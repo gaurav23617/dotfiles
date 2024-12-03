@@ -1,0 +1,1 @@
+C:/Users/Gaurav/Documents/PowerShell/Microsoft.VSCode_profile.ps1
