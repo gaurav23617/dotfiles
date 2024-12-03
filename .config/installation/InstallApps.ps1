@@ -45,7 +45,7 @@ function Check-IfInstalled {
 }
 
 # Ask the user if they want to install one by one or all at once
-$installChoice = Read-Host "Do you want to install applications one by one or all at once? (Enter '1' or '2')"
+$installChoice = Read-Host "Do you want to install applications one by one or all at once? (Enter '1' for installing applications one by one or '2' for all at once)"
 
 # Define an array of application objects (Fill this with your applications)
 $applications = @(
@@ -144,22 +144,56 @@ $applications = @(
 function Install-AppWithProgress {
     param (
         [string]$appName,
-        [string]$command
+        [string]$command,
+        [int]$timeoutSeconds = 300  # Default timeout of 5 minutes (adjust as needed)
     )
     $progress = 0
-    $totalSteps = 100
+    $totalSteps = 100  # The total number of steps for the progress bar
 
     Write-Host "Installing $appName..." -ForegroundColor Green
 
-    # Execute the command in the background
+    # Start the installation process in the background
     $process = Start-Process winget -ArgumentList "install --id $command -e" -PassThru
+
+    # Start the timer for the timeout mechanism
+    $startTime = Get-Date
+
+    # Wait for the installation to finish or timeout
     while (!$process.HasExited) {
-        $progress++
+        # Calculate the elapsed time
+        $elapsedTime = (Get-Date) - $startTime
+
+        # Check if the elapsed time exceeds the timeout
+        if ($elapsedTime.TotalSeconds -ge $timeoutSeconds) {
+            Write-Host "Installation of $appName timed out after $timeoutSeconds seconds." -ForegroundColor Red
+            $process.Kill()  # Forcefully kill the process if it exceeds the timeout
+            break
+        }
+
+        # Increment the progress
+        $progress = [math]::Min($progress + 1, 100)
+
+        # Update the progress bar
         Write-Progress -PercentComplete $progress -Activity "Installing $appName" -Status "Please wait..."
+
+        # Small delay to make progress visible
         Start-Sleep -Seconds 1
     }
 
+    # Ensure the progress bar reaches 100% (or stops at the maximum if it times out)
     Write-Progress -PercentComplete 100 -Activity "Installing $appName" -Status "Completed"
+
+    # Wait for the process to fully exit if it didn't timeout
+    if ($process.HasExited) {
+        $process.WaitForExit()
+    }
+
+    # Optional: Check the exit code to determine success/failure
+    if ($process.ExitCode -eq 0) {
+        Write-Host "$appName installation completed successfully!" -ForegroundColor Green
+    } else {
+        Write-Host "There was an issue installing $appName." -ForegroundColor Red
+    }
 }
 
 # Install apps based on user choice
