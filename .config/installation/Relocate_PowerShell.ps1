@@ -30,19 +30,18 @@ if (-not $env:IS_ELEVATED) {
     Ensure-Admin
 }
 
-# Use USERPROFILE as a fallback for HOME if it's not set
+# Use USERPROFILE as a fallback for HOME
 if (-not $env:HOME) {
     $env:HOME = $env:USERPROFILE
 }
 
-# Locate the PowerShell profile path
-$profilePath = $PROFILE
+# Original locations of the profile files
+$originalVSCodeProfilePath = Join-Path $env:USERPROFILE "Documents\PowerShell\Microsoft.VSCode_profile.ps1"
+$originalPowerShellProfilePath = Join-Path $env:USERPROFILE "Documents\PowerShell\Microsoft.PowerShell_profile.ps1"
 
-# New location for Microsoft.PowerShell_profile.ps1
-$newProfilePath = Join-Path $env:HOME ".pwsh\Microsoft.PowerShell_profile.ps1"
-
-# Path for the VSCode profile
-$vscodeProfilePath = "C:\Users\Gaurav\Documents\PowerShell\Microsoft.VSCode_profile.ps1"
+# New locations where actual profile files will be created
+$newVSCodeProfilePath = Join-Path $env:HOME ".pwsh\Microsoft.VSCode_profile.ps1"
+$newPowerShellProfilePath = Join-Path $env:HOME ".pwsh\Microsoft.PowerShell_profile.ps1"
 
 # Validate the resolved HOME path
 if (-not (Test-Path -Path $env:HOME)) {
@@ -50,35 +49,45 @@ if (-not (Test-Path -Path $env:HOME)) {
     return
 }
 
-# Ensure the new profile path exists
-if (-not (Test-Path -Path $newProfilePath)) {
-    Write-Error "New profile path does not exist: $newProfilePath"
+# Ensure the directory for the new profile files exists (in .pwsh)
+$newProfileDirectory = [System.IO.Path]::GetDirectoryName($newPowerShellProfilePath)
+if (-not (Test-Path -Path $newProfileDirectory)) {
+    Write-Output "Creating directory for new profile path: $newProfileDirectory"
+    New-Item -ItemType Directory -Path $newProfileDirectory -Force
+}
+
+$newVSCodeProfileDirectory = [System.IO.Path]::GetDirectoryName($newVSCodeProfilePath)
+if (-not (Test-Path -Path $newVSCodeProfileDirectory)) {
+    Write-Output "Creating directory for VSCode profile path: $newVSCodeProfileDirectory"
+    New-Item -ItemType Directory -Path $newVSCodeProfileDirectory -Force
+}
+
+# Ensure the target files (in .pwsh) exist for both profiles
+if (-not (Test-Path -Path $newVSCodeProfilePath)) {
+    Write-Error "Target file for Microsoft.VSCode_profile.ps1 does not exist: $newVSCodeProfilePath"
     return
 }
 
-# Ensure the VSCode profile path exists
-if (-not (Test-Path -Path $vscodeProfilePath)) {
-    Write-Error "VSCode profile path does not exist: $vscodeProfilePath"
+if (-not (Test-Path -Path $newPowerShellProfilePath)) {
+    Write-Error "Target file for Microsoft.PowerShell_profile.ps1 does not exist: $newPowerShellProfilePath"
     return
 }
 
-# Remove the existing profile file if it exists and create a symbolic link for PowerShell profile
-if (Test-Path -Path $profilePath) {
-    Remove-Item -Path $profilePath -Force
+# Remove existing symlink files in Documents\PowerShell (if they exist)
+if (Test-Path -Path $originalVSCodeProfilePath) {
+    Write-Output "Removing existing VSCode profile file at the symlink location: $originalVSCodeProfilePath"
+    Remove-Item -Path $originalVSCodeProfilePath -Force
 }
 
-# Create a symbolic link for the PowerShell profile
-cmd /c "mklink `"$profilePath`" `"$newProfilePath`""
-Write-Output "Symbolic link created: $profilePath -> $newProfilePath"
-
-# Define path for VSCode profile symbolic link
-$vscodeProfileLink = Join-Path $env:HOME ".pwsh\Microsoft.VSCode_profile.ps1"
-
-# Remove the existing VSCode profile link if it exists
-if (Test-Path -Path $vscodeProfileLink) {
-    Remove-Item -Path $vscodeProfileLink -Force
+if (Test-Path -Path $originalPowerShellProfilePath) {
+    Write-Output "Removing existing PowerShell profile file at the symlink location: $originalPowerShellProfilePath"
+    Remove-Item -Path $originalPowerShellProfilePath -Force
 }
 
-# Create a symbolic link for VSCode profile
-cmd /c "mklink `"$vscodeProfileLink`" `"$vscodeProfilePath`""
-Write-Output "Symbolic link created: $vscodeProfileLink -> $vscodeProfilePath"
+# Create the symbolic link for Microsoft.VSCode_profile.ps1
+cmd /c "mklink `"$originalVSCodeProfilePath`" `"$newVSCodeProfilePath`""
+Write-Output "Symbolic link created: $originalVSCodeProfilePath -> $newVSCodeProfilePath"
+
+# Create the symbolic link for Microsoft.PowerShell_profile.ps1
+cmd /c "mklink `"$originalPowerShellProfilePath`" `"$newPowerShellProfilePath`""
+Write-Output "Symbolic link created: $originalPowerShellProfilePath -> $newPowerShellProfilePath"
