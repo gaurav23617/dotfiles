@@ -1,4 +1,36 @@
-# Use USERPROFILE as a fallback for HOME
+# Ensure the script is running as Administrator
+function Ensure-Admin {
+    # Load the necessary assembly for MessageBox
+    Add-Type -AssemblyName PresentationFramework
+
+    # Check if the script is running as Administrator
+    if (-not ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] "Administrator")) {
+        $message = "This script needs to be run as Administrator. Would you like to run this script as Administrator?"
+        $caption = "Administrator Privileges Required"
+        $result = [System.Windows.MessageBox]::Show($message, $caption, [System.Windows.MessageBoxButton]::YesNo, [System.Windows.MessageBoxImage]::Warning)
+
+        if ($result -eq [System.Windows.MessageBoxResult]::Yes) {
+            # Get the full path to the current script
+            $scriptPath = $PSCommandPath
+
+            # Start PowerShell as Administrator and run the script
+            Start-Process powershell.exe -ArgumentList "-NoProfile -ExecutionPolicy Bypass -File `"$scriptPath`"" -Verb RunAs
+            exit
+        } else {
+            Write-Host "Administrator privileges are required. Exiting script."
+            exit
+        }
+    }
+}
+
+# Check if the script is being run as administrator
+# If not, elevate to administrator
+if (-not $env:IS_ELEVATED) {
+    $env:IS_ELEVATED = "True"
+    Ensure-Admin
+}
+
+# Use USERPROFILE as a fallback for HOME if it's not set
 if (-not $env:HOME) {
     $env:HOME = $env:USERPROFILE
 }
