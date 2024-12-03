@@ -42,7 +42,7 @@
         "defaults": {
             "colorScheme": "Catppuccin Mocha",
             "font": {
-                "face": "JetBrainsMono Nerd Font Mono"
+                "face": "Consolas, 'Courier New', JetBrainsMono Nerd Font Mono"
             }
         },
         "list": [
