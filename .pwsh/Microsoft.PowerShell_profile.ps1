@@ -56,6 +56,10 @@ function config {
     git --git-dir=$HOME\dotfiles --work-tree=$HOME $args
 }
 
+function goto {
+    wsl -d Arch 
+}
+
 
 $ENV:STARSHIP_CONFIG = "$HOME\.starship\starship.toml"
 Invoke-Expression (&starship init powershell)
