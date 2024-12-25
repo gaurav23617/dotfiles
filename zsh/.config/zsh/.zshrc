@@ -1,78 +1,45 @@
-# starship.toml
+#!/bin/sh
+
+[ -f "$HOME/.local/share/zap/zap.zsh" ] && source "$HOME/.local/share/zap/zap.zsh"
+
+# History Configuration
+export HISTFILE=~/.zsh_history # Use this path consistently
+export HISTSIZE=1000000
+export SAVEHIST=1000000
+HISTDUP=erase
+
+# History options
+setopt APPEND_HISTORY             # Append history to the file
+setopt SHARE_HISTORY              # Share history across all sessions
+setopt HIST_IGNORE_SPACE          # Ignore commands that start with a space
+setopt HIST_IGNORE_DUPS           # Ignore duplicate commands
+setopt INC_APPEND_HISTORY         # Write history incrementally to the file
+setopt HIST_SAVE_NO_DUPS          # Do not save duplicate entries in the history file
+setopt HIST_FIND_NO_DUPS          # Do not display duplicate commands in history searches
+
 
 # Add in Starship
 export STARSHIP_CONFIG=~/.config/starship.toml
 eval "$(starship init zsh)"
 
-# Set the directory we want to store zinit and plugins
-ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
-
-# Download Zinit, if it's not there yet
-if [ ! -d "$ZINIT_HOME" ]; then
-   mkdir -p "$(dirname $ZINIT_HOME)"
-   git clone https://github.com/zdharma-continuum/zinit.git "$ZINIT_HOME"
-fi
-
-# Source/Load zinit
-source "${ZINIT_HOME}/zinit.zsh"
+# source
+plug "$HOME/.config/zsh/aliases.zsh"
+plug "$HOME/.config/zsh/zstyle.zsh"
+plug "$HOME/.config/zsh/exports.zsh"
+plug "$HOME/.config/zsh/functions.zsh"
 
 # Add in zsh plugins
-zinit light zsh-users/zsh-syntax-highlighting
-zinit light zsh-users/zsh-completions
-zinit light zsh-users/zsh-autosuggestions
-zinit light Aloxaf/fzf-tab
+plug "zap-zsh/vim"
+plug "zap-zsh/fzf"
+plug "Aloxaf/fzf-tab"
+plug "zap-zsh/supercharge"
+plug "zap-zsh/exa"
+plug "hlissner/zsh-autopair"
+plug "zsh-users/zsh-completions"
+# plug "esc/conda-zsh-completion"
+plug "zsh-users/zsh-autosuggestions"
+plug "zsh-users/zsh-history-substring-search"
+plug "zsh-users/zsh-syntax-highlighting"
 
 # Load completions
 autoload -Uz compinit && compinit
-
-# Keybindings
-bindkey -e
-bindkey '^p' history-search-backward
-bindkey '^n' history-search-forward
-bindkey '^[w' kill-region
-
-# History
-HISTSIZE=10000
-HISTFILE=~/.zsh_history
-SAVEHIST=$HISTSIZE
-HISTDUP=erase
-setopt appendhistory
-setopt sharehistory
-setopt hist_ignore_space
-setopt hist_ignore_all_dups
-setopt hist_save_no_dups
-setopt hist_ignore_dups
-setopt hist_find_no_dups
-
-# Completion styling
-zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
-zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
-zstyle ':completion:*' menu no
-zstyle ':fzf-tab:complete:cd:*' fzf-preview 'ls --color $realpath'
-zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview 'ls --color $realpath'
-
-# Add in snippets
-zinit snippet OMZL::git.zsh
-zinit snippet OMZP::git
-zinit snippet OMZP::sudo
-zinit snippet OMZP::archlinux
-zinit snippet OMZP::aws
-zinit snippet OMZP::kubectl
-zinit snippet OMZP::kubectx
-zinit snippet OMZP::command-not-found
-
-zinit cdreplay -q
-
-# Aliases
-alias ls='ls --color'
-alias vim='nvim'
-alias c='clear'
-
-# Shell integrations
-eval "$(fzf --zsh)"
-eval "$(zoxide init --cmd cd zsh)"
-
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-export PATH=$HOME/.local/bin:$PATH
