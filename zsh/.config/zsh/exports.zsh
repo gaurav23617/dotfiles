@@ -1,5 +1,20 @@
 #!/bin/sh
 
+# History Configuration
+HISTFILE=~/.zsh_history # Use this path consistently
+HISTSIZE=1000000
+SAVEHIST=$HISTSIZE
+HISTDUP=erase
+
+# History options
+setopt APPEND_HISTORY             # Append history to the file
+setopt SHARE_HISTORY              # Share history across all sessions
+setopt HIST_IGNORE_SPACE          # Ignore commands that start with a space
+setopt HIST_IGNORE_DUPS           # Ignore duplicate commands
+setopt INC_APPEND_HISTORY         # Write history incrementally to the file
+setopt HIST_SAVE_NO_DUPS          # Do not save duplicate entries in the history file
+setopt HIST_FIND_NO_DUPS          # Do not display duplicate commands in history searches
+
 export EDITOR="nvim"
 # export TERMINAL="kitty"
 # export BROWSER="firefox"
