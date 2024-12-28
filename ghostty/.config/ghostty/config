@@ -3,7 +3,7 @@
 theme = catppuccin-mocha
 
 # font
-font-family = "JetBrainsMono Nerd Font"
+font-family = "JetBrains Mono"
 font-style = default
 font-style-bold = default
 font-style-italic = default
