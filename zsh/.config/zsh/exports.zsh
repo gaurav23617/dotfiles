@@ -33,11 +33,6 @@ export MANWIDTH=999
 # export HOMEBREW_NO_ANALYTICS=1
 # export HOMEBREW_NO_ENV_HINTS=1
 
-# Shell integrations
-eval "$(fzf --zsh)"
-# eval "$(fnm env)"
-eval "$(zoxide init zsh)"
-# eval "`pip completion --zsh`"
 
 case "$(uname -s)" in
 

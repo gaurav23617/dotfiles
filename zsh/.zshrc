@@ -5,6 +5,13 @@
 export STARSHIP_CONFIG=~/.config/starship.toml
 eval "$(starship init zsh)"
 
+# Shell integrations
+eval "$(fzf --zsh)"
+# eval "$(fnm env)"
+eval "$(zoxide init zsh)"
+# eval "`pip completion --zsh`"
+
+
 # source
 plug "$HOME/.config/zsh/aliases.zsh"
 plug "$HOME/.config/zsh/zstyle.zsh"
@@ -26,4 +33,3 @@ plug "zsh-users/zsh-history-substring-search"
 
 # Load completions
 autoload -Uz compinit && compinit
-

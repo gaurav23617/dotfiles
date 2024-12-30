@@ -1,9 +1,11 @@
 # theme
 # config-file = ghostty-theme
 theme = catppuccin-mocha
+# background-opacity = 0.9
+# background-blur-radius = 70
 
 # font
-font-family = "JetBrains Mono"
+font-family = JetBrainsMonoNL Nerd Font
 font-style = default
 font-style-bold = default
 font-style-italic = default
@@ -16,9 +18,10 @@ grapheme-width-method = unicode
 # mouse
 mouse-hide-while-typing = true
 mouse-shift-capture = false
+cursor-style = block
+cursor-style-blink = false
+shell-integration-features = no-cursor
 
-# background-opacity = 0.9
-# background-blur-radius = 70
 unfocused-split-opacity = 0.6
 scrollback-limit = 10000000
 
@@ -29,12 +32,17 @@ class =
 # working-directory = ""
 # x11-instance-name =
 
-window-padding-x = 16
-window-padding-y = 8
-window-padding-balance = false
+window-padding-x = 10
+window-padding-y = 10
+window-padding-balance = true
 window-padding-color = extend
+gtk-tabs-location = bottom
+gtk-wide-tabs = false
+gtk-adwaita = false
+adw-toolbar-style = raised
 
 # keep the following enabled unless you want to test out what a kernel panic looks like
+auto-update = check
 window-vsync = true
 window-inherit-working-directory = false
 window-inherit-font-size = true
