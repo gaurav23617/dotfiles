@@ -1,8 +1,8 @@
 # theme
 # config-file = ghostty-theme
 theme = catppuccin-mocha
-# background-opacity = 0.9
-# background-blur-radius = 70
+background-opacity = 0.96
+background-blur-radius = 70
 
 # font
 font-family = JetBrainsMonoNL Nerd Font
@@ -46,13 +46,14 @@ auto-update = check
 window-vsync = true
 window-inherit-working-directory = false
 window-inherit-font-size = true
-window-decoration = true
+window-decoration = false
+gtk-titlebar = false
 window-title-font-family = "0xProto Nerd Font Mono"
 window-theme = auto
 window-colorspace = srgb
 window-height = 0
 window-width = 0
-window-save-state = default
+window-save-state = always
 window-step-resize = false
 window-new-tab-position = current
 

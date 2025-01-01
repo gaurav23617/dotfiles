@@ -5,6 +5,10 @@ window-height=500
 window-is-maximized=false
 window-width=540
 
+[org/gnome/Console]
+last-window-maximised=false
+last-window-size=(1170, 777)
+
 [org/gnome/builder/editor]
 style-scheme-name='Adwaita-dark'
 
@@ -153,9 +157,14 @@ insert-trailing-newline=true
 overwrite-braces=true
 tab-width=2
 
+[org/gnome/calendar]
+active-view='month'
+window-maximized=true
+window-size=(768, 600)
+
 [org/gnome/control-center]
-last-panel='online-accounts'
-window-state=(980, 639, false)
+last-panel='system'
+window-state=(980, 639, true)
 
 [org/gnome/desktop/app-folders]
 folder-children=['Utilities', 'YaST', 'Pardus']
@@ -187,7 +196,9 @@ xkb-options=['terminate:ctrl_alt_bksp']
 
 [org/gnome/desktop/interface]
 color-scheme='prefer-dark'
-show-battery-percentage=false
+enable-animations=true
+enable-hot-corners=false
+show-battery-percentage=true
 
 [org/gnome/desktop/media-handling]
 autorun-never=false
@@ -196,16 +207,25 @@ autorun-x-content-open-folder=@as []
 autorun-x-content-start-app=['x-content/unix-software', 'x-content/ostree-repository', 'x-content/audio-player', 'x-content/video-dvd', 'x-content/audio-cdda', 'x-content/audio-dvd']
 
 [org/gnome/desktop/notifications]
-application-children=['discord', 'zen-beta']
+application-children=['discord', 'zen-beta', 'spotify', 'gnome-power-panel', 'com-mattjakeman-extensionmanager']
+
+[org/gnome/desktop/notifications/application/com-mattjakeman-extensionmanager]
+application-id='com.mattjakeman.ExtensionManager.desktop'
 
 [org/gnome/desktop/notifications/application/discord]
 application-id='discord.desktop'
+
+[org/gnome/desktop/notifications/application/gnome-power-panel]
+application-id='gnome-power-panel.desktop'
+
+[org/gnome/desktop/notifications/application/spotify]
+application-id='spotify.desktop'
 
 [org/gnome/desktop/notifications/application/zen-beta]
 application-id='zen-beta.desktop'
 
 [org/gnome/desktop/peripherals/keyboard]
-numlock-state=false
+numlock-state=true
 
 [org/gnome/desktop/peripherals/mouse]
 natural-scroll=true
@@ -223,12 +243,45 @@ sort-order=['org.gnome.Settings.desktop', 'org.gnome.Contacts.desktop', 'org.gno
 [org/gnome/desktop/session]
 idle-delay=uint32 0
 
+[org/gnome/desktop/wm/keybindings]
+activate-window-menu=['<Shift><Control>space']
+show-desktop=['<Super>d']
+toggle-fullscreen=['F11']
+
 [org/gnome/epiphany/state]
 is-maximized=true
 window-size=(1920, 1048)
 
 [org/gnome/evolution-data-server]
 migrated=true
+
+[org/gnome/file-roller/dialogs/extract]
+height=800
+recreate-folders=true
+skip-newer=false
+width=1000
+
+[org/gnome/file-roller/file-selector]
+show-hidden=false
+sidebar-size=300
+sort-method='name'
+sort-type='ascending'
+window-size=(-1, -1)
+
+[org/gnome/file-roller/listing]
+list-mode='as-folder'
+name-column-width=65
+show-path=false
+sort-method='name'
+sort-type='ascending'
+
+[org/gnome/file-roller/ui]
+sidebar-width=200
+window-height=480
+window-width=600
+
+[org/gnome/mutter]
+overlay-key='Super_L'
 
 [org/gnome/nautilus/preferences]
 default-folder-viewer='icon-view'
@@ -243,6 +296,9 @@ maximized=true
 [org/gnome/portal/filechooser/org.gnome.Settings]
 last-folder-path='/home/gaurav/Pictures'
 
+[org/gnome/portal/filechooser/spotify]
+last-folder-path='/home/gaurav/Music'
+
 [org/gnome/recipes]
 user='gaurav'
 
@@ -250,6 +306,7 @@ user='gaurav'
 night-light-schedule-automatic=false
 
 [org/gnome/settings-daemon/plugins/media-keys]
+control-center=['<Super>i']
 custom-keybindings=['/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/', '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/']
 help=@as []
 www=['<Super>F1']
@@ -265,24 +322,191 @@ command='rofi -show drun'
 name='Rofi'
 
 [org/gnome/settings-daemon/plugins/power]
+sleep-inactive-ac-timeout=7200
 sleep-inactive-ac-type='suspend'
+sleep-inactive-battery-timeout=7200
 
 [org/gnome/shell]
-favorite-apps=['discord.desktop', 'vlc.desktop', 'zen-beta.desktop', 'code.desktop']
+disable-user-extensions=false
+disabled-extensions=['accerciser@accerciser.gnome.org', 'system-monitor@gnome-shell-extensions.gcampax.github.com', 'user-theme@gnome-shell-extensions.gcampax.github.com', 'screenshot-window-sizer@gnome-shell-extensions.gcampax.github.com', 'light-style@gnome-shell-extensions.gcampax.github.com', 'window-list@gnome-shell-extensions.gcampax.github.com', 'windowsNavigator@gnome-shell-extensions.gcampax.github.com', 'workspace-indicator@gnome-shell-extensions.gcampax.github.com', 'apps-menu@gnome-shell-extensions.gcampax.github.com']
+enabled-extensions=['places-menu@gnome-shell-extensions.gcampax.github.com', 'drive-menu@gnome-shell-extensions.gcampax.github.com', 'status-icons@gnome-shell-extensions.gcampax.github.com', 'just-perfection-desktop@just-perfection', 'blur-my-shell@aunetx', 'advanced-alt-tab@G-dH.github.com', 'search-light@icedman.github.com', 'arcmenu@arcmenu.com', 'dash-to-dock@micxgx.gmail.com', 'huanghaohhoa@163.com', 'appindicatorsupport@rgcjonas.gmail.com']
+favorite-apps=['discord.desktop', 'vlc.desktop', 'zen-beta.desktop', 'code.desktop', 'spotify.desktop']
 welcome-dialog-last-shown-version='47.2'
+
+[org/gnome/shell/extensions/advanced-alt-tab-window-switcher]
+app-switcher-popup-icon-size=48
+app-switcher-popup-titles=false
+hot-edge-pressure=126
+switcher-popup-preview-selected=1
+switcher-popup-status=false
+switcher-popup-tooltip-title=2
+switcher-ws-thumbnails=2
+win-switcher-popup-icon-size=32
+win-switcher-single-prev-size=193
+
+[org/gnome/shell/extensions/appindicator]
+icon-brightness=0.29999999999999999
+icon-contrast=2.7755575615628914e-17
+icon-opacity=196
+icon-saturation=0.40000000000000002
+icon-size=13
+legacy-tray-enabled=true
+tray-pos='right'
+
+[org/gnome/shell/extensions/arcmenu]
+prefs-visible-page=0
+search-entry-border-radius=(true, 25)
+
+[org/gnome/shell/extensions/blur-my-shell]
+settings-version=2
+
+[org/gnome/shell/extensions/blur-my-shell/appfolder]
+brightness=0.59999999999999998
+sigma=30
+
+[org/gnome/shell/extensions/blur-my-shell/coverflow-alt-tab]
+pipeline='pipeline_default'
+
+[org/gnome/shell/extensions/blur-my-shell/dash-to-dock]
+blur=true
+brightness=0.59999999999999998
+pipeline='pipeline_default_rounded'
+sigma=30
+static-blur=true
+style-dash-to-dock=0
+
+[org/gnome/shell/extensions/blur-my-shell/lockscreen]
+pipeline='pipeline_default'
+
+[org/gnome/shell/extensions/blur-my-shell/overview]
+pipeline='pipeline_default'
+
+[org/gnome/shell/extensions/blur-my-shell/panel]
+brightness=0.59999999999999998
+pipeline='pipeline_default'
+sigma=30
+
+[org/gnome/shell/extensions/blur-my-shell/screenshot]
+pipeline='pipeline_default'
+
+[org/gnome/shell/extensions/blur-my-shell/window-list]
+brightness=0.59999999999999998
+sigma=30
+
+[org/gnome/shell/extensions/dash-to-dock]
+apply-custom-theme=false
+autohide-in-fullscreen=false
+background-opacity=0.80000000000000004
+custom-theme-shrink=true
+dash-max-icon-size=38
+dock-position='BOTTOM'
+extend-height=false
+height-fraction=0.91000000000000003
+intellihide-mode='MAXIMIZED_WINDOWS'
+multi-monitor=true
+preferred-monitor=-2
+preferred-monitor-by-connector='eDP-1'
+show-apps-always-in-the-edge=true
+show-apps-at-top=false
+
+[org/gnome/shell/extensions/just-perfection]
+accessibility-menu=true
+activities-button=true
+alt-tab-small-icon-size=32
+alt-tab-window-preview-size=32
+background-menu=true
+clock-menu=true
+clock-menu-position=1
+clock-menu-position-offset=0
+controls-manager-spacing-size=0
+dash=true
+dash-icon-size=48
+double-super-to-appgrid=true
+keyboard-layout=false
+max-displayed-search-results=0
+notification-banner-position=2
+osd=true
+overlay-key=true
+panel=true
+panel-button-padding-size=0
+panel-icon-size=12
+panel-in-overview=true
+panel-indicator-padding-size=0
+panel-notification-icon=true
+panel-size=24
+power-icon=true
+quick-settings=true
+quick-settings-dark-mode=true
+ripple-box=true
+screen-sharing-indicator=true
+search=true
+show-apps-button=true
+startup-status=1
+theme=true
+top-panel-position=0
+weather=false
+window-demands-attention-focus=false
+window-maximized-on-create=false
+window-picker-icon=true
+window-preview-caption=true
+window-preview-close-button=true
+workspace=true
+workspace-background-corner-size=17
+workspace-popup=true
+workspace-switcher-should-show=false
+workspace-wrap-around=false
+workspaces-in-app-grid=true
+world-clock=true
+
+[org/gnome/shell/extensions/search-light]
+blur-background=true
+blur-brightness=0.59999999999999998
+blur-sigma=30.0
+currency-converter=false
+entry-font-size=1
+font-size=1
+monitor-count=1
+popup-at-cursor-monitor=true
+preferred-monitor=0
+scale-height=0.10000000000000001
+scale-width=0.10000000000000001
+shortcut-search=['<Alt>space']
+show-panel-icon=false
+unit-converter=false
 
 [org/gnome/shell/world-clocks]
 locations=@av []
 
 [org/gnome/software]
-check-timestamp=int64 1735562692
+check-timestamp=int64 1735751845
 first-run=false
-flatpak-purge-timestamp=int64 1735569905
+flatpak-purge-timestamp=int64 1735726224
 
 [org/gnome/todo]
 default-provider='local'
 window-maximized=true
 
+[org/gnome/tweaks]
+show-extensions-notice=false
+
+[org/gtk/gtk4/settings/color-chooser]
+custom-colors=[(1.0, 1.0, 1.0, 0.0)]
+selected-color=(true, 1.0, 1.0, 1.0, 0.0)
+
 [org/gtk/gtk4/settings/file-chooser]
 show-hidden=false
 sort-directories-first=false
+
+[org/gtk/settings/file-chooser]
+date-format='regular'
+location-mode='path-bar'
+show-hidden=false
+show-size-column=true
+show-type-column=true
+sidebar-width=157
+sort-column='name'
+sort-directories-first=false
+sort-order='ascending'
+type-format='category'
+window-position=(26, 23)
+window-size=(1231, 902)
