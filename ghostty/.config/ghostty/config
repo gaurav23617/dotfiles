@@ -1,7 +1,7 @@
 # theme
 # config-file = ghostty-theme
 theme = catppuccin-mocha
-background-opacity = 0.96
+background-opacity = 0.94
 background-blur-radius = 70
 
 # font
@@ -46,7 +46,7 @@ auto-update = check
 window-vsync = true
 window-inherit-working-directory = false
 window-inherit-font-size = true
-window-decoration = false
+window-decoration = true
 gtk-titlebar = false
 window-title-font-family = "0xProto Nerd Font Mono"
 window-theme = auto
