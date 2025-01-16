@@ -1,5 +1,4 @@
 # theme
-# config-file = ghostty-theme
 theme = catppuccin-mocha
 background-opacity = 0.94
 background-blur-radius = 70
@@ -32,8 +31,8 @@ class =
 # working-directory = ""
 # x11-instance-name =
 
-window-padding-x = 10
-window-padding-y = 10
+window-padding-x = 6
+window-padding-y = 0
 window-padding-balance = true
 window-padding-color = extend
 gtk-tabs-location = bottom
@@ -46,18 +45,18 @@ auto-update = check
 window-vsync = true
 window-inherit-working-directory = false
 window-inherit-font-size = true
-window-decoration = true
+window-decoration = false
 gtk-titlebar = false
 window-title-font-family = "0xProto Nerd Font Mono"
 window-theme = auto
 window-colorspace = srgb
-window-height = 0
-window-width = 0
+# window-height = 0
+# window-width = 0
 window-save-state = always
 window-step-resize = false
 window-new-tab-position = current
 
-resize-overlay = after-first
+resize-overlay = always
 resize-overlay-position = center
 resize-overlay-duration = 750ms
 

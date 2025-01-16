@@ -49,3 +49,5 @@ Linux)
 	alias ls='ls --color=auto'
 	;;
 esac
+alias lzd='lazydocker'
+alias lzg='lazygit'
