@@ -32,8 +32,8 @@ class =
 # x11-instance-name =
 
 window-padding-x = 6
-window-padding-y = 0
-window-padding-balance = true
+window-padding-y = 0 
+window-padding-balance = false
 window-padding-color = extend
 gtk-tabs-location = bottom
 gtk-wide-tabs = false
