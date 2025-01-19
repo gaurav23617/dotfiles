@@ -5,6 +5,14 @@
 export STARSHIP_CONFIG=~/.config/starship.toml
 eval "$(starship init zsh)"
 
+# Set the directory we want to store zinit and plugins
+ZAP_DIR="${XDG_DATA_HOME:-$HOME/.local/share}/zap"
+
+# Download Zinit, if it's not there yet
+if [ ! -d "$ZAP_DIR" ]; then
+   zsh <(curl -s https://raw.githubusercontent.com/zap-zsh/zap/master/install.zsh) --branch release-v --keep
+fi
+
 # Shell integrations
 eval "$(fzf --zsh)"
 # eval "$(fnm env)"
