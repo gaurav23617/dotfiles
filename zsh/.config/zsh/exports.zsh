@@ -14,10 +14,11 @@ setopt HIST_IGNORE_DUPS           # Ignore duplicate commands
 setopt INC_APPEND_HISTORY         # Write history incrementally to the file
 setopt HIST_SAVE_NO_DUPS          # Do not save duplicate entries in the history file
 setopt HIST_FIND_NO_DUPS          # Do not display duplicate commands in history searches
+export HISTORY_IGNORE="(ls|cd|pwd|exit|sudo reboot|history|cd -|cd ..)"
 
 export EDITOR="nvim"
-# export TERMINAL="kitty"
-# export BROWSER="firefox"
+export TERMINAL="ghostty"
+export BROWSER="zen-browser"
 # export PATH="$HOME/.local/bin":$PATH
 # export PATH="$HOME/.docker/bin":$PATH
 # export PATH="$HOME/.local/nvim-macos-arm64/bin":$PATH
