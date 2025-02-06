@@ -75,3 +75,4 @@ echo "File not found: $file"
 fi
 
 } 
+. "/home/gaurav/.deno/env"
