@@ -1,16 +1,20 @@
 # ~/.config/starship.toml
 
+# enable a newline before the prompt
 add_newline = true
 command_timeout = 1000
-format = """ $shell$os$hostname$username$directory$git_branch$git_status$nodejs$package"""
+palette = 'catppuccin_mocha'
 
-# Drop ugly default prompt characters
+# custom prompt format
+format = """╭─ $shell$os$hostname$username$directory$aws$git_branch$git_status$fill$lua$nodejs$custom$package
+╰─≻ """
+
+# drop ugly default prompt characters
 [character]
-success_symbol = ''
-error_symbol = ''
+success_symbol = '󰚔 '
+error_symbol = ' '
 
-# ------------------------------------
-
+# shows the current operating system
 [os]
 format = '[$symbol](bold white) '
 disabled = false
@@ -21,38 +25,37 @@ Arch = ' 󰣇'
 Ubuntu = ' '
 Macos = ' 󰀵'
 
-# Shows the Username
+# shows the username
 [username]
 show_always = true
 style_root = "bold red"
-style_user = "bold gray"
+style_user = "bold mauve"
 format = "[$user]($style) "
 disabled = false
 
-# Shows the hostname
+# shows the hostname
 [hostname]
 ssh_only = false
 format = '[$hostname](bold yellow)/'
 disabled = false
 
-# Shows current directory
+# shows current directory
 [directory]
-truncation_length = 1
-# truncation_symbol = ' '
+truncation_length = 3 
 truncation_symbol = ' '
 home_symbol = '󰋜 ~'
-read_only_style = '197'
+read_only_style = 'red'
 read_only = '  '
 format = 'at [$path]($style)[$read_only]($read_only_style) '
 
-# Shows current git branch
+# shows current git branch
 [git_branch]
-format = '[$symbol$branch]($style)'
+format = '[$symbol$branch(:$remote_branch)]($style)'
 symbol = " "
 truncation_symbol = '…/'
 style = 'bold red'
 
-# Shows current git status
+# shows current git status
 [git_status]
 format = '[$all_status$ahead_behind]($style) '
 style = 'bold green'
@@ -67,15 +70,18 @@ modified = ' '
 staged = '[ ++\($count\)](green)'
 renamed = ' 襁'
 deleted = ' '
-windows_starship = '/mnt/c/Users/gaura/.config/starship.exe'
 
-# Shows current nodejs
+# shows current nodejs
 [nodejs]
 format = '[$symbol ($version )]($style)'
-symbol = ""
+symbol = "󰎙"
 not_capable_style = "bold red"
 
-# Shows current shell
+# shows the currently installed lua version
+[lua]
+format = '[  $version](bold blue)'
+
+# shows the currently active shell
 [shell]
 powershell_indicator = '_'
 unknown_indicator = 'mystery shell'
@@ -84,3 +90,91 @@ zsh_indicator = ''
 cmd_indicator = ''
 style = 'bold'
 disabled = false
+
+# shows the current aws profile and region
+[aws]
+format = '[$symbol(profile: "$profile" )(\(region: $region\) )]($style)'
+disabled = false
+style = 'bold blue'
+symbol = " "
+
+[fill]
+symbol = ' '
+
+# Pacman Updates (Arch Linux)
+# [custom.pacman_updates]
+# command = """
+# rate=5; cache_file="${HOME}/.cache/pacman_update_count.txt";
+# write_updates() { echo "$(checkupdates --nocolor | wc -l)" > $cache_file; };
+# if ! test -f $cache_file; then touch $cache_file && write_updates; fi;
+# if test `find $cache_file -mmin +$rate`; then write_updates; fi;
+# echo "$(<$cache_file)"
+# """
+# when = "true"
+# symbol = "  "
+# shell = ["bash", "--noprofile", "--norc"]
+# format = " [$symbol$output](yellow)"
+
+# Detect Angular version from package.json
+[custom.angular]
+command = "rg --no-heading --no-line-number '\"@angular/core\":' package.json | sed 's/.*@angular\\/core\": \"//;s/\".*//'"
+when = "test -f package.json && rg -q '\"@angular/core\":' package.json"
+format = " [󰚿 $output](red)"
+ignore_timeout = true
+
+# Detect Vue version from package.json
+[custom.vue]
+command = "rg --no-heading --no-line-number '\"vue\":' package.json | sed 's/.*\"vue\": \"//;s/\".*//'"
+when = "test -f package.json && rg -q '\"vue\":' package.json"
+format = " [󰹭 $output](blue)"
+ignore_timeout = true
+
+# Detect Vuetify version from package.json
+[custom.vuetify]
+command = "rg --no-heading --no-line-number '\"vuetify\":' package.json | sed 's/.*\"vuetify\": \"//;s/\".*//'"
+when = "test -f package.json && rg -q '\"vuetify\":' package.json"
+format = " [ $output](green)"
+ignore_timeout = true
+
+# Detect React version from package.json
+[custom.react]
+command = "rg --no-heading --no-line-number '\"react\":' package.json | sed 's/.*\"react\": \"//;s/\".*//'"
+when = "test -f package.json && rg -q '\"react\":' package.json"
+format = " [ $output](cyan)"
+ignore_timeout = true
+
+# Detect Next.js version from package.json
+[custom.nextjs]
+command = "rg --no-heading --no-line-number '\"next\":' package.json | sed 's/.*\"next\": \"//;s/\".*//'"
+when = "test -f package.json && rg -q '\"next\":' package.json"
+format = " [ $output](magenta)"
+ignore_timeout = true
+
+# catppuccin mocha palette
+[palettes.catppuccin_mocha]
+rosewater = "#f5e0dc"
+flamingo = "#f2cdcd"
+pink = "#f5c2e7"
+mauve = "#cba6f7"
+red = "#f38ba8"
+maroon = "#eba0ac"
+peach = "#fab387"
+yellow = "#f9e2af"
+green = "#a6e3a1"
+teal = "#94e2d5"
+sky = "#89dceb"
+sapphire = "#74c7ec"
+blue = "#89b4fa"
+lavender = "#b4befe"
+text = "#cdd6f4"
+subtext1 = "#bac2de"
+subtext0 = "#a6adc8"
+overlay2 = "#9399b2"
+overlay1 = "#7f849c"
+overlay0 = "#6c7086"
+surface2 = "#585b70"
+surface1 = "#45475a"
+surface0 = "#313244"
+base = "#1e1e2e"
+mantle = "#181825"
+crust = "#11111b"
