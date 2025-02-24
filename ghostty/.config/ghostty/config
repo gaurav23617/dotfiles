@@ -1,7 +1,7 @@
 # theme
 theme = catppuccin-mocha
-background-opacity = 0.80
-background-blur-radius = 70
+background-opacity = 0.90
+background-blur-radius = 10
 
 # font
 font-family = JetBrainsMonoNL Nerd Font
@@ -32,7 +32,7 @@ class =
 # x11-instance-name =
 
 window-padding-x = 8
-window-padding-y = 6,2 
+# window-padding-y = 6,2 
 window-padding-balance = false
 window-padding-color = extend
 gtk-tabs-location = bottom 
