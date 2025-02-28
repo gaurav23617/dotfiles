@@ -6,7 +6,7 @@ command_timeout = 1000
 palette = 'catppuccin_mocha'
 
 # custom prompt format
-format = """╭─ $shell$os$hostname$username$directory$aws$git_branch$git_status$fill$lua$nodejs$custom$package
+format = """╭─ $shell$os$hostname$docker$username$directory$aws$git_branch$git_status$fill$lua$nodejs$custom$package
 ╰─≻ """
 
 # drop ugly default prompt characters
@@ -76,6 +76,9 @@ deleted = ' '
 format = '[$symbol ($version )]($style)'
 symbol = "󰎙"
 not_capable_style = "bold red"
+
+[docker_context]
+format = 'via [ $context](blue bold)'
 
 # shows the currently installed lua version
 [lua]
