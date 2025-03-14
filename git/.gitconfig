@@ -20,3 +20,5 @@
 	helper = !/usr/bin/gh auth git-credential
 [rerere]
 	enabled = true
+[submodule]
+	recurse = true
