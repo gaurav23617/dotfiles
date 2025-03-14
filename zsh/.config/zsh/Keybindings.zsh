@@ -1,7 +1,7 @@
 # Keybindings
 
-bindkey '^ ' autosuggest-accept
-bindkey -e
+bindkey '^y' autosuggest-accept
+bindkey -y
 bindkey '^p' history-search-backward
 bindkey '^n' history-search-forward
 bindkey '^[w' kill-region

@@ -56,23 +56,7 @@ function y() {
 	rm -f -- "$tmp"
 }
 
-
-
- function nvimf() {
-
-local file="$1"
-
-local path=$(cdi query -l | xargs -I {} find {} -name "$file" -type f 2>/dev/null | head -n 1)
-
-if [ -n "$path" ]; then
-
-nvim "$path"
-
-else
-
-echo "File not found: $file"
-
-fi
-
-} 
 . "$HOME/.deno/env"
+
+
+alias av='NVIM_APPNAME=atomic nvim'
