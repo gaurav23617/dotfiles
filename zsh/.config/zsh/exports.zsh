@@ -32,7 +32,8 @@ export PATH="$HOME/.local/share/neovim/bin":$PATH
 # export XDG_CURRENT_DESKTOP="Wayland"
 # export HOMEBREW_NO_ANALYTICS=1
 # export HOMEBREW_NO_ENV_HINTS=1
-
+# Open in tmux popup if on tmux, otherwise use --height mode
+export FZF_DEFAULT_OPTS='--height 40% --tmux bottom,40% --layout reverse --border top'
 
 case "$(uname -s)" in
 
