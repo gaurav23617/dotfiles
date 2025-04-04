@@ -58,8 +58,6 @@ function y() {
 
 . "$HOME/.deno/env"
 
-alias nt="NVIM_APPNAME=nvimtest nvim"
-
 # pnpm
 export PNPM_HOME="/home/gaurav/.local/share/pnpm"
 case ":$PATH:" in
