@@ -51,6 +51,12 @@
 
   # Define system packages here
   environment.systemPackages = with pkgs; [
+    ghostty
+    zoxide
+    gcc
+    gh
+    github-copilot-cli
+    google-chrome
   ];
 
   networking.hostName = hostname; # Set hostname defined in flake.nix
