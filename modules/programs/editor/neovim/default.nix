@@ -4,10 +4,10 @@
       programs.neovim.enable = true;
       home.file.".config/nvim" = {
         source = builtins.fetchGit {
-          url = "https://github.com/Sly-Harvey/nvim.git";
-          rev = "018aad196d833c441ded5b09a8f8e7546d0c1bf1";
+          url = "https://github.com/gaurav23617/nvim.git";
+	        rev = "066d33d8c48918cacbcc4b1aa5cb7ce75179ae77";
         };
-        recursive = true;
+        recursive = false;
       };
     })
   ];
