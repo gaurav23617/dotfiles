@@ -12,10 +12,6 @@
       url = "github:nix-community/nix-index-database";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    nixvim = {
-      url = "github:Sly-Harvey/nixvim";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
     spicetify-nix = {
       url = "github:Gerg-L/spicetify-nix";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -48,8 +44,8 @@
     settings = {
       # User configuration
       username = "coffee"; # automatically set with install.sh and live-install.sh
-      editor = "nixvim"; # nixvim, vscode, nvchad, neovim, emacs (WIP)
-      browser = "floorp"; # firefox, floorp, zen
+      editor = "nvchad"; # nixvim, vscode, nvchad, neovim, emacs (WIP)
+      browser = "zen"; # firefox, floorp, zen
       terminal = "kitty"; # kitty, alacritty, wezterm
       terminalFileManager = "yazi"; # yazi or lf
       sddmTheme = "purple_leaves"; # astronaut, black_hole, purple_leaves, jake_the_dog, hyprland_kath
@@ -57,12 +53,12 @@
 
       # System configuration
       videoDriver = "nvidia"; # CHOOSE YOUR GPU DRIVERS (nvidia or amdgpu or intel) THIS IS IMPORTANT
-      hostname = "NixOS"; # CHOOSE A HOSTNAME HERE
+      hostname = "coffee"; # CHOOSE A HOSTNAME HERE
       locale = "en_GB.UTF-8"; # CHOOSE YOUR LOCALE
-      timezone = "Europe/London"; # CHOOSE YOUR TIMEZONE
-      kbdLayout = "gb"; # CHOOSE YOUR KEYBOARD LAYOUT
-      kbdVariant = "extd"; # CHOOSE YOUR KEYBOARD VARIANT (Can leave empty)
-      consoleKeymap = "uk"; # CHOOSE YOUR CONSOLE KEYMAP (Affects the tty?)
+      timezone = "Asia/Kolkata"; # CHOOSE YOUR TIMEZONE
+      kbdLayout = "us"; # CHOOSE YOUR KEYBOARD LAYOUT
+      kbdVariant = ""; # CHOOSE YOUR KEYBOARD VARIANT (Can leave empty)
+      consoleKeymap = "us"; # CHOOSE YOUR CONSOLE KEYMAP (Affects the tty?)
     };
 
     systems = [
