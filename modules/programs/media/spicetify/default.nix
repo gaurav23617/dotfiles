@@ -22,9 +22,10 @@
         colorScheme = "mocha";
 
         enabledExtensions = with spicePkgs.extensions; [
-          adblock
+          # adblock
           shuffle # shuffle+ (special characters are sanitized out of ext names)
-          # fullAppDisplay
+          fullAppDisplay
+          keyboardShortcut
           # hidePodcasts
         ];
       };
