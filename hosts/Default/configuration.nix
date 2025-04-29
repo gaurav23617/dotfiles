@@ -42,8 +42,7 @@
   home-manager.sharedModules = [
     (_: {
       home.packages = with pkgs; [
-        # pokego # Overlayed
-        # lact # Overlayed [LONG COMPILE]
+        # Overlayed [LONG COMPILE]
         gimp
       ];
     })

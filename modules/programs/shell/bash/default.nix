@@ -127,7 +127,6 @@
       tp = "${pkgs.trash-cli}/bin/trash-put";
       tpr = "${pkgs.trash-cli}/bin/trash-restore";
       grep = "grep --color=always";
-      pokemon = "pokego --random 1-8 --no-title";
 
       # Nixos
       list-gens = "sudo nix-env --list-generations --profile /nix/var/nix/profiles/system/";
