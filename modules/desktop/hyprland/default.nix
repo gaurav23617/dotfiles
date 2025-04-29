@@ -137,9 +137,10 @@
 
             touchpad.natural_scroll = false;
 
+
             tablet.output = "current";
 
-            sensitivity = 0; # -1.0 - 1.0, 0 means no modification.
+            sensitivity = 1.0; # -1.0 - 1.0, 0 means no modification.
             force_no_accel = true;
           };
           general = {
@@ -241,16 +242,15 @@
           windowrule = [
             #"noanim, class:^(Rofi)$
             "tile,title:(.*)(Godot)(.*)$"
-            "workspace 1, class:^(kitty|Alacritty|org.wezfurlong.wezterm)$"
-            "workspace 2, class:^(code|VSCodium|code-url-handler|codium-url-handler)$"
-            "workspace 3, class:^(krita)$"
+            "workspace 3, class:^(kitty|Alacritty|Ghostty|org.wezfurlong.wezterm)$"
+            "workspace 6, class:^(code|VSCodium|code-url-handler|codium-url-handler)$"
             "workspace 3, title:(.*)(Godot)(.*)$"
-            "workspace 3, title:(GNU Image Manipulation Program)(.*)$"
-            "workspace 3, class:^(factorio)$"
-            "workspace 3, class:^(steam)$"
-            "workspace 5, class:^(firefox|floorp|zen)$"
-            "workspace 6, class:^(Spotify)$"
-            "workspace 6, title:(.*)(Spotify)(.*)$"
+            "workspace 6, title:(GNU Image Manipulation Program)(.*)$"
+            "workspace 6, class:^(factorio)$"
+            "workspace 6, class:^(steam)$"
+            "workspace 2, class:^(firefox|floorp|zen)$"
+            "workspace 1, class:^(Spotify)$"
+            "workspace 1, title:(.*)(Spotify)(.*)$"
 
             # Can use FLOAT FLOAT for active and inactive or just FLOAT
             "opacity 0.80 0.80,class:^(kitty|alacritty|Alacritty|org.wezfurlong.wezterm)$"
@@ -349,6 +349,7 @@
               "$mainMod, W, togglefloating" # toggle the window on focus to float
               "$mainMod SHIFT, G, togglegroup" # toggle the window on focus to float
               "ALT, return, fullscreen" # toggle the window on focus to fullscreen
+              "$mainMod, D, fullscreen, 1" #toggle the window to fullscreen
               "$mainMod ALT, L, exec, hyprlock" # lock screen
               "$mainMod, backspace, exec, wlogout -b 4" # logout menu
               "$CONTROL, ESCAPE, exec, pkill waybar || waybar" # toggle waybar
@@ -357,14 +358,13 @@
               "$mainMod, T, exec, $term"
               "$mainMod, E, exec, $fileManager"
               "$mainMod, C, exec, $editor"
-              "$mainMod, F, exec, $browser"
-              "$mainMod SHIFT, S, exec, spotify"
+              "$mainMod, B, exec, $browser"
+              "$mainMod, M, exec, spotify"
               "$CONTROL ALT, DELETE, exec, $term -e '${getExe pkgs.btop}'" # System Monitor
               "$mainMod CTRL, C, exec, hyprpicker --autocopy --format=hex" # Colour Picker
 
-              "$mainMod, A, exec, pkill -x rofi || ${./scripts/rofi.sh} drun" # launch desktop applications
               "$mainMod, SPACE, exec, pkill -x rofi || ${./scripts/rofi.sh} drun" # launch desktop applications
-              "$mainMod, Z, exec, pkill -x rofi || ${./scripts/rofi.sh} emoji" # launch emoji picker
+              "$mainMod, comma, exec, pkill -x rofi || ${./scripts/rofi.sh} emoji" # launch emoji picker
               # "$mainMod, tab, exec, pkill -x rofi || ${./scripts/rofi.sh} window" # switch between desktop applications
               # "$mainMod, R, exec, pkill -x rofi || ${./scripts/rofi.sh} file" # brrwse system files
               "$mainMod ALT, K, exec, ${./scripts/keyboardswitch.sh}" # change keyboard layout
@@ -373,11 +373,9 @@
               "$mainMod, G, exec, ${./scripts/rofi.sh} games" # game launcher
               "$mainMod ALT, G, exec, ${./scripts/gamemode.sh}" # disable hypr effects for gamemode
               "$mainMod, V, exec, ${./scripts/ClipManager.sh}" # Clipboard Manager
-              "$mainMod, M, exec, pkill -x rofi || ${./scripts/rofimusic.sh}" # online music
 
               # Screenshot/Screencapture
-              "$mainMod, P, exec, ${./scripts/screenshot.sh} s" # drag to snip an area / click on a window to print it
-              "$mainMod CTRL, P, exec, ${./scripts/screenshot.sh} sf" # frozen screen, drag to snip an area / click on a window to print it
+              "$mainMod SHIFT, S, exec, ${./scripts/screenshot.sh} sf" # drag to snip an area / click on a window to print it
               "$mainMod, print, exec, ${./scripts/screenshot.sh} m" # print focused monitor
               "$mainMod ALT, P, exec, ${./scripts/screenshot.sh} p" # print all monitor outputs
 
@@ -419,9 +417,6 @@
               "$mainMod, k, movefocus, u"
               "$mainMod, j, movefocus, d"
 
-              # Go to workspace 5 (FireFox) and 6 (Spotify) with mouse side buttons
-              "$mainMod, mouse:276, workspace, 5"
-              "$mainMod, mouse:275, workspace, 6"
               "$mainMod SHIFT, mouse:276, movetoworkspace, 5"
               "$mainMod SHIFT, mouse:275, movetoworkspace, 6"
               "$mainMod CTRL, mouse:276, movetoworkspacesilent, 5"
