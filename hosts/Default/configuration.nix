@@ -51,9 +51,7 @@
   # Define system packages here
   environment.systemPackages = with pkgs; [
     ghostty
-    zoxide
-    gcc
-    gh
+    vim
     github-copilot-cli
     google-chrome
   ];
