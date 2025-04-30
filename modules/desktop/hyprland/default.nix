@@ -65,6 +65,9 @@
         wl-clipboard
         xdotool
         yad
+        grim
+        slurp
+        tesseract
       ];
 
       xdg.configFile."hypr/icons" = {
@@ -361,12 +364,10 @@
               "$mainMod, B, exec, $browser"
               "$mainMod, M, exec, spotify"
               "$CONTROL ALT, DELETE, exec, $term -e '${getExe pkgs.btop}'" # System Monitor
-              "$mainMod CTRL, C, exec, hyprpicker --autocopy --format=hex" # Colour Picker
+              "$mainMod SHIFT, C, exec, hyprpicker --autocopy --format=hex" # Colour Picker
 
               "$mainMod, SPACE, exec, pkill -x rofi || ${./scripts/rofi.sh} drun" # launch desktop applications
               "$mainMod, comma, exec, pkill -x rofi || ${./scripts/rofi.sh} emoji" # launch emoji picker
-              # "$mainMod, tab, exec, pkill -x rofi || ${./scripts/rofi.sh} window" # switch between desktop applications
-              # "$mainMod, R, exec, pkill -x rofi || ${./scripts/rofi.sh} file" # brrwse system files
               "$mainMod ALT, K, exec, ${./scripts/keyboardswitch.sh}" # change keyboard layout
               "$mainMod SHIFT, N, exec, swaync-client -t -sw" # swayNC panel
               "$mainMod SHIFT, Q, exec, swaync-client -t -sw" # swayNC panel
@@ -378,6 +379,10 @@
               "$mainMod SHIFT, S, exec, ${./scripts/screenshot.sh} sf" # drag to snip an area / click on a window to print it
               "$mainMod, print, exec, ${./scripts/screenshot.sh} m" # print focused monitor
               "$mainMod ALT, P, exec, ${./scripts/screenshot.sh} p" # print all monitor outputs
+
+              # OCR
+              "$mainMod SHIFT,T,exec,sh -c 'tmpfile=$(mktemp --suffix=.png) && grim -g \"$(slurp)\" \"$tmpfile\" && tesseract -l eng \"$tmpfile\" - | wl-copy && rm \"$tmpfile\"'"
+ # Screen snip to text >> clipboard
 
               # Functional keybinds
               ",xf86Sleep, exec, systemctl suspend" # Put computer into sleep mode
