@@ -21,16 +21,8 @@
       url = "github:yokoffing/Betterfox";
       flake = false;
     };
-    thunderbird-catppuccin = {
-      url = "github:catppuccin/thunderbird";
-      flake = false;
-    };
     zen-browser = {
       url = "github:maximoffua/zen-browser.nix";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-    nvchad4nix = {
-      url = "github:nix-community/nix4nvchad";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
@@ -44,7 +36,7 @@
     settings = {
       # User configuration
       username = "coffee"; # automatically set with install.sh and live-install.sh
-      editor = "nvchad"; # nixvim, vscode, nvchad, neovim, emacs (WIP)
+      editor = "neovim"; # neovim, vscode
       browser = "zen"; # firefox, floorp, zen
       terminal = "kitty"; # kitty, alacritty, wezterm
       terminalFileManager = "yazi"; # yazi or lf

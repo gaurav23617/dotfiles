@@ -188,9 +188,9 @@ if [ "$partitioning" = "auto" ]; then
   wipefs -a "/dev/$disk"
   parted -s "/dev/$disk" \
     mklabel gpt \
-    mkpart primary fat32 1MiB 513MiB \
+    mkpart primary fat32 4MiB 2561MiB \
     set 1 esp on \
-    mkpart primary linux-swap 513MiB 2561MiB \
+    mkpart primary linux-swap 1026MiB 5122MiB \
     mkpart primary 2561MiB 100%
   if [[ "/dev/$disk" =~ nvme ]]; then
     part_boot="${disk}p1"
@@ -503,12 +503,12 @@ nixos-install --flake /mnt/etc/nixos#Default --no-root-passwd
 nixos-enter --root /mnt -c "echo $password | passwd --stdin $username"
 
 # Copy flake to ~/NixOS
-echo -e "\n${GREEN}Copying flake to /home/$username/NixOS...${NC}"
-mkdir -p "/mnt/home/$username/NixOS"
-cp -r ./ "/mnt/home/$username/NixOS/"
+echo -e "\n${GREEN}Copying flake to /home/$username/dotfile...${NC}"
+mkdir -p "/mnt/home/$username/dotfile"
+cp -r ./ "/mnt/home/$username/dotfile/"
 uid=$(awk -F: -v user="$username" '$1 == user {print $3}' /mnt/etc/passwd)
 gid=$(awk -F: -v user="$username" '$1 == user {print $4}' /mnt/etc/passwd)
-chown -R "$uid:$gid" "/mnt/home/$username/NixOS"
+chown -R "$uid:$gid" "/mnt/home/$username/dotfile"
 echo "Done."
 
 # Run cleanup

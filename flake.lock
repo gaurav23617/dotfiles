@@ -145,44 +145,6 @@
         "type": "github"
       }
     },
-    "nvchad-starter": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1744683935,
-        "narHash": "sha256-3ev7kaDwFW9llqdnXUAKnSgXIhQlsipxVkyNNYZFzJg=",
-        "owner": "NvChad",
-        "repo": "starter",
-        "rev": "85404dcb03bda6badc55cec998b3bdbe76b81138",
-        "type": "github"
-      },
-      "original": {
-        "owner": "NvChad",
-        "ref": "main",
-        "repo": "starter",
-        "type": "github"
-      }
-    },
-    "nvchad4nix": {
-      "inputs": {
-        "nixpkgs": [
-          "nixpkgs"
-        ],
-        "nvchad-starter": "nvchad-starter"
-      },
-      "locked": {
-        "lastModified": 1745572989,
-        "narHash": "sha256-XgSHXuXknwtrPoQq0DQV6P+n9fhCEREzXGdiERmusyE=",
-        "owner": "nix-community",
-        "repo": "nix4nvchad",
-        "rev": "1973e2b1d2499c370f8aebe119f184f6abbc4ef7",
-        "type": "github"
-      },
-      "original": {
-        "owner": "nix-community",
-        "repo": "nix4nvchad",
-        "type": "github"
-      }
-    },
     "root": {
       "inputs": {
         "betterfox": "betterfox",
@@ -191,9 +153,7 @@
         "nixpkgs": "nixpkgs",
         "nixpkgs-stable": "nixpkgs-stable",
         "nur": "nur",
-        "nvchad4nix": "nvchad4nix",
         "spicetify-nix": "spicetify-nix",
-        "thunderbird-catppuccin": "thunderbird-catppuccin",
         "zen-browser": "zen-browser"
       }
     },
@@ -230,22 +190,6 @@
       "original": {
         "owner": "nix-systems",
         "repo": "default",
-        "type": "github"
-      }
-    },
-    "thunderbird-catppuccin": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1730465032,
-        "narHash": "sha256-07gT37m1+OhRTbUk51l0Nhx+I+tl1il5ayx2ow23APY=",
-        "owner": "catppuccin",
-        "repo": "thunderbird",
-        "rev": "0289f3bd9566f9666682f66a3355155c0d0563fc",
-        "type": "github"
-      },
-      "original": {
-        "owner": "catppuccin",
-        "repo": "thunderbird",
         "type": "github"
       }
     },
