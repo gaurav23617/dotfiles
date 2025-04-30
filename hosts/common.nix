@@ -1,5 +1,5 @@
 {
-  inputs,
+ inputs,
   outputs,
   pkgs,
   username,
@@ -64,8 +64,18 @@
         # Terminal
         fzf
         fd
+        zoxide
+        imagemagick
         git
         gh
+        gcc
+        nodejs_23
+        rustup
+        vimPlugins.nvim-treesitter
+        luajitPackages.luarocks
+        amd-ucodegen
+        vlc
+        wordnet
         htop
         nix-prefetch-scripts
         microfetch
@@ -239,6 +249,13 @@
     XDG_CONFIG_HOME = "$HOME/.config";
     XDG_DATA_HOME = "$HOME/.local/share";
     XDG_BIN_HOME = "$HOME/.local/bin";
+    XDG_DESKTOP_DIR="$HOME/Desktop";
+    XDG_DOCUMENTS_DIR="$HOME/Documents";
+    XDG_DOWNLOAD_DIR="$HOME/Downloads";
+    XDG_MUSIC_DIR="$HOME/Music";
+    XDG_PICTURES_DIR="$HOME/Pictures";
+    XDG_PUBLICSHARE_DIR="$HOME/Public";
+    XDG_VIDEOS_DIR="$HOME/Videos";
 
     templates = "${self}/dev-shells";
   };
@@ -297,7 +314,7 @@
         enable = true;
         extraArgs = "--keep-since 7d --keep 3";
       };
-      flake = "/home/${username}/NixOS";
+      flake = "/home/${username}/dotfile";
     };
   };
   nix = {
