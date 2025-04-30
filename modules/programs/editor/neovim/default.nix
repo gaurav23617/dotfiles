@@ -1,14 +1,62 @@
 {...}: {
   home-manager.sharedModules = [
-    (_: {
-      programs.neovim.enable = true;
-      home.file.".config/nvim" = {
-        source = builtins.fetchGit {
-          url = "https://github.com/gaurav23617/nvim.git";
-	        rev = "066d33d8c48918cacbcc4b1aa5cb7ce75179ae77";
-        };
-        recursive = false;
+    ({ config, pkgs, lib, ... }: let
+      inherit (pkgs) tree-sitter lua54Packages luajitPackages nodePackages_latest vimPlugins;
+      inherit (pkgs.tree-sitter-grammars)
+        tree-sitter-lua
+        tree-sitter-nix
+        tree-sitter-go
+        tree-sitter-python
+        tree-sitter-bash
+        tree-sitter-regex
+        tree-sitter-markdown
+        tree-sitter-json;
+    in {
+      programs.neovim = {
+        enable = true;
+        vimAlias = true;
+        vimdiffAlias = true;
+
+        extraPackages = with pkgs; [
+          tree-sitter
+          lua54Packages.jsregexp
+          tree-sitter-lua
+          tree-sitter-nix
+          tree-sitter-go
+          tree-sitter-python
+          tree-sitter-bash
+          tree-sitter-regex
+          tree-sitter-markdown
+          tree-sitter-json
+
+          nodejs_23
+          nodePackages_latest.vscode-json-languageserver
+          fzf
+          lua-language-server
+          luajitPackages.jsregexp
+          nixd
+          go
+          gopls
+          gofumpt
+          stylua
+          cargo
+          rustc
+          basedpyright
+          nixfmt-rfc-style
+          ripgrep
+          imagemagick
+        ];
+
+        plugins = [
+          vimPlugins.nvim-treesitter.withAllGrammars
+          vimPlugins.nvim-treesitter
+        ];
       };
+
+      home.file.".config/nvim".source = builtins.toString (
+        config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfile/config/nvim"
+      );
     })
   ];
 }
+
