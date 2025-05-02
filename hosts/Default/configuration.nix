@@ -93,4 +93,8 @@
 
   # Auto-optimize Nix store to deduplicate after builds
   nix.settings.auto-optimise-store = true;
+
+  # Enable zram-based compressed swap
+  zramSwap.enable = true;
+  zramSwap.memoryPercent = 50;
 }
