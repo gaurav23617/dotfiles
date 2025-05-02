@@ -1,5 +1,5 @@
 {
- inputs,
+  inputs,
   outputs,
   pkgs,
   username,
@@ -12,7 +12,8 @@
   consoleKeymap,
   self,
   ...
-}: {
+}:
+{
   imports = [
     inputs.home-manager.nixosModules.home-manager
     inputs.nix-index-database.nixosModules.nix-index
@@ -39,58 +40,56 @@
     useGlobalPkgs = true;
     useUserPackages = true;
     backupFileExtension = "backup";
-    users.${username} = {pkgs, ...}: {
-      # Let Home Manager install and manage itself.
-      programs.home-manager.enable = true;
+    users.${username} =
+      { pkgs, ... }:
+      {
+        # Let Home Manager install and manage itself.
+        programs.home-manager.enable = true;
 
-      xdg.enable = true;
-      home.username = username;
-      home.homeDirectory =
-        if pkgs.stdenv.isDarwin
-        then "/Users/${username}"
-        else "/home/${username}";
-      home.stateVersion = "23.11"; # Please read the comment before changing.
-      home.sessionVariables = {
-        EDITOR = "nvim";
-        BROWSER = browser;
-        TERMINAL = terminal;
+        xdg.enable = true;
+        home.username = username;
+        home.homeDirectory = if pkgs.stdenv.isDarwin then "/Users/${username}" else "/home/${username}";
+        home.stateVersion = "23.11"; # Please read the comment before changing.
+        home.sessionVariables = {
+          EDITOR = "nvim";
+          BROWSER = browser;
+          TERMINAL = terminal;
+        };
+
+        # Packages that don't require configuration. If you're looking to configure a program see the /modules dir
+        home.packages = with pkgs; [
+          # Applications
+          #kate
+
+          # Terminal
+          fzf
+          fd
+          zoxide
+          imagemagick
+          amd-ucodegen
+          vlc
+          wordnet
+          nix-prefetch-scripts
+          microfetch
+          ripgrep
+          tldr
+          unzip
+          zip
+          (pkgs.writeShellScriptBin "hello" ''
+            echo "Hello ${username}!"
+          '')
+        ];
       };
-
-      # Packages that don't require configuration. If you're looking to configure a program see the /modules dir
-      home.packages = with pkgs; [
-        # Applications
-        #kate
-
-        # Terminal
-        fzf
-        fd
-        zoxide
-        imagemagick
-        git
-        gh
-        gcc
-        nodejs_23
-        rustup
-        vimPlugins.nvim-treesitter
-        luajitPackages.luarocks
-        amd-ucodegen
-        vlc
-        wordnet
-        htop
-        nix-prefetch-scripts
-        microfetch
-        ripgrep
-        tldr
-        unzip
-        (pkgs.writeShellScriptBin "hello" ''
-          echo "Hello ${username}!"
-        '')
-      ];
-    };
   };
 
   # Filesystems support
-  boot.supportedFilesystems = ["ntfs" "exfat" "ext4" "fat32" "btrfs"];
+  boot.supportedFilesystems = [
+    "ntfs"
+    "exfat"
+    "ext4"
+    "fat32"
+    "btrfs"
+  ];
   services.devmon.enable = true;
   services.gvfs.enable = true;
   services.udisks2.enable = true;
@@ -161,7 +160,7 @@
 
   xdg.portal = {
     enable = true;
-    extraPortals = with pkgs; [xdg-desktop-portal-gtk];
+    extraPortals = with pkgs; [ xdg-desktop-portal-gtk ];
   };
 
   # Enable dconf for home-manager
@@ -249,13 +248,13 @@
     XDG_CONFIG_HOME = "$HOME/.config";
     XDG_DATA_HOME = "$HOME/.local/share";
     XDG_BIN_HOME = "$HOME/.local/bin";
-    XDG_DESKTOP_DIR="$HOME/Desktop";
-    XDG_DOCUMENTS_DIR="$HOME/Documents";
-    XDG_DOWNLOAD_DIR="$HOME/Downloads";
-    XDG_MUSIC_DIR="$HOME/Music";
-    XDG_PICTURES_DIR="$HOME/Pictures";
-    XDG_PUBLICSHARE_DIR="$HOME/Public";
-    XDG_VIDEOS_DIR="$HOME/Videos";
+    XDG_DESKTOP_DIR = "$HOME/Desktop";
+    XDG_DOCUMENTS_DIR = "$HOME/Documents";
+    XDG_DOWNLOAD_DIR = "$HOME/Downloads";
+    XDG_MUSIC_DIR = "$HOME/Music";
+    XDG_PICTURES_DIR = "$HOME/Pictures";
+    XDG_PUBLICSHARE_DIR = "$HOME/Public";
+    XDG_VIDEOS_DIR = "$HOME/Videos";
 
     templates = "${self}/dev-shells";
   };
@@ -288,16 +287,16 @@
 
   # Enable the OpenSSH daemon.
   /*
-     services.openssh = {
-    enable = true;
-    settings = {
-      PasswordAuthentication = true;
-      AllowUsers = null; # Allows all users by default. Can be [ "user1" "user2" ]
-      UseDns = true;
-      X11Forwarding = false;
-      PermitRootLogin = "prohibit-password"; # "yes", "without-password", "prohibit-password", "forced-commands-only", "no"
+       services.openssh = {
+      enable = true;
+      settings = {
+        PasswordAuthentication = true;
+        AllowUsers = null; # Allows all users by default. Can be [ "user1" "user2" ]
+        UseDns = true;
+        X11Forwarding = false;
+        PermitRootLogin = "prohibit-password"; # "yes", "without-password", "prohibit-password", "forced-commands-only", "no"
+      };
     };
-  };
   */
 
   # Open ports in the firewall.
@@ -339,7 +338,10 @@
         "nix-gaming.cachix.org-1:nbjlureqMbRAxR1gJ/f3hxemL9svXaZF/Ees8vCUUs4="
         "devenv.cachix.org-1:w1cLUi8dv3hnoSPGAuibQv+f9TZLr6cv/Hm9XgU50cw="
       ];
-      experimental-features = ["nix-command" "flakes"];
+      experimental-features = [
+        "nix-command"
+        "flakes"
+      ];
       use-xdg-base-directories = false;
       warn-dirty = false;
       keep-outputs = true;
