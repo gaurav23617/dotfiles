@@ -7,7 +7,8 @@
   terminal,
   terminalFileManager,
   ...
-}: {
+}:
+{
   imports = [
     ./hardware-configuration.nix
     ../../modules/hardware/video/${videoDriver}.nix # Enable gpu drivers defined in flake.nix
@@ -54,6 +55,13 @@
     vim
     github-copilot-cli
     google-chrome
+    git
+    gh
+    gcc
+    nodejs_23
+    rustup
+    cargo
+    pkg-config
   ];
 
   networking.hostName = hostname; # Set hostname defined in flake.nix
@@ -78,6 +86,11 @@
     };
   };
   users.users.minidlna = {
-    extraGroups = ["users"]; # so minidlna can access the files.
+    extraGroups = [ "users" ]; # so minidlna can access the files.
   };
+  # Enable weekly SSD TRIM
+  services.fstrim.enable = true;
+
+  # Auto-optimize Nix store to deduplicate after builds
+  nix.settings.auto-optimise-store = true;
 }
