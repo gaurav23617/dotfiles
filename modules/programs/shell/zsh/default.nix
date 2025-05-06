@@ -3,41 +3,19 @@
   pkgs,
   terminalFileManager,
   ...
-}: {
+}:
+{
   home-manager.sharedModules = [
     (_: {
-      xdg.configFile."zsh/.p10k.zsh".source = ./.p10k.zsh;
-      xdg.configFile."zsh/templates" = {
-        source = ./templates;
-        recursive = true;
-      };
       programs.zsh = {
         enable = true;
-        autosuggestion.enable = true;
-        syntaxHighlighting.enable = true;
-        enableCompletion = true;
         history.size = 100000;
         history.path = "\${XDG_DATA_HOME}/zsh/history";
         dotDir = ".config/zsh";
-        # plugins = [
-        #   {
-        #     name = "powerlevel10k";
-        #     file = "share/zsh-powerlevel10k/powerlevel10k.zsh-theme";
-        #     src = pkgs.zsh-powerlevel10k;
-        #   }
-        # ];
-        oh-my-zsh = {
-          enable = true;
-          plugins = [
-            "git"
-            "gitignore"
-            "z"
-          ];
-        };
         initContent = ''
-          # Powerlevel10k Zsh theme
-          source ${pkgs.zsh-powerlevel10k}/share/zsh-powerlevel10k/powerlevel10k.zsh-theme
-          test -f ~/.config/zsh/.p10k.zsh && source ~/.config/zsh/.p10k.zsh
+          eval "$(zoxide init --cmd cd zsh)"
+          # Add in Starship
+          eval "$(starship init zsh)"
 
           # Direnv hook
           eval "$(direnv hook zsh)"
@@ -131,34 +109,6 @@
             nix flake init --template ${self}/dev-shells#$1
             direnv allow
           }
-
-          function cgen {
-            if [ -d "$1" ]; then
-              echo "Directory \"$1\" already exists!"
-              return 1
-            fi
-            nix flake new $1 --template ${self}/dev-shells#c-cpp
-            cd $1
-            cat ~/.config/zsh/templates/ListTemplate.txt >> CMakeLists.txt
-            mkdir src
-            mkdir include
-            cat ~/.config/zsh/templates/HelloWorldTemplate.txt >> src/main.cpp
-            direnv allow
-          }
-
-          function crun {
-            #VAR=''${1:-.}
-            mkdir build 2> /dev/null
-            cmake -B build
-            cmake --build build
-            build/main
-          }
-
-          function cbuild {
-            mkdir build 2> /dev/null
-            cmake -B build
-            cmake --build build
-          }
         '';
         envExtra = ''
           # Defaults
@@ -166,6 +116,7 @@
           export XMONAD_DATA_DIR="''${XDG_DATA_HOME:-$HOME/.local/share}/xmonad"
           export XMONAD_CACHE_DIR="''${XDG_CACHE_HOME:-$HOME/.cache}/xmonad"
 
+          export STARSHIP_CONFIG=~/.config/starship.toml
           export FZF_DEFAULT_OPTS=" \
           --color=bg+:#363a4f,bg:#24273a,spinner:#f4dbd6,hl:#ed8796 \
           --color=fg:#cad3f5,header:#ed8796,info:#c6a0f6,pointer:#f4dbd6 \
@@ -203,25 +154,6 @@
           update-input = "nix flake update $@";
           rebuild = "${../../../desktop/hyprland/scripts/rebuild.sh}";
           sysup = "sudo nixos-rebuild switch --flake ~/NixOS#Default --upgrade-all --show-trace";
-
-          # Directory Shortcuts.
-          dots = "cd ~/NixOS/";
-          games = "cd /mnt/games/";
-          work = "cd /mnt/work/";
-          media = "cd /mnt/work/media/";
-          projects = "cd /mnt/work/Projects/";
-          proj = "cd /mnt/work/Projects/";
-          dev = "cd /mnt/work/Projects/";
-          # dev = "cd /mnt/work/dev/";
-          # nixdir = "cd /mnt/work/dev/nix/";
-          # cppdir = "cd /mnt/work/dev/C++/";
-          # zigdir = "cd /mnt/work/dev/Zig/";
-          # csdir = "cd /mnt/work/dev/C#/";
-          # rustdir = "cd /mnt/work/dev/Rust/";
-          # pydir = "cd /mnt/work/dev/Python/";
-          # javadir = "cd /mnt/work/dev/Java/";
-          # luadir = "cd /mnt/work/dev/lua/";
-          # webdir = "cd /mnt/work/dev/Website/";
         };
       };
     })
