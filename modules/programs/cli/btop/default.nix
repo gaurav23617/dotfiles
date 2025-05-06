@@ -1,10 +1,12 @@
-{...}: {
+{ ... }:
+{
   home-manager.sharedModules = [
     (_: {
       programs.btop = {
         enable = true;
         settings = {
           color_theme = "catppuccin-mocha";
+          enable_gpu_stats = true;
         };
       };
       xdg.configFile."btop/themes/catppuccin-mocha.theme".text = ''
