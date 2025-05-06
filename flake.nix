@@ -25,67 +25,79 @@
       url = "github:maximoffua/zen-browser.nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    ghostty = {
+      url = "github:ghostty-org/ghostty";
+    };
   };
 
-  outputs = {
-    self,
-    nixpkgs,
-    ...
-  } @ inputs: let
-    inherit (self) outputs;
-    settings = {
-      # User configuration
-      username = "coffee"; # automatically set with install.sh and live-install.sh
-      editor = "neovim"; # neovim, vscode
-      browser = "zen"; # firefox, floorp, zen
-      terminal = "kitty"; # kitty, alacritty, wezterm
-      terminalFileManager = "yazi"; # yazi or lf
-      sddmTheme = "purple_leaves"; # astronaut, black_hole, purple_leaves, jake_the_dog, hyprland_kath
-      wallpaper = "figure.jpg"; # see modules/themes/wallpapers
+  outputs =
+    {
+      self,
+      nixpkgs,
+      ghostty,
+      ...
+    }@inputs:
+    let
+      inherit (self) outputs;
+      settings = {
+        # User configuration
+        username = "coffee"; # automatically set with install.sh and live-install.sh
+        editor = "neovim"; # neovim, vscode
+        browser = "zen"; # firefox, floorp, zen
+        terminal = "kitty"; # kitty, alacritty, wezterm
+        terminalFileManager = "yazi"; # yazi or lf
+        sddmTheme = "purple_leaves"; # astronaut, black_hole, purple_leaves, jake_the_dog, hyprland_kath
+        wallpaper = "moon.png"; # see modules/themes/wallpapers
+        # System configuration
+        videoDriver = "nvidia"; # CHOOSE YOUR GPU DRIVERS (nvidia or amdgpu or intel) THIS IS IMPORTANT
+        hostname = "coffee"; # CHOOSE A HOSTNAME HERE
+        locale = "en_GB.UTF-8"; # CHOOSE YOUR LOCALE
+        timezone = "Asia/Kolkata"; # CHOOSE YOUR TIMEZONE
+        kbdLayout = "us"; # CHOOSE YOUR KEYBOARD LAYOUT
+        kbdVariant = ""; # CHOOSE YOUR KEYBOARD VARIANT (Can leave empty)
+        consoleKeymap = "us"; # CHOOSE YOUR CONSOLE KEYMAP (Affects the tty?)
+      };
 
-      # System configuration
-      videoDriver = "nvidia"; # CHOOSE YOUR GPU DRIVERS (nvidia or amdgpu or intel) THIS IS IMPORTANT
-      hostname = "coffee"; # CHOOSE A HOSTNAME HERE
-      locale = "en_GB.UTF-8"; # CHOOSE YOUR LOCALE
-      timezone = "Asia/Kolkata"; # CHOOSE YOUR TIMEZONE
-      kbdLayout = "us"; # CHOOSE YOUR KEYBOARD LAYOUT
-      kbdVariant = ""; # CHOOSE YOUR KEYBOARD VARIANT (Can leave empty)
-      consoleKeymap = "us"; # CHOOSE YOUR CONSOLE KEYMAP (Affects the tty?)
+      systems = [
+        "x86_64-linux"
+        "aarch64-linux"
+      ];
+      forAllSystems = nixpkgs.lib.genAttrs systems;
+    in
+    {
+      templates = import ./dev-shells;
+      overlays = import ./overlays { inherit inputs settings; };
+      formatter = forAllSystems (system: nixpkgs.legacyPackages.${system}.alejandra);
+      nixosConfigurations = {
+        Default = nixpkgs.lib.nixosSystem {
+          system = forAllSystems (system: system);
+          specialArgs = {
+            inherit self inputs outputs;
+          } // settings;
+          modules = [ ./hosts/Default/configuration.nix ];
+        };
+      };
+      devShells = forAllSystems (
+        system:
+        let
+          pkgs = import nixpkgs {
+            system = system;
+            config.allowUnfree = true;
+            config.nvidia.acceptLicense = true;
+            # overlays = settings.overlays;
+          };
+        in
+        {
+          default = pkgs.mkShellNoCC {
+            packages = with pkgs; [
+              git
+              nix
+              figlet
+              lolcat
+            ];
+            NIX_CONFIG = "experimental-features = nix-command flakes";
+          };
+        }
+      );
     };
-
-    systems = [
-      "x86_64-linux"
-      "aarch64-linux"
-    ];
-    forAllSystems = nixpkgs.lib.genAttrs systems;
-  in {
-    templates = import ./dev-shells;
-    overlays = import ./overlays {inherit inputs settings;};
-    formatter = forAllSystems (system: nixpkgs.legacyPackages.${system}.alejandra);
-    nixosConfigurations = {
-      Default = nixpkgs.lib.nixosSystem {
-        system = forAllSystems (system: system);
-        specialArgs = {inherit self inputs outputs;} // settings;
-        modules = [./hosts/Default/configuration.nix];
-      };
-    };
-    devShells = forAllSystems (system: let
-      pkgs = import nixpkgs {
-        system = system;
-        config.allowUnfree = true;
-        config.nvidia.acceptLicense = true;
-        # overlays = settings.overlays;
-      };
-    in {
-      default = pkgs.mkShellNoCC {
-        packages = with pkgs; [
-          git
-          nix
-          figlet
-          lolcat
-        ];
-        NIX_CONFIG = "experimental-features = nix-command flakes";
-      };
-    });
-  };
 }
