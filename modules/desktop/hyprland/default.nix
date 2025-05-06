@@ -70,6 +70,7 @@
             wl-clipboard
             xdotool
             yad
+            nautilus
             grim
             slurp
             tesseract
@@ -363,7 +364,8 @@
 
                   "$mainMod, Return, exec, $term"
                   "$mainMod, T, exec, $term"
-                  "$mainMod, E, exec, $fileManager"
+                  "$mainMod, E, exec, nautilus"
+                  "$mainMod SHIFT, E, exec, $fileManager"
                   "$mainMod, C, exec, $editor"
                   "$mainMod, B, exec, $browser"
                   "$mainMod, M, exec, spotify"
@@ -449,10 +451,10 @@
                   "$mainMod SHIFT $CONTROL, down, movewindow, d"
 
                   # Move active window around current workspace with mainMod + SHIFT + CTRL [HLJK]
-                  "$mainMod SHIFT $CONTROL, H, movewindow, l"
-                  "$mainMod SHIFT $CONTROL, L, movewindow, r"
-                  "$mainMod SHIFT $CONTROL, K, movewindow, u"
-                  "$mainMod SHIFT $CONTROL, J, movewindow, d"
+                  "$mainMod SHIFT, H, movewindow, l"
+                  "$mainMod SHIFT, L, movewindow, r"
+                  "$mainMod SHIFT, K, movewindow, u"
+                  "$mainMod SHIFT, J, movewindow, d"
 
                   # Special workspaces (scratchpad)
                   "$mainMod CTRL, S, movetoworkspacesilent, special"
