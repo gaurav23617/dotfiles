@@ -30,7 +30,6 @@
     ../../modules/programs/cli/lazygit
     ../../modules/programs/cli/cava
     ../../modules/programs/cli/btop
-    ../../modules/programs/shell/bash
     ../../modules/programs/shell/zsh
     ../../modules/programs/media/discord
     ../../modules/programs/media/spicetify
@@ -58,6 +57,7 @@
     git
     gh
     gcc
+    bash
     nodejs_23
     rustup
     cargo
