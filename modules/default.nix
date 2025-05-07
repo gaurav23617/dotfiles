@@ -17,6 +17,7 @@
     ./desktop/hyprland # Enable hyprland window manager
 
     ./programs/games
+    ./programs/git
     ./programs/browser/${browser} # Set browser defined in flake.nix
     ./programs/terminal/${terminal} # Set terminal defined in flake.nix
     ./programs/editor/${editor} # Set editor defined in flake.nix
