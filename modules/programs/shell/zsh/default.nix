@@ -1,31 +1,24 @@
 {
-  config,
-  lib,
-  pkgs,
-  ...
-}:
-
-{
   home-manager.sharedModules = [
     (
       {
         config,
-        lib,
         pkgs,
+        lib,
         ...
       }:
       {
-        programs.zsh.enable = true;
-        programs.zsh.dotDir = ".config/zsh"; # Ensures .zshrc and other config files are in this folder
+        programs.zsh = {
+          enable = true;
+          dotDir = ".config/zsh";
+          # Other Zsh options like history, aliases, initContent, etc...
+        };
 
-        # Correctly symlink .zshrc file
-        home.file.".config/zsh/".source =
-          config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfile/config/zsh/";
+        # Symlink your Zsh folder (e.g. contains .zshrc, .p10k.zsh, etc.)
+        home.file.".config/zsh/.zshrc".source =
+          config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfile/config/zsh/.zshrc";
 
-        # Correctly symlink .zshenv if required
-        home.file.".config/zsh/.zshenv".source =
-          config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfile/config/zsh/.zshenv";
-
+        # DO NOT SYMLINK `.zshenv` ANYWHERE — let Home Manager manage /etc/zshenv
       }
     )
   ];

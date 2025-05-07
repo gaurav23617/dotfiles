@@ -20,10 +20,10 @@ eval "$(zoxide init --cmd cd zsh)"
 # eval "`pip completion --zsh`"
 
 # source
-plug "$HOME/.config/aliases.zsh"
-plug "$HOME/.config/zstyle.zsh"
-plug "$HOME/.config/exports.zsh"
-plug "$HOME/.config/functions.zsh"
+plug "$HOME/dotfile/config/zsh/aliases.zsh"
+plug "$HOME/dotfile/config/zsh/zstyle.zsh"
+plug "$HOME/dotfile/config/zsh/exports.zsh"
+plug "$HOME/dotfile/config/zsh/functions.zsh"
 
 # Add in zsh plugins
 plug "zsh-users/zsh-completions"
