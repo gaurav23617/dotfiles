@@ -1,41 +1,13 @@
 {
   pkgs,
-  videoDriver,
   hostname,
-  browser,
-  editor,
-  terminal,
-  terminalFileManager,
   ...
 }:
 {
   imports = [
     ./hardware-configuration.nix
-    ../../modules/hardware/video/${videoDriver}.nix # Enable gpu drivers defined in flake.nix
-    ../../modules/hardware/drives
-
     ../common.nix
-    ../../modules/scripts
-
-    ../../modules/desktop/hyprland # Enable hyprland window manager
-
-    ../../modules/programs/games
-    ../../modules/programs/browser/${browser} # Set browser defined in flake.nix
-    ../../modules/programs/terminal/${terminal} # Set terminal defined in flake.nix
-    ../../modules/programs/editor/${editor} # Set editor defined in flake.nix
-    ../../modules/programs/cli/${terminalFileManager} # Set file-manager defined in flake.nix
-    ../../modules/programs/cli/starship
-    ../../modules/programs/cli/tmux
-    ../../modules/programs/cli/direnv
-    ../../modules/programs/cli/lazygit
-    ../../modules/programs/cli/cava
-    ../../modules/programs/cli/btop
-    ../../modules/programs/shell/zsh
-    ../../modules/programs/media/discord
-    ../../modules/programs/media/spicetify
-    ../../modules/programs/misc/tlp
-    ../../modules/programs/misc/virt-manager
-    ../../modules/programs/misc/lact # gpu power and fan control (WIP)
+    ../../modules
   ];
 
   # Home-manager config
