@@ -50,7 +50,6 @@
 
   # Define system packages here
   environment.systemPackages = with pkgs; [
-    ghostty
     vim
     github-copilot-cli
     google-chrome
