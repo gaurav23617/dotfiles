@@ -44,7 +44,7 @@
         username = "coffee"; # automatically set with install.sh and live-install.sh
         editor = "neovim"; # neovim, vscode
         browser = "zen"; # firefox, floorp, zen
-        terminal = "kitty"; # kitty, alacritty, wezterm
+        terminal = "ghostty"; # kitty, alacritty, wezterm
         terminalFileManager = "yazi"; # yazi or lf
         sddmTheme = "purple_leaves"; # astronaut, black_hole, purple_leaves, jake_the_dog, hyprland_kath
         wallpaper = "moon.png"; # see modules/themes/wallpapers
