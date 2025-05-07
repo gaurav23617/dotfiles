@@ -67,6 +67,7 @@
           zoxide
           imagemagick
           amd-ucodegen
+          diff-so-fancy
           eza
           vlc
           wordnet
@@ -265,6 +266,7 @@
     lm_sensors
     jq
     bibata-cursors
+    stylua
     sddm-astronaut # Overlayed
     pkgs.kdePackages.qtsvg
     pkgs.kdePackages.qtmultimedia
