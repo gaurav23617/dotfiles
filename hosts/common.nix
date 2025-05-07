@@ -67,6 +67,7 @@
           zoxide
           imagemagick
           amd-ucodegen
+          eza
           vlc
           wordnet
           nix-prefetch-scripts
