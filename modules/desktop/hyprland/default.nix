@@ -228,7 +228,7 @@
               misc = {
                 disable_hyprland_logo = true;
                 mouse_move_focuses_monitor = true;
-                swallow_regex = "^(Alacritty|kitty)$";
+                swallow_regex = "^(ghostty|kitty)$";
                 enable_swallow = true;
                 vfr = true; # always keep on
                 vrr = 1; # enable variable refresh rate (0=off, 1=on, 2=fullscreen only)
@@ -253,7 +253,7 @@
                 "workspace 1, title:(.*)(Spotify)(.*)$"
                 "workspace 1, class:^(Spotify)$"
                 "workspace 2, class:^(firefox|zen)$"
-                "workspace 3, class:^(kitty|Ghostty)$"
+                "workspace 3, class:^(kitty|ghostty)$"
                 "workspace 3, title:(.*)(Godot)(.*)$"
                 "workspace 4, title:(GNU Image Manipulation Program)(.*)$"
                 "workspace 5, class:^(steam)$"
@@ -261,7 +261,7 @@
                 "workspace 6, class:^(code|VSCodium|code-url-handler|codium-url-handler)$"
 
                 # Can use FLOAT FLOAT for active and inactive or just FLOAT
-                "opacity 0.80 0.80,class:^(kitty|alacritty|Alacritty|org.wezfurlong.wezterm)$"
+                "opacity 0.80 0.80,class:^(ghostty|kitty)$"
                 "opacity 0.90 0.90,class:^(gcr-prompter)$" # keyring prompt
                 "opacity 0.90 0.90,title:^(Hyprland Polkit Agent)$" # polkit prompt
                 "opacity 1.00 1.00,class:^(firefox)$"
@@ -352,7 +352,7 @@
 
                   # Window/Session actions
                   "$mainMod, Q, exec, ${./scripts/dontkillsteam.sh}" # killactive, kill the window on focus
-                  "ALT, F4, exec, ${./scripts/dontkillsteam.sh}" # killactive, kill the window on focus
+                  "ALT, F4, exec, wlogout -b 4" # killactive, kill the window on focus
                   "$mainMod, delete, exit" # kill hyperland session
                   "$mainMod, W, togglefloating" # toggle the window on focus to float
                   "$mainMod SHIFT, G, togglegroup" # toggle the window on focus to float
