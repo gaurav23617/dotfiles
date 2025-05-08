@@ -28,6 +28,7 @@
     git
     gh
     gcc
+    dysk
     bash
     nodejs_23
     rustup
@@ -59,6 +60,10 @@
   users.users.minidlna = {
     extraGroups = [ "users" ]; # so minidlna can access the files.
   };
+
+  # casting
+  services.avahi.enable = true;
+
   # Enable weekly SSD TRIM
   services.fstrim.enable = true;
 
