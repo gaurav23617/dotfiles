@@ -18,17 +18,19 @@
 
     ./programs/games
     ./programs/git
-    ./programs/browser/${browser} # Set browser defined in flake.nix
+    ./programs/browser/zen # Set browser defined in flake.nix
+    ./programs/browser/brave
     ./programs/terminal/${terminal} # Set terminal defined in flake.nix
-    ./programs/editor/${editor} # Set editor defined in flake.nix
-    ./programs/cli/${terminalFileManager} # Set file-manager defined in flake.nix
+    ./programs/editor/neovim # Set editor defined in flake.nix
+    ./programs/editor/vscode
+    ./programs/cli/yazi # Set file-manager defined in flake.nix
     ./programs/cli/starship
     ./programs/cli/tmux
     ./programs/cli/direnv
     ./programs/cli/lazygit
     ./programs/cli/cava
     ./programs/cli/btop
-    ./programs/shell
+    ./programs/zsh
     ./programs/media/discord
     ./programs/media/spicetify
     ./programs/misc/tlp
