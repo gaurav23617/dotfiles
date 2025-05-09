@@ -24,7 +24,6 @@
   environment.systemPackages = with pkgs; [
     vim
     github-copilot-cli
-    google-chrome
     git
     gh
     gcc
