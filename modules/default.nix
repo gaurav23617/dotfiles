@@ -20,6 +20,7 @@
     ./programs/git
     ./programs/browser/zen # Set browser defined in flake.nix
     ./programs/browser/brave
+    ./programs/browser/chrome
     ./programs/terminal/${terminal} # Set terminal defined in flake.nix
     ./programs/editor/neovim # Set editor defined in flake.nix
     ./programs/editor/vscode
