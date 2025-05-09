@@ -251,14 +251,16 @@
                 #"noanim, class:^(Rofi)$
                 "tile,title:(.*)(Godot)(.*)$"
                 "workspace 1, title:(.*)(Spotify)(.*)$"
-                "workspace 1, class:^(Spotify)$"
+                "workspace 1, class:^(Spotify|discord)$"
                 "workspace 2, class:^(firefox|zen)$"
-                "workspace 3, class:^(kitty|ghostty)$"
+                "workspace 3, class:^(kitty|ghostty|Ghostty)$"
                 "workspace 3, title:(.*)(Godot)(.*)$"
                 "workspace 4, title:(GNU Image Manipulation Program)(.*)$"
                 "workspace 5, class:^(steam)$"
                 "workspace 6, class:^(factorio)$"
                 "workspace 6, class:^(code|VSCodium|code-url-handler|codium-url-handler)$"
+                "workspace 7, class:^(google-chrome)$"
+                "workspace 9, class:^(Brave-browser)$"
 
                 # Can use FLOAT FLOAT for active and inactive or just FLOAT
                 "opacity 0.80 0.80,class:^(ghostty|kitty)$"
@@ -319,6 +321,13 @@
                 "float,class:^(nm-applet)$"
                 "float,class:^(nm-connection-editor)$"
                 "float,class:^(org.kde.polkit-kde-authentication-agent-1)$"
+                "float,title:^(Open|Save|Choose|File|Preferences|Settings)"
+                "float,title:^(.*Dialog.*|.*Popup.*|.*Chooser.*|.*Prompt.*)"
+                "float,title:^(.*)(File Chooser|File Picker)(.*)$"
+                "float,class:^(org.gtk.GtkFileChooserDialog)$"
+                "float,class:^(xdg-desktop-portal-gtk)$"
+                "float,class:^(org.kde.kdialog|kdialog)$"
+                "float,class:^(zenity)$"
               ];
               binde = [
                 # Resize windows
