@@ -35,6 +35,14 @@ export PATH="$HOME/.local/share/neovim/bin":$PATH
 # Open in tmux popup if on tmux, otherwise use --height mode
 export FZF_DEFAULT_OPTS='--height 40% --tmux bottom,40% --layout reverse --border top'
 
+# pnpm
+export PNPM_HOME="/home/gaurav/.local/share/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
+# pnpm end
+
 case "$(uname -s)" in
 
 Darwin)

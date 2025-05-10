@@ -24,32 +24,6 @@ plug "$HOME/dotfile/config/zsh/aliases.zsh"
 plug "$HOME/dotfile/config/zsh/zstyle.zsh"
 plug "$HOME/dotfile/config/zsh/exports.zsh"
 plug "$HOME/dotfile/config/zsh/functions.zsh"
+plug "$HOME/dotfile/config/zsh/plugins.zsh.zsh"
 
-# Add in zsh plugins
-plug "zsh-users/zsh-completions"
-plug "zsh-users/zsh-autosuggestions"
-plug "hlissner/zsh-autopair"
-plug "zap-zsh/supercharge"
-plug "zap-zsh/vim"
-plug "zap-zsh/fzf"
-plug "Aloxaf/fzf-tab"
-plug "zap-zsh/exa"
-plug "zsh-users/zsh-syntax-highlighting"
-plug "zsh-users/zsh-history-substring-search"
 
-function y() {
-	local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
-	yazi "$@" --cwd-file="$tmp"
-	if cwd="$(command cat -- "$tmp")" && [ -n "$cwd" ] && [ "$cwd" != "$PWD" ]; then
-		builtin cd -- "$cwd"
-	fi
-	rm -f -- "$tmp"
-}
-
-# pnpm
-export PNPM_HOME="/home/gaurav/.local/share/pnpm"
-case ":$PATH:" in
-  *":$PNPM_HOME:"*) ;;
-  *) export PATH="$PNPM_HOME:$PATH" ;;
-esac
-# pnpm end
