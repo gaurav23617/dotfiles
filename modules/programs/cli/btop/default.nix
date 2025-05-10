@@ -1,9 +1,20 @@
-{ ... }:
+{
+  pkgs,
+  videoDriver,
+  ...
+}:
 {
   home-manager.sharedModules = [
     (_: {
       programs.btop = {
         enable = true;
+        package =
+          if videoDriver == "amd" then
+            pkgs.btop-rocm
+          else if videoDriver == "nvidia" then
+            pkgs.btop-cuda
+          else
+            pkgs.btop;
         settings = {
           color_theme = "catppuccin-mocha";
           enable_gpu_stats = true;
