@@ -31,6 +31,7 @@
     ./programs/cli/lazygit
     ./programs/cli/cava
     ./programs/cli/btop
+    ./programs/cli/fastfetch
     ./programs/zsh
     ./programs/media/discord
     ./programs/media/spicetify
