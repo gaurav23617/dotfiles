@@ -9,9 +9,6 @@ alias vimrc='nvim ~/.config/nvim/'
 alias zsh-update-plugins="find "$ZDOTDIR/plugins" -type d -exec test -e '{}/.git' ';' -print0 | xargs -I {} -0 git -C {} pull -q"
 alias sshk="kitty +kitten ssh"
 
-# Remarkable
-# alias remarkable_ssh='ssh root@10.11.99.1'
-
 # pacman and yay
 alias pacsyu='sudo pacman -Syu'                  # update only standard pkgs
 alias pacsyyu='sudo pacman -Syyu'                # Refresh pkglist & update standard pkgs
