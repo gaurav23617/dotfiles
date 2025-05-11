@@ -1,5 +1,5 @@
 {
-  videoDriver,
+  driver,
   browser,
   editor,
   terminal,
@@ -9,7 +9,7 @@
 
 {
   imports = [
-    ./hardware/video/${videoDriver}.nix # Enable gpu drivers defined in flake.nix
+    ./hardware/video/${driver}.nix # Enable gpu drivers defined in flake.nix
     ./hardware/drives
 
     ./scripts

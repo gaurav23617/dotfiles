@@ -19,8 +19,8 @@ in
   };
 
   # Load nvidia driver for Xorg and Wayland
-  services.xserver.videoDrivers = [ "nvidia" ]; # or "nvidiaLegacy470", etc.
-  boot.kernelParams = lib.optionals (lib.elem "nvidia" config.services.xserver.videoDrivers) [
+  services.xserver.drivers = [ "nvidia" ]; # or "nvidiaLegacy470", etc.
+  boot.kernelParams = lib.optionals (lib.elem "nvidia" config.services.xserver.drivers) [
     "nvidia-drm.modeset=1"
     "nvidia_drm.fbdev=1"
   ];

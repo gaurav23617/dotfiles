@@ -49,7 +49,7 @@
         sddmTheme = "purple_leaves"; # astronaut, black_hole, purple_leaves, jake_the_dog, hyprland_kath
         wallpaper = "moon.png"; # see modules/themes/wallpapers
         # System configuration
-        videoDriver = "nvidia"; # CHOOSE YOUR GPU DRIVERS (nvidia or amdgpu or intel) THIS IS IMPORTANT
+        driver = "nvidia"; # CHOOSE YOUR GPU DRIVERS (nvidia or amdgpu or intel) THIS IS IMPORTANT
         hostname = "coffee"; # CHOOSE A HOSTNAME HERE
         locale = "en_GB.UTF-8"; # CHOOSE YOUR LOCALE
         timezone = "Asia/Kolkata"; # CHOOSE YOUR TIMEZONE

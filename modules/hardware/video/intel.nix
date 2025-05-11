@@ -15,7 +15,7 @@
   ];
 
   # Load the driver
-  services.xserver.videoDrivers = ["modesetting"];
+  services.xserver.drivers = ["modesetting"];
 
   # OpenGL
   hardware.graphics = {

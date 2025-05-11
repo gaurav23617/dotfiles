@@ -1,6 +1,6 @@
 {
   pkgs,
-  videoDriver,
+  driver,
   ...
 }:
 {
@@ -9,9 +9,9 @@
       programs.btop = {
         enable = true;
         package =
-          if videoDriver == "amd" then
+          if driver == "amd" then
             pkgs.btop-rocm
-          else if videoDriver == "nvidia" then
+          else if driver == "nvidia" then
             pkgs.btop-cuda
           else
             pkgs.btop;
