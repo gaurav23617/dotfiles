@@ -30,7 +30,7 @@ with lib;
           programs.ghostty.enable = true;
 
           home.file.".config/ghostty/config" = {
-            source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfile/config/ghostty/config";
+            source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfiles/config/ghostty/config";
           };
         }
       )

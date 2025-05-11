@@ -316,7 +316,7 @@
         enable = true;
         extraArgs = "--keep-since 7d --keep 3";
       };
-      flake = "/home/${username}/dotfile";
+      flake = "/home/${username}/dotfiles";
     };
   };
   nix = {

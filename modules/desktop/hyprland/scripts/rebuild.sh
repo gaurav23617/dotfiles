@@ -15,12 +15,12 @@ if [[ ! "$(grep -i nixos </etc/os-release)" ]]; then
   exit 1
 fi
 
-if [ -f "$HOME/dotfile/flake.nix" ]; then
-  flake=$HOME/dotfile
+if [ -f "$HOME/dotfiles/flake.nix" ]; then
+  flake=$HOME/dotfiles
 elif [ -f "/etc/nixos/flake.nix" ]; then
   flake=/etc/nixos
 else
-  echo "Error: flake not found. Ensure flake.nix exists in either \$HOME/dotfile or /etc/nixos"
+  echo "Error: flake not found. Ensure flake.nix exists in either \$HOME/dotfiles or /etc/nixos"
   exit 1
 fi
 
@@ -44,4 +44,3 @@ sudo nixos-rebuild switch --flake "$flake#Default"
 
 echo
 read -rsn1 -p"$(echo -e "${GREEN}Press any key to continue${NC}")"
-

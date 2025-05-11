@@ -122,12 +122,27 @@ else
     read -p "Enter choice (1-5, default 1): " editor_choice
     editor_choice=${editor_choice:-1}
     case $editor_choice in
-      1) editor="$default_editor"; break;;
-      2) editor="vim +52"; break;;
-      3) editor="nano +52"; break;;
-      4) editor="vi +52"; break;;
-      5) editor="none"; break;;
-      *) echo -e "${RED}Invalid choice. Enter 1-5.${NC}";;
+    1)
+      editor="$default_editor"
+      break
+      ;;
+    2)
+      editor="vim +52"
+      break
+      ;;
+    3)
+      editor="nano +52"
+      break
+      ;;
+    4)
+      editor="vi +52"
+      break
+      ;;
+    5)
+      editor="none"
+      break
+      ;;
+    *) echo -e "${RED}Invalid choice. Enter 1-5.${NC}" ;;
     esac
     if [ "$editor" != "none" ] && ! command -v "${editor%% *}" &>/dev/null; then
       echo -e "${RED}Editor $editor not found. Please choose another.${NC}"
@@ -155,9 +170,15 @@ echo "2) Manual (for dual-boot or custom layouts, launches cfdisk)"
 while true; do
   read -p "Enter choice (1 or 2): " part_choice
   case $part_choice in
-    1) partitioning="auto"; break;;
-    2) partitioning="manual"; break;;
-    *) echo -e "${RED}Invalid choice. Enter 1 or 2.${NC}";;
+  1)
+    partitioning="auto"
+    break
+    ;;
+  2)
+    partitioning="manual"
+    break
+    ;;
+  *) echo -e "${RED}Invalid choice. Enter 1 or 2.${NC}" ;;
   esac
 done
 
@@ -167,7 +188,7 @@ echo "Username: $username"
 echo "User Password: [hidden]"
 echo "Partitioning: $partitioning"
 if [ "$partitioning" = "manual" ]; then
-  echo 
+  echo
   echo "Please create partitions, including EFI, root, and optionally home and swap. Write and quit when done."
   read -p "Launch cfdisk for manual partitioning? (Y/n): " confirm
 else
@@ -258,9 +279,15 @@ echo "2) btrfs"
 while true; do
   read -p "Enter choice (1 or 2): " fs_choice
   case $fs_choice in
-    1) filesystem="ext4"; break;;
-    2) filesystem="btrfs"; break;;
-    *) echo -e "${RED}Invalid choice. Enter 1 or 2.${NC}";;
+  1)
+    filesystem="ext4"
+    break
+    ;;
+  2)
+    filesystem="btrfs"
+    break
+    ;;
+  *) echo -e "${RED}Invalid choice. Enter 1 or 2.${NC}" ;;
   esac
 done
 
@@ -271,9 +298,15 @@ echo "2) No"
 while true; do
   read -p "Enter choice (1 or 2): " luks_choice
   case $luks_choice in
-    1) luks_enabled="yes"; break;;
-    2) luks_enabled="no"; break;;
-    *) echo -e "${RED}Invalid choice. Enter 1 or 2.${NC}";;
+  1)
+    luks_enabled="yes"
+    break
+    ;;
+  2)
+    luks_enabled="no"
+    break
+    ;;
+  *) echo -e "${RED}Invalid choice. Enter 1 or 2.${NC}" ;;
   esac
 done
 
@@ -343,9 +376,15 @@ if [ "$partitioning" = "manual" ] && [ -n "$part_home" ]; then
         while true; do
           read -p "Enter choice (1 or 2): " home_luks_choice
           case $home_luks_choice in
-            1) home_luks_enabled="yes"; break;;
-            2) home_luks_enabled="no"; break;;
-            *) echo -e "${RED}Invalid choice. Enter 1 or 2.${NC}";;
+          1)
+            home_luks_enabled="yes"
+            break
+            ;;
+          2)
+            home_luks_enabled="no"
+            break
+            ;;
+          *) echo -e "${RED}Invalid choice. Enter 1 or 2.${NC}" ;;
           esac
         done
         if [ "$home_luks_enabled" = "yes" ]; then
@@ -357,9 +396,12 @@ if [ "$partitioning" = "manual" ] && [ -n "$part_home" ]; then
             while true; do
               read -p "Enter choice (1 or 2): " same_password_choice
               case $same_password_choice in
-                1) home_luks_password="$luks_password"; break;;
-                2) break;;
-                *) echo -e "${RED}Invalid choice. Enter 1 or 2.${NC}";;
+              1)
+                home_luks_password="$luks_password"
+                break
+                ;;
+              2) break ;;
+              *) echo -e "${RED}Invalid choice. Enter 1 or 2.${NC}" ;;
               esac
             done
           fi
@@ -402,9 +444,15 @@ if [ "$partitioning" = "manual" ] && [ -n "$part_home" ]; then
       while true; do
         read -p "Enter choice (1 or 2): " home_luks_choice
         case $home_luks_choice in
-          1) home_luks_enabled="yes"; break;;
-          2) home_luks_enabled="no"; break;;
-          *) echo -e "${RED}Invalid choice. Enter 1 or 2.${NC}";;
+        1)
+          home_luks_enabled="yes"
+          break
+          ;;
+        2)
+          home_luks_enabled="no"
+          break
+          ;;
+        *) echo -e "${RED}Invalid choice. Enter 1 or 2.${NC}" ;;
         esac
       done
       if [ "$home_luks_enabled" = "yes" ]; then
@@ -416,9 +464,12 @@ if [ "$partitioning" = "manual" ] && [ -n "$part_home" ]; then
           while true; do
             read -p "Enter choice (1 or 2): " same_password_choice
             case $same_password_choice in
-              1) home_luks_password="$luks_password"; break;;
-              2) break;;
-              *) echo -e "${RED}Invalid choice. Enter 1 or 2.${NC}";;
+            1)
+              home_luks_password="$luks_password"
+              break
+              ;;
+            2) break ;;
+            *) echo -e "${RED}Invalid choice. Enter 1 or 2.${NC}" ;;
             esac
           done
         fi
@@ -484,7 +535,7 @@ echo "Done."
 
 # Generate hardware configuration
 echo -e "\n${GREEN}Generating hardware configuration...${NC}"
-nixos-generate-config --root /mnt --show-hardware-config > ./hosts/Default/hardware-configuration.nix
+nixos-generate-config --root /mnt --show-hardware-config >./hosts/Default/hardware-configuration.nix
 echo "Done."
 
 # Replace username variable in flake.nix
@@ -503,12 +554,12 @@ nixos-install --flake /mnt/etc/nixos#Default --no-root-passwd
 nixos-enter --root /mnt -c "echo $password | passwd --stdin $username"
 
 # Copy flake to ~/NixOS
-echo -e "\n${GREEN}Copying flake to /home/$username/dotfile...${NC}"
-mkdir -p "/mnt/home/$username/dotfile"
-cp -r ./ "/mnt/home/$username/dotfile/"
+echo -e "\n${GREEN}Copying flake to /home/$username/dotfiles...${NC}"
+mkdir -p "/mnt/home/$username/dotfiles"
+cp -r ./ "/mnt/home/$username/dotfiles/"
 uid=$(awk -F: -v user="$username" '$1 == user {print $3}' /mnt/etc/passwd)
 gid=$(awk -F: -v user="$username" '$1 == user {print $4}' /mnt/etc/passwd)
-chown -R "$uid:$gid" "/mnt/home/$username/dotfile"
+chown -R "$uid:$gid" "/mnt/home/$username/dotfiles"
 echo "Done."
 
 # Run cleanup

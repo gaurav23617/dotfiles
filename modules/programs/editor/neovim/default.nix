@@ -1,25 +1,22 @@
-{...}: {
+{ ... }:
+{
   home-manager.sharedModules = [
-    ({ config, pkgs, lib, ... }: let
-      inherit (pkgs) tree-sitter lua54Packages luajitPackages nodePackages_latest vimPlugins;
-      inherit (pkgs.tree-sitter-grammars)
-        tree-sitter-lua
-        tree-sitter-nix
-        tree-sitter-go
-        tree-sitter-python
-        tree-sitter-bash
-        tree-sitter-regex
-        tree-sitter-markdown
-        tree-sitter-json;
-    in {
-      programs.neovim = {
-        enable = true;
-        vimAlias = true;
-        vimdiffAlias = true;
-
-        extraPackages = with pkgs; [
+    (
+      {
+        config,
+        pkgs,
+        lib,
+        ...
+      }:
+      let
+        inherit (pkgs)
           tree-sitter
-          lua54Packages.jsregexp
+          lua54Packages
+          luajitPackages
+          nodePackages_latest
+          vimPlugins
+          ;
+        inherit (pkgs.tree-sitter-grammars)
           tree-sitter-lua
           tree-sitter-nix
           tree-sitter-go
@@ -28,35 +25,54 @@
           tree-sitter-regex
           tree-sitter-markdown
           tree-sitter-json
+          ;
+      in
+      {
+        programs.neovim = {
+          enable = true;
+          vimAlias = true;
+          vimdiffAlias = true;
 
-          nodejs_23
-          nodePackages_latest.vscode-json-languageserver
-          fzf
-          lua-language-server
-          luajitPackages.jsregexp
-          nixd
-          go
-          gopls
-          gofumpt
-          stylua
-          cargo
-          rustc
-          basedpyright
-          nixfmt-rfc-style
-          ripgrep
-          imagemagick
-        ];
+          extraPackages = with pkgs; [
+            tree-sitter
+            lua54Packages.jsregexp
+            tree-sitter-lua
+            tree-sitter-nix
+            tree-sitter-go
+            tree-sitter-python
+            tree-sitter-bash
+            tree-sitter-regex
+            tree-sitter-markdown
+            tree-sitter-json
 
-        plugins = [
-          vimPlugins.nvim-treesitter.withAllGrammars
-          vimPlugins.nvim-treesitter
-        ];
-      };
+            nodejs_23
+            nodePackages_latest.vscode-json-languageserver
+            fzf
+            lua-language-server
+            luajitPackages.jsregexp
+            nixd
+            go
+            gopls
+            gofumpt
+            stylua
+            cargo
+            rustc
+            basedpyright
+            nixfmt-rfc-style
+            ripgrep
+            imagemagick
+          ];
 
-      home.file.".config/nvim".source = builtins.toString (
-        config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfile/config/nvim"
-      );
-    })
+          plugins = [
+            vimPlugins.nvim-treesitter.withAllGrammars
+            vimPlugins.nvim-treesitter
+          ];
+        };
+
+        home.file.".config/nvim".source = builtins.toString (
+          config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfiles/config/nvim"
+        );
+      }
+    )
   ];
 }
-

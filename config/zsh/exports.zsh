@@ -34,6 +34,7 @@ export PATH="$HOME/.local/share/neovim/bin":$PATH
 # export HOMEBREW_NO_ENV_HINTS=1
 # Open in tmux popup if on tmux, otherwise use --height mode
 export FZF_DEFAULT_OPTS='--height 40% --tmux bottom,40% --layout reverse --border top'
+export NIX_CONFIG="experimental-features = nix-command flakes"
 
 # pnpm
 export PNPM_HOME="/home/gaurav/.local/share/pnpm"
