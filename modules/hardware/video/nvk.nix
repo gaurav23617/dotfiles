@@ -26,7 +26,7 @@ in {
   environment.sessionVariables = env;
   environment.variables = env;
 
-  services.xserver.drivers = ["modesetting"]; # "modesetting" is better than "nouveau"
+  services.xserver.videoDrivers = ["modesetting"]; # "modesetting" is better than "nouveau"
   # environment.variables.WLR_NO_HARDWARE_CURSORS = "1";
 
   hardware = {

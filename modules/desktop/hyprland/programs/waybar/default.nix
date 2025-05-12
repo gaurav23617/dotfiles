@@ -26,7 +26,7 @@
             modules-left = ["hyprland/workspaces" "cava"];
             # modules-center = ["clock" "custom/notification"];
             modules-center = ["idle_inhibitor" "clock"];
-            modules-right = ["custom/gpuinfo" "cpu" "memory" "pulseaudio" "backlight" "network" "bluetooth" "tray" "battery"];
+            modules-right = ["custom/gpuinfo" "cpu" "memory" "backlight" "pulseaudio" "bluetooth" "network" "tray" "battery"];
 
             "custom/notification" = {
               tooltip = false;
@@ -68,6 +68,7 @@
               # "noise_reduction" = 0.77;
               sleep_timer = 5;
               bar_delimiter = 0;
+              on-click = "playerctl play-pause";
             };
             "custom/gpuinfo" = {
               exec = "${../../scripts/gpuinfo.sh}";
@@ -200,8 +201,10 @@
               # on-click = "nm-connection-editor";
               # "interface" = "wlp2*"; # (Optional) To force the use of this interface
               format-wifi = "󰤨 Wi-Fi";
+              # format-wifi = " {bandwidthDownBits}  {bandwidthUpBits}";
               # format-wifi = "󰤨 {essid}";
               format-ethernet = "󱘖 Wired";
+              # format-ethernet = " {bandwidthDownBits}  {bandwidthUpBits}";
               format-linked = "󱘖 {ifname} (No IP)";
               format-disconnected = "󰤮 Off";
               # format-disconnected = "󰤮 Disconnected";

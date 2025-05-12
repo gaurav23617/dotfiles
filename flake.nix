@@ -30,74 +30,48 @@
     };
   };
 
-  outputs =
-    {
-      self,
-      nixpkgs,
-      ghostty,
-      ...
-    }@inputs:
-    let
-      inherit (self) outputs;
-      settings = {
-        # User configuration
-        username = "gaurav"; # automatically set with install.sh and live-install.sh
-        editor = "neovim"; # neovim, vscode
-        browser = "zen"; # firefox, floorp, zen
-        terminal = "ghostty";
-        terminalFileManager = "yazi"; # yazi or lf
-        sddmTheme = "purple_leaves"; # astronaut, black_hole, purple_leaves, jake_the_dog, hyprland_kath
-        wallpaper = "moon.png"; # see modules/themes/wallpapers
-        # System configuration
-        driver = "nvidia"; # CHOOSE YOUR GPU DRIVERS (nvidia or amdgpu or intel) THIS IS IMPORTANT
-        hostname = "coffee"; # CHOOSE A HOSTNAME HERE
-        locale = "en_GB.UTF-8"; # CHOOSE YOUR LOCALE
-        timezone = "Asia/Kolkata"; # CHOOSE YOUR TIMEZONE
-        kbdLayout = "us"; # CHOOSE YOUR KEYBOARD LAYOUT
-        kbdVariant = ""; # CHOOSE YOUR KEYBOARD VARIANT (Can leave empty)
-        consoleKeymap = "us"; # CHOOSE YOUR CONSOLE KEYMAP (Affects the tty?)
-      };
+  outputs = {
+    self,
+    nixpkgs,
+    ghostty,
+    ...
+  } @ inputs: let
+    inherit (self) outputs;
+    settings = {
+      # User configuration
+      username = "gaurav"; # automatically set with install.sh and live-install.sh
+      editor = "neovim"; # nixvim, vscode, nvchad, neovim, emacs (WIP)
+      browser = "zen"; # firefox, floorp, zen
+      terminal = "ghostty"; # kitty, alacritty, wezterm
+      terminalFileManager = "yazi"; # yazi or lf
+      sddmTheme = "purple_leaves"; # astronaut, black_hole, purple_leaves, jake_the_dog, hyprland_kath
+      wallpaper = "moon"; # see modules/themes/wallpapers
 
-      systems = [
-        "x86_64-linux"
-        "aarch64-linux"
-      ];
-      forAllSystems = nixpkgs.lib.genAttrs systems;
-    in
-    {
-      templates = import ./dev-shells;
-      overlays = import ./overlays { inherit inputs settings; };
-      formatter = forAllSystems (system: nixpkgs.legacyPackages.${system}.alejandra);
-      nixosConfigurations = {
-        Default = nixpkgs.lib.nixosSystem {
-          system = forAllSystems (system: system);
-          specialArgs = {
-            inherit self inputs outputs;
-          } // settings;
-          modules = [ ./hosts/Default/configuration.nix ];
-        };
-      };
-      devShells = forAllSystems (
-        system:
-        let
-          pkgs = import nixpkgs {
-            system = system;
-            config.allowUnfree = true;
-            config.nvidia.acceptLicense = true;
-            # overlays = settings.overlays;
-          };
-        in
-        {
-          default = pkgs.mkShellNoCC {
-            packages = with pkgs; [
-              git
-              nix
-              figlet
-              lolcat
-            ];
-            NIX_CONFIG = "experimental-features = nix-command flakes";
-          };
-        }
-      );
+      # System configuration
+      driver = "nvidia"; # CHOOSE YOUR GPU DRIVERS (nvidia, amdgpu or intel)
+      hostname = "coffee"; # CHOOSE A HOSTNAME HERE
+      locale = "en_GB.UTF-8"; # CHOOSE YOUR LOCALE
+      timezone = "asia/kolkata"; # CHOOSE YOUR TIMEZONE
+      kbdLayout = "us"; # CHOOSE YOUR KEYBOARD LAYOUT
+      kbdVariant = ""; # CHOOSE YOUR KEYBOARD VARIANT (Can leave empty)
+      consoleKeymap = "us"; # CHOOSE YOUR CONSOLE KEYMAP (Affects the tty?)
     };
+
+    systems = [
+      "x86_64-linux"
+      "aarch64-linux"
+    ];
+    forAllSystems = nixpkgs.lib.genAttrs systems;
+  in {
+    templates = import ./dev-shells;
+    overlays = import ./overlays {inherit inputs settings;};
+    formatter = forAllSystems (system: nixpkgs.legacyPackages.${system}.alejandra);
+    nixosConfigurations = {
+      Default = nixpkgs.lib.nixosSystem {
+        system = forAllSystems (system: system);
+        specialArgs = {inherit self inputs outputs;} // settings;
+        modules = [./hosts/Default/configuration.nix];
+      };
+    };
+  };
 }

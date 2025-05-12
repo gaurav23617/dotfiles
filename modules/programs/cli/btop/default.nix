@@ -1,14 +1,9 @@
-{
-  pkgs,
-  driver,
-  ...
-}:
-{
+{...}: {
   home-manager.sharedModules = [
     (_: {
       programs.btop = {
         enable = true;
-        package =
+                package =
           if driver == "amd" then
             pkgs.btop-rocm
           else if driver == "nvidia" then
@@ -17,7 +12,6 @@
             pkgs.btop;
         settings = {
           color_theme = "catppuccin-mocha";
-          enable_gpu_stats = true;
         };
       };
       xdg.configFile."btop/themes/catppuccin-mocha.theme".text = ''

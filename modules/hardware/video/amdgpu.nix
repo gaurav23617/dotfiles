@@ -2,7 +2,7 @@
 {pkgs, ...}: {
   services.xserver = {
     enable = true;
-    drivers = ["amdgpu"];
+    videoDrivers = ["amdgpu"];
   };
   hardware.graphics = {
     enable = true;
