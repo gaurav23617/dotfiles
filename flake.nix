@@ -48,7 +48,7 @@
       wallpaper = "moon"; # see modules/themes/wallpapers
 
       # System configuration
-      driver = "nvidia"; # CHOOSE YOUR GPU DRIVERS (nvidia, amdgpu or intel)
+      videoDriver = "nvidia"; # CHOOSE YOUR GPU DRIVERS (nvidia, amdgpu or intel)
       hostname = "coffee"; # CHOOSE A HOSTNAME HERE
       locale = "en_GB.UTF-8"; # CHOOSE YOUR LOCALE
       timezone = "asia/kolkata"; # CHOOSE YOUR TIMEZONE

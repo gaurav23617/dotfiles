@@ -5,7 +5,7 @@
 }: {
   imports = [
     ./hardware-configuration.nix
-    ../../modules/hardware/video/${driver}.nix # Enable gpu drivers defined in flake.nix
+    ../../modules/hardware/video/${videoDriver}.nix # Enable gpu videoDrivers defined in flake.nix
     ../../modules/hardware/drives
 
     ../../modules

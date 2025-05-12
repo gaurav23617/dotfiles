@@ -1,12 +1,12 @@
-{...}: {
+{ videoDriver, ... }: {
   home-manager.sharedModules = [
     (_: {
       programs.btop = {
         enable = true;
                 package =
-          if driver == "amd" then
+          if videoDriver == "amd" then
             pkgs.btop-rocm
-          else if driver == "nvidia" then
+          else if videoDriver == "nvidia" then
             pkgs.btop-cuda
           else
             pkgs.btop;
