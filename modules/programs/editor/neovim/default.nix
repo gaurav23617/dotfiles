@@ -51,7 +51,7 @@
             luajitPackages.jsregexp
             nixd
             go
-            gcc
+	    gcc
             gopls
             gofumpt
             stylua
@@ -70,7 +70,7 @@
         };
 
         home.file.".config/nvim".source = builtins.toString (
-          config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/NixOS/config/nvim"
+          config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfiles/config/nvim"
         );
       }
     )

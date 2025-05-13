@@ -524,12 +524,12 @@ nixos-install --flake /mnt/etc/nixos#Default --no-root-passwd
 nixos-enter --root /mnt -c "echo $password | passwd --stdin $username"
 
 # Copy flake to ~/NixOS
-echo -e "\n${GREEN}Copying flake to /home/$username/NixOS...${NC}"
-mkdir -p "/mnt/home/$username/NixOS"
-cp -r ./ "/mnt/home/$username/NixOS/"
+echo -e "\n${GREEN}Copying flake to /home/$username/dotfiles...${NC}"
+mkdir -p "/mnt/home/$username/dotfiles"
+cp -r ./ "/mnt/home/$username/dotfiles/"
 uid=$(awk -F: -v user="$username" '$1 == user {print $3}' /mnt/etc/passwd)
 gid=$(awk -F: -v user="$username" '$1 == user {print $4}' /mnt/etc/passwd)
-chown -R "$uid:$gid" "/mnt/home/$username/NixOS"
+chown -R "$uid:$gid" "/mnt/home/$username/dotfiles"
 echo "Done."
 
 # Run cleanup

@@ -16,12 +16,12 @@ if [[ ! "$(grep -i nixos </etc/os-release)" ]]; then
   exit 1
 fi
 
-if [ -f "$HOME/NixOS/flake.nix" ]; then
-  flake=$HOME/NixOS
+if [ -f "$HOME/dotfiles/flake.nix" ]; then
+  flake=$HOME/dotfiles
 elif [ -f "/etc/nixos/flake.nix" ]; then
   flake=/etc/nixos
 else
-  echo "Error: flake not found. ensure flake.nix exists in either $HOME/NixOS or /etc/nixos"
+  echo "Error: flake not found. ensure flake.nix exists in either $HOME/dotfiles or /etc/nixos"
   exit 1
 fi
 echo -e "${GREEN}Rebuilding from $flake${NC}"

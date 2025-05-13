@@ -7,7 +7,8 @@
   terminal,
   terminalFileManager,
   ...
-}: {
+}:
+{
   imports = [
     ./hardware-configuration.nix
     ../../modules/hardware/video/${videoDriver}.nix # Enable gpu drivers defined in flake.nix
@@ -51,9 +52,7 @@
       home.packages = with pkgs; [
         # pokego # Overlayed
         # lact # Overlayed [LONG COMPILE]
-        krita
         gimp
-        github-desktop
       ];
     })
   ];
@@ -84,6 +83,6 @@
     };
   };
   users.users.minidlna = {
-    extraGroups = ["users"]; # so minidlna can access the files.
+    extraGroups = [ "users" ]; # so minidlna can access the files.
   };
 }
