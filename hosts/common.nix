@@ -72,6 +72,8 @@
           microfetch
           ripgrep
           gh
+          zoxide
+          bash
           tldr
           unzip
           (pkgs.writeShellScriptBin "hello" ''
