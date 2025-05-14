@@ -45,13 +45,14 @@
             tree-sitter-markdown
             tree-sitter-json
 
+            nodejs_23
             nodePackages_latest.vscode-json-languageserver
             fzf
             lua-language-server
             luajitPackages.jsregexp
             nixd
             go
-	    gcc
+            gcc
             gopls
             gofumpt
             stylua
