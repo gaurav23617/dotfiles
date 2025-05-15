@@ -22,6 +22,8 @@
 
     ../../modules/programs/games
     ../../modules/programs/browser/${browser} # Set browser defined in flake.nix
+    ../../modules/programs/browser/chrome # Set browser defined in flake.nix
+    ../../modules/programs/browser/brave # Set browser defined in flake.nix
     ../../modules/programs/terminal/${terminal} # Set terminal defined in flake.nix
     ../../modules/programs/editor/${editor} # Set editor defined in flake.nix
     ../../modules/programs/cli/${terminalFileManager} # Set file-manager defined in flake.nix
@@ -31,7 +33,6 @@
     ../../modules/programs/cli/lazygit
     ../../modules/programs/cli/cava
     ../../modules/programs/cli/btop
-    ../../modules/programs/shell/bash
     ../../modules/programs/shell/zsh
     ../../modules/programs/media/discord
     ../../modules/programs/media/spicetify
@@ -39,6 +40,7 @@
     # ../../modules/programs/media/thunderbird
     # ../../modules/programs/media/obs-studio
     ../../modules/programs/media/mpv
+    ../../modules/programs/media/vlc
     ../../modules/programs/misc/tlp
     ../../modules/programs/misc/thunar
     # ../../modules/programs/misc/nix-ld
