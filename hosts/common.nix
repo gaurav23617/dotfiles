@@ -66,6 +66,9 @@
           fd
           git
           gh
+          eza
+          motrix
+          nodejs_22
           github-copilot-cli
           htop
           nix-prefetch-scripts
