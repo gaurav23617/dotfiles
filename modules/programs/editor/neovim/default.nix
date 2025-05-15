@@ -45,7 +45,6 @@
             tree-sitter-markdown
             tree-sitter-json
 
-            nodejs_23
             nodePackages_latest.vscode-json-languageserver
             fzf
             lua-language-server
@@ -53,11 +52,13 @@
             nixd
             go
             gcc
+            gnumake
+            unzip
             gopls
             gofumpt
             stylua
-            cargo
             rustc
+            cargo
             basedpyright
             nixfmt-rfc-style
             ripgrep
