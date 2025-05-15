@@ -37,49 +37,59 @@
       url = "github:nix-community/nix4nvchad";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-  };
-
-  outputs = {
-    self,
-    nixpkgs,
-    ...
-  } @ inputs: let
-    inherit (self) outputs;
-    settings = {
-      # User configuration
-      username = "gaurav"; # automatically set with install.sh and live-install.sh
-      editor = "neovim"; # nixvim, vscode, nvchad, neovim, emacs (WIP)
-      browser = "zen"; # firefox, floorp, zen
-      terminal = "kitty"; # kitty, alacritty, wezterm
-      terminalFileManager = "yazi"; # yazi or lf
-      sddmTheme = "purple_leaves"; # astronaut, black_hole, purple_leaves, jake_the_dog, hyprland_kath
-      wallpaper = "moon"; # see modules/themes/wallpapers
-
-      # System configuration
-      videoDriver = "nvidia"; # CHOOSE YOUR GPU DRIVERS (nvidia, amdgpu or intel)
-      hostname = "coffee"; # CHOOSE A HOSTNAME HERE
-      locale = "en_GB.UTF-8"; # CHOOSE YOUR LOCALE
-      timezone = "asia/kolkata"; # CHOOSE YOUR TIMEZONE
-      kbdLayout = "us"; # CHOOSE YOUR KEYBOARD LAYOUT
-      kbdVariant = ""; # CHOOSE YOUR KEYBOARD VARIANT (Can leave empty)
-      consoleKeymap = "us"; # CHOOSE YOUR CONSOLE KEYMAP (Affects the tty?)
+    ghostty = {
+      url = "github:ghostty-org/ghostty";
     };
 
-    systems = [
-      "x86_64-linux"
-      "aarch64-linux"
-    ];
-    forAllSystems = nixpkgs.lib.genAttrs systems;
-  in {
-    templates = import ./dev-shells;
-    overlays = import ./overlays {inherit inputs settings;};
-    formatter = forAllSystems (system: nixpkgs.legacyPackages.${system}.alejandra);
-    nixosConfigurations = {
-      Default = nixpkgs.lib.nixosSystem {
-        system = forAllSystems (system: system);
-        specialArgs = {inherit self inputs outputs;} // settings;
-        modules = [./hosts/Default/configuration.nix];
+  };
+
+  outputs =
+    {
+      self,
+      nixpkgs,
+      ghostty,
+      ...
+    }@inputs:
+    let
+      inherit (self) outputs;
+      settings = {
+        # User configuration
+        username = "gaurav"; # automatically set with install.sh and live-install.sh
+        editor = "neovim"; # nixvim, vscode, nvchad, neovim, emacs (WIP)
+        browser = "zen"; # firefox, floorp, zen
+        terminal = "ghostty"; # kitty, alacritty, wezterm
+        terminalFileManager = "yazi"; # yazi or lf
+        sddmTheme = "purple_leaves"; # astronaut, black_hole, purple_leaves, jake_the_dog, hyprland_kath
+        wallpaper = "moon"; # see modules/themes/wallpapers
+
+        # System configuration
+        videoDriver = "nvidia"; # CHOOSE YOUR GPU DRIVERS (nvidia, amdgpu or intel)
+        hostname = "coffee"; # CHOOSE A HOSTNAME HERE
+        locale = "en_US.UTF-8"; # CHOOSE YOUR LOCALE
+        timezone = "Asia/Kolkata"; # CHOOSE YOUR TIMEZONE
+        kbdLayout = "us"; # CHOOSE YOUR KEYBOARD LAYOUT
+        kbdVariant = ""; # CHOOSE YOUR KEYBOARD VARIANT (Can leave empty)
+        consoleKeymap = "us"; # CHOOSE YOUR CONSOLE KEYMAP (Affects the tty?)
+      };
+
+      systems = [
+        "x86_64-linux"
+        "aarch64-linux"
+      ];
+      forAllSystems = nixpkgs.lib.genAttrs systems;
+    in
+    {
+      templates = import ./dev-shells;
+      overlays = import ./overlays { inherit inputs settings; };
+      formatter = forAllSystems (system: nixpkgs.legacyPackages.${system}.alejandra);
+      nixosConfigurations = {
+        Default = nixpkgs.lib.nixosSystem {
+          system = forAllSystems (system: system);
+          specialArgs = {
+            inherit self inputs outputs;
+          } // settings;
+          modules = [ ./hosts/Default/configuration.nix ];
+        };
       };
     };
-  };
 }
