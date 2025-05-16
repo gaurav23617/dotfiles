@@ -1,6 +1,12 @@
 # Common configuration for all hosts
 
-{ lib, inputs, outputs, ... }: {
+{
+  lib,
+  inputs,
+  outputs,
+  ...
+}:
+{
   nixpkgs = {
     # You can add overlays here
     overlays = [
@@ -31,7 +37,7 @@
       experimental-features = "nix-command flakes";
       trusted-users = [
         "root"
-        "your-user"
+        "gaurav"
       ]; # Set users that are allowed to use the flake command
     };
     gc = {
@@ -39,8 +45,9 @@
       options = "--delete-older-than 30d";
     };
     optimise.automatic = true;
-    registry = (lib.mapAttrs (_: flake: { inherit flake; }))
-      ((lib.filterAttrs (_: lib.isType "flake")) inputs);
+    registry = (lib.mapAttrs (_: flake: { inherit flake; })) (
+      (lib.filterAttrs (_: lib.isType "flake")) inputs
+    );
     nixPath = [ "/etc/nix/path" ];
   };
 }
