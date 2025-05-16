@@ -70,6 +70,9 @@
             wl-clipboard
             xdotool
             yad
+            grim
+            slurp
+            tesseract
             # socat # for and autowaybar.sh
             # jq # for and autowaybar.sh
           ];
@@ -405,6 +408,10 @@
                   "$mainMod CTRL, P, exec, ${./scripts/screenshot.sh} sf" # frozen screen, drag to snip an area / click on a window to print it
                   "$mainMod, print, exec, ${./scripts/screenshot.sh} m" # print focused monitor
                   "$mainMod ALT, P, exec, ${./scripts/screenshot.sh} p" # print all monitor outputs
+
+                  # OCR
+                  "$mainMod SHIFT,T,exec,sh -c 'tmpfile=$(mktemp --suffix=.png) && grim -g \"$(slurp)\" \"$tmpfile\" && tesseract -l eng \"$tmpfile\" - | wl-copy && rm \"$tmpfile\"'"
+                  # Screen snip to text >> clipboard
 
                   # Functional keybinds
                   ",xf86Sleep, exec, systemctl suspend" # Put computer into sleep mode
