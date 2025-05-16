@@ -66,6 +66,7 @@
           fd
           git
           gh
+          vlc
           eza
           motrix
           nodejs_22
