@@ -37,17 +37,12 @@
       url = "github:nix-community/nix4nvchad";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    ghostty = {
-      url = "github:ghostty-org/ghostty";
-    };
-
   };
 
   outputs =
     {
       self,
       nixpkgs,
-      ghostty,
       ...
     }@inputs:
     let
