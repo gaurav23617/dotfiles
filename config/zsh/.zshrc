@@ -37,19 +37,3 @@ plug "Aloxaf/fzf-tab"
 plug "zap-zsh/exa"
 plug "zsh-users/zsh-syntax-highlighting"
 plug "zsh-users/zsh-history-substring-search"
-
-
-function nix-new {
-  if [ -d "$1" ]; then
-    echo "Directory \"$1\" already exists!"
-    return 1
-  fi
-  nix flake new $1 --template ${self}/dev-shells#$2
-  cd $1
-  direnv allow
-}
-
-function nix-init {
-  nix flake init --template ${self}/dev-shells#$1
-  direnv allow
-}
