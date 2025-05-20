@@ -7,6 +7,17 @@
   ...
 }:
 {
+  imports = [
+    ./users
+    # Include the home-manager module
+    inputs.home-manager.nixosModules.home-manager
+  ];
+  home-manager = {
+    # Enable home-manager for the user
+    useUserPackages = true;
+    # Pass the inputs and outputs to the home-manager module
+    extraSpecialArgs = { inherit inputs outputs; };
+  };
   nixpkgs = {
     # You can add overlays here
     overlays = [
