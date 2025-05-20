@@ -5,7 +5,7 @@
   ...
 }:
 {
-  users.users.gaurrav = {
+  users.users.gaurav = {
     initialHashedPassword = "$y$j9T$dAWv8pFBx9tHQKeElCWu41$awYuhwpDwDhZxQ5.RVZORKcm1bxXpeWK0LPAnGHxNX6";
     isNormalUser = true;
     description = "gaurav";
