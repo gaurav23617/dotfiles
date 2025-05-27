@@ -1,43 +1,40 @@
+{ inputs, lib, ... }:
 {
-  inputs,
-  lib,
-  ...
-}: {
-  # allow spotify to be installed if you don't have unfree enabled already
-  nixpkgs.config.allowUnfreePredicate = pkg:
-    builtins.elem (lib.getName pkg) [
-      "spotify"
-    ];
-  home-manager.sharedModules = [
-    ({pkgs, ...}: let
-      spicePkgs = inputs.spicetify-nix.legacyPackages.${pkgs.system};
-    in {
-      # import the flake's module for your system
-      imports = [inputs.spicetify-nix.homeManagerModules.default];
+  nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [ "spotify" ];
 
-      # configure spicetify :)
-      programs.spicetify = {
-        enable = true;
-        theme = spicePkgs.themes.catppuccin;
-        colorScheme = "mocha";
-        enabledExtensions = with spicePkgs.extensions; [
-          adblock
-          shuffle # shuffle+ (special characters are sanitized out of ext names)
-          keyboardShortcut # vimium-like navigation
-          copyLyrics # copy lyrics with selection
-          # autoVolume
-          # showQueueDuration
-          # fullAppDisplay
-          # hidePodcasts
+  home-manager.sharedModules = [
+    (
+      { pkgs, ... }:
+      let
+        spicePkgs = inputs.spicetify-nix.legacyPackages.${pkgs.system};
+      in
+      {
+        # Only install actual programs here
+        home.packages = with pkgs; [
+          spotify
+          spicetify-cli
         ];
-        # enabledCustomApps = with spicePkgs.apps; [
-        #   reddit
-        #   lyricsPlus
-        #   marketplace
-        #   localFiles
-        #   ncsVisualizer
-        # ];
-      };
-    })
+
+        # Import Spicetify module
+        imports = [ inputs.spicetify-nix.homeManagerModules.default ];
+
+        # Use theme only inside spicetify config (no global install)
+        programs.spicetify = {
+          enable = true;
+          theme = spicePkgs.themes.catppuccin;
+          colorScheme = "mocha";
+          enabledExtensions = with spicePkgs.extensions; [
+            shuffle
+            keyboardShortcut
+            copyLyrics
+            fullAppDisplay
+          ];
+          enabledCustomApps = with spicePkgs.apps; [
+            marketplace
+            localFiles
+          ];
+        };
+      }
+    )
   ];
 }
