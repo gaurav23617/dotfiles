@@ -121,7 +121,7 @@
               exec-once = [
                 #"[workspace 1 silent] ${terminal}"
                 #"[workspace 5 silent] ${browser}"
-                #"[workspace 6 silent] spotify"
+                "[workspace 1 silent] spotify"
                 #"[workspace special silent] ${browser} --private-window"
                 #"[workspace special silent] ${terminal}"
 
@@ -252,11 +252,10 @@
               windowrule = [
                 #"noanim, class:^(Rofi)$
                 "tile,title:(.*)(Godot)(.*)$"
-                "tile,title:(.*)(Godot)(.*)$"
-                "workspace 1, title:(.*)(Spotify)(.*)$"
-                "workspace 1, class:^(Spotify|discord)$"
+                # "workspace 1, title:(.*)(Spotify)(.*)$"
+                # "workspace 1, class:^(Spotify|discord)$"
                 "workspace 2, class:^(firefox|zen)$"
-                "workspace 3, class:^(kitty|ghostty|Ghostty)$"
+                "workspace 3, class:^(kitty|ghostty)$"
                 "workspace 3, title:(.*)(Godot)(.*)$"
                 "workspace 4, title:(GNU Image Manipulation Program)(.*)$"
                 "workspace 5, class:^(steam)$"
@@ -264,9 +263,10 @@
                 "workspace 6, class:^(code|VSCodium|code-url-handler|codium-url-handler)$"
                 "workspace 6, class:^(Brave-browser)$"
                 "workspace 7, class:^(google-chrome)$"
+                "workspace 0, class:^(motrix)$"
 
                 # Can use FLOAT FLOAT for active and inactive or just FLOAT
-                "opacity 0.80 0.80,class:^(kitty|alacritty|Alacritty|org.wezfurlong.wezterm)$"
+                "opacity 0.80 0.80,class:^(ghostty|kitty|alacritty|Alacritty|org.wezfurlong.wezterm)$"
                 "opacity 0.90 0.90,class:^(gcr-prompter)$" # keyring prompt
                 "opacity 0.90 0.90,title:^(Hyprland Polkit Agent)$" # polkit prompt
                 "opacity 1.00 1.00,class:^(firefox)$"
@@ -386,7 +386,9 @@
                   "$mainMod, E, exec, $fileManager"
                   "$mainMod, C, exec, $editor"
                   "$mainMod, B, exec, $browser"
-                  "$mainMod, M, exec, spotify"
+                  # "$mainMod, M, exec, Spotify"
+                  "$mainMod SHIFT, S, exec, spotify"
+                  "$mainMod SHIFT, S, exec, Spotify"
                   "$mainMod SHIFT, Y, exec, youtube-music"
                   "$CONTROL ALT, DELETE, exec, $term -e '${getExe pkgs.btop}'" # System Monitor
                   "$mainMod CTRL, C, exec, hyprpicker --autocopy --format=hex" # Colour Picker
@@ -402,6 +404,7 @@
                   "$mainMod, G, exec, ${./scripts/rofi.sh} games" # game launcher
                   "$mainMod ALT, G, exec, ${./scripts/gamemode.sh}" # disable hypr effects for gamemode
                   "$mainMod, V, exec, ${./scripts/ClipManager.sh}" # Clipboard Manager
+                  "$mainMod, M, exec, pkill -x rofi || ${./scripts/rofimusic.sh}" # online music
 
                   # Screenshot/Screencapture
                   "$mainMod, P, exec, ${./scripts/screenshot.sh} s" # drag to snip an area / click on a window to print it
@@ -410,8 +413,7 @@
                   "$mainMod ALT, P, exec, ${./scripts/screenshot.sh} p" # print all monitor outputs
 
                   # OCR
-                  "$mainMod SHIFT,T,exec,sh -c 'tmpfile=$(mktemp --suffix=.png) && grim -g \"$(slurp)\" \"$tmpfile\" && tesseract -l eng \"$tmpfile\" - | wl-copy && rm \"$tmpfile\"'"
-                  # Screen snip to text >> clipboard
+                  "$mainMod SHIFT,T,exec,sh -c 'tmpfile=$(mktemp --suffix=.png) && grim -g \"$(slurp)\" \"$tmpfile\" && tesseract -l eng \"$tmpfile\" - | wl-copy && rm \"$tmpfile\"'" # Screen snip to text >> clipboard
 
                   # Functional keybinds
                   ",xf86Sleep, exec, systemctl suspend" # Put computer into sleep mode
