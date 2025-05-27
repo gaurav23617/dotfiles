@@ -66,7 +66,10 @@
           fd
           git
           gh
+          noto-fonts
+          noto-fonts-emoji
           vlc
+          diff-so-fancy
           eza
           motrix
           nodejs_22
