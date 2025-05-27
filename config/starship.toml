@@ -6,7 +6,7 @@ command_timeout = 1000
 palette = 'catppuccin_mocha'
 
 # custom prompt format
-format = """╭─ $shell$os$hostname$docker$username$directory$aws$git_branch$git_status$fill$lua$nodejs$custom$package 
+format = """╭─ $shell$os$hostname$docker$username$directory$aws$git_branch$git_status$fill$lua$nodejs$custom$package$nix 
 ╰─≻ """
 
 # drop ugly default prompt characters
