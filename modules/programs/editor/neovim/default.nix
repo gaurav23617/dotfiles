@@ -48,8 +48,11 @@
             nodePackages_latest.vscode-json-languageserver
             fzf
             lua-language-server
+            lua
             luajitPackages.jsregexp
+            luajitPackages.lua-lsp
             nixd
+            nil
             go
             gcc
             gnumake
