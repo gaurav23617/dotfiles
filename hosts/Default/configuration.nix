@@ -22,7 +22,7 @@
     ../../modules/programs/games
     ../../modules/programs/browser/${browser} # Set browser defined in flake.nix
     ../../modules/programs/browser/chrome # Set browser defined in flake.nix
-    ../../modules/programs/browser/brave # Set browser defined in flake.nix
+    # ../../modules/programs/browser/brave # Set browser defined in flake.nix
     ../../modules/programs/terminal/${terminal} # Set terminal defined in flake.nix
     ../../modules/programs/editor/${editor} # Set editor defined in flake.nix
     ../../modules/programs/editor/vscode # Set editor defined in flake.nix
