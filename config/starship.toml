@@ -6,7 +6,7 @@ command_timeout = 1000
 palette = 'catppuccin_mocha'
 
 # custom prompt format
-format = """╭─ $shell$os$hostname$docker$username$directory$aws$git_branch$git_status$fill$lua$nodejs$custom$package$nix 
+format = """╭─ $shell$os$hostname$docker$username$directory$aws$git_branch$git_status$fill$nodejs$custom$package$nix_shell 
 ╰─≻ """
 
 # drop ugly default prompt characters
@@ -72,6 +72,12 @@ staged = '[ ++\($count\)](green)'
 renamed = ' 襁'
 deleted = ' '
 
+# shown when inside a nix-shell environment
+[nix_shell]
+impure_msg = '[impure](bold red)'
+pure_msg = '[pure](bold green)'
+format = '[   $state](bold blue) '
+
 # shows current nodejs
 [nodejs]
 format = '[$symbol ($version )]($style)'
@@ -81,9 +87,6 @@ not_capable_style = "bold red"
 [docker_context]
 format = 'via [ $context](blue bold)'
 
-# shows the currently installed lua version
-[lua]
-format = '[  $version](bold blue)'
 
 # shows the currently active shell
 [shell]
