@@ -19,6 +19,7 @@ export HISTORY_IGNORE="(ls|cd|pwd|exit|sudo reboot|history|cd -|cd ..)"
 export EDITOR="nvim"
 export TERMINAL="ghostty"
 export BROWSER="zen-browser"
+export BROWSER="zen"
 # export PATH="$HOME/.local/bin":$PATH
 # export PATH=$PATH:/usr/bin
 # export PATH="$HOME/.docker/bin":$PATH
