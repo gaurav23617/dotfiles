@@ -37,3 +37,6 @@ plug "Aloxaf/fzf-tab"
 plug "zap-zsh/exa"
 plug "zsh-users/zsh-syntax-highlighting"
 plug "zsh-users/zsh-history-substring-search"
+
+# Prevent Zsh from throwing errors on unmatched globs (e.g. *, ?, # in commands)
+setopt no_nomatch
