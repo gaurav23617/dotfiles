@@ -1,6 +1,5 @@
 {
   description = "A simple flake for an atomic system";
-
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-24.11";
@@ -10,10 +9,6 @@
     };
     nix-index-database = {
       url = "github:nix-community/nix-index-database";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-    nixvim = {
-      url = "github:Sly-Harvey/nixvim";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     spicetify-nix = {
@@ -33,16 +28,12 @@
       url = "github:maximoffua/zen-browser.nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    nvchad4nix = {
-      url = "github:nix-community/nix4nvchad";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
   };
-
   outputs =
     {
       self,
       nixpkgs,
+      home-manager,
       ...
     }@inputs:
     let
@@ -56,7 +47,6 @@
         terminalFileManager = "yazi"; # yazi or lf
         sddmTheme = "purple_leaves"; # astronaut, black_hole, purple_leaves, jake_the_dog, hyprland_kath
         wallpaper = "moon"; # see modules/themes/wallpapers
-
         # System configuration
         videoDriver = "nvidia"; # CHOOSE YOUR GPU DRIVERS (nvidia, amdgpu or intel)
         hostname = "coffee"; # CHOOSE A HOSTNAME HERE
@@ -66,7 +56,6 @@
         kbdVariant = ""; # CHOOSE YOUR KEYBOARD VARIANT (Can leave empty)
         consoleKeymap = "us"; # CHOOSE YOUR CONSOLE KEYMAP (Affects the tty?)
       };
-
       systems = [
         "x86_64-linux"
         "aarch64-linux"
@@ -79,11 +68,39 @@
       formatter = forAllSystems (system: nixpkgs.legacyPackages.${system}.alejandra);
       nixosConfigurations = {
         Default = nixpkgs.lib.nixosSystem {
-          system = forAllSystems (system: system);
+          system = "x86_64-linux"; # Fixed: removed forAllSystems here as it's incorrect
           specialArgs = {
             inherit self inputs outputs;
           } // settings;
-          modules = [ ./hosts/Default/configuration.nix ];
+          modules = [ 
+            ./hosts/Default/configuration.nix 
+            home-manager.nixosModules.home-manager
+            {
+              home-manager.useGlobalPkgs = true;
+              home-manager.useUserPackages = true;
+              home-manager.extraSpecialArgs = {
+                inherit inputs outputs;
+              } // settings;
+              # If you have a separate home.nix file, point to it here
+              # home-manager.users.${settings.username} = import ./hosts/Default/home.nix;
+              # If home-manager config is in configuration.nix, this line is not needed
+            }
+          ];
+        };
+      };
+
+      # Add standalone home-manager configuration for direct home-manager commands
+      homeConfigurations = {
+        ${settings.username} = home-manager.lib.homeManagerConfiguration {
+          pkgs = nixpkgs.legacyPackages.x86_64-linux;
+          extraSpecialArgs = {
+            inherit inputs outputs;
+          } // settings;
+          modules = [
+            # Point to your home-manager configuration
+            # You'll need to create this file or extract it from configuration.nix
+            ./hosts/Default/home.nix
+          ];
         };
       };
     };
