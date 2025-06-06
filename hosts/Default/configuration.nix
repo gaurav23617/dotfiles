@@ -30,6 +30,7 @@
     ../../modules/programs/cli/starship
     ../../modules/programs/cli/tmux
     ../../modules/programs/cli/direnv
+    ../../modules/programs/cli/nh
     ../../modules/programs/cli/lazygit
     ../../modules/programs/cli/cava
     ../../modules/programs/cli/btop
