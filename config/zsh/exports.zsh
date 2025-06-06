@@ -37,6 +37,7 @@ export MANWIDTH=999
 # Open in tmux popup if on tmux, otherwise use --height mode
 export FZF_DEFAULT_OPTS='--height 40% --tmux bottom,40% --layout reverse --border top'
 export NIX_CONFIG="experimental-features = nix-command flakes"
+export FZF_DEFAULT_COMMAND='rg --files --no-ignore-vcs --hidden'
 
 # pnpm
 export PNPM_HOME="/home/gaurav/.local/share/pnpm"
