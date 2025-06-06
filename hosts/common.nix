@@ -270,6 +270,8 @@
   environment.systemPackages = with pkgs; [
     killall
     lm_sensors
+    nvd
+    nix-output-monitor
     jq
     bibata-cursors
     sddm-astronaut # Overlayed
