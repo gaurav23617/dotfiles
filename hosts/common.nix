@@ -73,7 +73,7 @@
           eza
           motrix
           nodejs_22
-          github-copilot-cli
+          gh-copilot
           htop
           nix-prefetch-scripts
           microfetch
