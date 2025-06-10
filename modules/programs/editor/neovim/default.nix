@@ -32,10 +32,9 @@
           enable = true;
           vimAlias = true;
           vimdiffAlias = true;
-
           extraPackages = with pkgs; [
+            # Tree-sitter and grammars
             tree-sitter
-            lua54Packages.jsregexp
             tree-sitter-lua
             tree-sitter-nix
             tree-sitter-go
@@ -45,35 +44,57 @@
             tree-sitter-markdown
             tree-sitter-json
 
-            nodePackages_latest.vscode-json-languageserver
-            fzf
+            # LSP servers (Nix-managed, not Mason)
             lua-language-server
-            lua
-            luajitPackages.jsregexp
-            luajitPackages.lua-lsp
             nixd
             nil
-            go
+            gopls
+            rust-analyzer
+            basedpyright
+            nodePackages_latest.vscode-json-languageserver
+            nodePackages_latest.vscode-langservers-extracted # HTML, CSS, JSON
+            nodePackages_latest.typescript-language-server
+            nodePackages_latest.bash-language-server
+            nodePackages_latest.dockerfile-language-server-nodejs
+            nodePackages_latest.yaml-language-server
+            marksman # Markdown LSP
+
+            # Formatters and linters
+            stylua
+            nixfmt-rfc-style
+            gofumpt
+            prettier
+            black
+            shfmt
+
+            # Development tools
             gcc
             gnumake
-            unzip
-            gopls
-            gofumpt
-            stylua
+            go
             rustc
             cargo
-            basedpyright
-            nixfmt-rfc-style
+            nodejs_20
+            python3
+
+            # Utilities
+            fzf
             ripgrep
-            imagemagick
+            fd
+            unzip
+            git
+            curl
+
+            # Lua packages
+            lua54Packages.jsregexp
+            luajitPackages.jsregexp
           ];
 
-          plugins = [
-            vimPlugins.nvim-treesitter.withAllGrammars
-            vimPlugins.nvim-treesitter
+          plugins = with vimPlugins; [
+            nvim-treesitter.withAllGrammars
           ];
         };
 
+        # Your LazyVim config
         home.file.".config/nvim".source = builtins.toString (
           config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfiles/config/nvim"
         );
