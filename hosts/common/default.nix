@@ -1,6 +1,7 @@
 # Common configuration for all hosts
 
 {
+  pkgs,
   lib,
   inputs,
   outputs,
@@ -42,6 +43,10 @@
       allowUnfree = true;
     };
   };
+
+  # Default shell
+  programs.zsh.enable = true;
+  users.defaultUserShell = pkgs.zsh;
 
   nix = {
     settings = {
