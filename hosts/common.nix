@@ -78,7 +78,6 @@
           nix-prefetch-scripts
           microfetch
           ripgrep
-          gh
           zoxide
           bash
           tldr
@@ -186,6 +185,24 @@
   networking = {
     # hostName = hostname; # Define your hostname.
     networkmanager.enable = true;
+    firewall = {
+      enable = true;
+      allowedTCPPorts = [
+        22
+        80
+        443
+        59010
+        59011
+        7236
+        7250
+      ];
+      allowedUDPPorts = [
+        59010
+        59011
+        7236
+        5353
+      ];
+    };
     # wireless.enable = true; # Enables wireless support via wpa_supplicant.
     # Configure network proxy if necessary
     # networking.proxy.default = "http://user:password@proxy:port/";
