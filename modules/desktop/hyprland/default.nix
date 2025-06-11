@@ -386,6 +386,7 @@
                   "$mainMod, E, exec, $fileManager"
                   "$mainMod, C, exec, $editor"
                   "$mainMod, B, exec, $browser"
+                  "$mainMod, backtick, exec, google-chrome-stable"
                   # "$mainMod, M, exec, Spotify"
                   "$mainMod SHIFT, S, exec, spotify"
                   "$mainMod SHIFT, S, exec, Spotify"

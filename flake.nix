@@ -72,8 +72,8 @@
           specialArgs = {
             inherit self inputs outputs;
           } // settings;
-          modules = [ 
-            ./hosts/Default/configuration.nix 
+          modules = [
+            ./hosts/Default/configuration.nix
             home-manager.nixosModules.home-manager
             {
               home-manager.useGlobalPkgs = true;
@@ -90,18 +90,11 @@
       };
 
       # Add standalone home-manager configuration for direct home-manager commands
-      homeConfigurations = {
-        ${settings.username} = home-manager.lib.homeManagerConfiguration {
-          pkgs = nixpkgs.legacyPackages.x86_64-linux;
-          extraSpecialArgs = {
-            inherit inputs outputs;
-          } // settings;
-          modules = [
-            # Point to your home-manager configuration
-            # You'll need to create this file or extract it from configuration.nix
-            ./hosts/Default/home.nix
-          ];
-        };
+      homeConfigurations."gaurav" = home-manager.lib.homeManagerConfiguration {
+        # ...
+        modules = [
+          ./hosts/Default/configuration.nix
+        ];
       };
     };
 }
