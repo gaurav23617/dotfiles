@@ -46,7 +46,6 @@
       # NixOS configuration entrypoint
       # Available through 'nixos-rebuild --flake .#coffee'
       nixosConfigurations = {
-        # FIXME replace with your hostname
         coffee = nixpkgs.lib.nixosSystem {
           specialArgs = { inherit inputs outputs; };
           modules = [
