@@ -17,7 +17,15 @@
 
   # You can import other home-manager modules here
   imports = [
+    # browser modules
+    ../modules/home-manager/browsers/zen.nix
+    ../modules/home-manager/browsers/browser.nix
   ];
+
+  browsers = {
+    chrome.enable = true; # Set to false to disable
+    brave.enable = false; # Set to false to disable
+  };
 
   # Add stuff for your user as you see fit:
   programs.neovim.enable = true;
