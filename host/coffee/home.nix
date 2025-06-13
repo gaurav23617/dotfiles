@@ -12,6 +12,8 @@
   # You can import other home-manager modules here
   imports = [
     ../../users/gaurav.nix
+    ../../modules/home-manager/browsers/zen.nix
+    ../../modules/home-manager/browsers/browser.nix
   ];
 
   nixpkgs = {
@@ -27,6 +29,11 @@
       # Disable if you don't want unfree packages
       allowUnfree = true;
     };
+  };
+
+  browsers = {
+    chrome.enable = true; # Set to false to disable
+    brave.enable = false; # Set to false to disable
   };
 
   # Host-specific packages and config
