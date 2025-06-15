@@ -64,6 +64,7 @@
           # Terminal
           fzf
           fd
+          stremio
           git
           gh
           noto-fonts

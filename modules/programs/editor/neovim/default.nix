@@ -83,6 +83,7 @@
             unzip
             git
             curl
+            steam-run
 
             # Lua packages
             lua54Packages.jsregexp
