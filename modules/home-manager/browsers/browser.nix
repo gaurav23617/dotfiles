@@ -16,9 +16,9 @@
     programs.chromium = lib.mkIf config.browsers.chrome.enable {
       enable = true;
       package = pkgs.google-chrome;
-      extensions = [
-        { id = "ficfmibkjjnpogdcfhfokmihanoldbfe"; } # File Icons for GitHub and GitLab
-      ];
+      # extensions = [
+      #   { id = "ficfmibkjjnpogdcfhfokmihanoldbfe"; } # File Icons for GitHub and GitLab
+      # ];
     };
 
     # Brave
@@ -26,11 +26,11 @@
 
     xdg.mimeApps = lib.mkIf config.browsers.brave.enable {
       enable = true;
-      defaultApplications = {
-        "text/html" = "brave-browser.desktop";
-        "x-scheme-handler/http" = "brave-browser.desktop";
-        "x-scheme-handler/https" = "brave-browser.desktop";
-      };
+      # defaultApplications = {
+      #   "text/html" = "brave-browser.desktop";
+      #   "x-scheme-handler/http" = "brave-browser.desktop";
+      #   "x-scheme-handler/https" = "brave-browser.desktop";
+      # };
     };
 
     # Optional: Add bash alias for Brave
