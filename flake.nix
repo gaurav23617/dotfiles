@@ -67,6 +67,7 @@
           modules = [
             # > Our main nixos configuration file <
             ./host/coffee/configuration.nix
+            inputs.disko.nixosModules.disko
           ];
         };
       };
