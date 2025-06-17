@@ -14,6 +14,7 @@
     ../../users/gaurav.nix
     ../../modules/home-manager/browsers/zen.nix
     ../../modules/home-manager/browsers/browser.nix
+    ../../modules/home-manager/editor/neovim.nix
   ];
 
   nixpkgs = {
