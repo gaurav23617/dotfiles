@@ -3,9 +3,11 @@
 {
   # List your module files here
   # my-module = import ./my-module.nix;
+  imports = [
     ./networking.nix
     ./bluetooth.nix
     ./security.nix
     ./sound.nix
     ./xserver.nix
+  ];
 }
