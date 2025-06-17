@@ -15,6 +15,7 @@
     ../../modules/home-manager/browsers/zen.nix
     ../../modules/home-manager/browsers/browser.nix
     ../../modules/home-manager/editor/neovim.nix
+    ../../modules/home-manager/editor/vscode.nix
   ];
 
   nixpkgs = {
@@ -30,6 +31,11 @@
       # Disable if you don't want unfree packages
       allowUnfree = true;
     };
+  };
+
+  programs.hyprland = {
+    enable = true;
+    xwayland.enable = true;
   };
 
   browsers = {
