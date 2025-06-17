@@ -6,4 +6,5 @@
     ./networking.nix
     ./bluetooth.nix
     ./security.nix
+    ./sound.nix
 }
