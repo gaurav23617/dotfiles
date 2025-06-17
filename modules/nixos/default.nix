@@ -5,4 +5,5 @@
   # my-module = import ./my-module.nix;
     ./networking.nix
     ./bluetooth.nix
+    ./security.nix
 }
