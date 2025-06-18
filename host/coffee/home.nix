@@ -16,6 +16,7 @@
     ../../modules/home-manager/browsers/browser.nix
     ../../modules/home-manager/editor/neovim.nix
     ../../modules/home-manager/editor/vscode.nix
+    ../../modiles/home-manager/git.nix
   ];
 
   nixpkgs = {
