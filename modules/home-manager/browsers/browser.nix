@@ -1,31 +1,41 @@
 {
-  pkgs,
-  lib,
   config,
+  lib,
+  pkgs,
   ...
 }:
+
+with lib;
+
+let
+  chromeCfg = config.browsers.chrome;
+  braveCfg = config.browsers.brave;
+in
 {
-  # Simple options to enable/disable browsers
   options.browsers = {
-    chrome.enable = lib.mkEnableOption "Google Chrome";
-    brave.enable = lib.mkEnableOption "Brave Browser";
+    chrome.enable = mkEnableOption "Enable Google Chrome browser";
+    brave.enable = mkEnableOption "Enable Brave browser";
   };
 
   config = {
-    # Chrome
-    programs.chromium = lib.mkIf config.browsers.chrome.enable {
+    # Google Chrome
+    programs.chromium = mkIf chromeCfg.enable {
       enable = true;
       package = pkgs.google-chrome;
+      # Optional: Uncomment to add extensions
       # extensions = [
-      #   { id = "ficfmibkjjnpogdcfhfokmihanoldbfe"; } # File Icons for GitHub and GitLab
+      #   { id = "ficfmibkjjnpogdcfhfokmihanoldbfe"; } # File Icons for GitHub
       # ];
     };
 
     # Brave
-    home.packages = lib.optional config.browsers.brave.enable pkgs.brave;
+    home.packages = mkIf braveCfg.enable [
+      pkgs.brave
+    ];
 
-    xdg.mimeApps = lib.mkIf config.browsers.brave.enable {
+    xdg.mimeApps = mkIf braveCfg.enable {
       enable = true;
+      # Optional default apps
       # defaultApplications = {
       #   "text/html" = "brave-browser.desktop";
       #   "x-scheme-handler/http" = "brave-browser.desktop";
@@ -33,8 +43,7 @@
       # };
     };
 
-    # Optional: Add bash alias for Brave
-    programs.bash = lib.mkIf config.browsers.brave.enable {
+    programs.bash = mkIf braveCfg.enable {
       enable = true;
       shellAliases = {
         brave = "brave-browser";
