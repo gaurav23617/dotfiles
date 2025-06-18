@@ -1,16 +1,24 @@
-{ lib, pkgs, ... }:
 {
-  nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [ "vscode" ];
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 
-  home-manager.sharedModules = [
-    (
-      { pkgs, ... }:
-      {
-        programs.vscode = {
-          enable = true;
-          package = pkgs.vscode;
-        };
-      }
-    )
-  ];
+with lib;
+
+let
+  cfg = config.home-manager.editor.vscode;
+in
+{
+  options.home-manager.editor.vscode.enable = mkEnableOption "Enable Visual Studio Code";
+
+  config = mkIf cfg.enable {
+    nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [ "vscode" ];
+
+    programs.vscode = {
+      enable = true;
+      package = pkgs.vscode;
+    };
+  };
 }
