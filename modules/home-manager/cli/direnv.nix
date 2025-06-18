@@ -8,11 +8,10 @@
 with lib;
 
 let
-  cfg = config.home-manager.cli.direnv;
+  cfg = config.cli.direnv;
 in
 {
-  options.home-manager.cli.direnv.enable =
-    mkEnableOption "Enable direnv with nix-direnv and shell integrations";
+  options.cli.direnv.enable = mkEnableOption "Enable direnv with nix-direnv and shell integrations";
 
   config = mkIf cfg.enable {
     environment.variables."DIRENV_WARN_TIMEOUT" = "60s";
