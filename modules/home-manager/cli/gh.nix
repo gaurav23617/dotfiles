@@ -8,10 +8,10 @@
 with lib;
 
 let
-  cfg = config.cli.direnv;
+  cfg = config.cli.gh;
 in
 {
-  options.cli.direnv.enable = mkEnableOption "Enable direnv with nix-direnv and shell integrations";
+  options.cli.gh.enable = mkEnableOption "Enable direnv with nix-direnv and shell integrations";
 
   config = mkIf cfg.enable {
     programs.gh = {
