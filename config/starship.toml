@@ -1,0 +1,180 @@
+# ~/.config/starship.toml
+
+# enable a newline before the prompt
+add_newline = true
+command_timeout = 1000
+palette = 'catppuccin_mocha'
+
+# custom prompt format
+format = """╭─ $shell$os$hostname$docker$username$directory$aws$git_branch$git_status$fill$nodejs$custom$package$nix_shell 
+╰─≻ """
+
+# drop ugly default prompt characters
+[character]
+success_symbol = '󰚔 '
+error_symbol = ' '
+
+# shows the current operating system
+[os]
+format = '[$symbol](bold white) '
+disabled = false
+
+[os.symbols]
+Windows = ' '
+Arch = ' 󰣇'
+NixOS = " "
+Ubuntu = ' '
+Macos = ' 󰀵'
+
+# shows the username
+[username]
+show_always = true
+style_root = "bold red"
+style_user = "bold mauve"
+format = "[$user]($style) "
+disabled = false
+
+# shows the hostname
+[hostname]
+ssh_only = false
+format = '[$hostname](bold yellow)/'
+disabled = false
+
+# shows current directory
+[directory]
+truncation_length = 3
+truncation_symbol = ' '
+home_symbol = '󰋜 ~'
+read_only_style = 'red'
+read_only = '  '
+format = 'at [$path]($style)[$read_only]($read_only_style) '
+
+# shows current git branch
+[git_branch]
+format = '[$symbol$branch(:$remote_branch)]($style)'
+symbol = " "
+truncation_symbol = '…/'
+style = 'bold red'
+
+# shows current git status
+[git_status]
+format = '[$all_status$ahead_behind]($style) '
+style = 'bold green'
+conflicted = '🏳'
+up_to_date = ''
+untracked = ' '
+ahead = ' ⇡${count}'
+diverged = ' ⇕⇡${ahead_count}⇣${behind_count}'
+behind = ' ⇣${count}'
+stashed = ' '
+modified = ' '
+staged = '[ ++\($count\)](green)'
+renamed = ' 襁'
+deleted = ' '
+
+# shown when inside a nix-shell environment
+[nix_shell]
+impure_msg = '[impure](bold red)'
+pure_msg = '[pure](bold green)'
+format = '[   $state](bold blue) '
+
+# shows current nodejs
+[nodejs]
+format = '[$symbol ($version )]($style)'
+symbol = "󰎙"
+not_capable_style = "bold red"
+
+[docker_context]
+format = 'via [ $context](blue bold)'
+
+
+# shows the currently active shell
+[shell]
+powershell_indicator = '_'
+unknown_indicator = 'mystery shell'
+bash_indicator = ''
+zsh_indicator = ''
+cmd_indicator = ''
+style = 'bold'
+disabled = false
+
+# shows the current aws profile and region
+[aws]
+format = '[$symbol(profile: "$profile" )(\(region: $region\) )]($style)'
+disabled = false
+style = 'bold blue'
+symbol = " "
+
+[fill]
+symbol = ' '
+
+# Detect Angular version from package.json
+[custom.angular]
+command = "rg --no-heading --no-line-number '\"@angular/core\":' package.json | sed 's/.*@angular\\/core\": \"//;s/\".*//'"
+when = "test -f package.json && rg -q '\"@angular/core\":' package.json"
+format = " [󰚿 $output](red)"
+ignore_timeout = true
+
+# Detect Vue version from package.json
+[custom.vue]
+command = "rg --no-heading --no-line-number '\"vue\":' package.json | sed 's/.*\"vue\": \"//;s/\".*//'"
+when = "test -f package.json && rg -q '\"vue\":' package.json"
+format = " [󰹭 $output](blue)"
+ignore_timeout = true
+
+# Detect Vuetify version from package.json
+[custom.vuetify]
+command = "rg --no-heading --no-line-number '\"vuetify\":' package.json | sed 's/.*\"vuetify\": \"//;s/\".*//'"
+when = "test -f package.json && rg -q '\"vuetify\":' package.json"
+format = " [ $output](green)"
+ignore_timeout = true
+
+# Detect React version from package.json
+[custom.react]
+command = "rg --no-heading --no-line-number '\"react\":' package.json | sed 's/.*\"react\": \"[~^]*//;s/\".*//'"
+when = "test -f package.json && rg -q '\"react\":' package.json"
+format = " [ $output](cyan)"
+ignore_timeout = true
+
+# Detect Next.js version from package.json
+[custom.nextjs]
+command = "rg --no-heading --no-line-number '\"next\":' package.json | sed 's/.*\"next\": \"[~^]*//;s/\".*//'"
+when = "test -f package.json && rg -q '\"next\":' package.json"
+format = " [ $output](magenta)"
+ignore_timeout = true
+
+# Detect express.js version from package.json
+[custom.express]
+command = "rg --no-heading --no-line-number '\"express\":' package.json | sed 's/.*\"express\": \"[~^]*//;s/\".*//'"
+when = "test -f package.json && rg -q '\"express\":' package.json"
+format = " [ $output](white)"
+ignore_timeout = true
+
+# catppuccin mocha palette
+[palettes.catppuccin_mocha]
+rosewater = "#f5e0dc"
+flamingo = "#f2cdcd"
+pink = "#f5c2e7"
+mauve = "#cba6f7"
+red = "#f38ba8"
+maroon = "#eba0ac"
+peach = "#fab387"
+yellow = "#f9e2af"
+green = "#a6e3a1"
+teal = "#94e2d5"
+sky = "#89dceb"
+sapphire = "#74c7ec"
+blue = "#89b4fa"
+lavender = "#b4befe"
+text = "#cdd6f4"
+subtext1 = "#bac2de"
+subtext0 = "#a6adc8"
+overlay2 = "#9399b2"
+overlay1 = "#7f849c"
+overlay0 = "#6c7086"
+surface2 = "#585b70"
+surface1 = "#45475a"
+surface0 = "#313244"
+base = "#1e1e2e"
+mantle = "#181825"
+crust = "#11111b"

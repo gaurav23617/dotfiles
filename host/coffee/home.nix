@@ -47,6 +47,7 @@
     direnv.enable = true;
     nh.enable = true;
     gh.enable = true;
+    starship.enable = true;
   };
 
   editor = {

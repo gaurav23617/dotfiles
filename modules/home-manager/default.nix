@@ -16,6 +16,7 @@
     ./cli/direnv.nix
     ./cli/git.nix
     ./cli/gh.nix
+    ./cli/starship.nix
 
     # Editor and IDEs
     ./editor/neovim.nix
