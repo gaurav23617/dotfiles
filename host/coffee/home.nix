@@ -12,11 +12,9 @@
   # You can import other home-manager modules here
   imports = [
     ../../users/gaurav.nix
-    ../../modules/home-manager/browsers/zen.nix
-    ../../modules/home-manager/browsers/browser.nix
-    ../../modules/home-manager/editor/neovim.nix
-    ../../modules/home-manager/editor/vscode.nix
-    ../../modiles/home-manager/git.nix
+    ../../modules/home-manager
+    ../../modules/home-manager/cli/git.nix
+    ../modules/home-manager/shell/zsh.nix
   ];
 
   nixpkgs = {
@@ -40,8 +38,33 @@
   };
 
   browsers = {
+    zen.enable = true; # Set to false to disable
     chrome.enable = true; # Set to false to disable
-    brave.enable = false; # Set to false to disable
+    brave.enable = true; # Set to false to disable
+  };
+
+  cli = {
+    direnv.enable = true;
+    nh.enable = true;
+    gh.enable = true;
+  };
+
+  editor = {
+    neovim.enable = true;
+    vscode.enable = true;
+  };
+
+  misc = {
+    lact.enable = true; # Set to false to disable
+    cpufreq.enable = true; # Set to false to disable
+    nix-ld.enable = true; # Set to false to disable
+    thunar.enable = true; # Set to false to disable
+    tlp.enable = true; # Set to false to disable
+  };
+
+  terminal = {
+    ghostty.enable = true; # Set to false to disable
+    kitty.enable = true; # Set to false to disable
   };
 
   # Host-specific packages and config
