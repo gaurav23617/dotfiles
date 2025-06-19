@@ -70,7 +70,26 @@
 
   # Host-specific packages and config
   home.packages = with pkgs; [
-    # Packages specific to this machine
+    fzf
+    fd
+    stremio
+    git
+    gh
+    vlc
+    diff-so-fancy
+    eza
+    motrix
+    nodejs_22
+    gh-copilot
+    nix-prefetch-scripts
+    ripgrep
+    zoxide
+    bash
+    tldr
+    unzip
+    (pkgs.writeShellScriptBin "hello" ''
+      echo "Hello ${username}!"
+    '')
   ];
 
   systemd.user.startServices = "sd-switch";
