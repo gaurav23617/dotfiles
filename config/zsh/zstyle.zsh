@@ -1,8 +1,22 @@
-# Completion styling
+# ⚡ Completion system setup
 autoload -Uz compinit
-compinit -d ~/.cache/zcompdump
-zstyle ':completion:*' menu no
-zstyle ':completion:*:*:*:*:*' menu select
+
+# Use a persistent, fast zcompdump location
+ZCDUMP="${XDG_CACHE_HOME:-$HOME/.cache}/zcompdump"
+
+# Load cached completions
+if [[ ! -s "$ZCDUMP" || "$ZCDUMP" -ot ~/.zshrc ]]; then
+  compinit -d "$ZCDUMP"
+else
+  compinit -C -d "$ZCDUMP"
+fi
+
+# Precompile zcompdump for faster startups
+if [[ -s "$ZCDUMP" && (! -s "$ZCDUMP.zwc" || "$ZCDUMP" -nt "$ZCDUMP.zwc") ]]; then
+  zcompile "$ZCDUMP"
+fi
+
+# 🧠 Completion styling
 zstyle ':completion:*' auto-description 'specify: %d'
 zstyle ':completion:*' completer _expand _complete
 zstyle ':completion:*' format 'Completing %d'
@@ -15,5 +29,7 @@ zstyle ':completion:*' select-prompt %SScrolling active: current selection at %p
 zstyle ':completion:*' use-compctl false
 zstyle ':completion:*' verbose true
 zstyle ':completion:*:kill:*' command 'ps -u $USER -o pid,%cpu,tty,cputime,cmd'
+
+# fzf-tab specific previews
 zstyle ':fzf-tab:complete:cd:*' fzf-preview 'ls --color $realpath'
 zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview 'ls --color $realpath'
