@@ -22,7 +22,34 @@
 
   # Add stuff for your user as you see fit:
   programs.neovim.enable = true;
-  # home.packages = with pkgs; [ steam ];
+  home.packages = with pkgs; [
+    # Terminal
+    fzf
+    fd
+    stremio
+    git
+    gh
+    noto-fonts
+    noto-fonts-emoji
+    vlc
+    diff-so-fancy
+    eza
+    motrix
+    nodejs_22
+    pnpm
+    gh-copilot
+    htop
+    nix-prefetch-scripts
+    microfetch
+    ripgrep
+    zoxide
+    bash
+    tldr
+    unzip
+    (pkgs.writeShellScriptBin "hello" ''
+      echo "Hello ${username}!"
+    '')
+  ];
 
   # Enable home-manager and git
   programs.home-manager.enable = true;
