@@ -14,7 +14,7 @@
     ../../users/gaurav.nix
     ../../modules/home-manager
     ../../modules/home-manager/cli/git.nix
-    ../modules/home-manager/shell/zsh.nix
+    ../../modules/home-manager/shell/zsh.nix
   ];
 
   nixpkgs = {
