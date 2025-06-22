@@ -3,7 +3,12 @@
   # Enable the X11 windowing system.
   services.xserver = {
     enable = true;
-    xkb.variant = lib.mkDefault "dvp";
+    exportConfiguration = true; # Make sure /etc/X11/xkb is populated so localectl works correctly
+
+    xkb = {
+      layout = "us";
+      variant = lib.mkDefault "dvp";
+    };
     # Enable Qtile
     windowManager.qtile = {
       enable = true;
