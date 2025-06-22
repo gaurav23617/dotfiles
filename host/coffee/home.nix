@@ -92,5 +92,8 @@
     '')
   ];
 
+  # Enable dconf for home-manager
+  programs.dconf.enable = true;
+
   systemd.user.startServices = "sd-switch";
 }
