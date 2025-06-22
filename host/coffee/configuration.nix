@@ -11,8 +11,8 @@
 {
   # You can import other NixOS modules here
   imports = [
-    ../modules/nixos
-    ../modules/nixos/nvidia.nix
+    ../../modules/nixos
+    ../../modules/nixos/nvidia.nix
     # Or modules from other flakes (such as nixos-hardware):
     # inputs.hardware.nixosModules.common-cpu-amd
     # inputs.hardware.nixosModules.common-ssd
@@ -22,6 +22,7 @@
 
     # Import your generated (nixos-generate-config) hardware configuration
     ./hardware-configuration.nix
+    ./disk.nix
   ];
 
   nixpkgs = {
