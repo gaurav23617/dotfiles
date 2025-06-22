@@ -1,4 +1,5 @@
 { lib, ... }:
+
 {
   disko.devices = {
     disk.vda = {
@@ -8,10 +9,12 @@
         type = "gpt";
         partitions = {
           root = {
-            type = "partition";
             size = "100%";
-            fsType = "ext4";
-            mountpoint = "/";
+            content = {
+              type = "filesystem";
+              format = "ext4";
+              mountpoint = "/";
+            };
           };
         };
       };
