@@ -9,11 +9,11 @@
 
         xdg.mimeApps = {
           enable = true;
-          defaultApplications = {
-            "text/html" = "brave-browser.desktop";
-            "x-scheme-handler/http" = "brave-browser.desktop";
-            "x-scheme-handler/https" = "brave-browser.desktop";
-          };
+          # defaultApplications = {
+          #   "text/html" = "brave-browser.desktop";
+          #   "x-scheme-handler/http" = "brave-browser.desktop";
+          #   "x-scheme-handler/https" = "brave-browser.desktop";
+          # };
         };
 
         # Optional: Add a desktop shortcut
