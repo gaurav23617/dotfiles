@@ -1,4 +1,13 @@
 #!/bin/sh
+
+ZCDUMP="$HOME/.cache/zcompdump"
+
+# Compile zcompdump only if source is newer
+if [[ -s "$ZCDUMP" && (! -s "$ZCDUMP.zwc" || "$ZCDUMP" -nt "$ZCDUMP.zwc") ]]; then
+  zcompile "$ZCDUMP"
+fi
+
+
 [ -f "$HOME/.local/share/zap/zap.zsh" ] && source "$HOME/.local/share/zap/zap.zsh"
 
 # Download Zinit, if it's not there yet
