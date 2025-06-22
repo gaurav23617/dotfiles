@@ -27,29 +27,15 @@
 
   nixpkgs = {
     # You can add overlays here
-    # overlays = [
-    # Add overlays your own flake exports (from overlays and pkgs dir):
-    # outputs.overlays.additions
-    # outputs.overlays.modifications
-    # outputs.overlays.unstable-packages
     overlays = [
       # Add overlays your own flake exports (from overlays and pkgs dir):
       outputs.overlays.additions
       outputs.overlays.modifications
       outputs.overlays.unstable-packages
 
-    # You can also add overlays exported from other flakes:
-    # neovim-nightly-overlay.overlays.default
       # You can also add overlays exported from other flakes:
       # neovim-nightly-overlay.overlays.default
 
-    # Or define it inline, for example:
-    # (final: prev: {
-    #   hi = final.hello.overrideAttrs (oldAttrs: {
-    #     patches = [ ./change-hello-to-hi.patch ];
-    #   });
-    # })
-    # ];
       # Or define it inline, for example:
       # (final: prev: {
       #   hi = final.hello.overrideAttrs (oldAttrs: {
@@ -58,7 +44,6 @@
       # })
     ];
 
-    overlays = builtins.attrValues outputs.overlays;
     # overlays = builtins.attrValues outputs.overlays;
 
     # Configure your nixpkgs instance
@@ -120,20 +105,6 @@
     };
 
   networking.hostName = "coffee";
-
-  # Enable XDG integration
-  xdg = {
-    enable = true;
-    portal = {
-      enable = true;
-      extraPortals = with pkgs; [
-        xdg-desktop-portal-gtk
-        # Add other portals as needed for your desktop environment
-        # xdg-desktop-portal-kde  # for KDE
-        # xdg-desktop-portal-wlr  # for wlroots-based compositors
-      ];
-    };
-  };
 
   # Environment session variables for XDG directories
   environment.sessionVariables = {
@@ -227,13 +198,6 @@
     LC_TIME = "en_US.UTF-8";
   };
   console.keyMap = "us"; # Configure console keymap
-  services.xserver = {
-    exportConfiguration = true; # Make sure /etc/X11/xkb is populated so localectl works correctly
-    xkb = {
-      layout = "us";
-      variant = "";
-    };
-  };
 
   # Filesystems support
   boot.supportedFilesystems = [
@@ -244,16 +208,11 @@
     "btrfs"
   ];
 
-  # Use the systemd-boot EFI boot loader.
-  # boot.loader.systemd-boot.enable = true;
-  # boot.loader.efi.canTouchEfiVariables = true;
-
   # Bootloader.
   boot = {
     tmp.cleanOnBoot = true;
     kernelPackages = pkgs.linuxPackages_latest;
     loader = {
-      systemd-boot.enable = true;
       efi.canTouchEfiVariables = true;
       efi.efiSysMountPoint = "/boot";
       timeout = null; # Display bootloader indefinitely until user selects OS
