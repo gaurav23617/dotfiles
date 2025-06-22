@@ -1,9 +1,9 @@
-{ pkgs, ... }:
+{ pkgs, lib, ... }:
 {
   # Enable the X11 windowing system.
   services.xserver = {
     enable = true;
-    xkb.variant = "dvp";
+    xkb.variant = lib.mkDefault "dvp";
     # Enable Qtile
     windowManager.qtile = {
       enable = true;
