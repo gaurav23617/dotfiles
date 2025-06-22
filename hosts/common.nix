@@ -74,6 +74,7 @@
           eza
           motrix
           nodejs_22
+          pnpm
           gh-copilot
           htop
           nix-prefetch-scripts
