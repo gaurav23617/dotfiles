@@ -6,5 +6,6 @@
     ./sound.nix
     ./xserver.nix
     ./services.nix
+    ./sddm.nix
   ];
 }
