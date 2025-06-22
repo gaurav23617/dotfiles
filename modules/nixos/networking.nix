@@ -1,7 +1,7 @@
-{ ... }:
+{ hostname, ... }:
 {
   networking = {
-    hostName = "coffee"; # Define your hostname.
+    hostName = hostname; # Define your hostname.
     networkmanager.enable = true; # Easiest to use and most distros use this by default.
     firewall = {
       enable = true;

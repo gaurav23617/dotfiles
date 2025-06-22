@@ -63,7 +63,10 @@
       # Available through 'nixos-rebuild --flake .#coffee'
       nixosConfigurations = {
         coffee = nixpkgs.lib.nixosSystem {
-          specialArgs = { inherit inputs outputs; };
+          specialArgs = {
+            inherit inputs outputs;
+            hostname = "coffee";
+          };
           modules = [
             # > Our main nixos configuration file <
             ./host/coffee/configuration.nix
@@ -72,7 +75,10 @@
         };
 
         vm = nixpkgs.lib.nixosSystem {
-          specialArgs = { inherit inputs outputs; };
+          specialArgs = {
+            inherit inputs outputs;
+            hostname = "vm";
+          };
           modules = [
             # > Our main nixos configuration file <
             ./host/vm/configuration.nix
