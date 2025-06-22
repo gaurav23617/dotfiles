@@ -26,7 +26,6 @@
     # Terminal
     fzf
     fd
-    stremio
     git
     gh
     noto-fonts
@@ -38,7 +37,6 @@
     nodejs_22
     pnpm
     gh-copilot
-    htop
     nix-prefetch-scripts
     microfetch
     ripgrep
