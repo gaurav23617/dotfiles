@@ -37,5 +37,6 @@
     ./terminal/ghostty.nix
     ./terminal/kitty.nix
 
+    ./obsidian.nix
   ];
 }

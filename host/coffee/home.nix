@@ -68,6 +68,8 @@
     kitty.enable = true; # Set to false to disable
   };
 
+  programs.obsidian.enable = true; # Set to false to disable
+
   # Host-specific packages and config
   home.packages = with pkgs; [
     fzf
