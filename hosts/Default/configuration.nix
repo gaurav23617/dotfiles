@@ -36,6 +36,7 @@
     ../../modules/programs/cli/btop
     ../../modules/programs/shell/zsh
     ../../modules/programs/media/discord
+    ../../modules/programs/media/obsidian
     # ../../modules/programs/media/spicetify
     ../../modules/programs/misc/nbfc
     ../../modules/programs/media/youtube-music
@@ -85,6 +86,19 @@
       log_level = "error";
     };
   };
+  # Enable ASUS WMI kernel module
+  boot.kernelModules = [
+    "asus-wmi"
+    "asus-nb-wmi"
+  ];
+
+  # Enable additional hardware support
+  hardware.enableRedistributableFirmware = true;
+
+  # Enable ASUS control service
+  services.supergfxd.enable = true; # For hybrid graphics
+  services.asusd.enable = true; # ASUS daemon for laptop controls
+
   users.users.minidlna = {
     extraGroups = [ "users" ]; # so minidlna can access the files.
   };
