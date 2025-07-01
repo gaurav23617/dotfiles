@@ -1,157 +1,66 @@
 {
-  config,
   lib,
   pkgs,
+  config,
   ...
 }:
-
+let
+  nvidiaDriverChannel = config.boot.kernelPackages.nvidiaPackages.latest; # stable, latest, beta, etc.
+in
 {
-  programs.neovim = {
-    extraPackages = with pkgs; [
-      # LazyVim
-      lua-language-server
-      stylua
-      # Telescope
-      ripgrep
-    ];
+  environment.sessionVariables = lib.optionalAttrs config.programs.hyprland.enable {
+    NVD_BACKEND = "direct";
+    GBM_BACKEND = "nvidia-drm";
+    WLR_NO_HARDWARE_CURSORS = "1";
+    LIBVA_DRIVER_NAME = "nvidia";
+    __GLX_VENDOR_LIBRARY_NAME = "nvidia";
+    # MOZ_DISABLE_RDD_SANDBOX = 1; # Potential security risk
 
-    plugins = with pkgs.vimPlugins; [
-      lazy-nvim
-    ];
-
-    extraLuaConfig =
-      let
-        plugins = with pkgs.vimPlugins; [
-          # LazyVim
-          LazyVim
-          bufferline-nvim
-          cmp-buffer
-          cmp-nvim-lsp
-          cmp-path
-          cmp_luasnip
-          conform-nvim
-          dashboard-nvim
-          dressing-nvim
-          flash-nvim
-          friendly-snippets
-          gitsigns-nvim
-          indent-blankline-nvim
-          lualine-nvim
-          neo-tree-nvim
-          neoconf-nvim
-          neodev-nvim
-          noice-nvim
-          nui-nvim
-          nvim-cmp
-          nvim-lint
-          nvim-lspconfig
-          nvim-notify
-          nvim-spectre
-          nvim-treesitter
-          nvim-treesitter-context
-          nvim-treesitter-textobjects
-          nvim-ts-autotag
-          nvim-ts-context-commentstring
-          nvim-web-devicons
-          persistence-nvim
-          plenary-nvim
-          telescope-fzf-native-nvim
-          telescope-nvim
-          todo-comments-nvim
-          tokyonight-nvim
-          trouble-nvim
-          vim-illuminate
-          vim-startuptime
-          which-key-nvim
-          {
-            name = "LuaSnip";
-            path = luasnip;
-          }
-          {
-            name = "catppuccin";
-            path = catppuccin-nvim;
-          }
-          {
-            name = "mini.ai";
-            path = mini-nvim;
-          }
-          {
-            name = "mini.bufremove";
-            path = mini-nvim;
-          }
-          {
-            name = "mini.comment";
-            path = mini-nvim;
-          }
-          {
-            name = "mini.indentscope";
-            path = mini-nvim;
-          }
-          {
-            name = "mini.pairs";
-            path = mini-nvim;
-          }
-          {
-            name = "mini.surround";
-            path = mini-nvim;
-          }
-        ];
-        mkEntryFromDrv =
-          drv:
-          if lib.isDerivation drv then
-            {
-              name = "${lib.getName drv}";
-              path = drv;
-            }
-          else
-            drv;
-        lazyPath = pkgs.linkFarm "lazy-plugins" (builtins.map mkEntryFromDrv plugins);
-      in
-      ''
-        require("lazy").setup({
-          defaults = {
-            lazy = true,
-          },
-          dev = {
-            -- reuse files from pkgs.vimPlugins.*
-            path = "${lazyPath}",
-            patterns = { "" },
-            -- fallback to download
-            fallback = true,
-          },
-          spec = {
-            { "LazyVim/LazyVim", import = "lazyvim.plugins" },
-            -- The following configs are needed for fixing lazyvim on nix
-            -- force enable telescope-fzf-native.nvim
-            { "nvim-telescope/telescope-fzf-native.nvim", enabled = true },
-            -- disable mason.nvim, use programs.neovim.extraPackages
-            { "williamboman/mason-lspconfig.nvim", enabled = false },
-            { "williamboman/mason.nvim", enabled = false },
-            -- import/override with your plugins
-            { import = "plugins" },
-            -- treesitter handled by xdg.configFile."nvim/parser", put this line at the end of spec to clear ensure_installed
-            { "nvim-treesitter/nvim-treesitter", opts = { ensure_installed = {} } },
-          },
-        })
-      '';
+    __GL_GSYNC_ALLOWED = "1"; # GSync
   };
 
-  # https://github.com/nvim-treesitter/nvim-treesitter#i-get-query-error-invalid-node-type-at-position
-  xdg.configFile."nvim/parser".source =
-    let
-      parsers = pkgs.symlinkJoin {
-        name = "treesitter-parsers";
-        paths =
-          (pkgs.vimPlugins.nvim-treesitter.withPlugins (
-            plugins: with plugins; [
-              c
-              lua
-            ]
-          )).dependencies;
-      };
-    in
-    "${parsers}/parser";
-
-  # Normal LazyVim config here, see https://github.com/LazyVim/starter/tree/main/lua
-  xdg.configFile."nvim/lua".source = ./lua;
+  # Load nvidia driver for Xorg and Wayland
+  services.xserver.videoDrivers = [ "nvidia" ]; # or "nvidiaLegacy470", etc.
+  boot.kernelParams = lib.optionals (lib.elem "nvidia" config.services.xserver.videoDrivers) [
+    "nvidia-drm.modeset=1"
+    "nvidia_drm.fbdev=1"
+  ];
+  hardware = {
+    nvidia = {
+      open = false;
+      # nvidiaPersistenced = true;
+      nvidiaSettings = false;
+      powerManagement.enable = true; # This can cause sleep/suspend to fail.
+      modesetting.enable = true;
+      package = nvidiaDriverChannel;
+    };
+    graphics = {
+      enable = true;
+      # package = nvidiaDriverChannel;
+      enable32Bit = true;
+      extraPackages = with pkgs; [
+        nvidia-vaapi-driver
+        vaapiVdpau
+        libvdpau-va-gl
+      ];
+    };
+  };
+  nixpkgs.config = {
+    nvidia.acceptLicense = true;
+    cudaSupport = true;
+    allowUnfreePredicate =
+      pkg:
+      builtins.elem (lib.getName pkg) [
+        "cudatoolkit"
+        "nvidia-persistenced"
+        "nvidia-settings"
+        "nvidia-x11"
+      ];
+  };
+  nix.settings = {
+    substituters = [ "https://cuda-maintainers.cachix.org" ];
+    trusted-public-keys = [
+      "cuda-maintainers.cachix.org-1:0dq3bujKpuEPMCX6U4WylrUDZ9JyUG0VpVZa7CNfq5E="
+    ];
+  };
 }
