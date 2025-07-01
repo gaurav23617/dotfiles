@@ -1,48 +1,47 @@
-{ inputs, lib, ... }:
-
 {
-  # Allow unfree packages like Spotify
-  nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [ "spotify" ];
-
+  inputs,
+  lib,
+  ...
+}:
+{
+  # allow spotify to be installed if you don't have unfree enabled already
+  nixpkgs.config.allowUnfreePredicate =
+    pkg:
+    builtins.elem (lib.getName pkg) [
+      "spotify"
+    ];
   home-manager.sharedModules = [
     (
       { pkgs, ... }:
-
       let
         spicePkgs = inputs.spicetify-nix.legacyPackages.${pkgs.system};
       in
-
       {
-        # Install only actual binaries
-        home.packages = with pkgs; [
-          spotify
-          spicetify-cli
-        ];
+        # import the flake's module for your system
+        imports = [ inputs.spicetify-nix.homeManagerModules.default ];
 
-        # Import spicetify-nix module
-        imports = [
-          inputs.spicetify-nix.homeManagerModules.default
-        ];
-
-        # Configure spicetify, safely referencing theme
+        # configure spicetify :)
         programs.spicetify = {
           enable = true;
-
-          # Reference theme only inside Spicetify config (do not install globally)
           theme = spicePkgs.themes.catppuccin;
           colorScheme = "mocha";
-
           enabledExtensions = with spicePkgs.extensions; [
-            shuffle
-            keyboardShortcut
-            copyLyrics
-            fullAppDisplay
+            adblock
+            shuffle # shuffle+ (special characters are sanitized out of ext names)
+            keyboardShortcut # vimium-like navigation
+            copyLyrics # copy lyrics with selection
+            # autoVolume
+            # showQueueDuration
+            # fullAppDisplay
+            # hidePodcasts
           ];
-
-          enabledCustomApps = with spicePkgs.apps; [
-            marketplace
-            localFiles
-          ];
+          # enabledCustomApps = with spicePkgs.apps; [
+          #   reddit
+          #   lyricsPlus
+          #   marketplace
+          #   localFiles
+          #   ncsVisualizer
+          # ];
         };
       }
     )

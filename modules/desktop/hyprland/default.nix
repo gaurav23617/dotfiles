@@ -121,11 +121,10 @@
               exec-once = [
                 #"[workspace 1 silent] ${terminal}"
                 #"[workspace 5 silent] ${browser}"
-                "[workspace 1 silent] spotify"
+                #"[workspace 6 silent] spotify"
                 #"[workspace special silent] ${browser} --private-window"
                 #"[workspace special silent] ${terminal}"
 
-                "hyprpaper"
                 "waybar"
                 "swaync"
                 "nm-applet --indicator"
@@ -225,7 +224,11 @@
               render = {
                 explicit_sync = 2; # 0 = off, 1 = on, 2 = auto based on gpu driver.
                 explicit_sync_kms = 2; # 0 = off, 1 = on, 2 = auto based on gpu driver.
-                direct_scanout = false; # Set to true for less Fullscreen game lag (may cause glitches).
+                direct_scanout = 2; # 0 = off, 1 = on, 2 = auto (on with content type ‘game’)
+              };
+              ecosystem = {
+                no_update_news = true;
+                no_donation_nag = true;
               };
               misc = {
                 disable_hyprland_logo = true;
@@ -252,25 +255,24 @@
               windowrule = [
                 #"noanim, class:^(Rofi)$
                 "tile,title:(.*)(Godot)(.*)$"
-                # "workspace 1, title:(.*)(Spotify)(.*)$"
-                # "workspace 1, class:^(Spotify|discord)$"
-                "workspace 2, class:^(firefox|zen)$"
-                "workspace 3, class:^(kitty|ghostty)$"
-                "workspace 3, title:(.*)(Godot)(.*)$"
-                "workspace 4, title:(GNU Image Manipulation Program)(.*)$"
-                "workspace 5, class:^(steam)$"
-                "workspace 6, class:^(factorio)$"
-                "workspace 6, class:^(code|VSCodium|code-url-handler|codium-url-handler)$"
-                "workspace 6, class:^(Brave-browser)$"
-                "workspace 7, class:^(google-chrome)$"
-                "workspace 0, class:^(motrix)$"
+                # "workspace 1, class:^(kitty|Alacritty|org.wezfurlong.wezterm)$"
+                # "workspace 2, class:^(code|VSCodium|code-url-handler|codium-url-handler)$"
+                # "workspace 3, class:^(krita)$"
+                # "workspace 3, title:(.*)(Godot)(.*)$"
+                # "workspace 3, title:(GNU Image Manipulation Program)(.*)$"
+                # "workspace 3, class:^(factorio)$"
+                # "workspace 3, class:^(steam)$"
+                # "workspace 5, class:^(firefox|floorp|zen)$"
+                # "workspace 6, class:^(Spotify)$"
+                # "workspace 6, title:(.*)(Spotify)(.*)$"
 
                 # Can use FLOAT FLOAT for active and inactive or just FLOAT
-                "opacity 0.80 0.80,class:^(ghostty|kitty|alacritty|Alacritty|org.wezfurlong.wezterm)$"
+                "opacity 0.80 0.80,class:^(kitty|alacritty|Alacritty|org.wezfurlong.wezterm)$"
                 "opacity 0.90 0.90,class:^(gcr-prompter)$" # keyring prompt
                 "opacity 0.90 0.90,title:^(Hyprland Polkit Agent)$" # polkit prompt
                 "opacity 1.00 1.00,class:^(firefox)$"
                 "opacity 0.90 0.90,class:^(Brave-browser)$"
+                "opacity 0.80 0.80,class:^(thunar)$"
                 "opacity 0.80 0.80,class:^(Steam)$"
                 "opacity 0.80 0.80,class:^(steam)$"
                 "opacity 0.80 0.80,class:^(steamwebhelper)$"
@@ -308,6 +310,21 @@
                 "opacity 0.80 0.70,class:^(nm-connection-editor)$"
                 "opacity 0.80 0.70,class:^(org.kde.polkit-kde-authentication-agent-1)$"
 
+                "content game, tag:games"
+                "tag +games, content:game"
+                "tag +games, class:^(steam_app.*|steam_app_\d+)$"
+                "tag +games, class:^(gamescope)$"
+                "tag +games, class:(Waydroid)"
+                "tag +games, class:(osu!)"
+
+                # Games
+                "syncfullscreen,tag:games"
+                "fullscreen,tag:games"
+                "noborder 1,tag:games"
+                "noshadow,tag:games"
+                "noblur,tag:games"
+                "noanim,tag:games"
+
                 "float,class:^(qt5ct)$"
                 "float,class:^(nwg-look)$"
                 "float,class:^(org.kde.ark)$"
@@ -324,13 +341,6 @@
                 "float,class:^(nm-applet)$"
                 "float,class:^(nm-connection-editor)$"
                 "float,class:^(org.kde.polkit-kde-authentication-agent-1)$"
-                "float,title:^(Open|Save|Choose|File|Preferences|Settings)"
-                "float,title:^(.*Dialog.*|.*Popup.*|.*Chooser.*|.*Prompt.*)"
-                "float,title:^(.*)(File Chooser|File Picker)(.*)$"
-                "float,class:^(org.gtk.GtkFileChooserDialog)$"
-                "float,class:^(xdg-desktop-portal-gtk)$"
-                "float,class:^(org.kde.kdialog|kdialog)$"
-                "float,class:^(zenity)$"
               ];
               binde = [
                 # Resize windows
@@ -375,7 +385,6 @@
                   "$mainMod, W, togglefloating" # toggle the window on focus to float
                   "$mainMod SHIFT, G, togglegroup" # toggle the window on focus to float
                   "ALT, return, fullscreen" # toggle the window on focus to fullscreen
-                  "$mainMod, D, fullscreen, 1" # toggle the window to fullscreen
                   "$mainMod ALT, L, exec, hyprlock" # lock screen
                   "$mainMod, backspace, exec, pkill -x wlogout || wlogout -b 4" # logout menu
                   "$CONTROL, ESCAPE, exec, pkill waybar || waybar" # toggle waybar
@@ -385,11 +394,8 @@
                   "$mainMod, T, exec, $term"
                   "$mainMod, E, exec, $fileManager"
                   "$mainMod, C, exec, $editor"
-                  "$mainMod, B, exec, $browser"
-                  "$mainMod, backtick, exec, google-chrome-stable"
-                  # "$mainMod, M, exec, Spotify"
+                  "$mainMod, F, exec, $browser"
                   "$mainMod SHIFT, S, exec, spotify"
-                  "$mainMod SHIFT, S, exec, Spotify"
                   "$mainMod SHIFT, Y, exec, youtube-music"
                   "$CONTROL ALT, DELETE, exec, $term -e '${getExe pkgs.btop}'" # System Monitor
                   "$mainMod CTRL, C, exec, hyprpicker --autocopy --format=hex" # Colour Picker
@@ -412,9 +418,6 @@
                   "$mainMod CTRL, P, exec, ${./scripts/screenshot.sh} sf" # frozen screen, drag to snip an area / click on a window to print it
                   "$mainMod, print, exec, ${./scripts/screenshot.sh} m" # print focused monitor
                   "$mainMod ALT, P, exec, ${./scripts/screenshot.sh} p" # print all monitor outputs
-
-                  # OCR
-                  "$mainMod SHIFT,T,exec,sh -c 'tmpfile=$(mktemp --suffix=.png) && grim -g \"$(slurp)\" \"$tmpfile\" && tesseract -l eng \"$tmpfile\" - | wl-copy && rm \"$tmpfile\"'" # Screen snip to text >> clipboard
 
                   # Functional keybinds
                   ",xf86Sleep, exec, systemctl suspend" # Put computer into sleep mode
@@ -480,10 +483,10 @@
                   "$mainMod SHIFT $CONTROL, down, movewindow, d"
 
                   # Move active window around current workspace with mainMod + SHIFT + CTRL [HLJK]
-                  "$mainMod SHIFT, H, movewindow, l"
-                  "$mainMod SHIFT, L, movewindow, r"
-                  "$mainMod SHIFT, K, movewindow, u"
-                  "$mainMod SHIFT, J, movewindow, d"
+                  "$mainMod SHIFT $CONTROL, H, movewindow, l"
+                  "$mainMod SHIFT $CONTROL, L, movewindow, r"
+                  "$mainMod SHIFT $CONTROL, K, movewindow, u"
+                  "$mainMod SHIFT $CONTROL, J, movewindow, d"
 
                   # Special workspaces (scratchpad)
                   "$mainMod CTRL, S, movetoworkspacesilent, special"
@@ -524,8 +527,8 @@
               monitor=,preferred,auto,1
 
               # 1080p-HDR monitor on the left, 4K-HDR monitor in the middle and 1080p vertical monitor on the right.
-              monitor=desc:BNQ BenQ EW277HDR 99J01861SL0,preferred,-1920x0,1,bitdepth,8
-              monitor=desc:BNQ BenQ EL2870U PCK00489SL0,3840x2160@60,0x0,2,bitdepth,10
+              monitor=desc:BNQ BenQ EW277HDR 99J01861SL0,preferred,-1920x0,1
+              monitor=desc:BNQ BenQ EL2870U PCK00489SL0,preferred,0x0,2
               monitor=desc:BNQ BenQ xl2420t 99D06760SL0,preferred,1920x0,1,transform,1 # 5 for fipped
 
               # Binds workspaces to my monitors only (find desc with: hyprctl monitors)

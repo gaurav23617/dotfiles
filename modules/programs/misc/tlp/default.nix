@@ -19,7 +19,6 @@
       STOP_CHARGE_THRESH_BAT0 = 95;
       START_CHARGE_THRESH_BAT1 = 82;
       STOP_CHARGE_THRESH_BAT1 = 95;
-
     };
   };
 }

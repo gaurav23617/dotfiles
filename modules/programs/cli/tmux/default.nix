@@ -61,10 +61,9 @@ in
           bind C-a send-prefix
 
           # Options
-          set -g @catppuccin_flavour 'macchiato'
+          set -g @catppuccin_flavour 'mocha'
           set -g mouse on
           set -g allow-rename off
-          set -g focus-events on
           set -g status-position top
           set -g base-index 1
           set -g pane-base-index 1
@@ -92,10 +91,10 @@ in
           bind j select-pane -D
 
           # Resize panes
-          bind -n M-h resize-pane -L 2
-          bind -n M-l resize-pane -R 2
-          bind -n M-k resize-pane -U 2
-          bind -n M-j resize-pane -D 2
+          # bind -n M-h resize-pane -L 2
+          # bind -n M-l resize-pane -R 2
+          # bind -n M-k resize-pane -U 2
+          # bind -n M-j resize-pane -D 2
           bind -n M-Left resize-pane -L 2
           bind -n M-Right resize-pane -R 2
           bind -n M-Up resize-pane -U 2
@@ -112,11 +111,6 @@ in
 
           bind -n C-M-h  previous-window
           bind -n C-M-l next-window
-
-          # Bind Alt+Number (M-1 to M-9) to select-pane -t 0 to 8
-          bind -n M-1 select-pane -t 0
-          bind -n M-2 select-pane -t 1
-          bind -n M-3 select-pane -t 2
 
           # vi mode
           bind-key -T copy-mode-vi v send-keys -X begin-selection

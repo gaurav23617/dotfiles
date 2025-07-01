@@ -1,5 +1,6 @@
-{pkgs, ...}: {
-  fonts.packages = with pkgs.nerd-fonts; [jetbrains-mono];
+{ pkgs, ... }:
+{
+  fonts.packages = with pkgs.nerd-fonts; [ jetbrains-mono ];
   home-manager.sharedModules = [
     (_: {
       programs.waybar = {
@@ -12,6 +13,7 @@
           {
             layer = "top";
             position = "top";
+            mode = "dock"; # Fixes fullscreen issues
             height = 32; # 35
             exclusive = true;
             passthrough = false;
@@ -23,10 +25,26 @@
             margin-right = 10;
             margin-bottom = 0;
 
-            modules-left = ["hyprland/workspaces" "cava"];
+            modules-left = [
+              "hyprland/workspaces"
+              "cava"
+            ];
             # modules-center = ["clock" "custom/notification"];
-            modules-center = ["idle_inhibitor" "clock"];
-            modules-right = ["custom/gpuinfo" "cpu" "memory" "backlight" "pulseaudio" "bluetooth" "network" "tray" "battery"];
+            modules-center = [
+              "idle_inhibitor"
+              "clock"
+            ];
+            modules-right = [
+              "custom/gpuinfo"
+              "cpu"
+              "memory"
+              "backlight"
+              "pulseaudio"
+              "bluetooth"
+              "network"
+              "tray"
+              "battery"
+            ];
 
             "custom/notification" = {
               tooltip = false;
@@ -63,7 +81,16 @@
               hide_on_silence = false;
               framerate = 60;
               bars = 10;
-              format-icons = ["▁" "▂" "▃" "▄" "▅" "▆" "▇" "█"];
+              format-icons = [
+                "▁"
+                "▂"
+                "▃"
+                "▄"
+                "▅"
+                "▆"
+                "▇"
+                "█"
+              ];
               input_delay = 1;
               # "noise_reduction" = 0.77;
               sleep_timer = 5;
@@ -100,14 +127,21 @@
                 paused = "⏸";
                 playing = "";
               };
-              ignored-players = ["firefox" "chromium"];
+              ignored-players = [
+                "firefox"
+                "chromium"
+              ];
               max-length = 30;
             };
             "temperature" = {
               hwmon-path = "/sys/class/hwmon/hwmon1/temp1_input";
               critical-threshold = 83;
               format = "{icon} {temperatureC}°C";
-              format-icons = ["" "" ""];
+              format-icons = [
+                ""
+                ""
+                ""
+              ];
               interval = 10;
             };
             "hyprland/language" = {
@@ -120,7 +154,18 @@
               active-only = false;
               on-click = "activate";
               persistent-workspaces = {
-                "*" = [1 2 3 4 5 6 7 8 9 10];
+                "*" = [
+                  1
+                  2
+                  3
+                  4
+                  5
+                  6
+                  7
+                  8
+                  9
+                  10
+                ];
               };
             };
 
@@ -178,7 +223,16 @@
               interval = 10;
               format = "󰍛 {usage}%";
               format-alt = "{icon0}{icon1}{icon2}{icon3}";
-              format-icons = ["▁" "▂" "▃" "▄" "▅" "▆" "▇" "█"];
+              format-icons = [
+                "▁"
+                "▂"
+                "▃"
+                "▄"
+                "▅"
+                "▆"
+                "▇"
+                "█"
+              ];
             };
 
             "memory" = {
@@ -187,12 +241,22 @@
               format-alt = "󰾅 {used}GB";
               max-length = 10;
               tooltip = true;
-              tooltip-format = " {used =0.1f}GB/{total =0.1f}GB";
+              tooltip-format = " {used:.1f}GB/{total:.1f}GB";
             };
 
             "backlight" = {
               format = "{icon} {percent}%";
-              format-icons = ["" "" "" "" "" "" "" "" ""];
+              format-icons = [
+                ""
+                ""
+                ""
+                ""
+                ""
+                ""
+                ""
+                ""
+                ""
+              ];
               on-scroll-up = "${pkgs.brightnessctl}/bin/brightnessctl set 2%+";
               on-scroll-down = "${pkgs.brightnessctl}/bin/brightnessctl set 2%-";
             };
@@ -235,7 +299,11 @@
                 phone = "";
                 portable = "";
                 car = "";
-                default = ["" "" ""];
+                default = [
+                  ""
+                  ""
+                  ""
+                ];
               };
             };
 
@@ -264,7 +332,19 @@
               format-charging = " {capacity}%";
               format-plugged = " {capacity}%";
               format-alt = "{time} {icon}";
-              format-icons = ["󰂎" "󰁺" "󰁻" "󰁼" "󰁽" "󰁾" "󰁿" "󰂀" "󰂁" "󰂂" "󰁹"];
+              format-icons = [
+                "󰂎"
+                "󰁺"
+                "󰁻"
+                "󰁼"
+                "󰁽"
+                "󰁾"
+                "󰁿"
+                "󰂀"
+                "󰂁"
+                "󰂂"
+                "󰁹"
+              ];
             };
 
             "custom/power" = {
