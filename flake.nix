@@ -16,10 +16,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     nur.url = "github:nix-community/NUR";
-    betterfox = {
-      url = "github:yokoffing/Betterfox";
-      flake = false;
-    };
     thunderbird-catppuccin = {
       url = "github:catppuccin/thunderbird";
       flake = false;
