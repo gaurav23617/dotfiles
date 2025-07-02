@@ -4,7 +4,6 @@
 
 pkgs.mkShell {
   buildInputs = with pkgs; [
-    colmena
     just
   ];
 }
