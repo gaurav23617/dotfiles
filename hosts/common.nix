@@ -340,17 +340,6 @@
   # Or disable the firewall altogether.
   # networking.firewall.enable = false;
 
-  programs = {
-    nh = {
-      enable = true;
-      # Automatic garbage collection
-      clean = {
-        enable = true;
-        extraArgs = "--keep-since 7d --keep 3";
-      };
-      flake = "/home/${username}/dotfiles";
-    };
-  };
   nix = {
     # Nix Package Manager Settings
     settings = {
