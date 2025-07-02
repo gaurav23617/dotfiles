@@ -26,6 +26,7 @@
             };
             root = {
               size = "100%"; # Use all remaining space
+              type = "8300"; # Linux filesystem - THIS WAS MISSING
               content = {
                 type = "filesystem";
                 format = "ext4";
@@ -43,8 +44,10 @@
           partitions = {
             home = {
               size = "100%"; # Use the entire disk
+              type = "8300"; # Linux filesystem
               content = {
-                type = "btrfs";
+                type = "filesystem"; # Changed from "btrfs" to "filesystem"
+                format = "btrfs"; # Specify btrfs as format
                 # Btrfs-specific options
                 extraArgs = [ "-f" ]; # Force creation
                 subvolumes = {
