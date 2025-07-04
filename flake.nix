@@ -77,13 +77,5 @@
           ];
         };
       };
-
-      # Add standalone home-manager configuration for direct home-manager commands
-      homeConfigurations."gaurav" = home-manager.lib.homeManagerConfiguration {
-        # ...
-        modules = [
-          ./hosts/Default/configuration.nix
-        ];
-      };
     };
 }
