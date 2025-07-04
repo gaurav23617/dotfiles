@@ -38,7 +38,6 @@
     ../../modules/programs/media/discord
     ../../modules/programs/media/obsidian
     ../../modules/programs/media/spicetify
-    ../../modules/programs/misc/nbfc
     ../../modules/programs/media/youtube-music
     # ../../modules/programs/media/thunderbird
     # ../../modules/programs/media/obs-studio
