@@ -17,6 +17,8 @@
     # inputs.hardware.nixosModules.common-cpu-amd
     # inputs.hardware.nixosModules.common-ssd
 
+    inputs.home-manager.nixosModules.home-manager
+
     # You can also split up your configuration and import pieces of it here:
     # ./users.nix
 
@@ -24,6 +26,16 @@
     ./hardware-configuration.nix
     ./disk.nix
   ];
+
+   home-manager = {
+    extraSpecialArgs = { inherit inputs outputs; };
+    users = {
+      gaurav = import ./home.nix;
+    };
+    useGlobalPkgs = true;
+    useUserPackages = true;
+    backupFileExtension = "backup";
+  };
 
   nixpkgs = {
     # You can add overlays here

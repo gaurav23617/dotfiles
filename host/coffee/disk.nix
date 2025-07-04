@@ -26,7 +26,7 @@
             };
             root = {
               size = "100%"; # Use all remaining space
-              type = "8300"; # Linux filesystem - THIS WAS MISSING
+              type = "8300"; # Linux filesystem
               content = {
                 type = "filesystem";
                 format = "ext4";
@@ -46,28 +46,14 @@
               size = "100%"; # Use the entire disk
               type = "8300"; # Linux filesystem
               content = {
-                type = "filesystem"; # Changed from "btrfs" to "filesystem"
-                format = "btrfs"; # Specify btrfs as format
-                # Btrfs-specific options
+                type = "filesystem";
+                format = "btrfs";
+                mountpoint = "/home";
                 extraArgs = [ "-f" ]; # Force creation
-                subvolumes = {
-                  # Define a subvolume for /home
-                  "/home" = {
-                    mountpoint = "/home";
-                    mountOptions = [
-                      "compress=zstd"
-                      "noatime"
-                    ];
-                  };
-                  # You can add more subvolumes if needed
-                  "/snapshots" = {
-                    mountpoint = "/snapshots";
-                    mountOptions = [
-                      "compress=zstd"
-                      "noatime"
-                    ];
-                  };
-                };
+                mountOptions = [
+                  "compress=zstd"
+                  "noatime"
+                ];
               };
             };
           };
