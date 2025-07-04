@@ -26,11 +26,10 @@
           theme = spicePkgs.themes.catppuccin;
           colorScheme = "mocha";
           enabledExtensions = with spicePkgs.extensions; [
-            adblock
             shuffle # shuffle+ (special characters are sanitized out of ext names)
             keyboardShortcut # vimium-like navigation
             copyLyrics # copy lyrics with selection
-            # autoVolume
+            autoVolume
             # showQueueDuration
             # fullAppDisplay
             # hidePodcasts
