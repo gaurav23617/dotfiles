@@ -15,6 +15,15 @@
     enable = true;
     enable32Bit = true;
   };
+  hardware.graphics.extraPackages = with pkgs; [
+    vulkan-loader
+    vulkan-validation-layers
+    vulkan-tools
+  ];
+  # 32-bit Vulkan support
+  hardware.graphics.extraPackages32 = with pkgs.pkgsi686Linux; [
+    vulkan-loader
+  ];
   environment.systemPackages = with pkgs; [
     lutris
     heroic
@@ -24,6 +33,19 @@
 
     steam-run
     wineWowPackages.staging
+
+    # Wine and gaming tools
+    wineWowPackages.stable
+    winetricks
+
+    # Vulkan tools
+    vulkan-loader
+    vulkan-validation-layers
+    vulkan-tools
+
+    # Additional gaming libraries
+    steam-run
+    lutris
   ];
   programs = {
     gamemode.enable = true;
