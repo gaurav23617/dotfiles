@@ -5,12 +5,17 @@ default:
 # Install NixOS with disko for coffee (DESTRUCTIVE - will wipe disks!)
 install-coffee:
     @echo "⚠️  WARNING: This will WIPE your disks for coffee machine!"
+    @echo "This will format /dev/nvme0n1 (home) and /dev/nvme1n1 (root/boot/swap)"
     @echo "Press Ctrl+C to cancel, Enter to continue..."
     @read
     sudo nix --experimental-features "nix-command flakes" run github:nix-community/disko -- --mode disko ./host/coffee/disk.nix
     nixos-generate-config --root /mnt
+    # Create user directory on the mounted home partition
     sudo mkdir -p /mnt/home/gaurav
+    # Copy dotfiles to the mounted home partition
     sudo cp -r . /mnt/home/gaurav/dotfiles
+    # Set proper ownership
+    sudo chown -R 1000:1000 /mnt/home/gaurav
     sudo nixos-install --flake /mnt/home/gaurav/dotfiles#coffee
     @echo "🎉 NixOS installation complete! After reboot, run: cd ~/dotfiles && just setup-home-coffee"
 
@@ -23,6 +28,7 @@ install-vm:
     nixos-generate-config --root /mnt
     sudo mkdir -p /mnt/home/gaurav
     sudo cp -r . /mnt/home/gaurav/dotfiles
+    sudo chown -R 1000:1000 /mnt/home/gaurav
     sudo nixos-install --flake /mnt/home/gaurav/dotfiles#vm
     @echo "🎉 NixOS installation complete! After reboot, run: cd ~/dotfiles && just setup-home-vm"
 
@@ -168,3 +174,17 @@ check-syntax:
 # Show flake inputs
 show-inputs:
     nix flake metadata --json | jq '.locks.nodes | to_entries[] | select(.key != "root") | {(.key): .value.locked}'
+
+# Check disk layout before installation
+check-disks:
+    @echo "Current disk layout:"
+    @lsblk
+    @echo ""
+    @echo "⚠️  Disko will format these disks:"
+    @echo "  /dev/nvme0n1 -> /home (btrfs)"
+    @echo "  /dev/nvme1n1 -> /boot (8G), swap (16G), / (remaining)"
+
+# Verify disko configuration
+verify-disko:
+    @echo "Verifying disko configuration..."
+    nix eval --impure --expr '(import ./host/coffee/disk.nix).disko.devices'
