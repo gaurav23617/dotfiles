@@ -74,17 +74,6 @@
           } // settings;
           modules = [
             ./hosts/Default/configuration.nix
-            home-manager.nixosModules.home-manager
-            {
-              home-manager.useGlobalPkgs = true;
-              home-manager.useUserPackages = true;
-              home-manager.extraSpecialArgs = {
-                inherit inputs outputs;
-              } // settings;
-              # If you have a separate home.nix file, point to it here
-              # home-manager.users.${settings.username} = import ./hosts/Default/home.nix;
-              # If home-manager config is in configuration.nix, this line is not needed
-            }
           ];
         };
       };
