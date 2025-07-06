@@ -79,6 +79,7 @@
           noto-fonts-emoji
           vlc
           diff-so-fancy
+          hayase
           eza
           motrix
           nodejs_22
