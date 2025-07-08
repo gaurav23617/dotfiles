@@ -24,6 +24,10 @@
       url = "github:maximoffua/zen-browser.nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    disko = {
+      url = "github:nix-community/disko";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
   outputs =
     {
@@ -64,12 +68,14 @@
       formatter = forAllSystems (system: nixpkgs.legacyPackages.${system}.alejandra);
       nixosConfigurations = {
         Default = nixpkgs.lib.nixosSystem {
-          system = "x86_64-linux"; # Fixed: removed forAllSystems here as it's incorrect
+          system = "x86-64-linux";
           specialArgs = {
             inherit self inputs outputs;
           } // settings;
           modules = [
             ./hosts/Default/configuration.nix
+            inputs.disko.nixosModules.disko
+            ./hosts/Default/disko.nix # Your disko configuration file
           ];
         };
       };
