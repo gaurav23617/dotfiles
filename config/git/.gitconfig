@@ -3,7 +3,7 @@
 	email = gaurav23617@gmail.com
 
 [commit]
-  template = ~/.config/git/template
+  template = ~/dotfiles/config/git/template
 
 [core]
   autocrlf = input  # keep newlines as in input
@@ -87,6 +87,11 @@
 [credential "https://github.com"]
 	helper = 
 	helper = !/etc/profiles/per-user/gaurav/bin/gh auth git-credential
+
 [credential "https://gist.github.com"]
 	helper = 
 	helper = !/etc/profiles/per-user/gaurav/bin/gh auth git-credential
+
+[credential]
+	helper = store
+	helper = store
