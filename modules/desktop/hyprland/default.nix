@@ -256,8 +256,8 @@
               windowrule = [
                 #"noanim, class:^(Rofi)$
                 "tile,title:(.*)(Godot)(.*)$"
-                # "workspace 1, title:(.*)(Spotify)(.*)$"
-                # "workspace 1, class:^(Spotify|discord)$"
+                "workspace 1, title:(.*)(Spotify)(.*)$"
+                "workspace 1, class:^(Spotify|discord)$"
                 "workspace 2, class:^(firefox|zen)$"
                 "workspace 3, class:^(kitty|ghostty)$"
                 "workspace 3, title:(.*)(Godot)(.*)$"
