@@ -22,6 +22,7 @@
   programs.nix-index-database.comma.enable = true;
 
   users.users.${username} = {
+    initialPassword = "$y$j9T$9IhPCib6d/887Lu3GkASg/$M4bf4upZzcN.qnYHDfxVqK37tiC//5jgKbfu5AV0pSB";
     isNormalUser = true;
     extraGroups = [
       "networkmanager"
@@ -68,6 +69,7 @@
         home.packages = with pkgs; [
           # Applications
           #kate
+          home-manager
 
           # Terminal
           fzf
