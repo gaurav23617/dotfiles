@@ -14,6 +14,6 @@
     diff-so-fancy
   ];
 
-  home.file.".config/git/config".source =
+  home.file.".gitconfig".source =
     config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfiles/config/git/.gitconfig";
 }
