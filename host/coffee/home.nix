@@ -97,5 +97,7 @@
   # Enable dconf for home-manager
   programs.dconf.enable = true;
 
+  programs.fonts.enable = true;
+
   systemd.user.startServices = "sd-switch";
 }
