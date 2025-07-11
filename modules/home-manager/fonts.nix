@@ -3,10 +3,10 @@
 with lib;
 
 let
-  cfg = config.home-manager.fonts;
+  cfg = config.programs.fonts;
 in
 {
-  options.home-manager.fonts.enable = mkEnableOption "Enable Fonts Management";
+  options.programs.enable = mkEnableOption "Enable Fonts Management";
 
   config = mkIf cfg.enable {
     fonts = {
