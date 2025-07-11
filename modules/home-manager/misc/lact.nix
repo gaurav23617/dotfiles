@@ -6,10 +6,10 @@
 }:
 with lib;
 let
-  cfg = config.home-manager.misc.lact;
+  cfg = config.misc.lact;
 in
 {
-  options.home-manager.misc.lact.enable =
+  options.misc.lact.enable =
     mkEnableOption "Enable lact (Linux Advanced Configuration Tool)";
 
   config = mkIf cfg.enable {
