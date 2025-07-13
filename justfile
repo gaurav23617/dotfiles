@@ -11,10 +11,10 @@ install:
     nixos-generate-config --root /mnt --show-hardware-config > ./hosts/Default/hardware-configuration.nix
     sudo mkdir -p /mnt/etc/nixos
     sudo cp -r . /mnt/etc/nixos/
-    sudo mkdir -p /mnt/home/gaurav
-    sudo cp -r . /mnt/home/gaurav/dotfiles
-    sudo chown -R 1000:1000 /mnt/home/gaurav
+    sudo mkdir -p /mnt/home/gaurav/dotfiles
+    sudo cp -r . /mnt/home/gaurav/dotfiles/
     sudo nixos-install --flake /mnt/etc/nixos#Default --no-root-passwd
+    sudo chown -R gaurav:users /mnt/home/gaurav || echo "Warning: Could not set ownership, fix manually after boot"
     @echo "NixOS installation complete!"
 
 # Quick rebuild
@@ -54,3 +54,10 @@ generations:
 check-disks:
     @echo "Current disk layout:"
     @lsblk
+
+# Prepare for installation (run this in live ISO)
+prepare:
+    @echo "Preparing live environment..."
+    nix-shell -p git --run "git config --global user.name 'Installer' && git config --global user.email 'installer@localhost'" || true
+    @echo "Environment prepared"
+
