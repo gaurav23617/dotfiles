@@ -214,8 +214,10 @@ echo "This disk will contain the boot partition, root partition, and swap partit
 echo "Available disks:"
 lsblk -d -o NAME,SIZE,MODEL | grep -v loop | grep -v rom
 
+# Replace the problematic section for SYSTEM DISK with this improved logic:
+
 while true; do
-  read -p "Enter system disk name (e.g., sda, nvme0n1): " system_disk
+  read -p "Enter system disk name for ROOT partition (e.g., sda, nvme0n1): " system_disk
 
   if [ -b "/dev/$system_disk" ]; then
     # Check if it's not a partition - improved logic for NVMe drives
@@ -237,15 +239,15 @@ while true; do
 
     if [ "$is_partition" = true ]; then
       if [[ "$system_disk" == nvme* ]]; then
-        error "You entered a partition ($system_disk). Please enter the disk name (e.g., nvme0n1 not nvme0n1p1)."
+        error "You entered a partition ($system_disk). Please enter the ROOT disk name (e.g., nvme0n1 not nvme0n1p1)."
       else
-        error "You entered a partition ($system_disk). Please enter the disk name (e.g., sda not sda1)."
+        error "You entered a partition ($system_disk). Please enter the ROOT disk name (e.g., sda not sda1)."
       fi
       continue
     fi
 
     # Show disk info
-    echo "Selected system disk: /dev/$system_disk"
+    echo "Selected ROOT disk: /dev/$system_disk"
     lsblk -o NAME,SIZE,MODEL,FSTYPE "/dev/$system_disk"
 
     read -p "Is this correct? (y/n): " confirm
@@ -253,7 +255,57 @@ while true; do
       break
     fi
   else
-    error "Disk /dev/$system_disk not found. Please enter a valid disk name."
+    error "ROOT disk /dev/$system_disk not found. Please enter a valid disk name."
+  fi
+done
+
+# ============================================
+# HOME DISK SELECTION (apply same logic here)
+# ============================================
+
+while true; do
+  read -p "Enter home disk name for HOME partition (e.g., sdb, nvme1n1): " home_disk
+
+  if [ "$home_disk" = "$system_disk" ]; then
+    error "HOME disk cannot be the same as ROOT disk. Please choose a different disk."
+    continue
+  fi
+
+  if [ -b "/dev/$home_disk" ]; then
+    # Check if it's not a partition - improved logic for NVMe drives
+    is_partition=false
+
+    if [[ "$home_disk" == nvme* ]]; then
+      # For NVMe drives, partitions have 'p' followed by partition number
+      if [[ "$home_disk" =~ p[0-9]+$ ]]; then
+        is_partition=true
+      fi
+    else
+      # For traditional drives, partitions end with numbers
+      if [[ "$home_disk" =~ [0-9]+$ ]]; then
+        is_partition=true
+      fi
+    fi
+
+    if [ "$is_partition" = true ]; then
+      if [[ "$home_disk" == nvme* ]]; then
+        error "You entered a partition ($home_disk). Please enter the HOME disk name (e.g., nvme1n1 not nvme1n1p1)."
+      else
+        error "You entered a partition ($home_disk). Please enter the HOME disk name (e.g., sdb not sdb1)."
+      fi
+      continue
+    fi
+
+    # Show disk info
+    echo "Selected HOME disk: /dev/$home_disk"
+    lsblk -o NAME,SIZE,MODEL,FSTYPE "/dev/$home_disk"
+
+    read -p "Is this correct? (y/n): " confirm
+    if [[ "$confirm" =~ ^[yY]$ ]]; then
+      break
+    fi
+  else
+    error "HOME disk /dev/$home_disk not found. Please enter a valid disk name."
   fi
 done
 
