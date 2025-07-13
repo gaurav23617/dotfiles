@@ -218,9 +218,29 @@ while true; do
   read -p "Enter system disk name (e.g., sda, nvme0n1): " system_disk
 
   if [ -b "/dev/$system_disk" ]; then
-    # Check if it's not a partition
-    if [[ "$system_disk" =~ [0-9]$ ]]; then
-      error "You entered a partition ($system_disk). Please enter the disk name (e.g., sda not sda1)."
+    # Check if it's not a partition - improved logic for NVMe drives
+    is_partition=false
+
+    if [[ "$system_disk" == nvme* ]]; then
+      # For NVMe drives, partitions have 'p' followed by partition number
+      # e.g., nvme0n1p1, nvme0n1p2 are partitions, but nvme0n1 is the disk
+      if [[ "$system_disk" =~ p[0-9]+$ ]]; then
+        is_partition=true
+      fi
+    else
+      # For traditional drives (sda, sdb, etc.), partitions end with numbers
+      # e.g., sda1, sda2 are partitions, but sda is the disk
+      if [[ "$system_disk" =~ [0-9]+$ ]]; then
+        is_partition=true
+      fi
+    fi
+
+    if [ "$is_partition" = true ]; then
+      if [[ "$system_disk" == nvme* ]]; then
+        error "You entered a partition ($system_disk). Please enter the disk name (e.g., nvme0n1 not nvme0n1p1)."
+      else
+        error "You entered a partition ($system_disk). Please enter the disk name (e.g., sda not sda1)."
+      fi
       continue
     fi
 
