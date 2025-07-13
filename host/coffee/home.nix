@@ -12,9 +12,9 @@
   # You can import other home-manager modules here
   imports = [
     ../../users/gaurav.nix
-    ../../modules/home-manager
-    ../../modules/home-manager/cli/git.nix
-    ../../modules/home-manager/shell/zsh.nix
+    ../../modules/home
+    ../../modules/home/cli/git.nix
+    ../../modules/home/shell/zsh.nix
   ];
 
   nixpkgs = {
