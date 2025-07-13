@@ -20,8 +20,7 @@
     inputs.home-manager.nixosModules.home-manager
 
     # You can also split up your configuration and import pieces of it here:
-    # ./users.nix
-    ../../users/gaurav.nix
+    ../../users/gaurav.nix  # This now contains system-level user config
 
     # Import your generated (nixos-generate-config) hardware configuration
     ./hardware-configuration.nix
@@ -159,29 +158,6 @@
     # devbox
     # shellify
   ];
-
-  users.users = {
-    # FIXME: Replace with your username
-    gaurav = {
-      initialPassword = "$y$j9T$9IhPCib6d/887Lu3GkASg/$M4bf4upZzcN.qnYHDfxVqK37tiC//5jgKbfu5AV0pSB";
-      isNormalUser = true;
-      openssh.authorizedKeys.keys = [
-        # TODO: Add your SSH public key(s) here, if you plan on using SSH to connect
-      ];
-      extraGroups = [
-        "wheel"
-        "networkmanager"
-        "libvirtd"
-        "flatpak"
-        "audio"
-        "video"
-        "plugdev"
-        "input"
-        "kvm"
-        "qemu-libvirtd"
-      ];
-    };
-  };
 
   # This setups a SSH server. Very important if you're setting up a headless system.
   # Feel free to remove if you don't need it.

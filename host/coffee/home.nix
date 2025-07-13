@@ -9,9 +9,14 @@
   ...
 }:
 {
+  # Set your username and home directory
+  home = {
+    username = "gaurav";
+    homeDirectory = "/home/gaurav";
+  };
+
   # You can import other home-manager modules here
   imports = [
-    ../../users/gaurav.nix
     ../../modules/home
     ../../modules/home/cli/git.nix
     ../../modules/home/shell/zsh.nix
@@ -82,17 +87,26 @@
     eza
     motrix
     nodejs_22
+    pnpm
     gh-copilot
     nix-prefetch-scripts
+    microfetch
     ripgrep
     zoxide
     bash
     tldr
     unzip
     (pkgs.writeShellScriptBin "hello" ''
-      echo "Hello ${username}!"
+      echo "Hello ${config.home.username}!"
     '')
   ];
+
+  # Enable home-manager and git
+  programs.home-manager.enable = true;
+  programs.git.enable = true;
+
+  # Default shell
+  programs.zsh.enable = true;
 
   # Enable dconf for home-manager
   programs.dconf.enable = true;
@@ -100,4 +114,13 @@
   programs.fonts.enable = true;
 
   systemd.user.startServices = "sd-switch";
+
+  # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
+  home.stateVersion = "25.05";
+  
+  home.sessionVariables = {
+    EDITOR = "nvim";
+    BROWSER = "zen";
+    TERMINAL = "ghostty";
+  };
 }
