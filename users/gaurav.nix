@@ -17,7 +17,7 @@
 
   # You can import other home-manager modules here
   imports = [
-    ../modules/home-manager/shell/zsh.nix
+    ../modules/home/shell/zsh.nix
   ];
 
   # Add stuff for your user as you see fit:
