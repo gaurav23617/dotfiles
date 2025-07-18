@@ -16,6 +16,8 @@ install-coffee:
     sudo cp -r . /mnt/home/gaurav/dotfiles
     # Set proper ownership
     sudo chown -R 1000:1000 /mnt/home/gaurav
+    # Fix Git ownership issue
+    sudo git config --system --add safe.directory /mnt/home/gaurav/dotfiles
     sudo nixos-install --flake /mnt/home/gaurav/dotfiles#coffee
     @echo "🎉 NixOS installation complete! After reboot, run: cd ~/dotfiles && just setup-home-coffee"
 
@@ -29,6 +31,8 @@ install-vm:
     sudo mkdir -p /mnt/home/gaurav
     sudo cp -r . /mnt/home/gaurav/dotfiles
     sudo chown -R 1000:1000 /mnt/home/gaurav
+    # Fix Git ownership issue
+    sudo git config --system --add safe.directory /mnt/home/gaurav/dotfiles
     sudo nixos-install --flake /mnt/home/gaurav/dotfiles#vm
     @echo "🎉 NixOS installation complete! After reboot, run: cd ~/dotfiles && just setup-home-vm"
 
