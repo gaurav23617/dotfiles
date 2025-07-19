@@ -61,7 +61,6 @@
   };
 
   misc = {
-    lact.enable = true; # Set to false to disable
     cpufreq.enable = true; # Set to false to disable
     nix-ld.enable = true; # Set to false to disable
     thunar.enable = true; # Set to false to disable
@@ -117,7 +116,7 @@
 
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
   home.stateVersion = "25.05";
-  
+
   home.sessionVariables = {
     EDITOR = "nvim";
     BROWSER = "zen";

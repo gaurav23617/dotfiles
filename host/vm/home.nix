@@ -56,7 +56,6 @@
   };
 
   misc = {
-    lact.enable = true; # Set to false to disable
     cpufreq.enable = true; # Set to false to disable
     nix-ld.enable = true; # Set to false to disable
     thunar.enable = true; # Set to false to disable

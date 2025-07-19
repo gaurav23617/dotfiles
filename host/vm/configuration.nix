@@ -13,6 +13,7 @@
   imports = [
     ../../modules/nixos
     ../../modules/nixos/nvidia.nix
+    ../../modules/home
     # Or modules from other flakes (such as nixos-hardware):
     # inputs.hardware.nixosModules.common-cpu-amd
     # inputs.hardware.nixosModules.common-ssd
@@ -20,7 +21,7 @@
     inputs.home-manager.nixosModules.home-manager
 
     # You can also split up your configuration and import pieces of it here:
-    # ./users.nix
+    ../../users/gaurav.nix # This now contains system-level user config
 
     # Import your generated (nixos-generate-config) hardware configuration
     ./hardware-configuration.nix
@@ -35,6 +36,10 @@
     useGlobalPkgs = true;
     useUserPackages = true;
     backupFileExtension = "backup";
+  };
+
+  misc = {
+    lact.enable = true; # Set to false to disable
   };
 
   nixpkgs = {
