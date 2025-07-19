@@ -1,7 +1,6 @@
 {
   lib,
   config,
-  inputs,
   pkgs,
   ...
 }:
@@ -16,20 +15,9 @@ in
   options.terminal.ghostty.enable = mkEnableOption "Enables ghostty Terminal Settings";
 
   config = mkIf cfg.enable {
+    # Use ghostty from nixpkgs (simpler approach)
+    home.packages = [ pkgs.ghostty ];
 
-    nixpkgs = {
-      overlays = [
-        inputs.brew-nix.overlays.default
-      ];
-    };
-    home.packages = (
-      if pkgs.stdenv.isLinux then
-        [
-          inputs.ghostty.packages."${pkgs.system}".default
-        ]
-      else
-        [ pkgs.brewCasks.ghostty ]
-    );
     home.file = {
       ".config/ghostty/config" = {
         source = ../../../config/ghostty/common-config;
