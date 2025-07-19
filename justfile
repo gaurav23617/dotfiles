@@ -11,7 +11,8 @@ install-coffee:
     sudo nix --experimental-features "nix-command flakes" run github:nix-community/disko -- --mode disko ./host/coffee/disk.nix
     nixos-generate-config --root /mnt
     sudo nixos-install --flake .#coffee
-    @echo "🎉 NixOS installation complete! After reboot, copy your dotfiles and run home-manager setup"
+    @echo "🎉 NixOS installation complete!"
+    @echo "After reboot, manually copy your dotfiles and run: just setup-home-coffee"
 
 # Install NixOS with disko for VM (DESTRUCTIVE - will wipe disks!)
 install-vm:
@@ -20,12 +21,9 @@ install-vm:
     @read
     sudo nix --experimental-features "nix-command flakes" run github:nix-community/disko -- --mode disko ./host/vm/disk.nix
     nixos-generate-config --root /mnt
-    sudo mkdir -p /mnt/home/gaurav
-    sudo cp -r . /mnt/home/gaurav/dotfiles
-    sudo chown -R 1000:1000 /mnt/home/gaurav
-    # Fix Git ownership issue by temporarily setting safe.directory
-    sudo -E bash -c 'export GIT_CONFIG_GLOBAL=/tmp/git-config-install; echo "[safe]" > /tmp/git-config-install; echo "    directory = /mnt/home/gaurav/dotfiles" >> /tmp/git-config-install; nixos-install --flake /mnt/home/gaurav/dotfiles#vm'
-    @echo "🎉 NixOS installation complete! After reboot, run: cd ~/dotfiles && just setup-home-vm"
+    sudo nixos-install --flake .#vm
+    @echo "🎉 NixOS installation complete!"
+    @echo "After reboot, manually copy your dotfiles and run: just setup-home-vm"
 
 # Quick rebuild shortcuts
 coffee:
