@@ -53,8 +53,8 @@
   home-manager.sharedModules = [
     (_: {
       home.packages = with pkgs; [
-        gimp
-        hayase
+        # gimp
+        # hayase
       ];
     })
   ];
