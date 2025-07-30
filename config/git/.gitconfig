@@ -1,6 +1,6 @@
 [user]
   name = gaurav23617
-	email = gaurav23617@gmail.com
+  email = gaurav23617@gmail.com
 
 [commit]
   template = ~/dotfiles/config/git/template
@@ -52,6 +52,7 @@
 
 [submodule]
   fetchJobs = 16
+	recurse = true
 
 [rebase]
   autoStash = true
