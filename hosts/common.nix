@@ -75,6 +75,12 @@
         libjxl
         microfetch
         nix-prefetch-scripts
+        nodejs_20
+        vlc
+        pnpm
+        biome
+        bun
+        motrix
         ripgrep
         tldr
         unzip
