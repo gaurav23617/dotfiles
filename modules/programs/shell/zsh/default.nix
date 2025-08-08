@@ -3,7 +3,8 @@
   pkgs,
   terminalFileManager,
   ...
-}: {
+}:
+{
   home-manager.sharedModules = [
     ({config, ...}: {
       xdg.configFile."zsh/.p10k.zsh".source = ./.p10k.zsh;
@@ -176,6 +177,7 @@
           G = "| grep";
         };
         shellAliases = {
+          v = " NVIM_APPNAME=nvimn nvim";
           cls = "clear";
           tml = "tmux list-sessions";
           attach = "tmux attach";

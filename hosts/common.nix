@@ -73,6 +73,12 @@
           git
           gh
           htop
+        nodejs_20
+        vlc
+        pnpm
+        biome
+        bun
+        motrix
           libjxl
           microfetch
           nix-prefetch-scripts
