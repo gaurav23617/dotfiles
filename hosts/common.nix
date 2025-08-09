@@ -1,19 +1,5 @@
-{
-  inputs,
-  outputs,
-  pkgs,
-  username,
-  browser,
-  terminal,
-  locale,
-  timezone,
-  kbdLayout,
-  kbdVariant,
-  consoleKeymap,
-  config,
-  self,
-  ...
-}: {
+{ inputs, outputs, pkgs, username, browser, terminal, locale, timezone
+, kbdLayout, kbdVariant, consoleKeymap, config, self, ... }: {
   imports = [
     inputs.home-manager.nixosModules.home-manager
     inputs.nix-index-database.nixosModules.nix-index
@@ -40,22 +26,25 @@
     useGlobalPkgs = true;
     useUserPackages = true;
     backupFileExtension = "backup";
-    users.${username} = {pkgs, ...}: {
+    users.${username} = { pkgs, ... }: {
       # Let Home Manager install and manage itself.
       programs.home-manager.enable = true;
 
       xdg.enable = true;
       xdg.portal = {
         enable = true;
-        extraPortals = with pkgs; [xdg-desktop-portal-hyprland xdg-desktop-portal-gtk];
+        extraPortals = with pkgs; [
+          xdg-desktop-portal-hyprland
+          xdg-desktop-portal-gtk
+        ];
         xdgOpenUsePortal = true;
       };
       home = {
         username = username;
-        homeDirectory =
-          if pkgs.stdenv.isDarwin
-          then "/Users/${username}"
-          else "/home/${username}";
+        homeDirectory = if pkgs.stdenv.isDarwin then
+          "/Users/${username}"
+        else
+          "/home/${username}";
         stateVersion = "23.11"; # Please read the comment before changing.
         sessionVariables = {
           EDITOR = "nvim";
@@ -73,12 +62,13 @@
           git
           gh
           htop
-        nodejs_20
-        vlc
-        pnpm
-        biome
-        bun
-        motrix
+          nodejs_20
+          vlc
+          uv
+          pnpm
+          biome
+          bun
+          motrix
           libjxl
           microfetch
           nix-prefetch-scripts
@@ -91,7 +81,7 @@
   };
 
   # Filesystems support
-  boot.supportedFilesystems = ["ntfs" "exfat" "ext4" "fat32" "btrfs"];
+  boot.supportedFilesystems = [ "ntfs" "exfat" "ext4" "fat32" "btrfs" ];
   services.devmon.enable = true;
   services.gvfs.enable = true;
   services.udisks2.enable = true;
@@ -105,7 +95,8 @@
   # Bootloader.
   boot = {
     tmp.cleanOnBoot = true;
-    kernelPackages = pkgs.linuxPackages_latest; # _latest, _zen, _xanmod_latest, _hardened, _rt, _OTHER_CHANNEL, etc.
+    kernelPackages =
+      pkgs.linuxPackages_latest; # _latest, _zen, _xanmod_latest, _hardened, _rt, _OTHER_CHANNEL, etc.
     loader = {
       efi.canTouchEfiVariables = true;
       efi.efiSysMountPoint = "/boot";
@@ -148,7 +139,8 @@
   };
   console.keyMap = consoleKeymap; # Configure console keymap
   services.xserver = {
-    exportConfiguration = true; # Make sure /etc/X11/xkb is populated so localectl works correctly
+    exportConfiguration =
+      true; # Make sure /etc/X11/xkb is populated so localectl works correctly
     xkb = {
       layout = kbdLayout;
       variant = kbdVariant;
@@ -215,9 +207,10 @@
     wireplumber = {
       enable = true;
       configPackages = [
-        (pkgs.writeTextDir "share/wireplumber/wireplumber.conf.d/11-bluetooth-policy.conf" ''
-          bluetooth.autoswitch-to-headset-profile = false
-        '')
+        (pkgs.writeTextDir
+          "share/wireplumber/wireplumber.conf.d/11-bluetooth-policy.conf" ''
+            bluetooth.autoswitch-to-headset-profile = false
+          '')
       ];
     };
   };
@@ -232,10 +225,7 @@
   users.defaultUserShell = pkgs.zsh;
 
   fonts.fontDir.enable = true;
-  fonts.packages = with pkgs.nerd-fonts; [
-    jetbrains-mono
-    fira-code
-  ];
+  fonts.packages = with pkgs.nerd-fonts; [ jetbrains-mono fira-code ];
 
   nixpkgs = {
     overlays = builtins.attrValues outputs.overlays;
@@ -284,17 +274,16 @@
   # List services that you want to enable:
 
   # Enable the OpenSSH daemon.
-  /*
-     services.openssh = {
-    enable = true;
-    settings = {
-      PasswordAuthentication = true;
-      AllowUsers = null; # Allows all users by default. Can be [ "user1" "user2" ]
-      UseDns = true;
-      X11Forwarding = false;
-      PermitRootLogin = "prohibit-password"; # "yes", "without-password", "prohibit-password", "forced-commands-only", "no"
-    };
-  };
+  /* services.openssh = {
+       enable = true;
+       settings = {
+         PasswordAuthentication = true;
+         AllowUsers = null; # Allows all users by default. Can be [ "user1" "user2" ]
+         UseDns = true;
+         X11Forwarding = false;
+         PermitRootLogin = "prohibit-password"; # "yes", "without-password", "prohibit-password", "forced-commands-only", "no"
+       };
+     };
   */
 
   # Open ports in the firewall.
@@ -338,7 +327,7 @@
         # "nixpkgs-wayland.cachix.org-1:3lwxaILxMRkVhehr5StQprHdEo4IrE8sRho9R9HOLYA="
         # "devenv.cachix.org-1:w1cLUi8dv3hnoSPGAuibQv+f9TZLr6cv/Hm9XgU50cw="
       ];
-      experimental-features = ["nix-command" "flakes"];
+      experimental-features = [ "nix-command" "flakes" ];
       use-xdg-base-directories = false;
       warn-dirty = false;
       keep-outputs = true;
