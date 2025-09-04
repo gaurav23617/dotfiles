@@ -1,12 +1,24 @@
 #!/bin/sh
 
+autoload -Uz compinit
+compinit
+
+# Use a persistent, fast zcompdump location
 ZCDUMP="$HOME/.cache/zcompdump"
-
-# Compile zcompdump only if source is newer
-if [[ -s "$ZCDUMP" && (! -s "$ZCDUMP.zwc" || "$ZCDUMP" -nt "$ZCDUMP.zwc") ]]; then
-  zcompile "$ZCDUMP"
-fi
-
+ZCDUMP="${XDG_CACHE_HOME:-$HOME/.cache}/zcompdump"
+#
+#
+# # Load cached completions
+# if [[ ! -s "$ZCDUMP" || "$ZCDUMP" -ot ~/.config/zsh/.zshrc ]]; then
+#   compinit -d "$ZCDUMP"
+# else
+#   compinit -C -d "$ZCDUMP"
+# fi
+#
+# # Precompile zcompdump for faster startups
+# if [[ -s "$ZCDUMP" && (! -s "$ZCDUMP.zwc" || "$ZCDUMP" -nt "$ZCDUMP.zwc") ]]; then
+#   zcompile "$ZCDUMP"
+# fi
 
 [ -f "$HOME/.local/share/zap/zap.zsh" ] && source "$HOME/.local/share/zap/zap.zsh"
 

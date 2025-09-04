@@ -1,20 +1,4 @@
-# ⚡ Completion system setup
-autoload -Uz compinit
 
-# Use a persistent, fast zcompdump location
-ZCDUMP="${XDG_CACHE_HOME:-$HOME/.cache}/zcompdump"
-
-# Load cached completions
-if [[ ! -s "$ZCDUMP" || "$ZCDUMP" -ot ~/.zshrc ]]; then
-  compinit -d "$ZCDUMP"
-else
-  compinit -C -d "$ZCDUMP"
-fi
-
-# Precompile zcompdump for faster startups
-if [[ -s "$ZCDUMP" && (! -s "$ZCDUMP.zwc" || "$ZCDUMP" -nt "$ZCDUMP.zwc") ]]; then
-  zcompile "$ZCDUMP"
-fi
 
 # 🧠 Completion styling
 zstyle ':completion:*' auto-description 'specify: %d'

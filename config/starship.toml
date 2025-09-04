@@ -6,7 +6,7 @@ command_timeout = 1000
 palette = 'catppuccin_mocha'
 
 # custom prompt format
-# format = """╭─ $shell$os$hostname$docker$username$directory$aws$git_branch$git_status$fill$nodejs$custom$package$nix_shell 
+# format = """╭─ $shell$os$hostname$docker$username$directory$aws$git_branch$git_status$fill$nodejs$custom$package$nix_shell
 # ╰─≻ """
 
 format = """$character$directory$git_branch$git_status"""
@@ -91,7 +91,7 @@ ahead = ''
 diverged = ''
 behind = ''
 stashed = ''
-modified = '✗'
+modified = '✘'
 staged = ''
 renamed = ''
 deleted = ''
