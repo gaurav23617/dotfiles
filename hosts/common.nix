@@ -60,8 +60,21 @@
           fzf
           fd
           git
+          zoxide
+          sesh
+          eza
+          fastfetch
+          glance
+          code-cursor
+          opencode
           gh
+          act
           htop
+          anydesk
+          laravel
+          php84Packages.composer
+          git-lfs
+          spotify-player
           nodejs_20
           vlc
           uv

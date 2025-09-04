@@ -250,16 +250,18 @@
           windowrule = [
             #"noanim, class:^(Rofi)$
             "tile,title:(.*)(Godot)(.*)$"
-            # "workspace 1, class:^(kitty|Alacritty|org.wezfurlong.wezterm)$"
-            # "workspace 2, class:^(code|VSCodium|code-url-handler|codium-url-handler)$"
-            # "workspace 3, class:^(krita)$"
-            # "workspace 3, title:(.*)(Godot)(.*)$"
-            # "workspace 3, title:(GNU Image Manipulation Program)(.*)$"
-            # "workspace 3, class:^(factorio)$"
-            # "workspace 3, class:^(steam)$"
-            # "workspace 5, class:^(firefox|floorp|zen)$"
-            # "workspace 6, class:^(Spotify)$"
-            # "workspace 6, title:(.*)(Spotify)(.*)$"
+            # "workspace 1, title:(.*)(Spotify)(.*)$"
+            "workspace 1, class:^(spotify|discord)$"
+            "workspace 2, class:^(firefox|zen)$"
+            "workspace 3, class:^(kitty|ghostty)$"
+            "workspace 3, title:(.*)(Godot)(.*)$"
+            "workspace 4, title:(GNU Image Manipulation Program)(.*)$"
+            "workspace 5, class:^(steam)$"
+            "workspace 6, class:^(factorio)$"
+            "workspace 6, class:^(code|VSCodium|code-url-handler|codium-url-handler)$"
+            "workspace 6, class:^(Brave-browser)$"
+            "workspace 7, class:^(google-chrome)$"
+            "workspace 0, class:^(motrix)$"
 
             # Can use FLOAT FLOAT for active and inactive or just FLOAT
             "opacity 0.80 0.80,class:^(kitty|alacritty|Alacritty|org.wezfurlong.wezterm)$"
@@ -389,17 +391,18 @@
               "$mainMod ALT, L, exec, hyprlock" # lock screen
               "$mainMod, backspace, exec, pkill -x wlogout || wlogout -b 4" # logout menu
               "$CONTROL, ESCAPE, exec, pkill waybar || waybar" # toggle waybar
+              "$mainMod, D, fullscreen, 1" # toggle the window to fullscreen
 
               # Applications/Programs
               "$mainMod, Return, exec, $term"
               "$mainMod, T, exec, $term"
               "$mainMod, E, exec, $fileManager"
               "$mainMod, C, exec, $editor"
-              "$mainMod, F, exec, $browser"
-              "$mainMod SHIFT, S, exec, spotify"
+              "$mainMod, B, exec, $browser"
+              "$mainMod, S, exec, spotify"
               "$mainMod SHIFT, Y, exec, youtube-music"
               "$mainMod SHIFT, W, exec, uwsm app -- google-chrome-stable --new-window --ozone-platform=wayland --app='https://web.whatsapp.com/'"
-              "$mainMod SHIFT, C, exec, uwsm app -- google-chrome-stable --new-window --ozone-platform=wayland --app=''https://chatgpt.com/"
+              "$mainMod SHIFT, C, exec, uwsm app -- google-chrome-stable --new-window --ozone-platform=wayland --app='https://chatgpt.com/'"
               "$mainMod, grave, exec, google-chrome-stable"
               "$CONTROL ALT, DELETE, exec, $term -e '${
                 getExe pkgs.btop
@@ -429,9 +432,9 @@
               "$mainMod, V, exec, ${
                 ./scripts/ClipManager.sh
               }" # Clipboard Manager
-              "$mainMod, M, exec, pkill -x rofi || ${
-                ./scripts/rofimusic.sh
-              }" # online music
+              # "$mainMod, M, exec, pkill -x rofi || ${
+              #   ./scripts/rofimusic.sh
+              # }" # online music
 
               "$mainMod SHIFT,T,exec,sh -c 'tmpfile=$(mktemp --suffix=.png) && grim -g \"$(slurp)\" \"$tmpfile\" && tesseract -l eng \"$tmpfile\" - | wl-copy && rm \"$tmpfile\"'" # Screen snip to text >> clipboard
 
@@ -521,7 +524,7 @@
               # Special workspaces (scratchpad)
               "$mainMod CTRL, S, movetoworkspacesilent, special"
               "$mainMod ALT, S, movetoworkspacesilent, special"
-              "$mainMod, S, togglespecialworkspace,"
+              # "$mainMod, S, togglespecialworkspace,"
             ] ++ (builtins.concatLists (builtins.genList (x:
               let
                 ws = let c = (x + 1) / 10;

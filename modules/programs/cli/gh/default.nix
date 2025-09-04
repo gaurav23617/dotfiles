@@ -1,4 +1,4 @@
-{ config, lib, pkgs, ... }: {
+{ pkgs, ... }: {
   home-manager.sharedModules = [
     (_: {
       programs.gh = {
@@ -9,7 +9,7 @@
         #     pv = "pr view";
         #   };
         # };
-        extensions = pkgs [ dash ];
+        extensions = with pkgs; [ gh-dash gh-notify gh-s gh-f ];
       };
     })
   ];

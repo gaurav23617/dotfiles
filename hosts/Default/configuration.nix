@@ -1,14 +1,5 @@
-{
-  pkgs,
-  videoDriver,
-  hostname,
-  browser,
-  editor,
-  terminal,
-  terminalFileManager,
-  ...
-}:
-{
+{ pkgs, videoDriver, hostname, browser, editor, terminal, terminalFileManager
+, ... }: {
   imports = [
     ./hardware-configuration.nix
     ../../modules/hardware/video/${videoDriver}.nix # Enable gpu drivers defined in flake.nix
@@ -18,7 +9,6 @@
     ../../modules/scripts
 
     ../../modules/desktop/hyprland # Enable hyprland window manager
-    # ../../modules/desktop/i3-gaps # Enable i3 window manager
 
     ../../modules/programs/games
     ../../modules/programs/browser/${browser} # Set browser defined in flake.nix
@@ -31,6 +21,7 @@
     ../../modules/programs/cli/tmux
     ../../modules/programs/cli/direnv
     ../../modules/programs/cli/lazygit
+    ../../modules/programs/cli/gh
     ../../modules/programs/cli/cava
     ../../modules/programs/cli/btop
     ../../modules/programs/shell/bash
@@ -52,19 +43,16 @@
   home-manager.sharedModules = [
     (_: {
       home.packages = with pkgs; [
-        # pokego # Overlayed
-        # krita
-        github-desktop
         # gimp
         obsidian
+        hayase
         google-chrome
       ];
     })
   ];
 
   # Define system packages here
-  environment.systemPackages = with pkgs; [
-  ];
+  environment.systemPackages = with pkgs; [ ];
 
   networking.hostName = hostname; # Set hostname defined in flake.nix
 

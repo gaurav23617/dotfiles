@@ -1,16 +1,15 @@
-{pkgs, ...}: let
-  dreamsofcode-io-catppuccin-tmux =
-    pkgs.tmuxPlugins.mkTmuxPlugin
-    {
-      pluginName = "catppuccin";
-      version = "unstable-2023-01-06";
-      src = pkgs.fetchFromGitHub {
-        owner = "dreamsofcode-io";
-        repo = "catppuccin-tmux";
-        rev = "b4e0715356f820fc72ea8e8baf34f0f60e891718";
-        sha256 = "sha256-FJHM6LJkiAwxaLd5pnAoF3a7AE1ZqHWoCpUJE0ncCA8=";
-      };
+{ pkgs, ... }:
+let
+  dreamsofcode-io-catppuccin-tmux = pkgs.tmuxPlugins.mkTmuxPlugin {
+    pluginName = "catppuccin";
+    version = "unstable-2023-01-06";
+    src = pkgs.fetchFromGitHub {
+      owner = "dreamsofcode-io";
+      repo = "catppuccin-tmux";
+      rev = "b4e0715356f820fc72ea8e8baf34f0f60e891718";
+      sha256 = "sha256-FJHM6LJkiAwxaLd5pnAoF3a7AE1ZqHWoCpUJE0ncCA8=";
     };
+  };
 in {
   home-manager.sharedModules = [
     (_: {
@@ -26,33 +25,32 @@ in {
           # catppuccin
           sensible
           vim-tmux-navigator
-          /*
-             {
-            plugin = resurrect;
-            extraConfig =
-              ''
-                set -g @resurrect-strategy-vim 'session'
-                set -g @resurrect-strategy-nvim 'session'
-                set -g @resurrect-capture-pane-contents 'on'
-              ''
-              + ''
-                # Taken from https://github.com/hmajid2301/dotfiles/blob/main/modules/home/cli/multiplexers/tmux/default.nix#L109
-                # Which was taken from: https://github.com/p3t33/nixos_flake/blob/5a989e5af403b4efe296be6f39ffe6d5d440d6d6/home/modules/tmux.nix
+          /* {
+               plugin = resurrect;
+               extraConfig =
+                 ''
+                   set -g @resurrect-strategy-vim 'session'
+                   set -g @resurrect-strategy-nvim 'session'
+                   set -g @resurrect-capture-pane-contents 'on'
+                 ''
+                 + ''
+                   # Taken from https://github.com/hmajid2301/dotfiles/blob/main/modules/home/cli/multiplexers/tmux/default.nix#L109
+                   # Which was taken from: https://github.com/p3t33/nixos_flake/blob/5a989e5af403b4efe296be6f39ffe6d5d440d6d6/home/modules/tmux.nix
 
-                resurrect_dir="$XDG_CACHE_HOME/tmux/resurrect"
-                set -g @resurrect-dir $resurrect_dir
-                set -g @resurrect-hook-post-save-all 'target=$(readlink -f $resurrect_dir/last); sed "s| --cmd .*-vim-pack-dir||g; s|/etc/profiles/per-user/$USER/bin/||g; s|/home/$USER/.nix-profile/bin/||g" $target | ${moreutils}/bin/sponge $target'
-              '';
-          }
-          {
-            plugin = continuum;
-            extraConfig = ''
-              set -g @continuum-restore 'on'
-              set -g @continuum-boot 'on'
-              set -g @continuum-save-interval '10'
-              set -g @continuum-systemd-start-cmd 'start-server'
-            '';
-          }
+                   resurrect_dir="$XDG_CACHE_HOME/tmux/resurrect"
+                   set -g @resurrect-dir $resurrect_dir
+                   set -g @resurrect-hook-post-save-all 'target=$(readlink -f $resurrect_dir/last); sed "s| --cmd .*-vim-pack-dir||g; s|/etc/profiles/per-user/$USER/bin/||g; s|/home/$USER/.nix-profile/bin/||g" $target | ${moreutils}/bin/sponge $target'
+                 '';
+             }
+             {
+               plugin = continuum;
+               extraConfig = ''
+                 set -g @continuum-restore 'on'
+                 set -g @continuum-boot 'on'
+                 set -g @continuum-save-interval '10'
+                 set -g @continuum-systemd-start-cmd 'start-server'
+               '';
+             }
           */
         ];
         extraConfig = ''
@@ -70,9 +68,30 @@ in {
           set -g renumber-windows on
           set-window-option -g pane-base-index 1
           set -ga terminal-overrides ",*:Tc"
+          set -s extended-keys on
+
+          unbind %
+          unbind '"'
+          bind v split-window -h
+          bind h split-window -v
+          bind -n C-q kill-pane
 
           # Tmux sessionizer
           bind-key -r f run-shell "tmux neww tmux-sessionizer"
+          # bind-key "T" run-shell "sesh connect \"$(
+          #   sesh list --icons | fzf-tmux -p 80%,70% \
+          #     --no-sort --ansi --border-label ' sesh ' --prompt '⚡  ' \
+          #     --header '  ^a all ^t tmux ^g configs ^x zoxide ^d tmux kill ^f find' \
+          #     --bind 'tab:down,btab:up' \
+          #     --bind 'ctrl-a:change-prompt(⚡  )+reload(sesh list --icons)' \
+          #     --bind 'ctrl-t:change-prompt(🪟  )+reload(sesh list -t --icons)' \
+          #     --bind 'ctrl-g:change-prompt(⚙️  )+reload(sesh list -c --icons)' \
+          #     --bind 'ctrl-x:change-prompt(📁  )+reload(sesh list -z --icons)' \
+          #     --bind 'ctrl-f:change-prompt(🔎  )+reload(fd -H -d 2 -t d -E .Trash . ~)' \
+          #     --bind 'ctrl-d:execute(tmux kill-session -t {2..})+change-prompt(⚡  )+reload(sesh list --icons)' \
+          #     --preview-window 'right:55%' \
+          #     --preview 'sesh preview {}'
+          # )\""
 
           # Tmux binds
           bind r command-prompt "rename-window %%"
@@ -116,6 +135,17 @@ in {
           bind-key -T copy-mode-vi v send-keys -X begin-selection
           bind-key -T copy-mode-vi C-v send-keys -X rectangle-toggle
           bind-key -T copy-mode-vi y send-keys -X copy-selection-and-cancel
+
+          # switch windows alt+number
+          bind-key -n M-1 select-window -t 1
+          bind-key -n M-2 select-window -t 2
+          bind-key -n M-3 select-window -t 3
+          bind-key -n M-4 select-window -t 4
+          bind-key -n M-5 select-window -t 5
+          bind-key -n M-6 select-window -t 6
+          bind-key -n M-7 select-window -t 7
+          bind-key -n M-8 select-window -t 8
+          bind-key -n M-9 select-window -t 9
         '';
       };
     })
