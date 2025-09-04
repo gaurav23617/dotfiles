@@ -1,13 +1,13 @@
 { fetchurl, makeWrapper, appimageTools, lib, }:
 appimageTools.wrapType2 rec {
   pname = "hayase";
-  version = "6.4.11";
+  version = "6.4.22";
 
   src = fetchurl {
     url =
       "https://github.com/hayase-app/ui/releases/download/v${version}/linux-hayase-${version}-linux.AppImage";
     name = "${pname}-${version}.AppImage";
-    sha256 = "c542ec4f8334df23e36e9a96087e01104a6320feb297c6f4e7872508269063ab";
+    sha256 = "1av3j0k0h9c7wzscd5xjzqh66jhh05z0i5lsdvij7prlhd7yqhn5";
   };
 
   nativeBuildInputs = [ makeWrapper ];
