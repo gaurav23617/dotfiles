@@ -10,10 +10,14 @@
     # Programs
     ../../home/programs/kitty
     ../../home/programs/nvf
+    ../../home/programs/nh
+    ../../home/programs/btop
+    ../../home/programs/tmux
     ../../home/programs/shell
     ../../home/programs/fetch
     ../../home/programs/git
-    ../../home/programs/git/signing.nix
+    ../../home/github.nix
+    # ../../home/programs/git/signing.nix
     ../../home/programs/spicetify
     ../../home/programs/thunar
     ../../home/programs/lazygit
@@ -35,9 +39,10 @@
     ../../home/system/mime
     ../../home/system/udiskie
     # ../../home/system/hypridle
-    # ../../home/system/clipman
+    ../../home/system/clipman
+    # ../../home/chrome.nix
 
-    ./secrets # CHANGEME: You should probably remove this line, this is where I store my secrets
+    # ./secrets # CHANGEME: You should probably remove this line, this is where I store my secrets
   ];
 
   home = {
@@ -48,7 +53,6 @@
       # Apps
       vlc # Video player
       obsidian # Note taking app
-      planify # Todolists
       textpieces # Manipulate texts
       curtail # Compress images
       resources # Ressource monitor

@@ -38,7 +38,6 @@
       unzip
       optipng
       pfetch
-      btop
       fastfetch
       tailscale
     ];

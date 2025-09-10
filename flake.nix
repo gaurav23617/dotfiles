@@ -14,7 +14,10 @@
     apple-fonts.url = "github:Lyndeno/apple-fonts.nix";
     zen-browser.url = "github:0xc000022070/zen-browser-flake";
     nixcord.url = "github:kaylorben/nixcord";
-    sops-nix.url = "github:Mic92/sops-nix";
+    sops-nix = {
+      url = "github:mic92/sops-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     nixarr.url = "github:rasmus-kirk/nixarr";
     nvf.url = "github:notashelf/nvf";
     home-manager = {
@@ -36,9 +39,13 @@
     };
   };
 
-  outputs = inputs @ {nixpkgs, ...}: {
+  outputs = inputs @ {
+    nixpkgs,
+    home-manager,
+    ...
+  }: {
     nixosConfigurations = {
-      nixy =
+      coffee =
         # CHANGEME: This should match the 'hostname' in your variables.nix file
         nixpkgs.lib.nixosSystem {
           modules = [
@@ -46,23 +53,22 @@
               nixpkgs.overlays = [];
               _module.args = {inherit inputs;};
             }
-            inputs.nixos-hardware.nixosModules.omen-16-n0005ne # CHANGEME: check https://github.com/NixOS/nixos-hardware
+            # inputs.nixos-hardware.nixosModules.omen-16-n0005ne # CHANGEME: check https://github.com/NixOS/nixos-hardware
             inputs.home-manager.nixosModules.home-manager
             inputs.stylix.nixosModules.stylix
-            ./hosts/laptop/configuration.nix # CHANGEME: change the path to match your host folder
+            ./hosts/coffee/configuration.nix # CHANGEME: change the path to match your host folder
           ];
         };
-      # Jack is my server
-      jack = nixpkgs.lib.nixosSystem {
+    };
+    homeConfigurations = {
+      # FIXME replace with your username@hostname
+      "gaurav@coffee" = home-manager.lib.homeManagerConfiguration {
+        pkgs = nixpkgs.legacyPackages.x86_64-linux; # Home-manager requires 'pkgs' instance
+        extraSpecialArgs = {inherit inputs;};
         modules = [
-          {_module.args = {inherit inputs;};}
-          inputs.home-manager.nixosModules.home-manager
-          inputs.stylix.nixosModules.stylix
-          inputs.sops-nix.nixosModules.sops
-          inputs.nixarr.nixosModules.default
-          inputs.search-nixos-api.nixosModules.search-nixos-api
-          inputs.eleakxir.nixosModules.eleakxir-backend
-          ./hosts/server/configuration.nix
+          # > Our main home-manager configuration file <
+          inputs.stylix.homeModules.stylix
+          ./hosts/coffee/home.nix
         ];
       };
     };
