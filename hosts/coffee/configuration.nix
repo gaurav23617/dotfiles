@@ -27,9 +27,6 @@
     ./disk.nix
   ];
 
-  environment.systemPackages = with pkgs; [
-    google-chrome
-  ];
   home-manager.users."${config.var.username}" = import ./home.nix;
 
   # Don't touch this
