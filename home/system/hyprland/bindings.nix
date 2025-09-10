@@ -2,23 +2,21 @@
   wayland.windowManager.hyprland.settings = {
     bind =
       [
-        "$mod,RETURN, exec, uwsm app -- ${pkgs.kitty}/bin/kitty" # Kitty
-        "$mod,E, exec,  uwsm app -- ${pkgs.xfce.thunar}/bin/thunar" # Thunar
-        "$mod,B, exec,  uwsm app -- ${pkgs.brave}/bin/brave" # Brave Browser
-        "$mod,K, exec,  uwsm app -- ${pkgs.proton-pass}/bin/proton-pass" # Proton Pass
-        "$mod,M, exec,  uwsm app -- ${pkgs.protonmail-desktop}/bin/proton-mail" # Proton Mail
-        "$mod,V, exec,  uwsm app -- ${pkgs.protonvpn-gui}/bin/protonvpn-app" # Proton VPN
-        "$mod,A, exec,  uwsm app -- ${pkgs.proton-authenticator}/bin/proton-authenticator" # Proton Authenticator
-        "$mod,L, exec,  uwsm app -- ${pkgs.hyprlock}/bin/hyprlock" # Lock
-        "$mod,X, exec, powermenu" # Powermenu
+        "$mod,RETURN, exec, kitty" # Kitty
+        "$mod,E, exec, thunar" # Thunar
+        "$mod,B, exec, zen" # Browser
+        "$shiftMod,L, exec, hyprlock" # Lock
+        "ALT,F4, exec, powermenu" # Powermenu
         "$mod,SPACE, exec, menu" # Launcher
         "$mod,C, exec, quickmenu" # Quickmenu
         "$shiftMod,SPACE, exec, hyprfocus-toggle" # Toggle HyprFocus
         # "$mod,P, exec,  uwsm app -- ${pkgs.planify}/bin/io.github.alainm23.planify" # Planify
+        "Control_L, ESCAPE, exec, pkill waybar || waybar" # toggle waybar
 
         "$mod,Q, killactive," # Close window
         "$mod,T, togglefloating," # Toggle Floating
         "$mod,F, fullscreen" # Toggle Fullscreen
+        "$mod, D, fullscreen, 1"
         "$mod,left, movefocus, l" # Move focus left
         "$mod,right, movefocus, r" # Move focus Right
         "$mod,up, movefocus, u" # Move focus Up
@@ -34,7 +32,7 @@
         "ALT,PRINT, exec, screenshot region swappy" # Screenshot region then edit
 
         "$shiftMod,T, exec, hyprpanel-toggle" # Toggle hyprpanel
-        "$shiftMod,C, exec, clipboard" # Clipboard picker with wofi
+        "$mod,V, exec, clipboard" # Clipboard picker with wofi
         "$shiftMod,E, exec, ${pkgs.wofi-emoji}/bin/wofi-emoji" # Emoji picker with wofi
         "$shiftMod,F2, exec, night-shift" # Toggle night shift
         "$shiftMod,F3, exec, night-shift" # Toggle night shift
@@ -53,7 +51,7 @@
     ];
 
     bindl = [
-      ",switch:Lid Switch, exec, ${pkgs.hyprlock}/bin/hyprlock" # Lock when closing Lid
+      ",switch:Lid Switch, exec, hyprlock" # Lock when closing Lid
     ];
   };
 }

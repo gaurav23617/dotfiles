@@ -20,7 +20,7 @@ in {
     ./bindings.nix
     ./polkitagent.nix
     ./keyboard-backlight.nix # CHANGEME: This is for omen laptop only
-    ./hyprspace.nix
+    # ./hyprspace.nix
   ];
 
   home.packages = with pkgs; [
@@ -138,7 +138,7 @@ in {
         mfact = 0.5;
       };
 
-      gestures = {workspace_swipe = true;};
+      # gestures = {workspace_swipe = true;};
 
       misc = {
         vfr = true;
