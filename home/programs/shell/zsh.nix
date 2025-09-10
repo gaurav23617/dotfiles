@@ -197,6 +197,7 @@ in {
         function preexec {
           print -n "\e]133;C\e\\"
         }
+        eval "$(direnv hook zsh)"
 
       '';
   };
