@@ -8,28 +8,169 @@
     ./swayosd.nix
   ];
 
-  wayland.windowManager.hyprland.settings.exec-once = ["waybar" "${pkgs.networkmanagerapplet}/bin/nm-applet" "${pkgs.blueman}/bin/blueman-applet"];
+  wayland.windowManager.hyprland.settings.exec-once = [
+    "waybar"
+    "${pkgs.networkmanagerapplet}/bin/nm-applet"
+    "${pkgs.blueman}/bin/blueman-applet"
+  ];
 
   programs.waybar = {
     enable = true;
     systemd.enable = true;
     settings.mainBar = {
+      layer = "top";
+      position = "top";
+      mode = "dock";
+      height = 28;
+      exclusive = true;
+      passthrough = false;
+      gtk-layer-shell = true;
+      ipc = true;
+      fixed-center = true;
+      margin-top = 8;
+      margin-left = 8;
+      margin-right = 8;
+      margin-bottom = 0;
       spacing = 5;
-      margin-bottom = -11;
 
-      modules-left = ["hyprland/workspaces" "hyprland/window"];
-      modules-center = ["cava"];
+      modules-left = ["hyprland/workspaces" "cava"];
+      modules-center = ["idle_inhibitor" "clock"];
       modules-right = [
-        "group/extras"
+        "cpu"
+        "memory"
+        "backlight"
         "pulseaudio"
         "battery"
-        "clock"
+        "tray"
         "custom/notification"
       ];
 
-      battery = {
-        states = {critical = 20;};
+      "hyprland/workspaces" = {
+        disable-scroll = true;
+        all-outputs = true;
+        active-only = false;
+        on-click = "activate";
+        persistent-workspaces = {
+          "*" = [1 2 3 4 5 6 7 8 9 10];
+        };
+      };
+
+      "hyprland/window" = {
+        format = "  {}";
+        separate-outputs = true;
+        rewrite = {
+          "^(.*?)[[:space:]]*[-—|].*?$" = "$1";
+          "(.*) — Mozilla Firefox" = "$1 󰈹";
+          "(.*)Mozilla Firefox" = " Firefox 󰈹";
+          "(.*) - Visual Studio Code" = "$1 󰨞";
+          "(.*)Visual Studio Code" = "Code 󰨞";
+          "(.*) — Dolphin" = "$1 󰉋";
+          "(.*)Spotify" = "Spotify 󰓇";
+          "(.*)Steam" = "Steam 󰓓";
+        };
+        icon = true;
+        icon-size = 20;
+        max-length = 30;
+      };
+
+      cava = {
+        hide_on_silence = false;
+        framerate = 60;
+        bars = 10;
+        format-icons = ["▁" "▂" "▃" "▄" "▅" "▆" "▇" "█"];
+        input_delay = 1;
+        sleep_timer = 5;
+        bar_delimiter = 0;
+        on-click = "playerctl play-pause";
+      };
+
+      "idle_inhibitor" = {
         format = "{icon}";
+        format-icons = {
+          activated = "󰥔";
+          deactivated = "";
+        };
+      };
+
+      clock = {
+        format = "{:%a %d %b %R}";
+        format-alt = "{:%I:%M %p}";
+        timezone = "Asia/Kolkata";
+        tooltip-format = "<tt>{calendar}</tt>";
+        calendar = {
+          mode = "month";
+          mode-mon-col = 3;
+          on-scroll = 1;
+          on-click-right = "mode";
+          format = {
+            months = "<span color='#ffead3'><b>{}</b></span>";
+            weekdays = "<span color='#ffcc66'><b>{}</b></span>";
+            today = "<span color='#ff6699'><b>{}</b></span>";
+          };
+        };
+        interval = 60;
+        max-length = 25;
+        on-click = "brave --profile-directory=Default --app-id=ojibjkjikcpjonjjngfkegflhmffeemk";
+        actions = {
+          on-click-right = "mode";
+          on-click-forward = "tz_up";
+          on-click-backward = "tz_down";
+          on-scroll-up = "shift_up";
+          on-scroll-down = "shift_down";
+        };
+      };
+
+      cpu = {
+        interval = 10;
+        format = "󰍛 {usage}%";
+        format-alt = "{icon0}{icon1}{icon2}{icon3}";
+        format-icons = ["▁" "▂" "▃" "▄" "▅" "▆" "▇" "█"];
+      };
+
+      memory = {
+        interval = 30;
+        format = "󰾆 {percentage}%";
+        format-alt = "󰾅 {used}GB";
+        max-length = 10;
+        tooltip = true;
+        tooltip-format = " {used:.1f}GB/{total:.1f}GB";
+      };
+
+      backlight = {
+        format = "{icon}  {percent}%";
+        format-icons = ["󰃞" "󰃟" "󰃠"];
+        on-scroll-up = "${pkgs.brightnessctl}/bin/brightnessctl set 2%+";
+        on-scroll-down = "${pkgs.brightnessctl}/bin/brightnessctl set 2%-";
+      };
+
+      pulseaudio = {
+        format = "{icon}";
+        format-muted = "󰖁";
+        format-icons = {
+          headphone = "";
+          hands-free = "";
+          headset = "";
+          phone = "";
+          portable = "";
+          car = "";
+          default = ["󰕿" "󰖀" "󰕾"];
+        };
+        on-click = "sound-toggle";
+        on-click-right = "pavucontrol -t 3";
+        tooltip-format = "{icon} {desc} // {volume}%";
+        scroll-step = 1;
+      };
+
+      battery = {
+        states = {
+          good = 95;
+          warning = 30;
+          critical = 20;
+        };
+        format = "{icon}  {capacity}%";
+        format-charging = " {capacity}%";
+        format-plugged = " {capacity}%";
+        format-alt = "{time} {icon}";
         format-icons = {
           default = ["󰁺" "󰁻" "󰁼" "󰁽" "󰁾" "󰁿" "󰂀" "󰂁" "󰂂" "󰁹"];
           charging = ["󰢜" "󰂆" "󰂇" "󰂈" "󰢝" "󰂉" "󰢞" "󰂊" "󰂋" "󰂅"];
@@ -39,69 +180,18 @@
         on-click-right = ''${pkgs.swayosd}/bin/swayosd-client --custom-message="Powermode is set to $(powerprofilesctl get)" --custom-icon="emblem-default"'';
       };
 
-      "custom/vpn" = {
-        interval = 3;
-        format = "{}";
-        exec = ''
-          if ip add show | ${pkgs.ripgrep}/bin/rg -qF "proton"; then
-            echo '{"text":"󰖂   VPN On","class":"vpn-on"}'
-          else
-            echo '{"text":"󰖂   VPN Off","class":"vpn-off"}'
-          fi
-        '';
-        return-type = "json";
-        max-length = "100";
-        on-click = "protonvpn-app";
-      };
-
-      cava = {
-        framerate = 240;
-        bars = 20;
-        bar_delimiter = 0;
-        stereo = true;
-        input_delay = 4;
-        sleep_timer = 2;
-        hide_on_silence = true;
-        lower_cutoff_freq = 100;
-        higher_cutoff_freq = 8000;
-        format-icons = ["▁" "▂" "▃" "▄" "▅" "▆" "▇" "█"];
-      };
-
-      clock = {
-        timezone = "Europe/Paris";
-        tooltip-format = "<span>{calendar}</span>";
-        calendar = {
-          mode = "month";
-          format = {
-            today = "<span color='#e7bbe4'><b>{}</b></span>";
-            days = "<span color='#cdd6f4'><b>{}</b></span>";
-            weekdays = "<span color='#7cd37c'><b>{}</b></span>";
-            months = "<b>{}</b>";
-          };
-        };
-        interval = 60;
-        max-length = 25;
-        on-click = "brave --profile-directory=Default --app-id=ojibjkjikcpjonjjngfkegflhmffeemk"; # Proton Calendar
-      };
-
-      "custom/arrow-toggle" = {
-        format = " {icon} ";
-        format-icons = {default = "";};
-        tooltip = false;
-      };
-
       "custom/notification" = {
         tooltip = false;
         format = "{icon}";
         format-icons = {
-          notification = "<span foreground='red'><sup></sup></span>";
-          none = "";
-          dnd-notification = "<span foreground='red'><sup></sup></span>";
-          dnd-none = "";
-          inhibited-notification = "<span foreground='red'><sup></sup></span>";
-          inhibited-none = "";
-          dnd-inhibited-notification = "<span foreground='red'><sup></sup></span>";
-          dnd-inhibited-none = "";
+          notification = "<span foreground='#89b4fa'><sup></sup></span>"; # Blue color
+          none = "";
+          dnd-notification = "<span foreground='#89b4fa'><sup></sup></span>";
+          dnd-none = "";
+          inhibited-notification = "<span foreground='#89b4fa'><sup></sup></span>";
+          inhibited-none = "";
+          dnd-inhibited-notification = "<span foreground='#89b4fa'><sup></sup></span>";
+          dnd-inhibited-none = "";
         };
         return-type = "json";
         exec-if = "which swaync-client";
@@ -110,224 +200,244 @@
         escape = true;
       };
 
-      "group/extras" = {
-        orientation = "inherit";
-        drawer = {
-          transition-duration = 300;
-          transitition-left-to-right = false;
-        };
-        modules = ["custom/arrow-toggle" "tray" "custom/vpn"];
+      tray = {
+        icon-size = 16;
+        spacing = 8;
+        show-passive-items = true;
       };
-
-      "hyprland/window" = {
-        format = "{}";
-        rewrite = {"^(.*?)[[:space:]]*[-—|].*?$" = "$1";};
-        icon = true;
-        icon-size = 20;
-        max-length = 30;
-      };
-
-      "hyprland/workspaces" = {
-        format = "{icon}";
-        format-active = " {icon} ";
-        all-outputs = true;
-      };
-
-      network = {
-        format = "{ifname}";
-        format-wifi = "{icon} {essid}";
-        format-ethernet = "󰈀 Ethernet";
-        format-disconnected = " 󰤭 Disconnected ";
-        tooltip-format = "{ipaddr}  {bandwidthUpBits}  {bandwidthDownBits}";
-        format-linked = "󰈁 {ifname} (No IP)";
-        format-icons = ["󰤯" "󰤟" "󰤢" "󰤥" "󰤨"];
-        on-click = "kitty --class nmtui-float-term nmtui";
-      };
-
-      pulseaudio = {
-        format = "{icon}";
-        format-muted = "󰖁";
-        format-icons = ["󰕿" "󰖀" "󰕾"];
-        on-click = "sound-toggle";
-        scroll-step = 1;
-      };
-
-      tray = {spacing = 10;};
     };
 
     style = ''
       * {
-        font-family: ${config.stylix.fonts.serif.name}, sans-serif;
+        font-family: "JetBrainsMono Nerd Font", ${config.stylix.fonts.serif.name}, sans-serif;
+        font-size: 13px;
+        font-feature-settings: '"zero", "ss01", "ss02", "ss03", "ss04", "ss05", "cv31"';
+        margin: 0px;
+        padding: 0px;
       }
+
+      @define-color base   #1e1e2e;
+      @define-color mantle #181825;
+      @define-color crust  #11111b;
+      @define-color text     #cdd6f4;
+      @define-color subtext0 #a6adc8;
+      @define-color subtext1 #bac2de;
+      @define-color surface0 #313244;
+      @define-color surface1 #45475a;
+      @define-color surface2 #585b70;
+      @define-color overlay0 #6c7086;
+      @define-color overlay1 #7f849c;
+      @define-color overlay2 #9399b2;
+      @define-color blue      #89b4fa;
+      @define-color lavender  #b4befe;
+      @define-color sapphire  #74c7ec;
+      @define-color sky       #89dceb;
+      @define-color teal      #94e2d5;
+      @define-color green     #a6e3a1;
+      @define-color yellow    #f9e2af;
+      @define-color peach     #fab387;
+      @define-color maroon    #eba0ac;
+      @define-color red       #f38ba8;
+      @define-color mauve     #cba6f7;
+      @define-color pink      #f5c2e7;
+      @define-color flamingo  #f2cdcd;
+      @define-color rosewater #f5e0dc;
 
       window#waybar {
-          background-color: transparent;
+        transition-property: background-color;
+        transition-duration: 0.5s;
+        background: transparent;
+        border-radius: 8px;
       }
 
-      #workspaces{
-          background-color: transparent;
-          margin-top: 10px;
-          margin-bottom: 10px;
-          margin-right: 10px;
-          margin-left: 25px;
-      }
-      #workspaces button{
-          background-color: #${config.lib.stylix.colors.base05};
-          color: 	#${config.lib.stylix.colors.base00};
-          box-shadow: rgba(0, 0, 0, 0.116) 2 2 5 2px;
-          border-radius: 15px;
-          margin-right: 10px;
-          padding-top: 4px;
-          padding-bottom: 2px;
-          padding-right: 10px;
-          font-weight: bolder;
+      window#waybar.hidden {
+        opacity: 0.2;
       }
 
-      .modules-left #workspaces button {
-          border-bottom: 0px;
+      tooltip {
+        background: #1e1e2e;
+        border-radius: 6px;
       }
 
-      #workspaces button.active{
-          padding-right: 20px;
-          box-shadow: rgba(0, 0, 0, 0.288) 2 2 5 2px;
-          text-shadow: 0 0 5px rgba(0, 0, 0, 0.377);
-          padding-left: 20px;
-          background: #${config.lib.stylix.colors.base0D};
-          color: #${config.lib.stylix.colors.base05};
+      tooltip label {
+        color: #cad3f5;
+        margin-right: 4px;
+        margin-left: 4px;
       }
 
-      .modules-left #workspaces button.focused,
-      .modules-left #workspaces button.active {
-          border-bottom: 0px;
+      .modules-left {
+        background: @base;
+        border: 1px solid @blue;
+        padding-right: 12px;
+        padding-left: 2px;
+        border-radius: 8px;
       }
 
-      #window {
-        color: #${config.theme.textColorOnWallpaper};
+      .modules-center {
+        background: @base;
+        border: 0.5px solid @overlay0;
+        padding-right: 4px;
+        padding-left: 4px;
+        border-radius: 8px;
       }
 
-      #clock,
+      .modules-right {
+        background: @base;
+        border: 1px solid @blue;
+        padding-right: 12px;
+        padding-left: 12px;
+        border-radius: 8px;
+      }
+
+      #backlight,
       #battery,
-      #network,
+      #clock,
+      #cpu,
+      #idle_inhibitor,
+      #memory,
       #pulseaudio,
       #tray,
+      #window,
+      #workspaces,
       #cava,
-      #custom-notification,
-      #custom-vpn,
-      #mpd {
-          padding: 0 10px;
-          border-radius: 15px;
-          background-color: #${config.lib.stylix.colors.base05};
-          color: 	#${config.lib.stylix.colors.base00};
-          box-shadow: rgba(0, 0, 0, 0.116) 2 2 5 2px;
-          margin-top: 10px;
-          margin-bottom: 10px;
-          margin-right: 10px;
-      }
-
-      #cava{
-          background: #${config.lib.stylix.colors.base0D};
-          color: #${config.lib.stylix.colors.base05};
-          text-shadow: 0 0 5px rgba(0, 0, 0, 0.377);
-          font-weight: 900;
-          padding-top: 0px;
-          margin-left: 10px;
-      }
-
-      #pulseaudio,
-      #pulseaudio.muted{
-          color: #${config.lib.stylix.colors.base0D};
-          font-size: 20px;
-          font-weight:  bolder;
-          padding-left: 14px;
-          padding-right: 15px;
-          border-radius: 15px;
-      }
-
       #custom-notification {
-          background: #${config.lib.stylix.colors.base0D};
-          color: #${config.lib.stylix.colors.base05};
-          font-size: 20px;
-          font-weight: bolder;
-          padding-left: 20px;
-          padding-right: 24px;
+        padding-top: 2px;
+        padding-bottom: 2px;
+        padding-right: 5px;
+        padding-left: 5px;
+      }
+
+      #idle_inhibitor {
+        color: @blue;
+      }
+
+      #backlight {
+        color: @blue;
       }
 
       #battery {
-          color: #86a381;
-          font-size: 17px;
-          padding-left: 15px;
-          padding-right: 15px;
-          border-radius: 15px;
+        color: #86a381;
+        font-size: 16px;
+        padding-left: 12px;
+        padding-right: 12px;
+        border-radius: 12px;
       }
 
       @keyframes blink {
-          to {
-              background-color: #f9e2af;
-              color:#96804e;
-          }
-      }
-
-      #custom-vpn.vpn-on {
-        color: #2ecc71;
-      }
-
-      #custom-vpn.vpn-off {
-        color: #e74c3c;
+        to {
+          background-color: #f9e2af;
+          color: #96804e;
+        }
       }
 
       #battery.critical:not(.charging) {
-          background-color:  #f38ba8;
-          color:#bf5673;
-          animation-name: blink;
-          animation-duration: 0.5s;
-          animation-timing-function: linear;
-          animation-iteration-count: infinite;
-          animation-direction: alternate;
+        background-color: #f38ba8;
+        color: #bf5673;
+        animation-name: blink;
+        animation-duration: 0.5s;
+        animation-timing-function: linear;
+        animation-iteration-count: infinite;
+        animation-direction: alternate;
       }
 
-      #network{
-          color:#000;
+      #clock {
+        color: @yellow;
       }
 
-      #network.disabled{
-          background-color: #45475a;
+      #cpu {
+        color: @yellow;
       }
 
-      #network.disconnected{
-          background: rgb(243,139,168);
-          color: #fff;
-          font-weight: bolder;
-      }
-
-      #network.linked, #network.wifi{
-          background-color: #a6e3a1 ;
-      }
-
-      #network.ethernet{
-          background-color:#f9e2af ;
+      #memory {
+        color: @green;
       }
 
       #tray {
-          background-color: #1c1816;
+        background-color: transparent;
+        padding-left: 8px;
+        padding-right: 8px;
       }
 
       #tray > .passive {
-          -gtk-icon-effect: dim;
+        -gtk-icon-effect: none;
       }
 
-      #custom-arrow-toggle {
-          font-size: 16px;
-          color: #516079;
-          opacity: 1;
-          transition: opacity 0.2s ease-in-out;
+      #tray > .needs-attention {
+        -gtk-icon-effect: highlight;
       }
 
-      #extras:hover #custom-arrow-toggle {
-          opacity: 0;
+      /* Style tray icons with colors */
+      #tray > widget > * {
+        color: @blue;
       }
 
-      #extras:hover {
-          background-color: transparent;
+      #workspaces button {
+        box-shadow: none;
+        text-shadow: none;
+        padding: 0px;
+        border-radius: 8px;
+        padding-left: 4px;
+        padding-right: 4px;
+        transition: all 0.5s cubic-bezier(.55,-0.68,.48,1.682);
+        border: 0px solid transparent;  /* Remove any border completely */
+      }
+
+      #workspaces button:hover {
+        border-radius: 8px;
+        color: @overlay0;
+        background-color: @surface0;
+        padding-left: 2px;
+        padding-right: 2px;
+        transition: all 0.3s cubic-bezier(.55,-0.68,.48,1.682);
+        border: 0px solid transparent;  /* Remove any border completely */
+      }
+
+      #workspaces button.persistent {
+        color: @surface1;
+        border-radius: 8px;
+        border: 0px solid transparent;  /* Remove any border completely */
+      }
+
+      #workspaces button.active {
+        color: @peach;
+        border-radius: 8px;
+        padding-left: 6px;
+        padding-right: 6px;
+        transition: all 0.3s cubic-bezier(.55,-0.68,.48,1.682);
+        border: 0px solid transparent;  /* Remove any border completely */
+      }
+
+      #workspaces button.urgent {
+        color: @red;
+        border-radius: 8px;
+        border: 0px solid transparent;  /* Remove any border completely */
+      }
+
+      #cava {
+        color: @pink;
+      }
+
+      #custom-notification {
+        color: @blue;           /* Blue color for notification icon */
+        font-size: 18px;
+        font-weight: bolder;
+        padding-left: 16px;
+        padding-right: 18px;
+        border-radius: 12px;
+      }
+
+      #pulseaudio,
+      #pulseaudio.muted {
+        color: @blue;
+        font-size: 18px;
+        font-weight: bolder;
+        padding-left: 12px;
+        padding-right: 13px;
+        border-radius: 12px;
+      }
+
+      #window {
+        color: @mauve;
       }
     '';
   };
