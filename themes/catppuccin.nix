@@ -7,13 +7,13 @@
   options.theme = lib.mkOption {
     type = lib.types.attrs;
     default = {
-      rounding = 17;
-      gaps-in = 8;
-      gaps-out = 8 * 2;
+      rounding = 10;
+      gaps-in = 3;
+      gaps-out = 4 * 2;
       active-opacity = 0.97;
-      inactive-opacity = 0.94;
+      inactive-opacity = 0.90;
       blur = true;
-      border-size = 3;
+      border-size = 1;
       animation-speed = "fast"; # "fast" | "medium" | "slow"
       fetch = "none"; # "nerdfetch" | "neofetch" | "pfetch" | "none"
       textColorOnWallpaper =
@@ -84,8 +84,8 @@
 
     polarity = "dark";
     image = pkgs.fetchurl {
-      url = "https://raw.githubusercontent.com/anotherhadi/awesome-wallpapers/refs/heads/main/app/static/wallpapers/railroad-cat.png";
-      sha256 = "sha256-1fSJFS/Nco9Nse650ywLBW6c5UO9l6CbfQGJUfrvsx4=";
+      url = "https://raw.githubusercontent.com/anotherhadi/awesome-wallpapers/refs/heads/main/app/static/wallpapers/japan-moutains_black-and-white.png";
+      sha256 = "sha256-j1MwX3TvWd6tS6SM0FzC1VASOKsXLjuJ7+SLACfTb6Q=";
     };
   };
 }
