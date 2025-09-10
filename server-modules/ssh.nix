@@ -15,8 +15,8 @@ in {
 
   # Add my public SSH key to my user
   users.users."${username}" = {
-    openssh.authorizedKeys.keys = [
-      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPG9SE80ZyBcXZK/f5ypSKudaM5Jo3XtQikCnGo0jI5E hadi@nixy"
-    ];
+    # openssh.authorizedKeys.keys = [
+    #   "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPG9SE80ZyBcXZK/f5ypSKudaM5Jo3XtQikCnGo0jI5E hadi@nixy"
+    # ];
   };
 }
