@@ -7,7 +7,7 @@
         "$mod,B, exec, zen" # Browser
         "$shiftMod,L, exec, hyprlock" # Lock
         "ALT,F4, exec, powermenu" # Powermenu
-        "$mod,SPACE, exec, menu" # Launcher
+        "$mod,SPACE, exec, vicinae" # Launcher
         "$mod,C, exec, quickmenu" # Quickmenu
         "$shiftMod,SPACE, exec, hyprfocus-toggle" # Toggle HyprFocus
         # "$mod,P, exec,  uwsm app -- ${pkgs.planify}/bin/io.github.alainm23.planify" # Planify

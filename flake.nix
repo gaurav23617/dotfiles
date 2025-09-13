@@ -13,11 +13,8 @@
     stylix.url = "github:danth/stylix";
     apple-fonts.url = "github:Lyndeno/apple-fonts.nix";
     zen-browser.url = "github:0xc000022070/zen-browser-flake";
+    vicinae.url = "github:vicinaehq/vicinae";
     nixcord.url = "github:kaylorben/nixcord";
-    disko = {
-      url = "github:nix-community/disko";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
     sops-nix = {
       url = "github:mic92/sops-nix";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -60,7 +57,6 @@
             # inputs.nixos-hardware.nixosModules.omen-16-n0005ne # CHANGEME: check https://github.com/NixOS/nixos-hardware
             inputs.home-manager.nixosModules.home-manager
             inputs.stylix.nixosModules.stylix
-            inputs.disko.nixosModules.disko
             ./hosts/coffee/configuration.nix # CHANGEME: change the path to match your host folder
           ];
         };
