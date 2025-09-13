@@ -124,11 +124,4 @@ in {
     # don't ask for password for wheel group
     sudo.wheelNeedsPassword = false;
   };
-
-  services.logind.settings = {
-    Login = {
-      HandlePowerKey = "suspend";
-      HandleLidSwitch = "suspend";
-    };
-  };
 }

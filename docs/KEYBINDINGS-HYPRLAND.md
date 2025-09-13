@@ -13,9 +13,7 @@
 | Lock | SUPER + L |
 | Powermenu | SUPER + X |
 | Launcher | SUPER + SPACE |
-| Quickmenu | SUPER + C |
 | Toggle HyprFocus | SHIFT + SUPER + SPACE |
-| "$mod,P, exec,  uwsm app -- ${pkgs.planify}/bin/io.github.alainm23.planify"  |  |
 | Close window | SUPER + Q |
 | Toggle Floating | SUPER + T |
 | Toggle Fullscreen | SUPER + F |
@@ -32,8 +30,6 @@
 | Screenshot window | SHIFT + SUPER + PRINT |
 | Screenshot region then edit | ALTPRINT |
 | Toggle hyprpanel | SHIFT + SUPER + T |
-| Clipboard picker with wofi | SHIFT + SUPER + C |
-| Emoji picker with wofi | SHIFT + SUPER + E |
 | Toggle night shift | SHIFT + SUPER + F2 |
 | Toggle night shift | SHIFT + SUPER + F3 |
 | Move Window (mouse) | SUPER + mouse:272 |
@@ -44,9 +40,7 @@
 | Lock | SUPER + L |
 | Powermenu | SUPER + X |
 | Launcher | SUPER + SPACE |
-| Quickmenu | SUPER + C |
 | Toggle HyprFocus | SHIFT + SUPER + SPACE |
-| "$mod,P, exec,  uwsm app -- ${pkgs.planify}/bin/io.github.alainm23.planify"  |  |
 | Close window | SUPER + Q |
 | Toggle Floating | SUPER + T |
 | Toggle Fullscreen | SUPER + F |
@@ -63,7 +57,5 @@
 | Screenshot window | SHIFT + SUPER + PRINT |
 | Screenshot region then edit | ALTPRINT |
 | Toggle hyprpanel | SHIFT + SUPER + T |
-| Clipboard picker with wofi | SHIFT + SUPER + C |
-| Emoji picker with wofi | SHIFT + SUPER + E |
 | Toggle night shift | SHIFT + SUPER + F2 |
 | Toggle night shift | SHIFT + SUPER + F3 |

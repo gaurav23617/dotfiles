@@ -21,21 +21,13 @@
     };
     nixarr.url = "github:rasmus-kirk/nixarr";
     nvf.url = "github:notashelf/nvf";
+    vicinae.url = "github:vicinaehq/vicinae";
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     spicetify-nix = {
       url = "github:Gerg-L/spicetify-nix";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-    hyprspace = {
-      url = "github:KZDKM/Hyprspace";
-      inputs.hyprland.follows = "hyprland";
-    };
-    search-nixos-api.url = "github:anotherhadi/search-nixos-api";
-    eleakxir = {
-      url = "github:anotherhadi/eleakxir-temp";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
