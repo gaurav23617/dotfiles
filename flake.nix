@@ -13,7 +13,6 @@
     stylix.url = "github:danth/stylix";
     apple-fonts.url = "github:Lyndeno/apple-fonts.nix";
     zen-browser.url = "github:0xc000022070/zen-browser-flake";
-    vicinae.url = "github:vicinaehq/vicinae";
     nixcord.url = "github:kaylorben/nixcord";
     sops-nix = {
       url = "github:mic92/sops-nix";
