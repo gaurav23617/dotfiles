@@ -29,11 +29,13 @@
 
     # System (Desktop environment like stuff)
     ../../home/system/hyprland
+    ../../home/system/waybar
     ../../home/system/hyprlock
     ../../home/system/hyprpaper
     ../../home/system/zathura
     ../../home/system/mime
     ../../home/system/udiskie
+    ../../home/system/vicinae
     ../../home/chrome.nix
 
     # ./secrets # CHANGEME: You should probably remove this line, this is where I store my secrets
