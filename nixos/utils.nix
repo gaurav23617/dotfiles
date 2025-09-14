@@ -59,7 +59,7 @@ in {
     EDITOR = "nvim";
     TERMINAL = "kitty";
     TERM = "kitty";
-    BROWSER = "zen-beta";
+    BROWSER = "zen";
   };
 
   services.libinput.enable = true;

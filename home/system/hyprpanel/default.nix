@@ -27,7 +27,6 @@
   location = config.var.location;
 
   homeDir = "/home/${config.var.username}";
-
 in {
   wayland.windowManager.hyprland.settings.exec-once = ["hyprpanel"];
 
@@ -35,11 +34,10 @@ in {
     enable = true;
 
     settings = {
-
       bar.layouts = {
         "*" = {
-          left = [ "dashboard" "workspaces" "windowtitle" ];
-          middle = [ "media" "cava" ];
+          left = ["dashboard" "workspaces" "windowtitle"];
+          middle = ["media" "cava"];
           right = [
             "systray"
             "volume"
