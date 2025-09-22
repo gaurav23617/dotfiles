@@ -31,7 +31,13 @@
         modules = [
           ./host/coffee/configuration.nix
           home-manager.nixosModules.home-manager
-          { home-manager.users.gaurav = import ./host/coffee/home.nix; }
+          {
+            home-manager.useGlobalPkgs = true;
+            home-manager.useUserPackages = true;
+            home-manager.users.gaurav = import ./host/coffee/home.nix;
+            home-manager.extraSpecialArgs = { inherit inputs; };
+            home-manager.backupFileExtension = "backup";
+          }
         ];
       };
       homeConfigurations = {
