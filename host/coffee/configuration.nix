@@ -9,7 +9,7 @@
     ../../modules/nixos/audio.nix
     ../../modules/nixos/bluetooth.nix
     ../../modules/nixos/home-manager.nix
-    ../../modules/nixos/desktop/gnome.nix
+    ../../modules/nixos/desktop/gnome
     ../../modules/common/nix.nix
     ../../modules/common/packages.nix
     ../../home/docker.nix
