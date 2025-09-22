@@ -1,0 +1,51 @@
+yaml-language-server: $schema=https://raw.githubusercontent.com/jesseduffield/lazygit/master/schema/config.json
+
+disableStartupPopups: true
+notARepository: "skip"
+promptToReturnFromSubprocess: false
+update:
+  method: "never"
+
+git:
+  showIcons: true
+  paging:
+  useConfig: true
+  commit:
+    signOff: true
+  overrideGpg: true
+  parseEmoji: true
+  useExternalDiffGitConfig: true
+
+gui:
+  showListFooter: true
+  showRandomTip: false
+  showCommandLog: true
+  showBottomLine: true
+  nerdFontsVersion: "3"
+
+os:
+  editPreset: "nvim"
+
+theme:
+  activeBorderColor:
+    - "#f38ba8"
+    - bold
+  inactiveBorderColor:
+    - "#a6adc8"
+  optionsTextColor:
+    - "#89b4fa"
+  selectedLineBgColor:
+    - "#313244"
+  cherryPickedCommitBgColor:
+    - "#45475a"
+  cherryPickedCommitFgColor:
+    - "#f38ba8"
+  unstagedChangesColor:
+    - "#f38ba8"
+  defaultFgColor:
+    - "#cdd6f4"
+  searchingActiveBorderColor:
+    - "#f9e2af"
+
+authorColors:
+  "*": "#b4befe"

@@ -1,0 +1,97 @@
+[user]
+  name = gaurav23617
+  email = gaurav23617@gmail.com
+  signingkey = ~/.ssh/key.pub
+
+[commit]
+  gpgsign = true
+  template = ~/.config/git/template
+
+[core]
+  editor = vim
+  pager = delta
+  autocrlf = input  # keep newlines as in input
+  compression = 9  # trade cpu for network
+  fsync = none
+  whitespace = error  # threat incorrect whitespace as errors
+  excludesFile = ~/.config/git/gitignore
+
+[advice]  # disable advices
+  addEmptyPathspec = false
+  pushNonFastForward = false
+  statusHints = false
+
+[blame]
+  coloring = highlightRecent
+  date = relative
+
+[diff]
+  context = 3  # less context in diffs
+  renames = copies  # detect copies as renames in diffs
+  interHunkContext = 10  # merge near hunks in diffs
+
+[merge]
+  conflictStyle = zdiff3
+
+[init]
+  defaultBranch = main
+
+[log]
+  abbrevCommit = true  # short commits
+  graphColors = blue,yellow,cyan,magenta,green,red
+
+[status]
+  branch = true
+  short = true
+  showStash = true
+  showUntrackedFiles = all  # show individual untracked files
+
+[push]
+  autoSetupRemote = true  # easier to push new branches
+  default = current  # push only current branch by default
+  followTags = true  # push also tags
+
+[tag]
+  gpgsign = true
+
+[gpg]
+  format = ssh
+  [gpg "ssh"]
+    allowedSignersFile = ~/.ssh/allowed_signers
+
+[pull]
+  rebase = true
+
+[submodule]
+  fetchJobs = 16
+
+[rebase]
+  autoStash = true
+
+[delta]
+  navigate = true  # use n and N to move between diff sections
+  dark = true      # or light = true, or omit for auto-detection
+
+# Colors
+[color "blame"]
+  highlightRecent = black bold,1 year ago,white,1 month ago,default,7 days ago,blue
+
+[color "branch"]
+  current  = magenta
+  local    = default
+  remote   = yellow
+  upstream = green
+  plain    = blue
+
+[color "diff"]
+  meta       = black bold
+  frag       = magenta
+  context    = white
+  whitespace = yellow reverse
+
+[interactive]
+  diffFilter = delta --color-only
+
+# URL shortcuts
+[url "git@github.com:"]
+  insteadOf = "gh:"

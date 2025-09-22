@@ -1,0 +1,8 @@
+--theme="Catppuccin Mocha"
+--italic-text=always
+--pager="less -FR"
+--style="full"
+
+# Uncomment the following line to disable automatic paging:
+#--paging=never
+

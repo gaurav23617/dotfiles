@@ -1,0 +1,89 @@
+{ config, pkgs, ... }:
+
+{
+  imports = [ # Include the results of the hardware scan.
+    ./hardware-configuration.nix
+    ../../modules/nixos/fonts.nix
+    ../../modules/nixos/nixld.nix
+    ../../modules/nixos/locale.nix
+    ../../modules/nixos/desktop/gnome.nix
+    ../../home/docker.nix
+  ];
+
+  # Bootloader.
+  boot.loader.systemd-boot.enable = true;
+  boot.loader.efi.canTouchEfiVariables = true;
+  boot.kernelParams = [ "nvidia-drm.modeset=1" ];
+
+  networking.hostName = "coffee"; # Define your hostname.
+
+  # Enable networking
+  networking.networkmanager.enable = true;
+
+  # Set your time zone.
+  time.timeZone = "Asia/Kolkata";
+
+  # Configure keymap in X11
+  services.xserver.xkb = {
+    layout = "us";
+    variant = "";
+  };
+
+  # Enable CUPS to print documents.
+  services.printing.enable = true;
+
+  # Enable sound with pipewire.
+  security.rtkit.enable = true;
+  services.pipewire = {
+    enable = true;
+    alsa.enable = true;
+    alsa.support32Bit = true;
+    pulse.enable = true;
+  };
+
+  # Define a user account. Don't forget to set a password with ‘passwd’.
+  users = {
+    defaultUserShell = pkgs.zsh;
+    users.gaurav = {
+      isNormalUser = true;
+      description = "Gaurav";
+      extraGroups = [ "networkmanager" "wheel" "docker" ];
+      packages = with pkgs;
+        [
+          #  thunderbird
+        ];
+    };
+  };
+
+  programs.zsh.enable = true;
+
+  # Enable automatic login for the user.
+  services.displayManager.autoLogin.enable = true;
+  services.displayManager.autoLogin.user = "gaurav";
+
+  # Workaround for GNOME autologin: https://github.com/NixOS/nixpkgs/issues/103746#issuecomment-945091229
+  systemd.services."getty@tty1".enable = false;
+  systemd.services."autovt@tty1".enable = false;
+
+  # Install firefox.
+  programs.firefox.enable = true;
+
+  # Allow unfree packages
+  nixpkgs.config.allowUnfree = true;
+  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+
+  # List packages installed in system profile. To search, run:
+  # $ nix search wget
+  environment.systemPackages = with pkgs; [
+    vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
+    curl
+    neovim
+    wget
+    google-chrome
+    ghostty
+    home-manager
+    wl-clipboard
+  ];
+
+  system.stateVersion = "25.05"; # Did you read the comment?
+}
