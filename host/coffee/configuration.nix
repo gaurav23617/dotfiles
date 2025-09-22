@@ -8,7 +8,7 @@
     ../../modules/nixos/locale.nix
     ../../modules/nixos/audio.nix
     ../../modules/nixos/bluetooth.nix
-    ../../modules/nixos/home-manager.nix
+    # ../../modules/nixos/home-manager.nix
     ../../modules/nixos/desktop/gnome
     ../../modules/nixos/nvidia.nix
     ../../modules/common/nix.nix
