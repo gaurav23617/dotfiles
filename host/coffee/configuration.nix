@@ -10,6 +10,7 @@
     ../../modules/nixos/bluetooth.nix
     ../../modules/nixos/home-manager.nix
     ../../modules/nixos/desktop/gnome.nix
+    ../../modules/common/nix.nix
     ../../home/docker.nix
   ];
 
@@ -22,9 +23,6 @@
 
   # Enable networking
   networking.networkmanager.enable = true;
-
-  # Set your time zone.
-  time.timeZone = "Asia/Kolkata";
 
   # Configure keymap in X11
   services.xserver.xkb = {
@@ -62,12 +60,6 @@
   # Install firefox.
   programs.firefox.enable = true;
 
-  # Allow unfree packages
-  nixpkgs.config.allowUnfree = true;
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
-
-  # List packages installed in system profile. To search, run:
-  # $ nix search wget
   environment.systemPackages = with pkgs; [
     vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
     curl
