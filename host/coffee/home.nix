@@ -19,6 +19,7 @@
     ../../home/fastfetch.nix
     ../../home/bat.nix
     ../../home/gh.nix
+    ../../home/hyprland.nix
 
     ./secrets
   ];

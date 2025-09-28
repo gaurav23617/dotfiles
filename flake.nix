@@ -24,6 +24,8 @@
       url = "github:0xc000022070/zen-browser-flake";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    hyprland.url = "github:hyprwm/Hyprland";
+    vicinae.url = "github:vicinaehq/vicinae";
   };
 
   outputs = { self, nixpkgs, home-manager, ... }@inputs: # Add @inputs here
@@ -31,6 +33,7 @@
     in {
       nixosConfigurations.coffee = nixpkgs.lib.nixosSystem {
         inherit system;
+        specialArgs = { inherit inputs; };
         modules = [
           ./host/coffee/configuration.nix
           home-manager.nixosModules.home-manager
