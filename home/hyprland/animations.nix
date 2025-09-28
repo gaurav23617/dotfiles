@@ -1,19 +1,4 @@
-{config, ...}: let
-  animationSpeed = config.theme.animation-speed;
-
-  animationDuration =
-    if animationSpeed == "slow"
-    then "4"
-    else if animationSpeed == "medium"
-    then "2.5"
-    else "1.5";
-  borderDuration =
-    if animationSpeed == "slow"
-    then "10"
-    else if animationSpeed == "medium"
-    then "6"
-    else "3";
-in {
+{ config, ... }: {
   wayland.windowManager.hyprland.settings = {
     animations = {
       enabled = true;
@@ -35,17 +20,18 @@ in {
       ];
 
       animation = [
-        "windows, 1, ${animationDuration}, md3_decel, popin 60%"
-        "windowsIn, 1, ${animationDuration}, md3_decel, popin 60%"
-        "windowsOut, 1, ${animationDuration}, md3_accel, popin 60%"
-        "border, 1, ${borderDuration}, default"
-        "fade, 1, ${animationDuration}, md3_decel"
-        "layersIn, 1, ${animationDuration}, menu_decel, slide"
-        "layersOut, 1, ${animationDuration}, menu_accel"
-        "fadeLayersIn, 1, ${animationDuration}, menu_decel"
-        "fadeLayersOut, 1, ${animationDuration}, menu_accel"
-        "workspaces, 1, ${animationDuration}, menu_decel, slide"
-        "specialWorkspace, 1, ${animationDuration}, md3_decel, slidevert"
+        # The third value is the duration. Lower is faster.
+        "windows, 1, 0.8, md3_decel, popin 60%"
+        "windowsIn, 1, 0.8, md3_decel, popin 60%"
+        "windowsOut, 1, 0.8, md3_accel, popin 60%"
+        "border, 1, 3, default"
+        "fade, 1, 0.8, md3_decel"
+        "layersIn, 1, 0.8, menu_decel, slide"
+        "layersOut, 1, 0.8, menu_accel"
+        "fadeLayersIn, 1, 0.8, menu_decel"
+        "fadeLayersOut, 1, 0.8, menu_accel"
+        "workspaces, 1, 0.8, menu_decel, slide"
+        "specialWorkspace, 1, 0.8, md3_decel, slidevert"
       ];
     };
   };
