@@ -1,10 +1,6 @@
+# Hyprland is a dynamic tiling Wayland compositor that is highly customizable and performant.
 { pkgs, config, lib, ... }: {
-  imports = [
-    ./animations.nix
-    ./bindings.nix
-    # ./polkitagent.nix
-    # ./keyboard-backlight.nix # CHANGEME: This is for omen laptop only
-  ];
+  imports = [ ./animations.nix ./bindings.nix ./polkitagent.nix ];
 
   home.packages = with pkgs; [
     qt5.qtwayland
@@ -88,6 +84,30 @@
         default_monitor = "eDP-2";
       };
 
+      general = {
+        resize_on_border = true;
+        gaps_in = 3;
+        gaps_out = 4 * 2;
+        border_size = 1;
+        layout = "master";
+        "col.inactive_border" = "0F0F15";
+      };
+
+      decoration = {
+        active_opacity = 1;
+        inactive_opacity = 0.9;
+        rounding = 10;
+        shadow = {
+          enabled = true;
+          range = 20;
+          render_power = 3;
+        };
+        blur = {
+          enabled = "true";
+          size = 18;
+        };
+      };
+
       master = {
         new_status = true;
         allow_small_split = true;
@@ -140,11 +160,10 @@
       layerrule = [ "noanim, launcher" "noanim, ^ags-.*" ];
 
       input = {
-        # kb_layout = us;
+        kb_layout = "us";
 
-        # kb_options = "caps:escape";
         follow_mouse = 1;
-        sensitivity = 0.5;
+        sensitivity = 1;
         repeat_delay = 300;
         repeat_rate = 50;
         numlock_by_default = true;

@@ -20,18 +20,17 @@
       ];
 
       animation = [
-        # The third value is the duration. Lower is faster.
-        "windows, 1, 0.8, md3_decel, popin 60%"
-        "windowsIn, 1, 0.8, md3_decel, popin 60%"
-        "windowsOut, 1, 0.8, md3_accel, popin 60%"
+        "windows, 1, 1.5, md3_decel, popin 60%"
+        "windowsIn, 1, 1.5, md3_decel, popin 60%"
+        "windowsOut, 1, 1.5, md3_accel, popin 60%"
         "border, 1, 3, default"
-        "fade, 1, 0.8, md3_decel"
-        "layersIn, 1, 0.8, menu_decel, slide"
-        "layersOut, 1, 0.8, menu_accel"
-        "fadeLayersIn, 1, 0.8, menu_decel"
-        "fadeLayersOut, 1, 0.8, menu_accel"
-        "workspaces, 1, 0.8, menu_decel, slide"
-        "specialWorkspace, 1, 0.8, md3_decel, slidevert"
+        "fade, 1, 1.5, md3_decel"
+        "layersIn, 1, 1.5, menu_decel, slide"
+        "layersOut, 1, 1.5, menu_accel"
+        "fadeLayersIn, 1, 1.5, menu_decel"
+        "fadeLayersOut, 1, 1.5, menu_accel"
+        "workspaces, 1, 1.5, menu_decel, slide"
+        "specialWorkspace, 1, 1.5, md3_decel, slidevert"
       ];
     };
   };
