@@ -6,17 +6,13 @@ command_timeout = 1000
 palette = 'catppuccin_mocha'
 
 # custom prompt format
-# format = """╭─ $shell$os$hostname$docker$username$directory$aws$git_branch$git_status$fill$nodejs$custom$package$nix_shell
-# ╰─≻ """
-
-format = """$character$directory$git_branch$git_status"""
+format = """╭─ $shell$os$hostname$docker$username$directory$aws$git_branch$git_status$fill$nodejs$custom$package$nix_shell
+╰─≻ """
 
 # drop ugly default prompt characters
 [character]
-# success_symbol = '󰚔 '
-# error_symbol = ' '
-success_symbol = '[ ➜](bold green)'
-error_symbol = '[ ➜](bold red)'
+success_symbol = '󰚔 '
+error_symbol = ' '
 
 # shows the current operating system
 [os]
@@ -46,56 +42,35 @@ disabled = false
 
 # shows current directory
 [directory]
-truncation_length = 1
-# truncation_symbol = ' '
-truncate_to_repo = false
-# home_symbol = '󰋜 ~'
-home_symbol = '~'
-# read_only_style = 'red'
-# read_only = '  '
-# format = 'at [$path]($style)[$read_only]($read_only_style) '
-format = '[$path](cyan) '
+truncation_length = 3
+truncation_symbol = ' '
+home_symbol = '󰋜 ~'
+read_only_style = 'red'
+read_only = '  '
+format = 'at [$path]($style)[$read_only]($read_only_style) '
 
 # shows current git branch
 [git_branch]
-# format = '[$symbol$branch(:$remote_branch)]($style)'
-# format = '[git:](bold blue)[(](bold blue)[$branch](red)[)](bold blue)'
-# format = 'git:[(]($branch) '
-format = 'on [$symbol$branch(:$remote_branch)]($style) '
-# symbol = " "
-# truncation_symbol = '…/'
-# style = 'bold red'
-style = 'bold blue'
+format = '[$symbol$branch(:$remote_branch)]($style)'
+symbol = " "
+truncation_symbol = '…/'
+style = 'bold red'
 
 # shows current git status
 [git_status]
-# format = '[$all_status$ahead_behind]($style) '
-# style = 'bold green'
-format = '[$all_status]($style) '
-style = 'yellow'
-# conflicted = '🏳'
-# up_to_date = ''
-# untracked = ' '
-# ahead = ' ⇡${count}'
-# diverged = ' ⇕⇡${ahead_count}⇣${behind_count}'
-# behind = ' ⇣${count}'
-# stashed = ' '
-# modified = ' '
-# staged = '[ ++\($count\)](green)'
-# renamed = ' 襁'
-# deleted = ' '
-conflicted = ''
+format = '[$all_status$ahead_behind]($style) '
+style = 'bold green'
+conflicted = '🏳'
 up_to_date = ''
-untracked = ''
-ahead = ''
-diverged = ''
-behind = ''
-stashed = ''
-modified = '✘'
-staged = ''
-renamed = ''
-deleted = ''
-
+untracked = ' '
+ahead = ' ⇡${count}'
+diverged = ' ⇕⇡${ahead_count}⇣${behind_count}'
+behind = ' ⇣${count}'
+stashed = ' '
+modified = ' '
+staged = '[ ++\($count\)](green)'
+renamed = ' 襁'
+deleted = ' '
 
 # shown when inside a nix-shell environment
 [nix_shell]
