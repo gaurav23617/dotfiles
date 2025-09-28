@@ -9,7 +9,8 @@
     ../../modules/nixos/audio.nix
     ../../modules/nixos/bluetooth.nix
     # ../../modules/nixos/home-manager.nix
-    ../../modules/nixos/desktop/gnome
+    # ../../modules/nixos/desktop/gnome
+    ../../modules/nixos/desktop/hyprland.nix
     ../../modules/nixos/nvidia.nix
     ../../modules/common/nix.nix
     ../../modules/common/packages.nix
