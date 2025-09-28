@@ -8,8 +8,6 @@ let
 in {
   programs.neovim = {
     enable = true;
-    vimAlias = true;
-    vimdiffAlias = true;
 
     extraPackages = with pkgs; [
       tree-sitter
