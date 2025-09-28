@@ -20,6 +20,7 @@
     ../../home/bat.nix
     ../../home/gh.nix
     ../../home/hyprland.nix
+    ../../home/vicinae.nix
 
     ./secrets
   ];

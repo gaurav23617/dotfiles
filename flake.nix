@@ -28,7 +28,8 @@
     vicinae.url = "github:vicinaehq/vicinae";
   };
 
-  outputs = { self, nixpkgs, home-manager, ... }@inputs: # Add @inputs here
+  outputs =
+    { self, nixpkgs, vicinae, home-manager, ... }@inputs: # Add @inputs here
     let system = "x86_64-linux";
     in {
       nixosConfigurations.coffee = nixpkgs.lib.nixosSystem {
@@ -51,6 +52,7 @@
           pkgs = nixpkgs.legacyPackages.x86_64-linux;
           extraSpecialArgs = { inherit inputs; }; # Now inputs is defined
           modules = [
+            vicinae.homeManagerModules.default
             ./host/coffee/home.nix # Fixed path consistency
           ];
         };
