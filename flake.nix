@@ -52,7 +52,6 @@
           pkgs = nixpkgs.legacyPackages.x86_64-linux;
           extraSpecialArgs = { inherit inputs; }; # Now inputs is defined
           modules = [
-            vicinae.homeManagerModules.default
             ./host/coffee/home.nix # Fixed path consistency
           ];
         };

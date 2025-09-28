@@ -1,6 +1,6 @@
 { pkgs, config, lib, ... }: {
   imports = [
-    # ./animations.nix
+    ./animations.nix
     ./bindings.nix
     # ./polkitagent.nix
     # ./keyboard-backlight.nix # CHANGEME: This is for omen laptop only
