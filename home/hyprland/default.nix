@@ -90,7 +90,8 @@
         gaps_out = 4 * 2;
         border_size = 1;
         layout = "master";
-        "col.inactive_border" = "0F0F15";
+        "col.active_border" = "rgba(ca9ee6ff) rgba(f2d5cfff) 45deg";
+        "col.inactive_border" = "rgba(b4befecc) rgba(6c7086cc) 45deg";
       };
 
       decoration = {
