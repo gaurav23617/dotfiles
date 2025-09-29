@@ -1,6 +1,16 @@
 # Hyprland is a dynamic tiling Wayland compositor that is highly customizable and performant.
-{ pkgs, config, lib, ... }: {
-  imports = [ ./animations.nix ./bindings.nix ./polkitagent.nix ];
+{
+  pkgs,
+  config,
+  lib,
+  ...
+}:
+{
+  imports = [
+    ./animations.nix
+    ./bindings.nix
+    ./polkitagent.nix
+  ];
 
   home.packages = with pkgs; [
     qt5.qtwayland
@@ -45,6 +55,7 @@
         "dbus-update-activation-environment --systemd --all &"
         "systemctl --user enable --now hyprpaper.service &"
         "systemctl --user enable --now nextcloud-client.service  &"
+        # "waybar &"
       ];
 
       monitor = [
@@ -158,7 +169,10 @@
         "size 640 400, class:^(.*jetbrains.*)$, title:^(splash)$"
       ];
 
-      layerrule = [ "noanim, launcher" "noanim, ^ags-.*" ];
+      layerrule = [
+        "noanim, launcher"
+        "noanim, ^ags-.*"
+      ];
 
       input = {
         kb_layout = "us";

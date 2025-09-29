@@ -20,6 +20,7 @@
     ../../home/bat.nix
     ../../home/gh.nix
     ../../home/hyprland
+    ../../home/waybar
     ../../home/vicinae.nix
 
     ./secrets
@@ -32,9 +33,13 @@
   programs.git.enable = true;
   programs.zsh = {
     enable = true;
-    shellAliases = { btw = "echo i use nixos, btw"; };
+    shellAliases = {
+      btw = "echo i use nixos, btw";
+    };
   };
-  home.sessionVariables = { EDITOR = "nvim"; };
+  home.sessionVariables = {
+    EDITOR = "nvim";
+  };
   programs.home-manager.enable = true;
 
 }
