@@ -22,6 +22,7 @@
     ../../home/hyprland
     ../../home/waybar
     ../../home/vicinae.nix
+    ../../home/thunar.nix
 
     ./secrets
   ];
