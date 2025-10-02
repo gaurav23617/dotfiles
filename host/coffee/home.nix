@@ -15,7 +15,9 @@
     ../../home/git.nix
     ../../home/lazygit.nix
     ../../home/lazydocker.nix
-    ../../home/neovim.nix
+    ../../home/editor/neovim.nix
+    ../../home/editor/vscode.nix
+    ../../home/editor/zed.nix
     ../../home/fastfetch.nix
     ../../home/bat.nix
     ../../home/gh.nix
