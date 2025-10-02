@@ -26,12 +26,24 @@
     };
     hyprland.url = "github:hyprwm/Hyprland";
     vicinae.url = "github:vicinaehq/vicinae";
+    betterfox = {
+      url = "github:yokoffing/Betterfox";
+      flake = false;
+    };
   };
 
   outputs =
-    { self, nixpkgs, vicinae, home-manager, ... }@inputs: # Add @inputs here
-    let system = "x86_64-linux";
-    in {
+    {
+      self,
+      nixpkgs,
+      vicinae,
+      home-manager,
+      ...
+    }@inputs: # Add @inputs here
+    let
+      system = "x86_64-linux";
+    in
+    {
       nixosConfigurations.coffee = nixpkgs.lib.nixosSystem {
         inherit system;
         specialArgs = { inherit inputs; };

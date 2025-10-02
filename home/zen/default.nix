@@ -14,7 +14,7 @@
       "en-US"
     ];
     profiles = {
-      default = {
+      coffee = {
         id = 0; # 0 is the default profile; see also option "isDefault"
         name = "coffee"; # name as listed in about:profiles
         isDefault = true; # can be omitted; true if profile ID is 0
