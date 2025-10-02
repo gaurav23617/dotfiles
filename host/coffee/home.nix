@@ -6,7 +6,7 @@
   imports = [
     ../../home/tmux.nix
     ../../home/zsh.nix
-    ../../home/zen.nix
+    ../../home/zen
     ../../home/direnv.nix
     ../../home/starship.nix
     ../../home/nh.nix
