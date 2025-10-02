@@ -1,29 +1,11 @@
-{
-  config,
-  pkgs,
-  lib,
-  ...
-}:
+{ config, pkgs, lib, ... }:
 let
   inherit (pkgs)
-    tree-sitter
-    lua54Packages
-    luajitPackages
-    nodePackages_latest
-    vimPlugins
-    ;
+    tree-sitter lua54Packages luajitPackages nodePackages_latest vimPlugins;
   inherit (pkgs.tree-sitter-grammars)
-    tree-sitter-lua
-    tree-sitter-nix
-    tree-sitter-go
-    tree-sitter-python
-    tree-sitter-bash
-    tree-sitter-regex
-    tree-sitter-markdown
-    tree-sitter-json
-    ;
-in
-{
+    tree-sitter-lua tree-sitter-nix tree-sitter-go tree-sitter-python
+    tree-sitter-bash tree-sitter-regex tree-sitter-markdown tree-sitter-json;
+in {
   programs.neovim = {
     enable = true;
 
@@ -42,6 +24,7 @@ in
       nodejs_22
       nodePackages_latest.vscode-json-languageserver
       fzf
+      unzip
       lua
       lua-language-server
       luajitPackages.jsregexp
@@ -67,13 +50,11 @@ in
       imagemagick
     ];
 
-    plugins = [
-      vimPlugins.nvim-treesitter.withAllGrammars
-      vimPlugins.nvim-treesitter
-    ];
+    plugins =
+      [ vimPlugins.nvim-treesitter.withAllGrammars vimPlugins.nvim-treesitter ];
   };
 
-  home.file.".config/nvim".source = builtins.toString (
-    config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfiles/config/nvim"
-  );
+  home.file.".config/nvim".source = builtins.toString
+    (config.lib.file.mkOutOfStoreSymlink
+      "${config.home.homeDirectory}/dotfiles/config/nvim");
 }
