@@ -1,4 +1,4 @@
-{ config, pkgs, lib, username, homeDirectory, ... }:
+{ config, pkgs, lib, ... }:
 
 {
   imports = [
@@ -19,9 +19,7 @@
     ./secrets
   ];
 
-  # Use the values passed from the flake
-  home.username = username;
-  home.homeDirectory = homeDirectory;
+  # username and homeDirectory are set by the wrapper in mkConfigHelper.nix
 
   xdg.userDirs = {
     enable = true;

@@ -43,8 +43,10 @@ in {
             useGlobalPkgs = true;
             useUserPackages = true;
             extraSpecialArgs = { inherit inputs username homeDirectory; };
-            users.${username} =
-              import ../hosts/${platform}/${hostname}/home.nix;
+            users.${username} = { ... }: {
+              imports = [ ../hosts/${platform}/${hostname}/home.nix ];
+              home = { inherit username homeDirectory; };
+            };
           };
         }
       ];
