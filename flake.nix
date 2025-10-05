@@ -76,8 +76,8 @@
           home-manager.useGlobalPkgs = true;
           home-manager.useUserPackages = true;
           home-manager.extraSpecialArgs = { inherit inputs; };
-          home-manager.users.gaurav = import ./hosts/coffee/home.nix;
           home-manager.backupFileExtension = "backup";
+          home-manager.users.gaurav = import ./hosts/coffee/home.nix;
         }
       ];
     };
@@ -86,12 +86,24 @@
       "gaurav@coffee" = home-manager.lib.homeManagerConfiguration {
         pkgs = nixpkgs.legacyPackages.aarch64-darwin;
         extraSpecialArgs = { inherit inputs; };
-        modules = [ ./hosts/coffee/home.nix ];
+        modules = [
+          ./hosts/coffee/home.nix
+          {
+            home.username = "gaurav";
+            home.homeDirectory = "/Users/gaurav";
+          }
+        ];
       };
       "gaurav@atlas" = home-manager.lib.homeManagerConfiguration {
         pkgs = nixpkgs.legacyPackages.x86_64-linux;
         extraSpecialArgs = { inherit inputs; };
-        modules = [ ./hosts/atlas/home.nix ];
+        modules = [
+          ./hosts/atlas/home.nix
+          {
+            home.username = "gaurav";
+            home.homeDirectory = "/home/gaurav";
+          }
+        ];
       };
     };
   };

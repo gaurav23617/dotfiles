@@ -15,8 +15,7 @@
     ../../home/fastfetch.nix
     ../../home/bat.nix
     ../../home/gh.nix
-
-    ./secrets
+    # ./secrets  # Temporarily comment this out to test
   ];
 
   # These MUST be set for Darwin
