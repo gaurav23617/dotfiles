@@ -1,111 +1,52 @@
-{ config, pkgs, ... }: {
-  networking.hostName = "coffee";
+# hosts/darwin/my-macbook/default.nix
+{ config, pkgs, ... }:
 
+{
+  # Enable flakes and the new command-line interface.
+  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  # Automatically run the garbage collector to free up disk space.
+  nix.gc = {
+    automatic = true;
+    options = "--delete-older-than 7d";
+  };
+
+  # Packages available to all users.
   environment.systemPackages = with pkgs; [
-    raycast
-    rectangle
-
-    # block of shame - no nix package with full integration
-    # signal-desktop, tailscale, obs-studio
+    coreutils # Provides GNU core utilities
+    wget # A classic command-line downloader
+    btop
   ];
 
-  programs.zsh.enable = true;
-  environment = {
-    shells = with pkgs; [ bash zsh ];
-    loginShell = pkgs.zsh;
-    systemPackages = [ pkgs.coreutils ];
-    systemPath = [ "/opt/homebrew/bin" ];
-    pathsToLink = [ "/Applications" ];
-  };
-  nix.extraOptions = ''
-    experimental-features = nix-command flakes
-  '';
-  system.keyboard.enableKeyMapping = true;
-  system.keyboard.remapCapsLockToEscape = true;
-  fonts.fontDir.enable = true; # DANGER
-  fonts.fonts = [ (pkgs.nerdfonts.override { fonts = [ "Meslo" ]; }) ];
-  services.nix-daemon.enable = true;
-  system.defaults = {
-    finder.AppleShowAllExtensions = true;
-    finder._FXShowPosixPathInTitle = true;
-    dock.autohide = true;
-    NSGlobalDomain.AppleShowAllExtensions = true;
-    NSGlobalDomain.InitialKeyRepeat = 14;
-    NSGlobalDomain.KeyRepeat = 1;
-  };
+  # Install system-wide fonts.
+  fonts.packages = with pkgs; [ fira-code fira-code-nerd-font ];
 
-  # backwards compat; don't change
-  system.stateVersion = 4;
-
-  # homebrew = {
-  #   enable = true;
-  #   caskArgs.no_quarantine = true;
-  #   global.brewfile = true;
-  #   masApps = { };
-  #   casks = [ "raycast" "amethyst" ];
-  #   taps = [ "fujiapple852/trippy" ];
-  #   brews = [ "trippy" ];
-  # };
-
-  users.users."gaurav" = {
-    shell = pkgs.zsh;
-    home = "/Users/gaurav";
-    packages = with pkgs; [
-      wget
-      k9s
-      kubectl
-      kubernetes-helm
-      xh
-      jq
-      yq-go
-      mosh
-      shadowsocks-rust
-      # dpkg
-      typst
-      terraform
-      poppler-utils
-      tree
-      awscli2
-      ssm-session-manager-plugin
-      pgcli
-      rclone
-      bat
-      kubecm
-      colorized-logs
-      gh
-      dive
-      pwgen
-      postgresql
-      redis
-      hyperfine
-      htop
-      gnumake
-      jujutsu
-      golangci-lint
-      # ollama
-      graphviz
-      scrcpy
-      pnpm
-      fd
-      grpcurl
-      ocrmypdf
-
-      go
-      python312
-      python312Packages.pyyaml
-      pipx
-      nodejs_22
-      lua
-      luarocks
-    ];
-  };
-
-  system.defaults.CustomUserPreferences = {
-    "com.apple.symbolichotkeys" = {
-      AppleSymbolicHotKeys = {
-        "64".enabled = false; # Disable 'Cmd + Space' for Spotlight Search
-      };
+  # --- HOMEBREW SUPPORT (for GUI Apps & Casks) ---
+  # Integrates nix-homebrew to manage apps not in nixpkgs.
+  nix-homebrew = {
+    enable = true;
+    # Your username must match the one above.
+    user = "gaurav";
+    # Automatically update Homebrew taps.
+    autoMigrate = true;
+    # Where to install Homebrew packages.
+    brewPrefix = "/opt/homebrew"; # For Apple Silicon
+    # Taps you want to use.
+    taps = {
+      "homebrew/homebrew-core" = config.inputs.nix-homebrew.homebrew-core;
+      "homebrew/homebrew-cask" = config.inputs.nix-homebrew.homebrew-cask;
     };
+    # Install GUI applications (Casks).
+    casks = [ "google-chrome" "spotify" ];
   };
-  security.pam.services.sudo_local.touchIdAuth = true;
+
+  # A few examples of how to configure macOS declaratively.
+  system.settings = {
+    # Set dark mode.
+    NSGlobalDomain.AppleInterfaceStyle = "Dark";
+    # Put the Dock on the left side of the screen.
+    dock.orientation = "left";
+  };
+
+  # This is required! Set it to the version of Nix-Darwin you're using.
+  system.stateVersion = 4;
 }

@@ -29,6 +29,7 @@
     createDirectories = true; # This is the key part
   };
 
+  # this piece of code is for creating empty directories
   home.activation.createCustomDirs =
     lib.hm.dag.entryAfter [ "writeBoundary" ] ''
       $DRY_RUN_CMD mkdir -p "$HOME/.config/sops/age"
