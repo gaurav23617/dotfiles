@@ -6,72 +6,50 @@ let
   isDarwin = system: isPlatform system "darwin";
   isLinux = system: isPlatform system "linux";
 
-  getHostInfo = hostArgs:
-    let inherit (hostArgs) system username;
-    in {
-      inherit username;
-      platform = if isDarwin system then "darwin" else "linux";
-      homeDirectory =
-        if isDarwin system then "/Users/${username}" else "/home/${username}";
-    };
-
 in {
   inherit isLinux isDarwin isPlatform;
 
   mkHost = hostArgs:
     let
-      inherit (hostArgs) system hostname;
-      hostInfo = getHostInfo hostArgs;
+      inherit (hostArgs) system hostname username;
+      platform = if isDarwin system then "darwin" else "linux";
 
-      systemBuilder = if hostInfo.platform == "darwin" then
+      systemBuilder = if platform == "darwin" then
         inputs.nix-darwin.lib.darwinSystem
       else
         inputs.nixpkgs.lib.nixosSystem;
 
-      homeManagerModule = if hostInfo.platform == "darwin" then
+      homeManagerModule = if platform == "darwin" then
         inputs.home-manager.darwinModules.home-manager
       else
         inputs.home-manager.nixosModules.home-manager;
 
     in systemBuilder {
       inherit system;
-      specialArgs = {
-        inherit inputs;
-        inherit (hostInfo) username homeDirectory platform;
-      };
+      specialArgs = { inherit inputs; };
 
       modules = [
-        ../hosts/${hostInfo.platform}/${hostname}/default.nix
+        ../hosts/${platform}/${hostname}/default.nix
 
         homeManagerModule
         {
           home-manager = {
             useGlobalPkgs = true;
             useUserPackages = true;
-            extraSpecialArgs = {
-              inherit inputs;
-              username = hostInfo.username;
-              homeDirectory = hostInfo.homeDirectory;
-              platform = hostInfo.platform;
-            };
-            users.${hostInfo.username} =
-              ../hosts/${hostInfo.platform}/${hostname}/home.nix;
+            extraSpecialArgs = { inherit inputs; };
+            users.${username} = ../hosts/${platform}/${hostname}/home.nix;
           };
         }
       ];
     };
 
   mkHomeConfig = hostArgs:
-    let hostInfo = getHostInfo hostArgs;
+    let
+      inherit (hostArgs) system hostname;
+      platform = if isDarwin system then "darwin" else "linux";
     in inputs.home-manager.lib.homeManagerConfiguration {
-      pkgs = inputs.nixpkgs.legacyPackages.${hostArgs.system};
-      extraSpecialArgs = {
-        inherit inputs;
-        username = hostInfo.username;
-        homeDirectory = hostInfo.homeDirectory;
-        platform = hostInfo.platform;
-      };
-
-      modules = [ ../hosts/${hostInfo.platform}/${hostArgs.hostname}/home.nix ];
+      pkgs = inputs.nixpkgs.legacyPackages.${system};
+      extraSpecialArgs = { inherit inputs; };
+      modules = [ ../hosts/${platform}/${hostname}/home.nix ];
     };
 }

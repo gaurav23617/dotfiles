@@ -1,4 +1,4 @@
-{ config, pkgs, lib, username, homeDirectory, ... }:
+{ config, pkgs, lib, ... }:
 
 {
   imports = [
@@ -19,23 +19,23 @@
     ./secrets
   ];
 
-  home.username = username;
-  home.homeDirectory = homeDirectory;
+  # Hardcode these values
+  home.username = "gaurav";
+  home.homeDirectory = "/Users/gaurav";
 
   xdg.userDirs = {
     enable = true;
     createDirectories = true;
   };
 
-  # Create custom directories
   home.activation.createCustomDirs =
     lib.hm.dag.entryAfter [ "writeBoundary" ] ''
-      $DRY_RUN_CMD mkdir -p "${homeDirectory}/.config/sops/age"
-      $DRY_RUN_CMD mkdir -p "${homeDirectory}/personal"
-      $DRY_RUN_CMD mkdir -p "${homeDirectory}/personal/media"
-      $DRY_RUN_CMD mkdir -p "${homeDirectory}/personal/projects"
-      $DRY_RUN_CMD mkdir -p "${homeDirectory}/personal/playground"
-      $DRY_RUN_CMD mkdir -p "${homeDirectory}/workspace"
+      $DRY_RUN_CMD mkdir -p "$HOME/.config/sops/age"
+      $DRY_RUN_CMD mkdir -p "$HOME/personal"
+      $DRY_RUN_CMD mkdir -p "$HOME/personal/media"
+      $DRY_RUN_CMD mkdir -p "$HOME/personal/projects"
+      $DRY_RUN_CMD mkdir -p "$HOME/personal/playground"
+      $DRY_RUN_CMD mkdir -p "$HOME/workspace"
     '';
 
   home.stateVersion = "25.05";

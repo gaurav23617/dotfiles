@@ -1,4 +1,4 @@
-{ config, pkgs, lib, homeDirectory ? config.home.homeDirectory, ... }:
+{ config, pkgs, lib, ... }:
 let
   inherit (pkgs)
     tree-sitter lua54Packages luajitPackages nodePackages_latest vimPlugins;
@@ -56,5 +56,5 @@ in {
 
   home.file.".config/nvim".source = builtins.toString
     (config.lib.file.mkOutOfStoreSymlink
-      "${homeDirectory}/dotfiles/config/nvim");
+      "${config.home.homeDirectory}/dotfiles/config/nvim");
 }
