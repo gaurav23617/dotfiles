@@ -21,23 +21,21 @@
   # Install system-wide fonts.
   fonts.packages = with pkgs; [ fira-code fira-code-nerd-font ];
 
-  # --- HOMEBREW SUPPORT (for GUI Apps & Casks) ---
   # Integrates nix-homebrew to manage apps not in nixpkgs.
   nix-homebrew = {
     enable = true;
-    # Your username must match the one above.
     user = "gaurav";
-    # Automatically update Homebrew taps.
     autoMigrate = true;
-    # Where to install Homebrew packages.
-    brewPrefix = "/opt/homebrew"; # For Apple Silicon
-    # Taps you want to use.
     taps = {
-      "homebrew/homebrew-core" = config.inputs.nix-homebrew.homebrew-core;
-      "homebrew/homebrew-cask" = config.inputs.nix-homebrew.homebrew-cask;
+      "homebrew/homebrew-core" = inputs.homebrew-core;
+      "homebrew/homebrew-cask" = inputs.homebrew-cask;
     };
-    # Install GUI applications (Casks).
     casks = [ "google-chrome" "spotify" ];
+  };
+
+  homebrew = {
+    enable = true;
+    brewPrefix = "/opt/homebrew"; # For Apple Silicon
   };
 
   # A few examples of how to configure macOS declaratively.
