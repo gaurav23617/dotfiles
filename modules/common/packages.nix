@@ -4,7 +4,6 @@
     curl
     neovim
     wget
-    google-chrome
     ghostty
     home-manager
     fd

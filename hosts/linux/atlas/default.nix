@@ -30,7 +30,7 @@
     layout = "us";
     variant = "";
   };
-
+  environment.systemPackages = [ pkgs.google-chrome ];
   # Enable CUPS to print documents.
   services.printing.enable = true;
 
