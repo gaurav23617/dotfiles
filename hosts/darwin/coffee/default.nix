@@ -10,7 +10,6 @@
     coreutils # Provides GNU core utilities
     wget # A classic command-line downloader
     btop
-    raycast
   ];
 
   # Install system-wide fonts.
@@ -30,7 +29,7 @@
   homebrew = {
     enable = true;
     brewPrefix = "/opt/homebrew"; # For Apple Silicon
-    casks = [ "google-chrome" "spotify" ];
+    casks = [ "google-chrome" "spotify" "raycast" ];
   };
 
   system.defaults = {
