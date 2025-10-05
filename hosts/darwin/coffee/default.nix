@@ -1,7 +1,8 @@
 # hosts/darwin/my-macbook/default.nix
-{ config, pkgs, ... }:
+{ config, pkgs, inputs, ... }:
 
 {
+  imports = [ inputs.nix-homebrew.darwinModules.nix-homebrew ];
   # Enable flakes and the new command-line interface.
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
   # Automatically run the garbage collector to free up disk space.
