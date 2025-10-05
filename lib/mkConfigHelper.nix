@@ -55,7 +55,8 @@ in {
             extraSpecialArgs = { inherit inputs; } // hostInfo;
             users.${hostInfo.username} = {
               imports = [ ../hosts/${hostInfo.platform}/${hostname}/home.nix ];
-              home = { inherit (hostInfo) username homeDirectory; };
+              home.username = hostInfo.username;
+              home.homeDirectory = hostInfo.homeDirectory;
             };
           };
         }
@@ -71,7 +72,10 @@ in {
 
       modules = [
         ../hosts/${hostInfo.platform}/${hostArgs.hostname}/home.nix
-        { home = { inherit (hostInfo) username homeDirectory; }; }
+        {
+          home.username = hostInfo.username;
+          home.homeDirectory = hostInfo.homeDirectory;
+        }
       ];
     };
 }
