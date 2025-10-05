@@ -30,20 +30,16 @@
       url = "github:yokoffing/Betterfox";
       flake = false;
     };
+    spicetify-nix = {
+      url = "github:Gerg-L/spicetify-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
-    {
-      self,
-      nixpkgs,
-      vicinae,
-      home-manager,
-      ...
-    }@inputs: # Add @inputs here
-    let
-      system = "x86_64-linux";
-    in
-    {
+    { self, nixpkgs, vicinae, home-manager, ... }@inputs: # Add @inputs here
+    let system = "x86_64-linux";
+    in {
       nixosConfigurations.coffee = nixpkgs.lib.nixosSystem {
         inherit system;
         specialArgs = { inherit inputs; };
