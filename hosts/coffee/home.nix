@@ -18,21 +18,18 @@
 
     ./secrets
   ];
-  # home.username = "gaurav";
-  # home.homeDirectory = "/User/gaurav";
 
-  xdg.userDirs.enable = lib.mkForce false;
+  # These MUST be set for Darwin
+  home.username = "gaurav";
+  home.homeDirectory = "/Users/gaurav";
+
+  # Disable XDG on macOS
+  xdg.userDirs.enable = false;
 
   # Create directories manually instead
   home.activation.createCustomDirs =
     lib.hm.dag.entryAfter [ "writeBoundary" ] ''
       $DRY_RUN_CMD mkdir -p "$HOME/.config/sops/age"
-      $DRY_RUN_CMD mkdir -p "$HOME/Downloads"
-      $DRY_RUN_CMD mkdir -p "$HOME/Documents"
-      $DRY_RUN_CMD mkdir -p "$HOME/Pictures"
-      $DRY_RUN_CMD mkdir -p "$HOME/Videos"
-      $DRY_RUN_CMD mkdir -p "$HOME/Music"
-      $DRY_RUN_CMD mkdir -p "$HOME/Desktop"
       $DRY_RUN_CMD mkdir -p "$HOME/personal"
       $DRY_RUN_CMD mkdir -p "$HOME/personal/media"
       $DRY_RUN_CMD mkdir -p "$HOME/personal/projects"
