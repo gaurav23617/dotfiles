@@ -4,7 +4,7 @@
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-25.05";
-    darwin = {
+    nix-darwin = {
       url = "github:lnl7/nix-darwin/master";
       inputs.nixpkgs.follows = "nixpkgs";
     };
@@ -49,7 +49,7 @@
     };
   };
 
-  outputs = inputs@{ self, nixpkgs, vicinae, home-manager, ... }:
+  outputs = inputs@{ self, nixpkgs, nix-darwin, vicinae, home-manager, ... }:
     let
       lib = nixpkgs.lib.extend
         (final: prev: { my = import ./lib { inherit inputs; }; });
