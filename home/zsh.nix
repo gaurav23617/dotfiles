@@ -16,7 +16,6 @@
 
   programs.zsh = {
     enable = true;
-    dotDir = ".config/zsh";
     initExtra = builtins.readFile ../config/zsh/.zshrc;
   };
 

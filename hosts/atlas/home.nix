@@ -4,27 +4,27 @@
   # Home Manager needs a bit of information about you and the paths it should
   # manage.
   imports = [
-    ../../../home/tmux.nix
-    ../../../home/zsh.nix
-    ../../../home/zen
-    ../../../home/direnv.nix
-    ../../../home/starship.nix
-    ../../../home/nh.nix
-    ../../../home/btop.nix
-    ../../../home/git.nix
-    ../../../home/lazygit.nix
-    ../../../home/lazydocker.nix
-    ../../../home/editor/neovim.nix
-    ../../../home/editor/vscode.nix
-    ../../../home/editor/zed.nix
-    ../../../home/fastfetch.nix
-    ../../../home/bat.nix
-    ../../../home/gh.nix
-    ../../../home/hyprland
-    ../../../home/waybar
-    ../../../home/spicetify.nix
-    ../../../home/vicinae.nix
-    ../../../home/thunar.nix
+    ../../home/tmux.nix
+    ../../home/zsh.nix
+    ../../home/zen
+    ../../home/direnv.nix
+    ../../home/starship.nix
+    ../../home/nh.nix
+    ../../home/btop.nix
+    ../../home/git.nix
+    ../../home/lazygit.nix
+    ../../home/lazydocker.nix
+    ../../home/editor/neovim.nix
+    ../../home/editor/vscode.nix
+    ../../home/editor/zed.nix
+    ../../home/fastfetch.nix
+    ../../home/bat.nix
+    ../../home/gh.nix
+    ../../home/hyprland
+    ../../home/waybar
+    ../../home/spicetify.nix
+    ../../home/vicinae.nix
+    ../../home/thunar.nix
 
     ./secrets
   ];

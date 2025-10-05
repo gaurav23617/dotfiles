@@ -2,19 +2,19 @@
 
 {
   imports = [
-    ../../../home/tmux.nix
-    ../../../home/zsh.nix
-    ../../../home/zen
-    ../../../home/direnv.nix
-    ../../../home/starship.nix
-    ../../../home/nh.nix
-    ../../../home/btop.nix
-    ../../../home/git.nix
-    ../../../home/lazygit.nix
-    ../../../home/editor/neovim.nix
-    ../../../home/fastfetch.nix
-    ../../../home/bat.nix
-    ../../../home/gh.nix
+    ../../home/tmux.nix
+    ../../home/zsh.nix
+    ../../home/zen
+    ../../home/direnv.nix
+    ../../home/starship.nix
+    ../../home/nh.nix
+    ../../home/btop.nix
+    ../../home/git.nix
+    ../../home/lazygit.nix
+    ../../home/editor/neovim.nix
+    ../../home/fastfetch.nix
+    ../../home/bat.nix
+    ../../home/gh.nix
 
     ./secrets
   ];

@@ -3,15 +3,15 @@
 {
   imports = [ # Include the results of the hardware scan.
     ./hardware-configuration.nix
-    ../../../modules/nixos/fonts.nix
-    ../../../modules/nixos/nixld.nix
-    ../../../modules/nixos/locale.nix
-    ../../../modules/nixos/audio.nix
-    ../../../modules/nixos/bluetooth.nix
-    ../../../modules/nixos/desktop/hyprland.nix
-    ../../../modules/nixos/nvidia.nix
-    ../../../modules/common
-    ../../../home/docker.nix
+    ../../modules/nixos/fonts.nix
+    ../../modules/nixos/nixld.nix
+    ../../modules/nixos/locale.nix
+    ../../modules/nixos/audio.nix
+    ../../modules/nixos/bluetooth.nix
+    ../../modules/nixos/desktop/hyprland.nix
+    ../../modules/nixos/nvidia.nix
+    ../../modules/common
+    ../../home/docker.nix
   ];
 
   # Bootloader.
