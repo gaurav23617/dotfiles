@@ -5,6 +5,6 @@
       enable = true;
       extraArgs = "--keep-since 7d --keep 3";
     };
-    flake = "/home/gaurav/dotfiles";
+    flake = "${config.home.homeDirectory}/dotfiles";
   };
 }
