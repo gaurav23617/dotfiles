@@ -1,12 +1,7 @@
-# inside lib/default.nix
-{ lib, inputs }:
+# lib/default.nix
+{ inputs }:
 
-{
-  mkHost = (import ./mkHost.nix { inherit lib inputs; }).mkHost;
-  mkHomeConfig =
-    (import ./mkHomeConfig.nix { inherit lib inputs; }).mkHomeConfig;
-  mkHostConfig = (import ./mkHostConfig.nix { inherit lib; }).mkHostConfig;
-  isPlatform = (import ./utils.nix { inherit lib; }).isPlatform;
-  isDarwin = (import ./utils.nix { inherit lib; }).isDarwin;
-  isLinux = (import ./utils.nix { inherit lib; }).isLinux;
+import ./mkConfigHelper.nix {
+  inherit inputs;
+  lib = inputs.nixpkgs.lib;
 }
