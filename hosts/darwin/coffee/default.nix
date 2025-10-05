@@ -4,21 +4,26 @@
 {
   imports = [ inputs.nix-homebrew.darwinModules.nix-homebrew ];
 
+  # Set the primary user for system defaults
+  system.primaryUser = "gaurav";
+
   # Allow unfree packages
   nixpkgs.config.allowBroken = true;
+
   nix = {
     extraOptions = ''
       warn-dirty = false
     '';
     settings = {
       download-buffer-size = 262144000; # 250 MB (250 * 1024 * 1024)
-      auto-optimise-store = true;
       experimental-features = [ "nix-command" "flakes" ];
     };
+
+    # Use optimise.automatic instead of auto-optimise-store
+    optimise.automatic = true;
+
     gc = {
       automatic = true;
-      persistent = true;
-      dates = "weekly";
       options = "--delete-older-than 7d";
     };
   };
