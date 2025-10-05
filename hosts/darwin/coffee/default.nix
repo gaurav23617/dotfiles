@@ -16,6 +16,7 @@
     coreutils # Provides GNU core utilities
     wget # A classic command-line downloader
     btop
+    raycast
   ];
 
   # Install system-wide fonts.
@@ -30,12 +31,12 @@
       "homebrew/homebrew-core" = inputs.homebrew-core;
       "homebrew/homebrew-cask" = inputs.homebrew-cask;
     };
-    casks = [ "google-chrome" "spotify" ];
   };
 
   homebrew = {
     enable = true;
     brewPrefix = "/opt/homebrew"; # For Apple Silicon
+    casks = [ "google-chrome" "spotify" ];
   };
 
   # A few examples of how to configure macOS declaratively.
@@ -43,7 +44,7 @@
     # Set dark mode.
     NSGlobalDomain.AppleInterfaceStyle = "Dark";
     # Put the Dock on the left side of the screen.
-    dock.orientation = "left";
+    dock.orientation = "bottom";
   };
 
   # This is required! Set it to the version of Nix-Darwin you're using.
