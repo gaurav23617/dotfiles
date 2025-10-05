@@ -7,10 +7,10 @@ let
     Value = true;
     Status = "locked";
   };
-in
-{
-  "zen.view.use-single-toolbar" = false;
-  "zen.view.sidebar-expanded" = false;
+in {
+  "zen.view.use-single-toolbar" = true;
+  "zen.view.sidebar-expanded" = true;
+  "zen.tabs.vertical.right-side" = true;
 
   "zen.watermark.enabled" = false;
   "zen.welcome-screen.seen" = true;
@@ -21,7 +21,8 @@ in
   "layout.css.color-mix.enabled" = true;
   "browser.tabs.delayHidingAudioPlayingIconMS" = 0;
   "layout.css.backdrop-filter.enabled" = true;
-  "browser.newtabpage.activity-stream.improvesearch.handoffToAwesomebar" = false;
+  "browser.newtabpage.activity-stream.improvesearch.handoffToAwesomebar" =
+    false;
   "privacy.userContext.enabled" = true;
   "privacy.userContext.ui.enabled" = true;
   "privacy.userContext.longPressBehavior" = 2;
@@ -102,17 +103,18 @@ in
     Value = "strict";
     Status = "locked";
   };
-  "browser.search.suggest.enabled" = lock-false;
+  "browser.search.suggest.enabled" = lock-true;
   "browser.search.suggest.enabled.private" = lock-false;
   "privacy.popups.disable_from_plugins" = 3;
   "extensions.pocket.enabled" = lock-false;
-  "browser.newtabpage.activity-stream.section.highlights.includePocket" = lock-false;
+  "browser.newtabpage.activity-stream.section.highlights.includePocket" =
+    lock-false;
   "browser.newtabpage.activity-stream.feeds.section.topstories" = lock-false;
   "browser.newtabpage.activity-stream.feeds.topsites" = lock-false;
   "browser.newtabpage.activity-stream.showSponsored" = lock-false;
   "browser.newtabpage.activity-stream.showSponsoredTopSites" = lock-false;
   "layout.word_select.eat_space_to_next_word" = lock-false;
-  "browser.shell.checkDefaultBrowser" = lock-false;
+  "browser.shell.checkDefaultBrowser" = lock-true;
   "signon.rememberSignons" = lock-false;
   "toolkit.coverage.opt-out" = lock-true;
   "toolkit.coverage.endpoint.base" = "";
@@ -172,8 +174,10 @@ in
   "browser.newtabpage.activity-stream.asrouter.userprefs.cfr.addons" = false;
   "browser.newtabpage.activity-stream.asrouter.userprefs.cfr.features" = false;
   "browser.newtabpage.activity-stream.feeds.snippets" = false;
-  "browser.newtabpage.activity-stream.improvesearch.topSiteSearchShortcuts.havePinned" = "";
-  "browser.newtabpage.activity-stream.improvesearch.topSiteSearchShortcuts.searchEngines" = "";
+  "browser.newtabpage.activity-stream.improvesearch.topSiteSearchShortcuts.havePinned" =
+    "";
+  "browser.newtabpage.activity-stream.improvesearch.topSiteSearchShortcuts.searchEngines" =
+    "";
   "browser.protections_panel.infoMessage.seen" = lock-true;
   "browser.ssb.enabled" = true;
   "browser.toolbars.bookmarks.visibility" = "always"; # always, never, newtab
@@ -221,41 +225,17 @@ in
     newElementCount = 7;
     placements = {
       widget-overflow-fixed-list = [ ];
-      unified-extensions-area = [
-        "ublock0_raymondhill_net-browser-action"
-        "firemonkey_eros_man-browser-action"
-        "addon_darkreader_org-browser-action"
-        "queryamoid_kaply_com-browser-action"
-        # "_aecec67f-0d10-4fa7-b7c7-609a2db280cf_-browser-action"
-      ];
       nav-bar = [
         "back-button"
         "forward-button"
         "stop-reload-button"
         "urlbar-container"
-        # "developer-button"
         "downloads-button"
-        "unified-extensions-button"
-
-        # Extensions
-        "_c4b582ec-4343-438c-bda2-2f691c16c262_-browser-action"
-        "firemonkey_eros_man-browser-action"
-        "ublock0_raymondhill_net-browser-action"
-        # "addon_darkreader_org-browser-action"
-        # "queryamoid_kaply_com-browser-action"
-        # "_aecec67f-0d10-4fa7-b7c7-609a2db280cf_-browser-action"
       ];
       toolbar-menubar = [ "menubar-items" ];
-      TabsToolbar = [
-        "firefox-view-button"
-        "tabbrowser-tabs"
-        "new-tab-button"
-        "alltabs-button"
-      ];
-      PersonalToolbar = [
-        "personal-bookmarks"
-        "managed-bookmarks"
-      ];
+      TabsToolbar =
+        [ "firefox-view-button" "tabbrowser-tabs" "alltabs-button" ];
+      PersonalToolbar = [ "personal-bookmarks" "managed-bookmarks" ];
     };
   };
 }
