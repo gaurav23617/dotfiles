@@ -18,8 +18,8 @@
 
     ./secrets
   ];
-  home.username = "gaurav";
-  home.homeDirectory = "/User/gaurav";
+  # home.username = "gaurav";
+  # home.homeDirectory = "/User/gaurav";
 
   xdg.userDirs.enable = lib.mkForce false;
 
