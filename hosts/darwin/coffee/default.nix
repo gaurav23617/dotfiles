@@ -39,12 +39,14 @@
     casks = [ "google-chrome" "spotify" ];
   };
 
-  # A few examples of how to configure macOS declaratively.
-  system.settings = {
-    # Set dark mode.
-    NSGlobalDomain.AppleInterfaceStyle = "Dark";
-    # Put the Dock on the left side of the screen.
-    dock.orientation = "bottom";
+  system.defaults = {
+    finder.AppleShowAllExtensions = true;
+    finder._FXShowPosixPathInTitle = true;
+    dock.orientation = "left";
+    dock.autohide = true;
+    NSGlobalDomain.AppleShowAllExtensions = true;
+    NSGlobalDomain.InitialKeyRepeat = 14;
+    NSGlobalDomain.KeyRepeat = 1;
   };
 
   # This is required! Set it to the version of Nix-Darwin you're using.
