@@ -6,7 +6,6 @@ let
   isDarwin = system: isPlatform system "darwin";
   isLinux = system: isPlatform system "linux";
 
-  # Gathers common information about a host.
   getHostInfo = hostArgs:
     let inherit (hostArgs) system username;
     in {
@@ -17,10 +16,8 @@ let
     };
 
 in {
-  # Make isLinux and isDarwin available to the flake.
   inherit isLinux isDarwin isPlatform;
 
-  # Builds the complete NixOS or Darwin system.
   mkHost = hostArgs:
     let
       inherit (hostArgs) system hostname;
@@ -30,7 +27,6 @@ in {
       else
         inputs.nixpkgs.lib.nixosSystem;
 
-      # Choose the correct Home Manager module based on platform
       homeManagerModule = if hostInfo.platform == "darwin" then
         inputs.home-manager.darwinModules.home-manager
       else
@@ -44,10 +40,8 @@ in {
       };
 
       modules = [
-        # Machine-specific configuration.
         ../hosts/${hostInfo.platform}/${hostname}/default.nix
 
-        # Home Manager integration (platform-specific).
         homeManagerModule
         {
           home-manager = {
@@ -57,14 +51,18 @@ in {
               inherit inputs;
               inherit (hostInfo) username homeDirectory platform;
             };
-            users.${hostInfo.username} =
-              ../hosts/${hostInfo.platform}/${hostname}/home.nix;
+            users.${hostInfo.username} = { config, pkgs, lib, ... }: {
+              imports = [ ../hosts/${hostInfo.platform}/${hostname}/home.nix ];
+
+              # Set these HERE to ensure they're defined before any modules try to use them
+              home.username = hostInfo.username;
+              home.homeDirectory = hostInfo.homeDirectory;
+            };
           };
         }
       ];
     };
 
-  # Builds a standalone Home Manager configuration.
   mkHomeConfig = hostArgs:
     let hostInfo = getHostInfo hostArgs;
     in inputs.home-manager.lib.homeManagerConfiguration {
@@ -74,6 +72,12 @@ in {
         inherit (hostInfo) username homeDirectory platform;
       };
 
-      modules = [ ../hosts/${hostInfo.platform}/${hostArgs.hostname}/home.nix ];
+      modules = [
+        ../hosts/${hostInfo.platform}/${hostArgs.hostname}/home.nix
+        {
+          home.username = hostInfo.username;
+          home.homeDirectory = hostInfo.homeDirectory;
+        }
+      ];
     };
 }
