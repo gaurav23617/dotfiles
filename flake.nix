@@ -77,7 +77,14 @@
           home-manager.useUserPackages = true;
           home-manager.extraSpecialArgs = { inherit inputs; };
           home-manager.backupFileExtension = "backup";
-          home-manager.users.gaurav = import ./hosts/coffee/home.nix;
+          home-manager.users.gaurav = {
+            imports = [ ./hosts/coffee/home.nix ];
+            # Explicitly set these here with highest priority
+            home = {
+              username = nixpkgs.lib.mkForce "gaurav";
+              homeDirectory = nixpkgs.lib.mkForce "/Users/gaurav";
+            };
+          };
         }
       ];
     };
