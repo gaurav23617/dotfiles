@@ -49,43 +49,50 @@
     };
   };
 
-  outputs = inputs@{ self, nixpkgs, nix-darwin, vicinae, home-manager, ... }:
-    let
-      lib = nixpkgs.lib.extend
-        (final: prev: { my = import ./lib { inherit inputs; }; });
-
-      systems = [ "x86_64-linux" "aarch64-darwin" ];
-      forAllSystems = nixpkgs.lib.genAttrs systems;
-
-      hosts = {
-        "coffee" = {
-          hostname = "coffee";
-          system = "aarch64-darwin";
-          username = "gaurav";
-        };
-        "atlas" = {
-          hostname = "atlas";
-          system = "x86_64-linux";
-          username = "gaurav";
-        };
-      };
-
-      forAllHosts = f: builtins.mapAttrs (name: host: f host);
-
-    in {
-      # Build NixOS configs using the isLinux helper for clarity
-      nixosConfigurations =
-        builtins.mapAttrs (name: hostConfig: lib.my.mkHost hostConfig)
-        (lib.filterAttrs (name: hostConfig: lib.my.isLinux hostConfig.system)
-          hosts);
-
-      # Build Darwin configs using the isDarwin helper
-      darwinConfigurations =
-        builtins.mapAttrs (name: hostConfig: lib.my.mkHost hostConfig)
-        (lib.filterAttrs (name: hostConfig: lib.my.isDarwin hostConfig.system)
-          hosts);
-
-      # Build home configs for all hosts
-      homeConfigurations = forAllHosts lib.my.mkHomeConfig;
+  outputs = { self, nixpkgs, vicinae, nix-darwin, home-manager, ... }@inputs: {
+    nixosConfigurations.atlas = nixpkgs.lib.nixosSystem {
+      system = "x86_64-linux";
+      specialArgs = { inherit inputs; };
+      modules = [
+        ./hosts/atlas
+        home-manager.nixosModules.home-manager
+        {
+          home-manager.useGlobalPkgs = true;
+          home-manager.useUserPackages = true;
+          home-manager.users.gaurav = import ./hosts/atlas/home.nix;
+          home-manager.extraSpecialArgs = { inherit inputs; };
+          home-manager.backupFileExtension = "backup";
+        }
+      ];
     };
+
+    darwinConfigurations.coffee = nix-darwin.lib.darwinSystem {
+      system = "aarch64-darwin";
+      specialArgs = { inherit inputs; };
+      modules = [
+        ./hosts/coffee
+        home-manager.darwinModules.home-manager
+        {
+          home-manager.useGlobalPkgs = true;
+          home-manager.useUserPackages = true;
+          home-manager.extraSpecialArgs = { inherit inputs; };
+          home-manager.users.gaurav = import ./hosts/coffee/home.nix;
+          home-manager.backupFileExtension = "backup";
+        }
+      ];
+    };
+
+    homeConfigurations = {
+      "gaurav@coffee" = home-manager.lib.homeManagerConfiguration {
+        pkgs = nixpkgs.legacyPackages.aarch64-darwin;
+        extraSpecialArgs = { inherit inputs; };
+        modules = [ ./hosts/coffee/home.nix ];
+      };
+      "gaurav@atlas" = home-manager.lib.homeManagerConfiguration {
+        pkgs = nixpkgs.legacyPackages.x86__64-linux;
+        extraSpecialArgs = { inherit inputs; };
+        modules = [ ./hosts/atlas/home.nix ];
+      };
+    };
+  };
 }

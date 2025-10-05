@@ -8,11 +8,10 @@
     ../../../modules/nixos/locale.nix
     ../../../modules/nixos/audio.nix
     ../../../modules/nixos/bluetooth.nix
-    # ../../modules/nixos/desktop/gnome
     ../../../modules/nixos/desktop/hyprland.nix
     ../../../modules/nixos/nvidia.nix
-    ../../../modules/common/nix.nix
-    # ../../../home/docker.nix
+    ../../../modules/common
+    ../../../home/docker.nix
   ];
 
   # Bootloader.

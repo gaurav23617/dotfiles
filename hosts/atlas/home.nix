@@ -1,6 +1,8 @@
 { config, pkgs, lib, ... }:
 
 {
+  # Home Manager needs a bit of information about you and the paths it should
+  # manage.
   imports = [
     ../../../home/tmux.nix
     ../../../home/zsh.nix
@@ -11,21 +13,33 @@
     ../../../home/btop.nix
     ../../../home/git.nix
     ../../../home/lazygit.nix
+    ../../../home/lazydocker.nix
     ../../../home/editor/neovim.nix
+    ../../../home/editor/vscode.nix
+    ../../../home/editor/zed.nix
     ../../../home/fastfetch.nix
     ../../../home/bat.nix
     ../../../home/gh.nix
+    ../../../home/hyprland
+    ../../../home/waybar
+    ../../../home/spicetify.nix
+    ../../../home/vicinae.nix
+    ../../../home/thunar.nix
 
     ./secrets
   ];
 
-  # username and homeDirectory are set by the wrapper in mkConfigHelper.nix
+  home.username = "gaurav";
+  home.homeDirectory = "/home/gaurav";
 
+  home.packages = [ ];
+  home.file = { };
   xdg.userDirs = {
     enable = true;
-    createDirectories = true;
+    createDirectories = true; # This is the key part
   };
 
+  # this piece of code is for creating empty directories
   home.activation.createCustomDirs =
     lib.hm.dag.entryAfter [ "writeBoundary" ] ''
       $DRY_RUN_CMD mkdir -p "$HOME/.config/sops/age"
@@ -36,7 +50,7 @@
       $DRY_RUN_CMD mkdir -p "$HOME/workspace"
     '';
 
-  home.stateVersion = "25.05";
-  home.sessionVariables = { EDITOR = "nvim"; };
   programs.home-manager.enable = true;
+  home.sessionVariables = { EDITOR = "nvim"; };
+  home.stateVersion = "25.05"; # Please read the comment before changing.
 }
