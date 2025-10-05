@@ -1,8 +1,6 @@
 { config, pkgs, lib, username, homeDirectory, ... }:
 
 {
-  # Home Manager needs a bit of information about you and the paths it should
-  # manage.
   imports = [
     ../../../home/tmux.nix
     ../../../home/zsh.nix
@@ -21,16 +19,15 @@
     ./secrets
   ];
 
-  # IMPORTANT: Set these values explicitly
   home.username = username;
   home.homeDirectory = homeDirectory;
 
   xdg.userDirs = {
     enable = true;
-    createDirectories = true; # This is the key part
+    createDirectories = true;
   };
 
-  # this piece of code is for creating empty directories
+  # Create custom directories
   home.activation.createCustomDirs =
     lib.hm.dag.entryAfter [ "writeBoundary" ] ''
       $DRY_RUN_CMD mkdir -p "${homeDirectory}/.config/sops/age"
@@ -41,7 +38,7 @@
       $DRY_RUN_CMD mkdir -p "${homeDirectory}/workspace"
     '';
 
-  home.stateVersion = "25.05"; # Please read the comment before changing.
+  home.stateVersion = "25.05";
   home.sessionVariables = { EDITOR = "nvim"; };
   programs.home-manager.enable = true;
 }
