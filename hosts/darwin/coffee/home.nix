@@ -21,9 +21,6 @@
     ./secrets
   ];
 
-  programs.git.enable = true;
-  programs.zsh.enable = true;
-
   xdg.userDirs = {
     enable = true;
     createDirectories = true; # This is the key part

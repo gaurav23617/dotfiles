@@ -1,15 +1,9 @@
-# hosts/darwin/my-macbook/default.nix
+# hosts/darwin/coffee/default.nix
 { config, pkgs, inputs, ... }:
 
 {
-  imports = [ inputs.nix-homebrew.darwinModules.nix-homebrew ];
-  # Enable flakes and the new command-line interface.
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
-  # Automatically run the garbage collector to free up disk space.
-  nix.gc = {
-    automatic = true;
-    options = "--delete-older-than 7d";
-  };
+  imports =
+    [ inputs.nix-homebrew.darwinModules.nix-homebrew ../../../modules/common ];
 
   # Packages available to all users.
   environment.systemPackages = with pkgs; [
