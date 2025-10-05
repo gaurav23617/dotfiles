@@ -1,4 +1,4 @@
-{ config, pkgs, lib, ... }:
+{ config, pkgs, lib, username, homeDirectory, ... }:
 
 {
   imports = [
@@ -19,9 +19,9 @@
     ./secrets
   ];
 
-  # Hardcode these values
-  home.username = "gaurav";
-  home.homeDirectory = "/Users/gaurav";
+  # Use the values passed from the flake
+  home.username = username;
+  home.homeDirectory = homeDirectory;
 
   xdg.userDirs = {
     enable = true;

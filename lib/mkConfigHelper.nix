@@ -14,6 +14,12 @@ in {
       inherit (hostArgs) system hostname username;
       platform = if isDarwin system then "darwin" else "linux";
 
+      # Determine home directory based on platform
+      homeDirectory = if platform == "darwin" then
+        "/Users/${username}"
+      else
+        "/home/${username}";
+
       systemBuilder = if platform == "darwin" then
         inputs.nix-darwin.lib.darwinSystem
       else
@@ -36,8 +42,9 @@ in {
           home-manager = {
             useGlobalPkgs = true;
             useUserPackages = true;
-            extraSpecialArgs = { inherit inputs; };
-            users.${username} = ../hosts/${platform}/${hostname}/home.nix;
+            extraSpecialArgs = { inherit inputs username homeDirectory; };
+            users.${username} =
+              import ../hosts/${platform}/${hostname}/home.nix;
           };
         }
       ];
@@ -45,11 +52,15 @@ in {
 
   mkHomeConfig = hostArgs:
     let
-      inherit (hostArgs) system hostname;
+      inherit (hostArgs) system hostname username;
       platform = if isDarwin system then "darwin" else "linux";
+      homeDirectory = if platform == "darwin" then
+        "/Users/${username}"
+      else
+        "/home/${username}";
     in inputs.home-manager.lib.homeManagerConfiguration {
       pkgs = inputs.nixpkgs.legacyPackages.${system};
-      extraSpecialArgs = { inherit inputs; };
+      extraSpecialArgs = { inherit inputs username homeDirectory; };
       modules = [ ../hosts/${platform}/${hostname}/home.nix ];
     };
 }
