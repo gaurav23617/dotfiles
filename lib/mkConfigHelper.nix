@@ -52,11 +52,13 @@ in {
           home-manager = {
             useGlobalPkgs = true;
             useUserPackages = true;
-            extraSpecialArgs = { inherit inputs; } // hostInfo;
+            # Pass all hostInfo values to home manager
+            extraSpecialArgs = {
+              inherit inputs;
+              inherit (hostInfo) username homeDirectory platform;
+            };
             users.${hostInfo.username} = {
               imports = [ ../hosts/${hostInfo.platform}/${hostname}/home.nix ];
-              home.username = hostInfo.username;
-              home.homeDirectory = hostInfo.homeDirectory;
             };
           };
         }
@@ -68,7 +70,10 @@ in {
     let hostInfo = getHostInfo hostArgs;
     in inputs.home-manager.lib.homeManagerConfiguration {
       pkgs = inputs.nixpkgs.legacyPackages.${hostArgs.system};
-      extraSpecialArgs = { inherit inputs; } // hostInfo;
+      extraSpecialArgs = {
+        inherit inputs;
+        inherit (hostInfo) username homeDirectory platform;
+      };
 
       modules = [
         ../hosts/${hostInfo.platform}/${hostArgs.hostname}/home.nix

@@ -21,7 +21,7 @@
     ./secrets
   ];
 
-  # Set home directory and username from passed arguments
+  # IMPORTANT: Set these values explicitly
   home.username = username;
   home.homeDirectory = homeDirectory;
 

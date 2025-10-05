@@ -1,4 +1,4 @@
-{ config, pkgs, lib, ... }:
+{ config, pkgs, lib, username, homeDirectory, ... }:
 
 {
   # Home Manager needs a bit of information about you and the paths it should
@@ -28,6 +28,11 @@
 
     ./secrets
   ];
+
+  # IMPORTANT: Set these values explicitly
+  home.username = username;
+  home.homeDirectory = homeDirectory;
+
   home.packages = [ ];
   home.file = { };
   xdg.userDirs = {
