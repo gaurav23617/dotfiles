@@ -5,15 +5,12 @@
     neovim
     wget
     google-chrome
-    libreoffice-qt6-fresh
     ghostty
     home-manager
-    wl-clipboard
     fd
     bc
     gcc
     git-ignore
     go
-    comma
   ];
 }
