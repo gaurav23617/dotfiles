@@ -4,6 +4,8 @@
 {
   imports = [ inputs.nix-homebrew.darwinModules.nix-homebrew ];
 
+  ids.gids.nixbld = 350;
+
   # Set the primary user for system defaults
   system.primaryUser = "gaurav";
 
