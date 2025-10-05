@@ -12,6 +12,19 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    nix-homebrew.url = "github:zhaofengli-wip/nix-homebrew";
+    homebrew-core = {
+      url = "github:homebrew/homebrew-core";
+      flake = false;
+    };
+    homebrew-cask = {
+      url = "github:homebrew/homebrew-cask";
+      flake = false;
+    };
+    homebrew-bundle = {
+      url = "github:homebrew/homebrew-bundle";
+      flake = false;
+    };
     disko = {
       url = "github:nix-community/disko/latest";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -36,33 +49,43 @@
     };
   };
 
-  outputs =
-    { self, nixpkgs, vicinae, home-manager, ... }@inputs: # Add @inputs here
-    let system = "x86_64-linux";
-    in {
-      nixosConfigurations.coffee = nixpkgs.lib.nixosSystem {
-        inherit system;
-        specialArgs = { inherit inputs; };
-        modules = [
-          ./host/coffee/configuration.nix
-          home-manager.nixosModules.home-manager
-          {
-            home-manager.useGlobalPkgs = true;
-            home-manager.useUserPackages = true;
-            home-manager.users.gaurav = import ./host/coffee/home.nix;
-            home-manager.extraSpecialArgs = { inherit inputs; };
-            home-manager.backupFileExtension = "backup";
-          }
-        ];
-      };
-      homeConfigurations = {
-        "gaurav@coffee" = home-manager.lib.homeManagerConfiguration {
-          pkgs = nixpkgs.legacyPackages.x86_64-linux;
-          extraSpecialArgs = { inherit inputs; }; # Now inputs is defined
-          modules = [
-            ./host/coffee/home.nix # Fixed path consistency
-          ];
+  outputs = inputs@{ self, nixpkgs, vicinae, home-manager, ... }:
+    let
+      lib = nixpkgs.lib.extend
+        (final: prev: { my = import ./lib { inherit inputs; }; });
+
+      systems = [ "x86_64-linux" "aarch64-darwin" ];
+      forAllSystems = nixpkgs.lib.genAttrs systems;
+
+      hosts = {
+        "coffee" = {
+          hostname = "coffee";
+          system = "aarch64-darwin";
+          username = "gaurav";
+        };
+        "atlas" = {
+          hostname = "atlas";
+          system = "x86_64-linux";
+          username = "gaurav";
         };
       };
+
+      forAllHosts = f: builtins.mapAttrs (name: host: f host);
+
+    in {
+      # Build NixOS configs using the isLinux helper for clarity
+      nixosConfigurations =
+        builtins.mapAttrs (name: hostConfig: lib.my.mkHost hostConfig)
+        (lib.filterAttrs (name: hostConfig: lib.my.isLinux hostConfig.system)
+          hosts);
+
+      # Build Darwin configs using the isDarwin helper
+      darwinConfigurations =
+        builtins.mapAttrs (name: hostConfig: lib.my.mkHost hostConfig)
+        (lib.filterAttrs (name: hostConfig: lib.my.isDarwin hostConfig.system)
+          hosts);
+
+      # Build home configs for all hosts
+      homeConfigurations = forAllHosts lib.my.mkHomeConfig;
     };
 }
