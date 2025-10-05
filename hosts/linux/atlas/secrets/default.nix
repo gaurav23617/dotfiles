@@ -6,7 +6,6 @@
   sops = {
     age.keyFile = "/home/gaurav/.config/sops/age/keys.txt";
     # defaultSopsFile = ./secrets.yaml;
-    # defaultSopsFile = ../../../secrets/secrets.yaml;
     defaultSopsFile = ../../../../secrets/secrets.yaml;
     secrets = {
       sshconfig = { path = "/home/gaurav/.ssh/config"; };

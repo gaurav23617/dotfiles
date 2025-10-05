@@ -3,18 +3,16 @@
 {
   imports = [ # Include the results of the hardware scan.
     ./hardware-configuration.nix
-    ../../modules/nixos/fonts.nix
-    ../../modules/nixos/nixld.nix
-    ../../modules/nixos/locale.nix
-    ../../modules/nixos/audio.nix
-    ../../modules/nixos/bluetooth.nix
-    # ../../modules/nixos/home-manager.nix
+    ../../../modules/nixos/fonts.nix
+    ../../../modules/nixos/nixld.nix
+    ../../../modules/nixos/locale.nix
+    ../../../modules/nixos/audio.nix
+    ../../../modules/nixos/bluetooth.nix
     # ../../modules/nixos/desktop/gnome
-    ../../modules/nixos/desktop/hyprland.nix
-    ../../modules/nixos/nvidia.nix
-    ../../modules/common/nix.nix
-    ../../modules/common/packages.nix
-    ../../home/docker.nix
+    ../../../modules/nixos/desktop/hyprland.nix
+    ../../../modules/nixos/nvidia.nix
+    ../../../modules/common/nix.nix
+    # ../../../home/docker.nix
   ];
 
   # Bootloader.
@@ -55,6 +53,6 @@
   # Enable automatic login for the user.
   services.displayManager.autoLogin.enable = true;
   services.displayManager.autoLogin.user = "gaurav";
-
+  nixpkgs.config.allowUnfree = true;
   system.stateVersion = "25.05"; # Did you read the comment?
 }

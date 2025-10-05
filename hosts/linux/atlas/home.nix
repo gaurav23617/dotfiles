@@ -11,7 +11,6 @@
     ../../../home/starship.nix
     ../../../home/nh.nix
     ../../../home/btop.nix
-    ../../../home/docker.nix
     ../../../home/git.nix
     ../../../home/lazygit.nix
     ../../../home/lazydocker.nix
@@ -29,24 +28,14 @@
 
     ./secrets
   ];
-  home.username = "gaurav";
-  home.homeDirectory = "/home/gaurav";
-  home.stateVersion = "25.05"; # Please read the comment before changing.
   home.packages = [ ];
   home.file = { };
-  programs.git.enable = true;
-  programs.zsh = {
-    enable = true;
-    shellAliases = { btw = "echo i use nixos, btw"; };
-  };
-  home.sessionVariables = { EDITOR = "nvim"; };
-  programs.home-manager.enable = true;
-
   xdg.userDirs = {
     enable = true;
     createDirectories = true; # This is the key part
   };
 
+  # this piece of code is for creating empty directories
   home.activation.createCustomDirs =
     lib.hm.dag.entryAfter [ "writeBoundary" ] ''
       $DRY_RUN_CMD mkdir -p "$HOME/.config/sops/age"
@@ -56,4 +45,8 @@
       $DRY_RUN_CMD mkdir -p "$HOME/personal/playground"
       $DRY_RUN_CMD mkdir -p "$HOME/workspace"
     '';
+
+  programs.home-manager.enable = true;
+  home.sessionVariables = { EDITOR = "nvim"; };
+  home.stateVersion = "25.05"; # Please read the comment before changing.
 }
