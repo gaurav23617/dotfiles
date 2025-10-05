@@ -2,8 +2,7 @@
 { config, pkgs, inputs, ... }:
 
 {
-  imports =
-    [ inputs.nix-homebrew.darwinModules.nix-homebrew ../../../modules/common ];
+  imports = [ inputs.nix-homebrew.darwinModules.nix-homebrew ];
 
   # Packages available to all users.
   environment.systemPackages = with pkgs; [
