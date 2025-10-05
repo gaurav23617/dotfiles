@@ -40,7 +40,8 @@ in {
       inherit system;
       specialArgs = {
         inherit inputs;
-      } // hostInfo // (hostArgs.specialArgs or { });
+        inherit (hostInfo) username homeDirectory platform;
+      };
 
       modules = [
         # Machine-specific configuration.
@@ -52,14 +53,12 @@ in {
           home-manager = {
             useGlobalPkgs = true;
             useUserPackages = true;
-            # Pass all hostInfo values to home manager
             extraSpecialArgs = {
               inherit inputs;
               inherit (hostInfo) username homeDirectory platform;
             };
-            users.${hostInfo.username} = {
-              imports = [ ../hosts/${hostInfo.platform}/${hostname}/home.nix ];
-            };
+            users.${hostInfo.username} =
+              ../hosts/${hostInfo.platform}/${hostname}/home.nix;
           };
         }
       ];
@@ -75,12 +74,6 @@ in {
         inherit (hostInfo) username homeDirectory platform;
       };
 
-      modules = [
-        ../hosts/${hostInfo.platform}/${hostArgs.hostname}/home.nix
-        {
-          home.username = hostInfo.username;
-          home.homeDirectory = hostInfo.homeDirectory;
-        }
-      ];
+      modules = [ ../hosts/${hostInfo.platform}/${hostArgs.hostname}/home.nix ];
     };
 }

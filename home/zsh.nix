@@ -16,9 +16,10 @@
 
   programs.zsh = {
     enable = true;
-    # dotDir = ".config/zsh"; # Use relative path, not absolute
-    initContent = builtins.readFile ../config/zsh/.zshrc;
+    dotDir = ".config/zsh";
+    initExtra = builtins.readFile ../config/zsh/.zshrc;
   };
+
   home.file.".config/zsh" = {
     recursive = true;
     source = ../config/zsh;
