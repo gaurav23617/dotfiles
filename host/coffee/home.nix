@@ -23,6 +23,7 @@
     ../../home/gh.nix
     ../../home/hyprland
     ../../home/waybar
+    ../../home/spicetify.nix
     ../../home/vicinae.nix
     ../../home/thunar.nix
 
@@ -36,13 +37,9 @@
   programs.git.enable = true;
   programs.zsh = {
     enable = true;
-    shellAliases = {
-      btw = "echo i use nixos, btw";
-    };
+    shellAliases = { btw = "echo i use nixos, btw"; };
   };
-  home.sessionVariables = {
-    EDITOR = "nvim";
-  };
+  home.sessionVariables = { EDITOR = "nvim"; };
   programs.home-manager.enable = true;
 
 }

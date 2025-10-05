@@ -1,5 +1,6 @@
 # Hyprland is a dynamic tiling Wayland compositor.
-{ inputs, pkgs, ... }: {
+{ inputs, pkgs, ... }:
+{
   programs.hyprland = {
     enable = true;
     withUWSM = true;
@@ -7,4 +8,7 @@
     portalPackage =
       inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland;
   };
+
+  services.displayManager.defaultSession = "hyprland";
+
 }
