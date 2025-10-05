@@ -30,6 +30,12 @@ in {
       else
         inputs.nixpkgs.lib.nixosSystem;
 
+      # Choose the correct Home Manager module based on platform
+      homeManagerModule = if hostInfo.platform == "darwin" then
+        inputs.home-manager.darwinModules.home-manager
+      else
+        inputs.home-manager.nixosModules.home-manager;
+
     in systemBuilder {
       inherit system;
       specialArgs = {
@@ -40,8 +46,8 @@ in {
         # Machine-specific configuration.
         ../hosts/${hostInfo.platform}/${hostname}/default.nix
 
-        # Home Manager integration.
-        inputs.home-manager.nixosModules.home-manager
+        # Home Manager integration (platform-specific).
+        homeManagerModule
         {
           home-manager = {
             useGlobalPkgs = true;
