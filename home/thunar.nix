@@ -3,9 +3,8 @@
   pkgs,
   config,
   ...
-}: let
-  user = config.var.username;
-in {
+}:
+{
   # ctrl + m to toggle the menubar
   home.packages = with pkgs; [
     xfce.thunar
@@ -34,12 +33,12 @@ in {
 
   # bookmarks for the side pane
   gtk.gtk3.bookmarks = [
-    "file:///home/${user}/Downloads Downloads"
-    "file:///home/${user}/Pictures Pictures"
-    "file:///home/${user}/dotfiles dotfiles"
-    "file:///home/${user}/workspace workspace"
-    "file:///home/${user}/personal personal"
-    "file:///home/${user}/personal/projects projects"
+    "file:///home/gaurav/Downloads Downloads"
+    "file:///home/gaurav/Pictures Pictures"
+    "file:///home/gaurav/dotfiles dotfiles"
+    "file:///home/gaurav/workspace workspace"
+    "file:///home/gaurav/personal personal"
+    "file:///home/gaurav/personal/projects projects"
   ];
 
   home.file.".config/xarchiver/xarchiverrc".text = ''
@@ -58,7 +57,7 @@ in {
     show_toolbar=true
     preferred_custom_cmd=
     preferred_temp_dir=/tmp
-    preferred_extract_dir=/home/${user}/Downloads
+    preferred_extract_dir=/home/gaurav/Downloads
     allow_sub_dir=0
     ensure_directory=true
     overwrite=false
