@@ -16,7 +16,7 @@
 
   programs.zsh = {
     enable = true;
-    initExtra = builtins.readFile ../config/zsh/.zshrc;
+    initContent = builtins.readFile ../config/zsh/.zshrc;
   };
 
   home.file.".config/zsh" = {
