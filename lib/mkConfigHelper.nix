@@ -42,10 +42,13 @@ in {
           home-manager = {
             useGlobalPkgs = true;
             useUserPackages = true;
-            extraSpecialArgs = { inherit inputs username homeDirectory; };
-            users.${username} = { ... }: {
+            extraSpecialArgs = { inherit inputs; };
+            users.${username} = {
               imports = [ ../hosts/${platform}/${hostname}/home.nix ];
-              home = { inherit username homeDirectory; };
+
+              # Force set these values with highest priority
+              home.username = lib.mkForce username;
+              home.homeDirectory = lib.mkForce homeDirectory;
             };
           };
         }
@@ -62,7 +65,13 @@ in {
         "/home/${username}";
     in inputs.home-manager.lib.homeManagerConfiguration {
       pkgs = inputs.nixpkgs.legacyPackages.${system};
-      extraSpecialArgs = { inherit inputs username homeDirectory; };
-      modules = [ ../hosts/${platform}/${hostname}/home.nix ];
+      extraSpecialArgs = { inherit inputs; };
+      modules = [
+        ../hosts/${platform}/${hostname}/home.nix
+        {
+          home.username = lib.mkForce username;
+          home.homeDirectory = lib.mkForce homeDirectory;
+        }
+      ];
     };
 }
