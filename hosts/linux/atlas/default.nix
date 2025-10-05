@@ -22,7 +22,7 @@
   boot.loader.efi.canTouchEfiVariables = true;
   boot.kernelParams = [ "nvidia-drm.modeset=1" ];
 
-  networking.hostName = "coffee"; # Define your hostname.
+  networking.hostName = "atlas"; # Define your hostname.
 
   # Enable networking
   networking.networkmanager.enable = true;
