@@ -22,6 +22,7 @@ in {
     let
       inherit (hostArgs) system hostname;
       hostInfo = getHostInfo hostArgs;
+
       systemBuilder = if hostInfo.platform == "darwin" then
         inputs.nix-darwin.lib.darwinSystem
       else
@@ -49,15 +50,12 @@ in {
             useUserPackages = true;
             extraSpecialArgs = {
               inherit inputs;
-              inherit (hostInfo) username homeDirectory platform;
+              username = hostInfo.username;
+              homeDirectory = hostInfo.homeDirectory;
+              platform = hostInfo.platform;
             };
-            users.${hostInfo.username} = { config, pkgs, lib, ... }: {
-              imports = [ ../hosts/${hostInfo.platform}/${hostname}/home.nix ];
-
-              # Set these HERE to ensure they're defined before any modules try to use them
-              home.username = hostInfo.username;
-              home.homeDirectory = hostInfo.homeDirectory;
-            };
+            users.${hostInfo.username} =
+              ../hosts/${hostInfo.platform}/${hostname}/home.nix;
           };
         }
       ];
@@ -69,15 +67,11 @@ in {
       pkgs = inputs.nixpkgs.legacyPackages.${hostArgs.system};
       extraSpecialArgs = {
         inherit inputs;
-        inherit (hostInfo) username homeDirectory platform;
+        username = hostInfo.username;
+        homeDirectory = hostInfo.homeDirectory;
+        platform = hostInfo.platform;
       };
 
-      modules = [
-        ../hosts/${hostInfo.platform}/${hostArgs.hostname}/home.nix
-        {
-          home.username = hostInfo.username;
-          home.homeDirectory = hostInfo.homeDirectory;
-        }
-      ];
+      modules = [ ../hosts/${hostInfo.platform}/${hostArgs.hostname}/home.nix ];
     };
 }
