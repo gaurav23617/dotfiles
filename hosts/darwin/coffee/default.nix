@@ -4,15 +4,31 @@
 {
   imports = [ inputs.nix-homebrew.darwinModules.nix-homebrew ];
 
+  # Allow unfree packages
+  nixpkgs.config.allowBroken = true;
+  nix = {
+    extraOptions = ''
+      warn-dirty = false
+    '';
+    settings = {
+      download-buffer-size = 262144000; # 250 MB (250 * 1024 * 1024)
+      auto-optimise-store = true;
+      experimental-features = [ "nix-command" "flakes" ];
+    };
+    gc = {
+      automatic = true;
+      persistent = true;
+      dates = "weekly";
+      options = "--delete-older-than 7d";
+    };
+  };
+
   # Packages available to all users.
   environment.systemPackages = with pkgs; [
     coreutils # Provides GNU core utilities
     wget # A classic command-line downloader
     btop
   ];
-
-  # Install system-wide fonts.
-  fonts.packages = with pkgs; [ fira-code fira-code-nerd-font ];
 
   # Integrates nix-homebrew to manage apps not in nixpkgs.
   nix-homebrew = {
