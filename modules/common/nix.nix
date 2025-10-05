@@ -1,11 +1,7 @@
 # Nix configuration for NixOS
 { config, inputs, ... }: {
   # Allow unfree packages
-  nixpkgs = {
-    hostPlatform = system;
-    config.allowUnfree = true;
-    config.allowBroken = true;
-  };
+  nixpkgs.config.allowBroken = true;
   nix = {
     channel.enable = false;
     extraOptions = ''
