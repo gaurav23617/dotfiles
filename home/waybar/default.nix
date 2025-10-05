@@ -10,7 +10,7 @@
   ];
 
   wayland.windowManager.hyprland.settings.exec-once = [
-    "waybar"
+    "waybar "
     "${pkgs.networkmanagerapplet}/bin/nm-applet"
     "${pkgs.blueman}/bin/blueman-applet"
   ];
