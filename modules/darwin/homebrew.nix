@@ -127,6 +127,8 @@
       "raycast"
       "blip"
       "google-drive"
+      "hiddenbar"
+      "alt-tab"
     ];
 
     brews = [
