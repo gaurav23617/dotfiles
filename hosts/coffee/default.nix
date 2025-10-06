@@ -1,5 +1,10 @@
 # hosts/darwin/coffee/default.nix
-{ config, pkgs, inputs, ... }:
+{
+  config,
+  pkgs,
+  inputs,
+  ...
+}:
 
 {
   imports = [ inputs.nix-homebrew.darwinModules.nix-homebrew ];
@@ -18,7 +23,10 @@
     '';
     settings = {
       download-buffer-size = 262144000; # 250 MB (250 * 1024 * 1024)
-      experimental-features = [ "nix-command" "flakes" ];
+      experimental-features = [
+        "nix-command"
+        "flakes"
+      ];
     };
 
     # Use optimise.automatic instead of auto-optimise-store
@@ -37,11 +45,23 @@
     btop
   ];
 
+  environment = {
+    systemPath = [ "/opt/homebrew/bin" ];
+    pathsToLink = [ "/Applications" ];
+  };
+
+  # environment variables for homebrew
+  environment.variables = {
+    HOMEBREW_PREFIX = "/opt/homebrew";
+    HOMEBREW_CELLAR = "/opt/homebrew/Cellar";
+    HOMEBREW_REPOSITORY = "/opt/homebrew";
+  };
+
   # Integrates nix-homebrew to manage apps not in nixpkgs.
   nix-homebrew = {
     enable = true;
     user = "gaurav";
-    autoMigrate = true;
+    autoMigrate = false;
     taps = {
       "homebrew/homebrew-core" = inputs.homebrew-core;
       "homebrew/homebrew-cask" = inputs.homebrew-cask;
@@ -51,7 +71,11 @@
   homebrew = {
     enable = true;
     brewPrefix = "/opt/homebrew"; # For Apple Silicon
-    casks = [ "google-chrome" "spotify" "raycast" ];
+    casks = [
+      "google-chrome"
+      "spotify"
+      "raycast"
+    ];
   };
 
   system.defaults = {

@@ -43,6 +43,7 @@ eval "$(fzf --zsh)"
 # eval "$(fnm env)"
 eval "$(zoxide init --cmd cd zsh)"
 # eval "`pip completion --zsh`"
+eval "$(<Homebrew prefix path>/bin/brew shellenv)"
 
 # source
 plug "$HOME/.config/zsh/aliases.zsh"
