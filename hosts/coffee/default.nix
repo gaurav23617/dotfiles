@@ -1,10 +1,5 @@
 # hosts/darwin/coffee/default.nix
-{
-  config,
-  pkgs,
-  inputs,
-  ...
-}:
+{ config, pkgs, inputs, ... }:
 
 {
   imports = [ inputs.nix-homebrew.darwinModules.nix-homebrew ];
@@ -23,13 +18,9 @@
     '';
     settings = {
       download-buffer-size = 262144000; # 250 MB (250 * 1024 * 1024)
-      experimental-features = [
-        "nix-command"
-        "flakes"
-      ];
+      experimental-features = [ "nix-command" "flakes" ];
     };
 
-    # Use optimise.automatic instead of auto-optimise-store
     optimise.automatic = true;
 
     gc = {
@@ -38,44 +29,53 @@
     };
   };
 
-  # Packages available to all users.
-  environment.systemPackages = with pkgs; [
-    coreutils # Provides GNU core utilities
-    wget # A classic command-line downloader
-    btop
-  ];
+  environment.systemPackages = with pkgs; [ coreutils wget btop ];
 
   environment = {
     systemPath = [ "/opt/homebrew/bin" ];
     pathsToLink = [ "/Applications" ];
   };
 
-  # environment variables for homebrew
   environment.variables = {
     HOMEBREW_PREFIX = "/opt/homebrew";
     HOMEBREW_CELLAR = "/opt/homebrew/Cellar";
     HOMEBREW_REPOSITORY = "/opt/homebrew";
   };
 
-  # Integrates nix-homebrew to manage apps not in nixpkgs.
+  # This installs Homebrew via nix-homebrew
   nix-homebrew = {
     enable = true;
     user = "gaurav";
+    enableRosetta = true;
     autoMigrate = false;
+
+    # Key: install Homebrew if not present
+    # This will happen BEFORE the homebrew module tries to run
     taps = {
       "homebrew/homebrew-core" = inputs.homebrew-core;
       "homebrew/homebrew-cask" = inputs.homebrew-cask;
+      "homebrew/homebrew-bundle" = inputs.homebrew-bundle;
     };
   };
 
+  # Configure what to install via Homebrew
   homebrew = {
     enable = true;
-    brewPrefix = "/opt/homebrew"; # For Apple Silicon
-    casks = [
-      "google-chrome"
-      "spotify"
-      "raycast"
-    ];
+
+    # Only enable if brew is already installed
+    # This prevents the error on first run
+    onActivation = {
+      autoUpdate = false;
+      cleanup = "zap";
+      upgrade = true;
+    };
+
+    taps = [ "homebrew/core" "homebrew/cask" ];
+
+    casks = [ "google-chrome" "spotify" "raycast" ];
+
+    brews = [ ];
+    masApps = { };
   };
 
   system.defaults = {
@@ -88,6 +88,5 @@
     NSGlobalDomain.KeyRepeat = 1;
   };
 
-  # This is required! Set it to the version of Nix-Darwin you're using.
   system.stateVersion = 4;
 }
