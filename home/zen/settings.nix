@@ -7,7 +7,8 @@ let
     Value = true;
     Status = "locked";
   };
-in {
+in
+{
   "zen.view.use-single-toolbar" = true;
   "zen.view.sidebar-expanded" = true;
   "zen.tabs.vertical.right-side" = true;
@@ -21,8 +22,7 @@ in {
   "layout.css.color-mix.enabled" = true;
   "browser.tabs.delayHidingAudioPlayingIconMS" = 0;
   "layout.css.backdrop-filter.enabled" = true;
-  "browser.newtabpage.activity-stream.improvesearch.handoffToAwesomebar" =
-    false;
+  "browser.newtabpage.activity-stream.improvesearch.handoffToAwesomebar" = false;
   "privacy.userContext.enabled" = true;
   "privacy.userContext.ui.enabled" = true;
   "privacy.userContext.longPressBehavior" = 2;
@@ -53,9 +53,9 @@ in {
   "toolkit.scrollbox.verticalScrollDistance" = 2;
 
   # Use cloudflare for better security/privacy
-  "network.trr.mode" = 3; # 2 if your havng DNS problems
-  "network.trr.custom_uri" = "https://dns.quad9.net/dns-query";
-  "network.trr.uri" = "https://dns.quad9.net/dns-query";
+  # "network.trr.mode" = 3; # 2 if your havng DNS problems
+  # "network.trr.custom_uri" = "https://dns.quad9.net/dns-query";
+  # "network.trr.uri" = "https://dns.quad9.net/dns-query";
 
   # Remove trackers
   "privacy.purge_trackers.enabled" = lock-true;
@@ -107,8 +107,7 @@ in {
   "browser.search.suggest.enabled.private" = lock-false;
   "privacy.popups.disable_from_plugins" = 3;
   "extensions.pocket.enabled" = lock-false;
-  "browser.newtabpage.activity-stream.section.highlights.includePocket" =
-    lock-false;
+  "browser.newtabpage.activity-stream.section.highlights.includePocket" = lock-false;
   "browser.newtabpage.activity-stream.feeds.section.topstories" = lock-false;
   "browser.newtabpage.activity-stream.feeds.topsites" = lock-false;
   "browser.newtabpage.activity-stream.showSponsored" = lock-false;
@@ -174,10 +173,8 @@ in {
   "browser.newtabpage.activity-stream.asrouter.userprefs.cfr.addons" = false;
   "browser.newtabpage.activity-stream.asrouter.userprefs.cfr.features" = false;
   "browser.newtabpage.activity-stream.feeds.snippets" = false;
-  "browser.newtabpage.activity-stream.improvesearch.topSiteSearchShortcuts.havePinned" =
-    "";
-  "browser.newtabpage.activity-stream.improvesearch.topSiteSearchShortcuts.searchEngines" =
-    "";
+  "browser.newtabpage.activity-stream.improvesearch.topSiteSearchShortcuts.havePinned" = "";
+  "browser.newtabpage.activity-stream.improvesearch.topSiteSearchShortcuts.searchEngines" = "";
   "browser.protections_panel.infoMessage.seen" = lock-true;
   "browser.ssb.enabled" = true;
   "browser.toolbars.bookmarks.visibility" = "always"; # always, never, newtab
@@ -233,9 +230,15 @@ in {
         "downloads-button"
       ];
       toolbar-menubar = [ "menubar-items" ];
-      TabsToolbar =
-        [ "firefox-view-button" "tabbrowser-tabs" "alltabs-button" ];
-      PersonalToolbar = [ "personal-bookmarks" "managed-bookmarks" ];
+      TabsToolbar = [
+        "firefox-view-button"
+        "tabbrowser-tabs"
+        "alltabs-button"
+      ];
+      PersonalToolbar = [
+        "personal-bookmarks"
+        "managed-bookmarks"
+      ];
     };
   };
 }
