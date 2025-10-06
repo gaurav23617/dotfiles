@@ -112,7 +112,7 @@
     # This prevents the error on first run
     onActivation = {
       autoUpdate = false;
-      cleanup = "zap";
+      cleanup = "uninstall";
       upgrade = true;
     };
 
@@ -126,6 +126,7 @@
       "spotify"
       "raycast"
       "blip"
+      "google-drive"
     ];
 
     brews = [
