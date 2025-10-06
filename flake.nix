@@ -12,7 +12,9 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    nix-homebrew.url = "github:zhaofengli-wip/nix-homebrew";
+    nix-homebrew = {
+      url = "github:zhaofengli-wip/nix-homebrew";
+    };
     homebrew-core = {
       url = "github:homebrew/homebrew-core";
       flake = false;
@@ -23,6 +25,14 @@
     };
     homebrew-bundle = {
       url = "github:homebrew/homebrew-bundle";
+      flake = false;
+    };
+    brew-nix = {
+      url = "github:BatteredBunny/brew-nix";
+      inputs.brew-api.follows = "brew-api";
+    };
+    brew-api = {
+      url = "github:BatteredBunny/brew-api";
       flake = false;
     };
     disko = {
@@ -47,6 +57,7 @@
       url = "github:Gerg-L/spicetify-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    ghostty.url = "github:ghostty-org/ghostty";
   };
 
   outputs =
@@ -83,6 +94,12 @@
         specialArgs = { inherit inputs; };
         modules = [
           ./hosts/coffee/default.nix
+          # Add the brew-nix overlay here
+          {
+            nixpkgs.overlays = [
+              inputs.brew-nix.overlays.default
+            ];
+          }
           home-manager.darwinModules.home-manager
           {
             home-manager.useGlobalPkgs = true;
@@ -91,7 +108,6 @@
             home-manager.backupFileExtension = "backup";
             home-manager.users.gaurav = {
               imports = [ ./hosts/coffee/home.nix ];
-              # Explicitly set these here with highest priority
               home = {
                 username = nixpkgs.lib.mkForce "gaurav";
                 homeDirectory = nixpkgs.lib.mkForce "/Users/gaurav";

@@ -1,4 +1,9 @@
-{ config, pkgs, lib, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
 
 {
   imports = [
@@ -15,8 +20,9 @@
     ../../home/fastfetch.nix
     ../../home/bat.nix
     ../../home/gh.nix
+    ../../home/ghostty.nix
 
-    ./secrets  # Temporarily comment this out to test
+    ./secrets
   ];
 
   # These MUST be set for Darwin
@@ -27,17 +33,18 @@
   xdg.userDirs.enable = false;
 
   # Create directories manually instead
-  home.activation.createCustomDirs =
-    lib.hm.dag.entryAfter [ "writeBoundary" ] ''
-      $DRY_RUN_CMD mkdir -p "$HOME/.config/sops/age"
-      $DRY_RUN_CMD mkdir -p "$HOME/personal"
-      $DRY_RUN_CMD mkdir -p "$HOME/personal/media"
-      $DRY_RUN_CMD mkdir -p "$HOME/personal/projects"
-      $DRY_RUN_CMD mkdir -p "$HOME/personal/playground"
-      $DRY_RUN_CMD mkdir -p "$HOME/workspace"
-    '';
+  home.activation.createCustomDirs = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
+    $DRY_RUN_CMD mkdir -p "$HOME/.config/sops/age"
+    $DRY_RUN_CMD mkdir -p "$HOME/personal"
+    $DRY_RUN_CMD mkdir -p "$HOME/personal/media"
+    $DRY_RUN_CMD mkdir -p "$HOME/personal/projects"
+    $DRY_RUN_CMD mkdir -p "$HOME/personal/playground"
+    $DRY_RUN_CMD mkdir -p "$HOME/workspace"
+  '';
 
   home.stateVersion = "25.05";
-  home.sessionVariables = { EDITOR = "nvim"; };
+  home.sessionVariables = {
+    EDITOR = "nvim";
+  };
   programs.home-manager.enable = true;
 }
