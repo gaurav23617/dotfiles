@@ -1,13 +1,13 @@
 # General Settings
 desktop-notifications = true
 link-url = true
-fullscreen = false
+fullscreen = true
 initial-window = true
 confirm-close-surface = false
 quit-after-last-window-closed = false
 vt-kam-allowed = false
 shell-integration = detect
-shell-integration-features = cursor,no-sudo,title
+shell-integration-features = cursor,no-sudo
 osc-color-report-format = 16-bit
 term = xterm-ghostty
 
@@ -27,8 +27,9 @@ window-save-state = always
 window-decoration = true
 # window-padding-x = 8
 window-padding-balance = false
-window-height = 800
-window-width = 800
+# window-height = 800
+# window-width = 800
+window-show-tab-bar = never
 window-step-resize = false
 resize-overlay = always
 resize-overlay-position = center
@@ -39,12 +40,12 @@ unfocused-split-opacity = 0.6
 theme = Catppuccin Mocha
 bold-is-bright = false
 background-opacity = 0.90
-background-blur-radius = 27
+background-blur-radius = 60
 cursor-style = bar
 cursor-style-blink = false
 
 # Font Settings
-font-family = JetBrainsMonoNL Nerd Font
+font-family = JetBrainsMono Nerd Font
 window-title-font-family = "0xProto Nerd Font Mono"
 font-style = default
 font-style-bold = default
@@ -67,17 +68,23 @@ gtk-adwaita = false
 window-theme = auto
 window-colorspace = srgb
 gtk-titlebar = false
-adw-toolbar-style = raised
-macos-titlebar-style = tabs
+macos-titlebar-style = false
 macos-window-shadow = true
 macos-non-native-fullscreen = false
 macos-option-as-alt = false
-
-# Keybindings
-keybind = ctrl+c=copy_to_clipboard
-keybind = ctrl+v=paste_from_clipboard
 
 # Scrollback & Storage
 scrollback-limit = 10000000
 image-storage-limit = 320000000
 click-repeat-interval = 0
+
+# Unbind Alt+Number keys to allow them to be passed through to tmux
+keybind = alt+1=unbind
+keybind = alt+2=unbind
+keybind = alt+3=unbind
+keybind = alt+4=unbind
+keybind = alt+5=unbind
+keybind = alt+6=unbind
+keybind = alt+7=unbind
+keybind = alt+8=unbind
+keybind = alt+9=unbind
