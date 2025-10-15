@@ -10,6 +10,10 @@
     bc
     gcc
     git-ignore
+    gnumake
     go
+    pkg-config
+    coreutils
+    nodejs_22
   ];
 }
