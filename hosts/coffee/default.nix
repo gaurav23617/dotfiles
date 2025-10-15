@@ -7,7 +7,10 @@
 }:
 
 {
-  imports = [ ../../modules/darwin ];
+  imports = [
+    ../../modules/darwin
+    ../../modules/common
+  ];
 
   ids.gids.nixbld = 350;
 
@@ -20,12 +23,7 @@
   nixpkgs.config.allowBroken = true;
 
   environment.systemPackages = with pkgs; [
-    coreutils
-    wget
     darwin.cctools
-    clang
     llvmPackages.bintools
-    gnumake
-    pkg-config
   ];
 }
