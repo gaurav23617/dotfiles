@@ -21,6 +21,7 @@
     ../../home/bat.nix
     ../../home/gh.nix
     ../../home/ghostty.nix
+    ../../home/atuin.nix
 
     ./secrets
   ];
