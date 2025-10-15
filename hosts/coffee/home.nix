@@ -22,6 +22,7 @@
     ../../home/gh.nix
     ../../home/ghostty.nix
     ../../home/atuin.nix
+    ../../home/aerospace.nix
 
     ./secrets
   ];
