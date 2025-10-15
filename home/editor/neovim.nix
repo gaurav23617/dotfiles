@@ -62,7 +62,6 @@ in
       cargo
       wordnet
       rustc
-      basedpyright
       nixfmt-rfc-style
       ripgrep
       imagemagick
