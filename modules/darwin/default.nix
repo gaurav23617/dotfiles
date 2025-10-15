@@ -1,12 +1,14 @@
 {
   pkgs,
   inputs,
+  self,
   ...
 }:
 {
   imports = [
     ./homebrew.nix
     ./settings.nix
+    ./packages.nix
   ];
 
   # nix config
