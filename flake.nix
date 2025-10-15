@@ -17,10 +17,28 @@
       homebrew-cask,
       ...
     }@inputs:
+
+    let
+      pkgs-gtk3 = import nixpkgs {
+        system = "aarch64-darwin";
+        config.allowUnfree = true;
+        overlays = [
+          inputs.brew-nix.overlays.default
+          # The GTK3 overlay
+          (final: prev: {
+            gtk3 =
+              (import inputs.nixpkgs-pinned-gtk3 {
+                system = prev.system;
+                config.allowUnfree = true;
+              }).gtk3;
+          })
+        ];
+      };
+    in
     {
       nixosConfigurations.atlas = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
-        specialArgs = { inherit inputs; };
+        specialArgs = { inherit inputs self; };
         modules = [
           ./hosts/atlas/default.nix
           home-manager.nixosModules.home-manager
@@ -36,15 +54,13 @@
 
       darwinConfigurations.coffee = nix-darwin.lib.darwinSystem {
         system = "aarch64-darwin";
-        specialArgs = { inherit inputs; };
+        # Use the special pkgs set
+        pkgs = pkgs-gtk3;
+        specialArgs = { inherit inputs self; };
         modules = [
           ./hosts/coffee/default.nix
-          # Add the brew-nix overlay here
-          {
-            nixpkgs.overlays = [
-              inputs.brew-nix.overlays.default
-            ];
-          }
+          # Note: The overlays are now part of pkgs-gtk3,
+          # so they don't need to be listed here again.
           home-manager.darwinModules.home-manager
           {
             home-manager.useGlobalPkgs = true;
@@ -64,7 +80,8 @@
 
       homeConfigurations = {
         "gaurav@coffee" = home-manager.lib.homeManagerConfiguration {
-          pkgs = nixpkgs.legacyPackages.aarch64-darwin;
+          # Use the same special pkgs set here
+          pkgs = pkgs-gtk3;
           extraSpecialArgs = { inherit inputs; };
           modules = [
             ./hosts/coffee/home.nix
