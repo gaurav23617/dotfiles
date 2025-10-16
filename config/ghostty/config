@@ -19,23 +19,6 @@ clipboard-trim-trailing-spaces = true
 clipboard-paste-protection = true
 clipboard-paste-bracketed-safe = true
 
-# Window Settings
-window-vsync = true
-window-inherit-working-directory = false
-window-inherit-font-size = true
-window-save-state = always
-window-decoration = true
-# window-padding-x = 8
-window-padding-balance = false
-# window-height = 800
-# window-width = 800
-window-show-tab-bar = never
-window-step-resize = false
-resize-overlay = always
-resize-overlay-position = center
-resize-overlay-duration = 750ms
-unfocused-split-opacity = 0.6
-
 # Appearance Settings
 theme = Catppuccin Mocha
 bold-is-bright = false

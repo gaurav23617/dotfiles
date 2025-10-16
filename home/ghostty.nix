@@ -17,12 +17,7 @@ in
       [ pkgs.brewCasks.ghostty ]
   );
 
-  home.file = {
-    ".config/ghostty/config" = {
-      source = ../config/ghostty/common-config;
-    };
-    ".config/ghostty/${config_name}" = {
-      source = ../config/ghostty/${config_name};
-    };
+  home.file.".config/ghostty/config" = {
+    source = ../config/ghostty/config;
   };
 }
