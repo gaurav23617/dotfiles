@@ -9,6 +9,7 @@
     ./homebrew.nix
     ./settings.nix
     ./packages.nix
+    ./fonts.nix
   ];
 
   # nix config
