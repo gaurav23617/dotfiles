@@ -7,6 +7,10 @@
   system = {
     configurationRevision = self.rev or self.dirtyRev or null;
 
+    # keyboard = {
+    #   enableKeyMapping = true;
+    # };
+
     startup.chime = false;
 
     defaults = {
@@ -16,18 +20,25 @@
       };
 
       finder = {
+        NewWindowTarget = Home; # new finder windows open home dir
         AppleShowAllFiles = true; # hidden files
         AppleShowAllExtensions = true; # file extensions
         _FXShowPosixPathInTitle = true; # title bar full path
+        FXRemoveOldTrashItems = true; # auto empty trash
         ShowPathbar = true; # breadcrumb nav at bottom
         ShowStatusBar = true; # file count & disk space
+        CreateDesktop = false; # no desktop icons
+        QuitMenuItem = true; # allow quitting finder
+        ShowExternalHardDrivesOnDesktop = false; # Whether to show external disks on desktop
       };
 
       NSGlobalDomain = {
-        NSAutomaticSpellingCorrectionEnabled = false;
-        NSAutomaticCapitalizationEnabled = false;
+        NSAutomaticSpellingCorrectionEnabled = true;
+        NSAutomaticCapitalizationEnabled = true;
         NSAutomaticPeriodSubstitutionEnabled = false;
-        NSAutomaticWindowAnimationsEnabled = false;
+        NSAutomaticWindowAnimationsEnabled = true; # on/off animations of windows closing/opening
+        NSDocumentSaveNewDocumentsToCloud = false; # default save to disk, not iCloud
+        # AppleInterfaceStyle = Dark; # dark mode
         AppleShowAllExtensions = true;
         InitialKeyRepeat = 14;
         KeyRepeat = 1;
@@ -36,6 +47,11 @@
       dock = {
         orientation = "bottom";
         autohide = true;
+        auothide-delay = 0.2;
+        show-recents = false;
+        expose-animation-duration = 0.12;
+        show-process-indicators = true;
+        autohide-time-modifier = 1.0;
       };
     };
   };
