@@ -26,6 +26,9 @@ background-opacity = 0.90
 background-blur-radius = 60
 cursor-style = bar
 cursor-style-blink = false
+window-padding-x = 10
+window-padding-y = 8
+window-padding-color = extend-always
 
 # Font Settings
 font-family = JetBrainsMono Nerd Font
