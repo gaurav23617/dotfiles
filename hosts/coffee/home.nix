@@ -8,7 +8,8 @@
 {
   imports = [
     ../../home/tmux.nix
-    ../../home/zsh.nix
+    # ../../home/zsh.nix
+    ../../home/nushell.nix
     ../../home/zen
     ../../home/direnv.nix
     ../../home/starship.nix
@@ -46,7 +47,13 @@
 
   home.stateVersion = "25.05";
   home.sessionVariables = {
+    TERM = "ghostty";
     EDITOR = "nvim";
+    SHELL = "nu";
   };
+  home.sessionPath = [
+    "/run/current-system/sw/bin"
+    "$HOME/.nix-profile/bin"
+  ];
   programs.home-manager.enable = true;
 }

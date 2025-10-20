@@ -5,7 +5,6 @@
   inputs,
   ...
 }:
-
 {
   imports = [
     ../../modules/darwin
@@ -13,17 +12,19 @@
   ];
 
   ids.gids.nixbld = 350;
-
   networking.hostName = "coffee";
-
-  # Set the primary user for system defaults
   system.primaryUser = "gaurav";
 
-  # Allow unfree packages
   nixpkgs.config.allowBroken = true;
 
   environment.systemPackages = with pkgs; [
     darwin.cctools
     llvmPackages.bintools
   ];
+  environment.shells = [ pkgs.nushell ];
+  users.users.gaurav = {
+    description = "Gaurav";
+    home = "/Users/gaurav";
+    # shell = pkgs.nushell;
+  };
 }
