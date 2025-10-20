@@ -104,7 +104,7 @@ in
     Status = "locked";
   };
   "browser.search.suggest.enabled" = lock-true;
-  "browser.search.suggest.enabled.private" = lock-false;
+  "browser.search.suggest.enabled.private" = lock-true;
   "privacy.popups.disable_from_plugins" = 3;
   "extensions.pocket.enabled" = lock-false;
   "browser.newtabpage.activity-stream.section.highlights.includePocket" = lock-false;
@@ -139,17 +139,17 @@ in
 
   # Permissions
   # 0=always ask (default), 1=allow, 2=block
-  "permissions.default.geo" = 2;
-  "permissions.default.camera" = 2;
+  "permissions.default.geo" = 0;
+  "permissions.default.camera" = 0;
   "permissions.default.microphone" = 0;
   "permissions.default.desktop-notification" = 2;
-  "permissions.default.xr" = 2; # Virtual Reality
+  "permissions.default.xr" = 0; # Virtual Reality
 
   # General settings
-  "ui.key.accelKey" = 17; # Set CTRL as master key
+  # "ui.key.accelKey" = 17; # Set CTRL as master key
   "intl.locale.requested" = "en-GB,en-US";
   "browser.aboutConfig.showWarning" = lock-false;
-  "browser.aboutwelcome.enabled" = lock-false;
+  "browser.aboutwelcome.enabled" = lock-true;
   "browser.tabs.firefox-view" = lock-false;
   "browser.startup.homepage_override.mstone" = "ignore";
   "trailhead.firstrun.didSeeAboutWelcome" = lock-true; # Disable welcome splash
@@ -177,11 +177,11 @@ in
   "browser.newtabpage.activity-stream.improvesearch.topSiteSearchShortcuts.searchEngines" = "";
   "browser.protections_panel.infoMessage.seen" = lock-true;
   "browser.ssb.enabled" = true;
-  "browser.toolbars.bookmarks.visibility" = "always"; # always, never, newtab
+  "browser.toolbars.bookmarks.visibility" = "newtab"; # always, never, newtab
   #"browser.urlbar.placeholderName" = "Google";
   "browser.urlbar.suggest.topsites" = lock-false;
-  "browser.urlbar.suggest.openpage" = lock-false;
-  "browser.urlbar.suggest.recentsearches" = lock-false;
+  "browser.urlbar.suggest.openpage" = lock-true;
+  "browser.urlbar.suggest.recentsearches" = lock-true;
   "datareporting.policy.dataSubmissionEnable" = false;
   "datareporting.policy.dataSubmissionPolicyAcceptedVersion" = 2;
 

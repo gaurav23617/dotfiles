@@ -1,9 +1,15 @@
-{ inputs, lib, pkgs, ... }: {
+{
+  inputs,
+  lib,
+  pkgs,
+  ...
+}:
+{
   imports = [ inputs.zen-browser.homeModules.beta ];
 
   programs.zen-browser = {
     enable = true;
-    policies = import ./policies.nix { inherit lib; };
+    # policies = import ./policies.nix { inherit lib; };
     languagePacks = [ "en-US" ];
     profiles = {
       coffee = {
