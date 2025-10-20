@@ -25,6 +25,9 @@
     configFile.source = ../config/nushell/config.nu;
     envFile.source = ../config/nushell/env.nu;
     # loginFile.source = ./.config/nushell/login.nu;
+    extraConfig = ''
+      $env.PATH ++= [ "~/.nix-profile/bin" ]
+    '';
   };
   home.file.".config/nushell" = {
     recursive = true;

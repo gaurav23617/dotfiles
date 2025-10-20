@@ -1,4 +1,4 @@
-# hosts/darwin/coffee/default.nix
+# hosts/coffee/default.nix
 {
   config,
   pkgs,
@@ -20,11 +20,17 @@
   environment.systemPackages = with pkgs; [
     darwin.cctools
     llvmPackages.bintools
+    nushell
   ];
-  environment.shells = [ pkgs.nushell ];
+
+  environment.shells = [
+    pkgs.nushell
+    pkgs.zsh
+  ];
+
   users.users.gaurav = {
     description = "Gaurav";
     home = "/Users/gaurav";
-    # shell = pkgs.nushell;
+    shell = pkgs.nushell;
   };
 }

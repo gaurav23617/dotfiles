@@ -50,6 +50,7 @@
     TERM = "ghostty";
     EDITOR = "nvim";
     SHELL = "nu";
+    XDG_CONFIG_HOME = "${config.home.homeDirectory}/.config";
   };
   home.sessionPath = [
     "/run/current-system/sw/bin"

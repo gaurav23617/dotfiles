@@ -32,11 +32,22 @@ $env.config = ($env.config? | default {} | merge {
     }
 })
 
-source $"($nu.default-config-dir)/catppuccin_mocha.nu"
-source $"($nu.default-config-dir)/functions.nu"
-source $"($nu.default-config-dir)/aliases.nu"
-source $"($nu.default-config-dir)/completions.nu"
-source $"($nu.default-config-dir)/abbreviations.nu"
+# let config_dir = ($env.HOME | path join ".config/nushell")
+#
+# source $"($nu.default-config-dir)/catppuccin_mocha.nu"
+# source $"($nu.default-config-dir)/functions.nu"
+# source $"($nu.default-config-dir)/aliases.nu"
+# source $"($nu.default-config-dir)/completions.nu"
+# source $"($nu.default-config-dir)/abbreviations.nu"
+
+# Use absolute paths instead of $nu.default-config-dir
+let config_dir = ($env.HOME | path join ".config/nushell")
+
+source $"($config_dir)/catppuccin_mocha.nu"
+source $"($config_dir)/functions.nu"
+source $"($config_dir)/aliases.nu"
+source $"($config_dir)/completions.nu"
+source $"($config_dir)/abbreviations.nu"
 
 
 let tty_out = (tty | str trim)
