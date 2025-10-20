@@ -1,7 +1,11 @@
 { self, ... }:
 {
   # touch ID for sudo
-  security.pam.services.sudo_local.touchIdAuth = true;
+  # security.pam.services.sudo_local.touchIdAuth = true;
+  security.pam.services.sudo_local = {
+    touchIdAuth = true;
+    reattach = true;
+  };
 
   # system defaults and preferences
   system = {
@@ -20,7 +24,7 @@
       };
 
       finder = {
-        NewWindowTarget = Home; # new finder windows open home dir
+        NewWindowTarget = "Home"; # new finder windows open home dir
         AppleShowAllFiles = true; # hidden files
         AppleShowAllExtensions = true; # file extensions
         _FXShowPosixPathInTitle = true; # title bar full path
@@ -47,10 +51,11 @@
       dock = {
         orientation = "bottom";
         autohide = true;
-        auothide-delay = 0.2;
+        # autohide-delay = 0;
         show-recents = false;
         expose-animation-duration = 0.12;
         show-process-indicators = true;
+        tilesize = 32;
         autohide-time-modifier = 1.0;
       };
     };
