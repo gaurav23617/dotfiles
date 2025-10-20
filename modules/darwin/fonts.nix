@@ -13,6 +13,6 @@
       nerd-fonts.zed-mono
     ];
 
-    enableDefaultPackages = false;
+    # enableDefaultPackages = false;
   };
 }
