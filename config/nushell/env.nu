@@ -1,3 +1,10 @@
+$env.PATH = ($env.PATH | split row (char esep) | prepend [
+    "/run/current-system/sw/bin"
+    $"($env.HOME)/.nix-profile/bin"
+    "/nix/var/nix/profiles/default/bin"
+    "/etc/profiles/per-user/($env.HOME | path basename)/bin"
+])
+
 $env.EDITOR = 'nvim'
 $env.VISUAL = 'nvim'
 $env.PAGER  = 'less'

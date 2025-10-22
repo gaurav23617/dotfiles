@@ -6,34 +6,35 @@
 }:
 {
   home.packages = with pkgs; [
+    # Core utilities
     bat
-    ripgrep
-    tldr
-    sesh
-    yq
-    fd
-    zoxide
-    fzf
     eza
-    bat
+    fd
+    fzf
+    ripgrep
+
+    # Shell enhancements
+    atuin
     carapace
+    starship
+    zoxide
+
+    # Other tools
+    lazygit
+    sesh
+    tldr
     vivid
+    yq
   ];
 
   programs.nushell = {
     enable = true;
     configFile.source = ../config/nushell/config.nu;
     envFile.source = ../config/nushell/env.nu;
-    # loginFile.source = ./.config/nushell/login.nu;
-    extraConfig = ''
-      $env.PATH ++= [ "~/.nix-profile/bin" ]
-    '';
   };
+
   home.file.".config/nushell" = {
     recursive = true;
     source = ../config/nushell;
-  };
-  home.sessionVariables = {
-    XDG_CONFIG_HOME = "${config.home.homeDirectory}/.config";
   };
 }
