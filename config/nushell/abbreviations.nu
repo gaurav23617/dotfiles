@@ -1,37 +1,50 @@
 # source: https://hackmd.io/Y9S7BmRsSvWxG_1AqS_xFw#3-abbr
 
-scope aliases | where name =~ '^_' | each { |alias|
-  $"alias ($alias.name | str replace -r '^_' '') = ($alias.expansion)"
-} | save -f $"($nu.cache-dir)/abbreviations.nu"
+let abbr_file = $"($nu.cache-dir)/abbreviations.nu"
 
+# Create cache dir if it doesn't exist
+if not ($nu.cache-dir | path exists) {
+  mkdir $nu.cache-dir
+}
+
+# Generate abbreviations from aliases
+scope aliases
+  | where name =~ '^_'
+  | each { |alias|
+    $"alias ($alias.name | str replace -r '^_' '') = ($alias.expansion)"
+  }
+  | save -f $abbr_file
+
+# Set up keybindings for abbreviation expansion
 $env.config = (
   $env.config | upsert keybindings (
     $env.config.keybindings
     | append [
         {
-        name: abbr
-        modifier: none
-        keycode: space
-        mode: [emacs, vi_normal, vi_insert]
-        event: [
-          { send: menu name: abbr_menu }
-          { edit: insertchar, value: ' ' }
-        ]
-      },
-      {
-        name: abbr
-        modifier: none
-        keycode: Enter
-        mode: [emacs, vi_normal, vi_insert]
-        event: [
-          { send: menu name: abbr_menu }
-          { send: enter }
-        ]
-      }
+          name: abbr
+          modifier: none
+          keycode: space
+          mode: [emacs, vi_normal, vi_insert]
+          event: [
+            { send: menu name: abbr_menu }
+            { edit: insertchar, value: ' ' }
+          ]
+        },
+        {
+          name: abbr
+          modifier: none
+          keycode: Enter
+          mode: [emacs, vi_normal, vi_insert]
+          event: [
+            { send: menu name: abbr_menu }
+            { send: enter }
+          ]
+        }
     ]
   )
 )
 
+# Configure the abbreviation menu
 $env.config = (
   $env.config | upsert menus (
     $env.config.menus
@@ -62,4 +75,5 @@ $env.config = (
   )
 )
 
+# Source the generated abbreviations file
 source $"($nu.cache-dir)/abbreviations.nu"

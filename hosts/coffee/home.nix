@@ -8,7 +8,7 @@
 {
   imports = [
     ../../home/tmux.nix
-    # ../../home/zsh.nix
+    ../../home/zsh.nix
     ../../home/nushell.nix
     ../../home/zen
     ../../home/direnv.nix
@@ -49,8 +49,7 @@
   home.sessionVariables = {
     TERM = "ghostty";
     EDITOR = "nvim";
-    SHELL = "nu";
-    XDG_CONFIG_HOME = "${config.home.homeDirectory}/.config";
+    SHELL = "${pkgs.nushell}/bin/nu";
   };
   home.sessionPath = [
     "/run/current-system/sw/bin"

@@ -1,8 +1,9 @@
 # Source external configurations
-source $"($nu.cache-dir)/carapace.nu"
-source $"($nu.cache-dir)/zoxide.nu"
-source $"($nu.cache-dir)/atuin.nu"
-use    $"($nu.cache-dir)/starship.nu"
+source ~/.config/nushell/env.nu
+source ~/.zoxide.nu
+# source ~/.cache/carapace/init.nu
+source ~/.local/share/atuin/init.nu
+use ~/.cache/starship/init.nu
 
 $env.config = ($env.config? | default {} | merge {
     ls: {
@@ -32,22 +33,11 @@ $env.config = ($env.config? | default {} | merge {
     }
 })
 
-# let config_dir = ($env.HOME | path join ".config/nushell")
-#
-# source $"($nu.default-config-dir)/catppuccin_mocha.nu"
-# source $"($nu.default-config-dir)/functions.nu"
-# source $"($nu.default-config-dir)/aliases.nu"
-# source $"($nu.default-config-dir)/completions.nu"
+source $"($nu.default-config-dir)/catppuccin_mocha.nu"
+source $"($nu.default-config-dir)/functions.nu"
+source $"($nu.default-config-dir)/aliases.nu"
+source $"($nu.default-config-dir)/completions.nu"
 # source $"($nu.default-config-dir)/abbreviations.nu"
-
-# Use absolute paths instead of $nu.default-config-dir
-let config_dir = ($env.HOME | path join ".config/nushell")
-
-source $"($config_dir)/catppuccin_mocha.nu"
-source $"($config_dir)/functions.nu"
-source $"($config_dir)/aliases.nu"
-source $"($config_dir)/completions.nu"
-source $"($config_dir)/abbreviations.nu"
 
 
 let tty_out = (tty | str trim)
@@ -66,6 +56,3 @@ if (not ($env | has-env DISPLAY) and
 if ($env | get -o LAST_EXIT_CODE | default 0) == 0 and ($env | get -o TMUX | default "") == ""  and ($env | get -o SSH_TTY | default "") != "" {
     exec sh -c 'tmux -u new-session -As workshop \; new-window'
 }
-
-# Initial greeting
-fastfetch

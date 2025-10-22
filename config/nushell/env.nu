@@ -8,6 +8,7 @@ $env.PROMPT_INDICATOR_VI_NORMAL = {|| ": " }
 
 $env.TRANSIENT_PROMPT_COMMAND = {|| ^starship module character }
 $env.TRANSIENT_PROMPT_COMMAND_RIGHT = {|| $"(^starship module directory)(^starship module time)" }
+$env.XDG_CONFIG_HOME = ($env.HOME | path join '.config')
 
 $env.CARAPACE_BRIDGES = 'zsh,fish,bash,inshellisense' # optional
 $env.INITIAL_COMMIT_MSG = "The same thing we do every night, Pinky - try to take over the world!"
