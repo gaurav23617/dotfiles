@@ -129,6 +129,7 @@
       "google-drive"
       "hiddenbar"
       "alt-tab"
+      "android-file-transfer"
     ];
 
     brews = [
