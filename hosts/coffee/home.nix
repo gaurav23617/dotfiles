@@ -24,6 +24,8 @@
     ../../home/ghostty.nix
     ../../home/atuin.nix
     ../../home/aerospace.nix
+    ../../home/mpv.nix
+    # ../../home/spicetify.nix
 
     ./secrets
   ];

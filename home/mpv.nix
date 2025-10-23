@@ -1,9 +1,10 @@
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
 {
   programs.mpv = {
     enable = true;
-    scripts = with pkgs.mpvScripts; [
+  scripts = with pkgs.mpvScripts; [
       thumbnail
+    ] ++ lib.optionals pkgs.stdenv.isLinux [
       mpris
     ];
     bindings = rec {
