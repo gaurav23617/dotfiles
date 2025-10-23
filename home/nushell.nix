@@ -33,6 +33,7 @@
     envFile.source = ../config/nushell/env.nu;
   };
 
+  # Copy entire nushell config directory to ~/.config/nushell
   home.file.".config/nushell" = {
     recursive = true;
     source = ../config/nushell;

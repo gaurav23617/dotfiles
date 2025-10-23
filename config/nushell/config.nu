@@ -1,9 +1,15 @@
 # Source external configurations
 source ~/.config/nushell/env.nu
-source ~/.zoxide.nu
+
+# source ~/.zoxide.nu
 # source ~/.cache/carapace/init.nu
 source ~/.local/share/atuin/init.nu
-use ~/.cache/starship/init.nu
+# use ~/.cache/starship/init.nu
+# Source generated init files from cache directory
+source $"($nu.cache-dir)/zoxide.nu"
+source $"($nu.cache-dir)/carapace.nu"
+source $"($nu.cache-dir)/atuin.nu"
+# use $"($nu.cache-dir)/starship.nu"
 
 $env.config = ($env.config? | default {} | merge {
     ls: {
