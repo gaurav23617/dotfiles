@@ -1,28 +1,45 @@
 # Spicetify is a spotify client customizer
-{ pkgs, config, lib, inputs, ... }: {
+{
+  lib,
+  config,
+  inputs,
+  pkgs,
+  ...
+}:
+with lib;
+{
   imports = [ inputs.spicetify-nix.homeManagerModules.default ];
 
-  programs.spicetify = {
-    enable = true;
-    # theme = lib.mkForce spicePkgs.themes.dribbblish;
+  # Only install Spotify on Linux, use Homebrew on macOS
+  home.packages = lib.optionals pkgs.stdenv.isLinux [
+    pkgs.spotify
+  ];
 
-    # customColorScheme = {
-    #   button = accent;
-    #   button-active = accent;
-    #   tab-active = accent;
-    #   player = background;
-    #   main = background;
-    #   sidebar = background;
-    # };
+  programs.spicetify =
+    let
+      spicePkgs = inputs.spicetify-nix.legacyPackages.${pkgs.system};
+    in
+    {
+      enable = true;
 
-    # enabledExtensions = with spicePkgs.extensions; [
-    #   playlistIcons
-    #   lastfm
-    #   historyShortcut
-    #   hidePodcasts
-    #   adblock
-    #   fullAppDisplay
-    #   keyboardShortcut
-    # ];
-  };
+      # On macOS, spicetify will automatically detect Homebrew Spotify
+      # Don't set spotifyPackage on macOS, let it auto-detect
+      theme = spicePkgs.themes.catppuccin;
+      colorScheme = "mocha";
+
+      enabledExtensions = with spicePkgs.extensions; [
+        # adblock
+        shuffle # shuffle+ (special characters are sanitized out of ext names)
+        keyboardShortcut # vimium-like navigation
+        copyLyrics # copy lyrics with selection
+      ];
+
+      # Uncomment and customize as needed:
+      # enabledCustomApps = with spicePkgs.apps; [
+      #   lyricsPlus
+      #   marketplace
+      #   localFiles
+      #   ncsVisualizer
+      # ];
+    };
 }
