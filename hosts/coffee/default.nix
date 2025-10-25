@@ -20,17 +20,16 @@
   environment.systemPackages = with pkgs; [
     darwin.cctools
     llvmPackages.bintools
-    nushell
+    # nushell
   ];
-
   environment.shells = [
-    pkgs.nushell
+    # pkgs.nushell
     pkgs.zsh
   ];
 
   users.users.gaurav = {
     description = "Gaurav";
     home = "/Users/gaurav";
-    shell = pkgs.nushell;
+    shell = pkgs.zsh;
   };
 }

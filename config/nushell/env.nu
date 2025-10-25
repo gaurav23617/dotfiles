@@ -6,10 +6,10 @@ $env.NU_LIB_DIRS = [($env.HOME | path join '.config/nushell/scripts'), ($env.HOM
 $env.NU_PLUGIN_DIRS = [($env.HOME | path join '.config/nushell/plugins'), '/run/current-system/sw/bin']
 
 $env.PATH = ($env.PATH | split row (char esep) | prepend [
+    $"($env.HOME)/.local/bin"
     "/run/current-system/sw/bin"
     $"($env.HOME)/.nix-profile/bin"
     "/nix/var/nix/profiles/default/bin"
-    $"($env.HOME)/.local/bin"
     "/opt/homebrew/bin"
     $"($env.HOME)/.cargo/bin"
     $"($env.HOME)/.local/share/go/bin"

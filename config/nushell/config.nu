@@ -1,6 +1,10 @@
 # Source external configurations
 source ~/.config/nushell/env.nu
 
+# source ~/.zoxide.nu
+# source ~/.cache/carapace/init.nu
+# source ~/.local/share/atuin/init.nu
+# use ~/.cache/starship/init.nu
 # Source generated init files from cache directory
 source $"($nu.cache-dir)/zoxide.nu"
 source $"($nu.cache-dir)/carapace.nu"
@@ -35,10 +39,12 @@ $env.config = ($env.config? | default {} | merge {
     }
 })
 
-source $"($nu.config-dir)/catppuccin_mocha.nu"
-source $"($nu.config-dir)/functions.nu"
-source $"($nu.config-dir)/aliases.nu"
-source $"($nu.config-dir)/completions.nu"
+source $"($nu.default-config-dir)/catppuccin_mocha.nu"
+source $"($nu.default-config-dir)/functions.nu"
+source $"($nu.default-config-dir)/aliases.nu"
+source $"($nu.default-config-dir)/completions.nu"
+# source $"($nu.default-config-dir)/abbreviations.nu"
+
 
 let tty_out = (tty | str trim)
 if (not ($env | has-env DISPLAY) and

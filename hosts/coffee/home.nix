@@ -9,7 +9,7 @@
   imports = [
     ../../home/tmux.nix
     ../../home/zsh.nix
-    ../../home/nushell.nix
+    # ../../home/nushell.nix
     ../../home/zen
     ../../home/direnv.nix
     ../../home/starship.nix
@@ -18,6 +18,7 @@
     ../../home/git.nix
     ../../home/lazygit.nix
     ../../home/editor/neovim.nix
+    ../../home/editor/zed.nix
     ../../home/fastfetch.nix
     ../../home/bat.nix
     ../../home/gh.nix
@@ -51,7 +52,8 @@
   home.sessionVariables = {
     TERM = "ghostty";
     EDITOR = "nvim";
-    SHELL = "${pkgs.nushell}/bin/nu";
+    SHELL = "zsh";
+    # SHELL = "${pkgs.nushell}/bin/nu";
   };
   home.sessionPath = [
     "/run/current-system/sw/bin"
