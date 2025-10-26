@@ -8,7 +8,7 @@
     # Pin a specific nixpkgs revision with GTK+3 3.24.49 for zen-browser
     nixpkgs-pinned-gtk3 = {
       url = "github:NixOS/nixpkgs/5b5b46259bef947314345ab3f702c56b7788cab8";
-      flake = false; # This is not a flake, just a source tree
+      flake = false;
     };
 
     nix-darwin = {
@@ -65,12 +65,14 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     ghostty.url = "github:ghostty-org/ghostty";
+    nixCats.url = "github:BirdeeHub/nixCats-nvim";
   };
 
   outputs =
     {
       self,
       nixpkgs,
+      nixCats,
       vicinae,
       nix-darwin,
       home-manager,
@@ -81,6 +83,9 @@
     }@inputs:
 
     let
+      # System definitions
+      forEachSystem = nixpkgs.lib.genAttrs [ "x86_64-linux" "aarch64-darwin" ];
+
       pkgs-gtk3 = import nixpkgs {
         system = "aarch64-darwin";
         config.allowUnfree = true;
@@ -99,7 +104,6 @@
     in
     {
       nixosConfigurations.atlas = nixpkgs.lib.nixosSystem {
-        # ... your atlas configuration remains unchanged
         system = "x86_64-linux";
         specialArgs = { inherit inputs self; };
         modules = [
@@ -117,13 +121,10 @@
 
       darwinConfigurations.coffee = nix-darwin.lib.darwinSystem {
         system = "aarch64-darwin";
-        # Use the special pkgs set
         pkgs = pkgs-gtk3;
         specialArgs = { inherit inputs self; };
         modules = [
           ./hosts/coffee/default.nix
-          # Note: The overlays are now part of pkgs-gtk3,
-          # so they don't need to be listed here again.
           home-manager.darwinModules.home-manager
           {
             home-manager.useGlobalPkgs = true;
@@ -143,7 +144,6 @@
 
       homeConfigurations = {
         "gaurav@coffee" = home-manager.lib.homeManagerConfiguration {
-          # Use the same special pkgs set here
           pkgs = pkgs-gtk3;
           extraSpecialArgs = { inherit inputs; };
           modules = [
