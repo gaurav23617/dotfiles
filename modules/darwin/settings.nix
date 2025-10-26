@@ -11,9 +11,9 @@
   system = {
     configurationRevision = self.rev or self.dirtyRev or null;
 
-    # keyboard = {
-    #   enableKeyMapping = true;
-    # };
+    keyboard = {
+      enableKeyMapping = true;
+    };
 
     startup.chime = false;
 
@@ -44,8 +44,8 @@
         NSDocumentSaveNewDocumentsToCloud = false; # default save to disk, not iCloud
         # AppleInterfaceStyle = Dark; # dark mode
         AppleShowAllExtensions = true;
-        InitialKeyRepeat = 14;
-        KeyRepeat = 1;
+        InitialKeyRepeat = 15;
+        KeyRepeat = 2;
       };
 
       dock = {
