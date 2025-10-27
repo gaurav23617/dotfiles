@@ -142,29 +142,29 @@
         ];
       };
 
-      homeConfigurations = {
-        "gaurav@coffee" = home-manager.lib.homeManagerConfiguration {
-          pkgs = pkgs-gtk3;
-          extraSpecialArgs = { inherit inputs; };
-          modules = [
-            ./hosts/coffee/home.nix
-            {
-              home.username = "gaurav";
-              home.homeDirectory = "/Users/gaurav";
-            }
-          ];
-        };
-        "gaurav@atlas" = home-manager.lib.homeManagerConfiguration {
-          pkgs = nixpkgs.legacyPackages.x86_64-linux;
-          extraSpecialArgs = { inherit inputs; };
-          modules = [
-            ./hosts/atlas/home.nix
-            {
-              home.username = "gaurav";
-              home.homeDirectory = "/home/gaurav";
-            }
-          ];
-        };
-      };
+  homeConfigurations = {
+    "gaurav@coffee" = home-manager.lib.homeManagerConfiguration {
+      pkgs = pkgs-gtk3;
+      extraSpecialArgs = { inherit inputs; }; # ✓ Already correct
+      modules = [
+        ./hosts/coffee/home.nix
+        {
+          home.username = "gaurav";
+          home.homeDirectory = "/Users/gaurav";
+        }
+      ];
+    };
+    "gaurav@atlas" = home-manager.lib.homeManagerConfiguration {
+      pkgs = nixpkgs.legacyPackages.x86_64-linux;
+      extraSpecialArgs = { inherit inputs; }; # ✓ Already correct
+      modules = [
+        ./hosts/atlas/home.nix
+        {
+          home.username = "gaurav";
+          home.homeDirectory = "/home/gaurav";
+        }
+      ];
+    };
+  };
     };
 }
