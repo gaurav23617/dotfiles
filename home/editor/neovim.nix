@@ -53,13 +53,9 @@ in {
             biome
             stylua
 
-      nodejs_24
-      nodePackages_latest.vscode-json-languageserver
       fzf
       unzip
       lua
-      luajitPackages.jsregexp
-      luajitPackages.luarocks
       gnumake
       go
       gcc
@@ -70,20 +66,22 @@ in {
       gopls
       gofumpt
       stylua
-      cargo
       wordnet
-      rustc
       nixfmt-rfc-style
       ripgrep
       imagemagick
+            # nil
           ];
           lua = with pkgs; [
             lua-language-server
             stylua
+      luajitPackages.jsregexp
+      luajitPackages.luarocks
           ];
           nix = with pkgs; [
             nixd
             alejandra
+            nil
           ];
           go = with pkgs; [
             gopls
@@ -93,6 +91,17 @@ in {
             gotools
             go-tools
             go
+          ];
+          rust = with pkgs; [
+            rust-analyzer
+            cargo
+            rustc
+          ];
+          node = with pkgs; [
+            nodejs_24 # Includes npm
+            pnpm
+            nodePackages_latest.typescript-language-server
+            nodePackages_latest.vscode-json-languageserver
           ];
         };
 
@@ -190,7 +199,9 @@ in {
             general = true;
             lua = true;
             nix = true;
-            go = false;
+            go = true;
+            rust = true;
+            node = true;
           };
           # anything else to pass and grab in lua with `nixCats.extra`
           extra = {
