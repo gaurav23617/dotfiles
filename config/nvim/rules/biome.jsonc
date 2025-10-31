@@ -1,0 +1,88 @@
+{
+  "$schema": "$HOME/.local/share/nvim/mason/packages/biome/node_modules/@biomejs/biome/configuration_schema.json",
+  "formatter": {
+    "enabled": true,
+    "formatWithErrors": true,
+    "indentStyle": "space",
+    "indentWidth": 2,
+    "lineEnding": "lf",
+    "lineWidth": 120,
+    "attributePosition": "auto"
+  },
+  "linter": {
+    "enabled": true,
+    "rules": {
+      "recommended": false,
+      "a11y": {
+        "recommended": true
+      },
+      "complexity": { "useArrowFunction": "error" },
+      "correctness": {
+        "noUnsafeFinally": "error",
+        "noUnusedVariables": "error",
+        "noUnusedImports": "error"
+      },
+      "security": { "noGlobalEval": "error" },
+      "style": {
+        "useBlockStatements": "off",
+        "useConst": "error"
+      },
+      "suspicious": {
+        "noDoubleEquals": "error",
+        "noExplicitAny": "error",
+        "useNamespaceKeyword": "error",
+        "noVar": "error",
+        "noCommentText": "off",
+        "noDuplicateJsxProps": "error",
+        "noExtraNonNullAssertion": "error",
+        "noShadowRestrictedNames": "error",
+        "noUnsafeDeclarationMerging": "error",
+        "useGetterReturn": "error",
+        "noDebugger": "warn"
+      }
+    }
+  },
+  "javascript": {
+    "formatter": {
+      "jsxQuoteStyle": "double",
+      "quoteProperties": "asNeeded",
+      "trailingCommas": "es5",
+      "semicolons": "always",
+      "arrowParentheses": "always",
+      "bracketSpacing": true,
+      "bracketSameLine": false,
+      "quoteStyle": "double",
+      "attributePosition": "auto"
+    }
+  },
+  "json": {
+    "parser": { "allowComments": true }
+  },
+  "files": {
+    "ignore": [
+      "**/dist",
+      "**/node_modules",
+      "**/package.lock",
+      "**/bun.lockb"
+    ]
+  },
+  "vcs": {
+    "enabled": true,
+    "clientKind": "git",
+    "useIgnoreFile": true
+  },
+  "overrides": [
+    {
+      "includes": ["**/scripts/*.js", "**/jxa/*.js"],
+      "javascript": {
+        "globals": ["ObjC", "Application", "delay", "Path", "$"]
+      }
+    },
+    {
+      "includes": ["**/.obsidian/scripts/*.js"],
+      "javascript": {
+        "globals": ["dv"]
+      }
+    }
+  ]
+}
