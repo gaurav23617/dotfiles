@@ -15,5 +15,7 @@
     pkg-config
     coreutils
     nodejs_22
+    cargo
+    rustc
   ];
 }
