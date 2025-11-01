@@ -7,25 +7,47 @@ return {
     opts = {
       -- Remove tools that Nix provides
       ensure_installed = {
-        -- Keep only platform-specific tools Mason should manage
-        -- Remove: lua-language-server, gopls, nil, nixfmt, luacheck, pint
-
-        "typescript-language-server",
-        "html-lsp",
-        "css-lsp",
-        "tailwindcss-language-server",
-        "vue-language-server",
+        -- LSP servers (matching your vim.lsp.enable() config)
+        "lua-language-server", -- Lua LSP
+        "gopls", -- Go LSP
+        "zls", -- Zig LSP
+        "typescript-language-server", -- TypeScript LSP
+        "rust-analyzer", -- Rust LSP
+        -- "intelephense", -- PHP LSP
+        "tailwindcss-language-server", -- Tailwind CSS LSP
+        "html-lsp", -- HTML LSP
+        "css-lsp", -- CSS LSP
+        "vue-language-server", -- Vue LSP
         "biome",
-        "eslint_d",
-        "prettier",
-        "blade-formatter",
-        "shfmt",
-        "shellcheck",
-        "delve",
+        "nil",
+        "alejandra",
+        "tflint",
 
-        -- Add comment explaining why some are excluded:
-        -- Note: lua-language-server, gopls, rust-analyzer, nil, nixfmt,
-        -- luacheck, cargo, composer are provided by Nix
+        -- Formatters (for conform.nvim and general use)
+        "stylua",
+        "selene",
+        "goimports",
+        -- Note: gofmt comes with Go installation, not managed by Mason
+        "prettier",
+        -- "black",
+        -- "isort",
+        "blade-formatter",
+
+        -- Linters and diagnostics
+        "golangci-lint",
+        "eslint_d",
+        "luacheck", -- Lua linting
+        -- "pint", -- Laravel Pint for PHP (formatting & linting)
+
+        -- Additional useful tools
+        "delve", -- Go debugger
+        "shfmt", -- Shell formatter
+        "shellcheck", -- Shell linter
+
+        -- Optional but useful additions
+        -- "markdownlint", -- Markdown linting
+        -- "yamllint",     -- YAML linting
+        -- "jsonlint",     -- JSON linting
       },
     },
     config = function(_, opts)

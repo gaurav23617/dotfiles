@@ -34,6 +34,7 @@ function M.verify_tools()
 
     -- Formatters (Mason-managed)
     "stylua",
+    "selene",
     "prettier",
     "goimports",
     "black",
