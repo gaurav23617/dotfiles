@@ -58,6 +58,8 @@
   home.sessionPath = [
     "/run/current-system/sw/bin"
     "$HOME/.nix-profile/bin"
+    "$HOME/.cargo/bin"
+    "/opt/homebrew/bin"
   ];
   programs.home-manager.enable = true;
 }
