@@ -1,5 +1,4 @@
-{ self, ... }:
-{
+{self, ...}: {
   # touch ID for sudo
   # security.pam.services.sudo_local.touchIdAuth = true;
   security.pam.services.sudo_local = {
@@ -57,6 +56,9 @@
         show-process-indicators = true;
         tilesize = 32;
         autohide-time-modifier = 1.0;
+      };
+      controlcenter = {
+        BatteryShowPercentage = true;
       };
     };
   };
