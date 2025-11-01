@@ -21,35 +21,6 @@ export TERMINAL="ghostty"
 export BROWSER="zen-browser"
 export BROWSER="zen"
 
-# Detect OS
-OS="$(uname -s)"
-
-if [[ "$OS" == "Darwin" ]]; then
-  # macOS Nix paths (HIGHEST PRIORITY)
-  # Home Manager profile (if using home-manager)
-  export PATH="$HOME/.nix-profile/bin:$PATH"
-
-  # nix-darwin system profile
-  export PATH="/run/current-system/sw/bin:$PATH"
-
-  # Homebrew (if installed)
-  if [[ -d "/opt/homebrew" ]]; then
-    export PATH="/opt/homebrew/bin:$PATH"
-    export PATH="/opt/homebrew/sbin:$PATH"
-    export DYLD_LIBRARY_PATH="/opt/homebrew/lib:$DYLD_LIBRARY_PATH"
-    export DYLD_FALLBACK_LIBRARY_PATH="/opt/homebrew/lib"
-  fi
-
-  # macOS-specific Neovim
-  if [[ -d "$HOME/.local/nvim-macos-arm64" ]]; then
-    export PATH="$HOME/.local/nvim-macos-arm64/bin:$PATH"
-  fi
-else
-  # Linux Nix paths
-  export PATH="$HOME/.nix-profile/bin:$PATH"
-  export PATH="/nix/var/nix/profiles/default/bin:$PATH"
-fi
-
 # Nix paths (highest priority)
 export PATH="$HOME/.nix-profile/bin:$PATH"
 export PATH="/nix/var/nix/profiles/default/bin:$PATH"
@@ -59,8 +30,9 @@ export PATH="/run/current-system/sw/bin"
 export PATH="$HOME/.local/bin:$PATH"
 export PATH="$HOME/.cargo/bin:$PATH"
 export PATH="$HOME/.composer/vendor/bin:$PATH"
-export PATH="$HOME/.npm-global/bin:$PATH"
+export PATH="$HOME/.npm/bin:$PATH"
 export PATH="$HOME/.docker/bin:$PATH"
+export PATH="$HOME/.luarocks/bin:$PATH"
 
 # Language-specific paths
 export PATH="$HOME/.local/share/go/bin:$PATH"
@@ -86,10 +58,31 @@ case "$(uname -s)" in
     export PATH="$HOME/.local/nvim-macos-arm64/bin:$PATH"
     export DYLD_LIBRARY_PATH=/opt/homebrew/lib/
     export DYLD_FALLBACK_LIBRARY_PATH=/opt/homebrew/lib
+
+  # Home Manager profile (if using home-manager)
+  export PATH="$HOME/.nix-profile/bin:$PATH"
+
+  # nix-darwin system profile
+  export PATH="/run/current-system/sw/bin:$PATH"
+
+  # Homebrew (if installed)
+  if [[ -d "/opt/homebrew" ]]; then
+    export PATH="/opt/homebrew/bin:$PATH"
+    export PATH="/opt/homebrew/sbin:$PATH"
+    export DYLD_LIBRARY_PATH="/opt/homebrew/lib:$DYLD_LIBRARY_PATH"
+    export DYLD_FALLBACK_LIBRARY_PATH="/opt/homebrew/lib"
+  fi
+
+  # macOS-specific Neovim
+  if [[ -d "$HOME/.local/nvim-macos-arm64" ]]; then
+    export PATH="$HOME/.local/nvim-macos-arm64/bin:$PATH"
+  fi
     ;;
   Linux)
     # Linux specific
     export PATH="/usr/local/bin:$PATH"
+    export PATH="$HOME/.nix-profile/bin:$PATH"
+    export PATH="/nix/var/nix/profiles/default/bin:$PATH"
     ;;
 esac
 
