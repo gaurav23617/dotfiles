@@ -22,7 +22,7 @@ export BROWSER="zen-browser"
 export BROWSER="zen"
 export PATH="$HOME/.local/bin":$PATH
 export PATH=$PATH:/usr/bin
-export PATH="$HOME/.npm-global/bin:$PATH"
+export PATH="$HOME/.npm/bin:$PATH"
 export PATH="$HOME/.docker/bin":$PATH
 export PATH="$HOME/.local/nvim-macos-arm64/bin":$PATH
 export MANPAGER='nvim +Man!'
@@ -48,12 +48,11 @@ export CARAPACE_BRIDGES='zsh,fish,bash,inshellisense'
 export LS_COLORS="$(vivid generate molokai)"
 
 # pnpm
-export PNPM_HOME="/home/gaurav/.local/share/pnpm"
+export PNPM_HOME="$HOME/.local/share/pnpm"
 case ":$PATH:" in
   *":$PNPM_HOME:"*) ;;
   *) export PATH="$PNPM_HOME:$PATH" ;;
 esac
-# pnpm end
 
 case "$(uname -s)" in
 
