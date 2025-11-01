@@ -21,13 +21,44 @@ export TERMINAL="ghostty"
 export BROWSER="zen-browser"
 export BROWSER="zen"
 
+# Detect OS
+OS="$(uname -s)"
+
+if [[ "$OS" == "Darwin" ]]; then
+  # macOS Nix paths (HIGHEST PRIORITY)
+  # Home Manager profile (if using home-manager)
+  export PATH="$HOME/.nix-profile/bin:$PATH"
+
+  # nix-darwin system profile
+  export PATH="/run/current-system/sw/bin:$PATH"
+
+  # Homebrew (if installed)
+  if [[ -d "/opt/homebrew" ]]; then
+    export PATH="/opt/homebrew/bin:$PATH"
+    export PATH="/opt/homebrew/sbin:$PATH"
+    export DYLD_LIBRARY_PATH="/opt/homebrew/lib:$DYLD_LIBRARY_PATH"
+    export DYLD_FALLBACK_LIBRARY_PATH="/opt/homebrew/lib"
+  fi
+
+  # macOS-specific Neovim
+  if [[ -d "$HOME/.local/nvim-macos-arm64" ]]; then
+    export PATH="$HOME/.local/nvim-macos-arm64/bin:$PATH"
+  fi
+else
+  # Linux Nix paths
+  export PATH="$HOME/.nix-profile/bin:$PATH"
+  export PATH="/nix/var/nix/profiles/default/bin:$PATH"
+fi
+
 # Nix paths (highest priority)
 export PATH="$HOME/.nix-profile/bin:$PATH"
 export PATH="/nix/var/nix/profiles/default/bin:$PATH"
+export PATH="/run/current-system/sw/bin"
 
 # User-local bins
 export PATH="$HOME/.local/bin:$PATH"
 export PATH="$HOME/.cargo/bin:$PATH"
+export PATH="$HOME/.composer/vendor/bin:$PATH"
 export PATH="$HOME/.npm-global/bin:$PATH"
 export PATH="$HOME/.docker/bin:$PATH"
 
@@ -36,13 +67,15 @@ export PATH="$HOME/.local/share/go/bin:$PATH"
 export PATH="$HOME/.local/share/neovim/bin:$PATH"
 export GOPATH=$HOME/.local/share/go
 
+# System paths (lowest priority, fallback)
+export PATH="$PATH:/usr/local/bin:/usr/bin:/bin"
+
 # pnpm
-export PNPM_HOME="/home/gaurav/.local/share/pnpm"
+export PNPM_HOME="$HOME/.local/share/pnpm"
 case ":$PATH:" in
   *":$PNPM_HOME:"*) ;;
   *) export PATH="$PNPM_HOME:$PATH" ;;
 esac
-# pnpm end
 
 # Platform-specific paths
 case "$(uname -s)" in
