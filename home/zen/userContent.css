@@ -1,7 +1,6 @@
 /* Catppuccin Mocha Mauve userContent.css*/
 
 @media (prefers-color-scheme: dark) {
-
   /* Common variables affecting all pages */
   @-moz-document url-prefix("about:") {
     :root {
@@ -12,12 +11,10 @@
       background-color: #1e1e2e !important;
       --in-content-page-background: #1e1e2e !important;
     }
-
   }
 
   /* Variables and styles specific to about:newtab and about:home */
   @-moz-document url("about:newtab"), url("about:home") {
-
     :root {
       --newtab-background-color: #1e1e2e !important;
       --newtab-background-color-secondary: #313244 !important;
@@ -32,7 +29,10 @@
     }
 
     .search-wrapper .logo-and-wordmark .logo {
-      background: url("zen-logo-mocha.svg"), url("https://raw.githubusercontent.com/IAmJafeth/zen-browser/main/themes/Mocha/Mauve/zen-logo-mocha.svg") no-repeat center !important;
+      background:
+        url("zen-logo-mocha.svg"),
+        url("https://raw.githubusercontent.com/IAmJafeth/zen-browser/main/themes/Mocha/Mauve/zen-logo-mocha.svg")
+          no-repeat center !important;
       display: inline-block !important;
       height: 82px !important;
       width: 82px !important;
@@ -72,7 +72,8 @@
       --zen-primary-color: #cba6f7 !important;
     }
 
-    groupbox , moz-card{
+    groupbox,
+    moz-card {
       background: #1e1e2e !important;
     }
 
@@ -149,7 +150,6 @@
       --in-content-primary-button-background: #45475a !important;
       --in-content-primary-button-text-color: #cdd6f4 !important;
     }
-
 
     .card {
       background-color: #313244 !important;

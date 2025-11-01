@@ -3,14 +3,13 @@
   lib,
   pkgs,
   ...
-}:
-{
-  imports = [ inputs.zen-browser.homeModules.beta ];
+}: {
+  imports = [inputs.zen-browser.homeModules.beta];
 
   programs.zen-browser = {
     enable = true;
     # policies = import ./policies.nix { inherit lib; };
-    languagePacks = [ "en-US" ];
+    languagePacks = ["en-US"];
     profiles = {
       coffee = {
         id = 0; # 0 is the default profile; see also option "isDefault"
@@ -18,7 +17,7 @@
         isDefault = true; # can be omitted; true if profile ID is 0
         settings = import ./settings.nix;
         # bookmarks = import ./bookmarks.nix;
-        search = import ./search.nix { inherit pkgs; };
+        search = import ./search.nix {inherit pkgs;};
         # userChrome = builtins.readFile ./userChrome.css;
         # userContent = builtins.readFile ./userContent.css;
         extraConfig = ''

@@ -1,4 +1,4 @@
-{ lib, ... }: {
+{lib, ...}: {
   ExtensionSettings = {
     "*" = {
       blocked_install_message = "Addon is not added in the nix config";
@@ -8,25 +8,24 @@
       private_browsing = true;
       # default_area = "navbar";
       installation_mode = "force_installed";
-      install_url =
-        "https://addons.mozilla.org/firefox/downloads/latest/ublock-origin/latest.xpi";
+      install_url = "https://addons.mozilla.org/firefox/downloads/latest/ublock-origin/latest.xpi";
     };
 
     "refined-github" = {
       private_browsing = true;
       # default_area = "navbar";
       installation_mode = "force_installed";
-      install_url =
-        "https://addons.mozilla.org/firefox/downloads/latest/refined-github-/latest.xpi";
+      install_url = "https://addons.mozilla.org/firefox/downloads/latest/refined-github-/latest.xpi";
     };
-
   };
   "3rdparty".Extensions = {
     "uBlock0@raymondhill.net" = {
-      advancedSettings = [[
-        "userResourcesLocation"
-        "https://raw.githubusercontent.com/pixeltris/TwitchAdSolutions/master/video-swap-new/video-swap-new-ublock-origin.js"
-      ]];
+      advancedSettings = [
+        [
+          "userResourcesLocation"
+          "https://raw.githubusercontent.com/pixeltris/TwitchAdSolutions/master/video-swap-new/video-swap-new-ublock-origin.js"
+        ]
+      ];
       adminSettings = {
         userFilters = lib.concatMapStrings (x: x + "\n") [
           "twitch.tv##+js(twitch-videoad)"

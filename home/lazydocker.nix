@@ -1,1 +1,6 @@
-{ config, lib, pkgs, ... }: { programs.lazydocker = { enable = true; }; }
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}: {programs.lazydocker = {enable = true;};}

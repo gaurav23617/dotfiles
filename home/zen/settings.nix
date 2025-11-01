@@ -7,8 +7,7 @@ let
     Value = true;
     Status = "locked";
   };
-in
-{
+in {
   "zen.view.use-single-toolbar" = true;
   "zen.view.sidebar-expanded" = true;
   "zen.tabs.vertical.right-side" = true;
@@ -221,7 +220,7 @@ in
     currentVersion = 20;
     newElementCount = 7;
     placements = {
-      widget-overflow-fixed-list = [ ];
+      widget-overflow-fixed-list = [];
       nav-bar = [
         "back-button"
         "forward-button"
@@ -229,7 +228,7 @@ in
         "urlbar-container"
         "downloads-button"
       ];
-      toolbar-menubar = [ "menubar-items" ];
+      toolbar-menubar = ["menubar-items"];
       TabsToolbar = [
         "firefox-view-button"
         "tabbrowser-tabs"

@@ -4,8 +4,7 @@
   pkgs,
   inputs,
   ...
-}:
-{
+}: {
   imports = [
     ../../modules/darwin
     ../../modules/common

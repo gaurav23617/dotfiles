@@ -3,8 +3,7 @@
   inputs,
   self,
   ...
-}:
-{
+}: {
   imports = [
     ./homebrew.nix
     ./settings.nix

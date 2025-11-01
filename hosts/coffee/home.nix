@@ -3,9 +3,7 @@
   pkgs,
   lib,
   ...
-}:
-
-{
+}: {
   imports = [
     ../../home/tmux.nix
     ../../home/zsh.nix
@@ -39,7 +37,7 @@
   xdg.userDirs.enable = false;
 
   # Create directories manually instead
-  home.activation.createCustomDirs = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
+  home.activation.createCustomDirs = lib.hm.dag.entryAfter ["writeBoundary"] ''
     $DRY_RUN_CMD mkdir -p "$HOME/.config/sops/age"
     $DRY_RUN_CMD mkdir -p "$HOME/personal"
     $DRY_RUN_CMD mkdir -p "$HOME/personal/media"

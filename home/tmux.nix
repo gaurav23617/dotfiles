@@ -1,14 +1,13 @@
-{ pkgs, ... }: {
-  home.packages = with pkgs; [ sesh tmuxinator yq tmuxp ];
+{pkgs, ...}: {
+  home.packages = with pkgs; [sesh tmuxinator yq tmuxp];
   programs.tmux = {
     enable = true;
     tmuxp.enable = false;
 
-    plugins = with pkgs.tmuxPlugins;
-      [
-        # pain-control
-        sessionist
-      ];
+    plugins = with pkgs.tmuxPlugins; [
+      # pain-control
+      sessionist
+    ];
 
     extraConfig = builtins.readFile ../config/tmux/tmux.conf;
   };

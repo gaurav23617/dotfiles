@@ -1,4 +1,4 @@
-{ pkgs, ... }: {
+{pkgs, ...}: {
   # imports = [ ./dconf.nix ];
   services.xserver.enable = true;
   services = {

@@ -1,6 +1,5 @@
 # lib/default.nix
-{ inputs }:
-
+{inputs}:
 import ./mkConfigHelper.nix {
   inherit inputs;
   lib = inputs.nixpkgs.lib;

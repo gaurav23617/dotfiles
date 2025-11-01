@@ -3,16 +3,17 @@
   pkgs,
   lib,
   ...
-}:
-let
-  inherit (pkgs)
+}: let
+  inherit
+    (pkgs)
     tree-sitter
     lua54Packages
     luajitPackages
     nodePackages_latest
     vimPlugins
     ;
-  inherit (pkgs.tree-sitter-grammars)
+  inherit
+    (pkgs.tree-sitter-grammars)
     tree-sitter-lua
     tree-sitter-nix
     tree-sitter-go
@@ -22,8 +23,7 @@ let
     tree-sitter-markdown
     tree-sitter-json
     ;
-in
-{
+in {
   programs.neovim = {
     enable = true;
     extraPackages = with pkgs; [
@@ -36,11 +36,12 @@ in
       unzip
       lua
       lua-language-server
-lua53Packages.luacheck
+      lua53Packages.luacheck
       luajitPackages.jsregexp
-      luajitPackages.luarocks
+      lua51Packages.luarocks-nix
       luarocks
       nixd
+      alejandra
       gnumake
       go
       gcc
@@ -55,9 +56,15 @@ lua53Packages.luacheck
       cargo
       wordnet
       rustc
-      nixfmt-rfc-style
       ripgrep
       imagemagick
+      libiconv
+    ];
+    extraWrapperArgs = [
+      "--suffix"
+      "LIBRARY_PATH"
+      ":"
+      "${lib.makeLibraryPath [pkgs.stdenv.cc.cc.lib]}"
     ];
 
     plugins = [

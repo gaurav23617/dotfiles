@@ -1,12 +1,18 @@
-{ config, pkgs, lib, ... }:
 {
+  config,
+  pkgs,
+  lib,
+  ...
+}: {
   programs.mpv = {
     enable = true;
-  scripts = with pkgs.mpvScripts; [
-      thumbnail
-    ] ++ lib.optionals pkgs.stdenv.isLinux [
-      mpris
-    ];
+    scripts = with pkgs.mpvScripts;
+      [
+        thumbnail
+      ]
+      ++ lib.optionals pkgs.stdenv.isLinux [
+        mpris
+      ];
     bindings = rec {
       MBTN_LEFT_DBL = "cycle fullscreen";
       MBTN_RIGHT = "cycle pause";
