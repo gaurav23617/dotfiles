@@ -17,7 +17,7 @@ in {
     else [pkgs.brewCasks.ghostty]
   );
 
-  home.file.".config/ghostty/config" = {
-    source = ../config/ghostty/config;
-  };
+  home.file.".config/ghostty".source = builtins.toString (
+    config.lib.file.mkOutOfStoreSymlink ../config/ghostty
+  );
 }
