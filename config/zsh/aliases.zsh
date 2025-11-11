@@ -3,9 +3,10 @@ alias c='clear'
 alias vi='vim'
 alias vim='nvim'
 alias lg='lazygit'
-alias lzg='lazygit'
 alias lzd='lazydocker'
 alias ff='fastfetch'
+alias logs='git log --graph --all --pretty=format:"%C(magenta)%h %C(white) %an  %ar%C(auto)  %D%n%s%n"'
+# alias rg="rg --hidden --smart-case --glob='!.git/' --no-search-zip --trim --colors=line:fg:black --colors=line:style:bold --colors=path:fg:magenta --colors=match:style:nobold"
 
 # get fastest mirrors
 alias mirrora="sudo reflector --latest 50 --number 20 --sort age --save /etc/pacman.d/mirrorlist"
@@ -14,7 +15,7 @@ alias mirror="sudo reflector -f 30 -l 30 --number 10 --verbose --save /etc/pacma
 alias mirrord="sudo reflector --latest 50 --number 20 --sort delay --save /etc/pacman.d/mirrorlist"
 
 # Colorize grep output (good for log files)
-alias grep='rp'
+alias grep='rg'
 alias grep='grep --color=auto'
 alias egrep='egrep --color=auto'
 alias fgrep='fgrep --color=auto'
