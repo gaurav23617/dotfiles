@@ -5,8 +5,13 @@
 }: {
   home.packages = with pkgs; [delta git-cliff];
   programs.git = {enable = true;};
-  home.file.".config/git" = {
-    recursive = true;
-    source = ../config/git;
-  };
+
+  # home.file.".config/git" = {
+  #   recursive = true;
+  #   source = ../config/git;
+  # };
+
+  home.file.".config/git".source = builtins.toString (
+    config.lib.file.mkOutOfStoreSymlink ../config/git
+  );
 }
