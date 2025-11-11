@@ -17,5 +17,6 @@
     cargo
     nixd
     rustc
+    pnpm
   ];
 }
