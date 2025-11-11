@@ -32,6 +32,8 @@ in {
 
       nodejs_22
       nodePackages_latest.vscode-json-languageserver
+      vscode-langservers-extracted
+      tailwindcss-language-server
       fzf
       unzip
       lua
@@ -56,6 +58,8 @@ in {
       cargo
       wordnet
       rustc
+      rustup
+      rustfmt
       ripgrep
       imagemagick
       libiconv
