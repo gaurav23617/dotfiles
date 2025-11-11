@@ -4,13 +4,6 @@
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-25.05";
-
-    # Pin a specific nixpkgs revision with GTK+3 3.24.49 for zen-browser
-    nixpkgs-pinned-gtk3 = {
-      url = "github:NixOS/nixpkgs/5b5b46259bef947314345ab3f702c56b7788cab8";
-      flake = false;
-    };
-
     nix-darwin = {
       url = "github:nix-darwin/nix-darwin/master";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -79,26 +72,7 @@
     homebrew-core,
     homebrew-cask,
     ...
-  } @ inputs: let
-    # System definitions
-    forEachSystem = nixpkgs.lib.genAttrs ["x86_64-linux" "aarch64-darwin"];
-
-    pkgs-gtk3 = import nixpkgs {
-      system = "aarch64-darwin";
-      config.allowUnfree = true;
-      overlays = [
-        inputs.brew-nix.overlays.default
-        # The GTK3 overlay
-        (final: prev: {
-          gtk3 =
-            (import inputs.nixpkgs-pinned-gtk3 {
-              system = prev.system;
-              config.allowUnfree = true;
-            }).gtk3;
-        })
-      ];
-    };
-  in {
+  } @ inputs: {
     nixosConfigurations.atlas = nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
       specialArgs = {inherit inputs self;};
@@ -106,7 +80,7 @@
         ./hosts/atlas/default.nix
         home-manager.nixosModules.home-manager
         {
-          home-manager.useGlobalPkgs = true;
+          home-manager.useGlobalPkgs = false;
           home-manager.useUserPackages = true;
           home-manager.users.gaurav = import ./hosts/atlas/home.nix;
           home-manager.extraSpecialArgs = {inherit inputs;};
@@ -117,10 +91,15 @@
 
     darwinConfigurations.coffee = nix-darwin.lib.darwinSystem {
       system = "aarch64-darwin";
-      pkgs = pkgs-gtk3;
       specialArgs = {inherit inputs self;};
       modules = [
         ./hosts/coffee/default.nix
+        # Add the brew-nix overlay here
+        {
+          nixpkgs.overlays = [
+            inputs.brew-nix.overlays.default
+          ];
+        }
         home-manager.darwinModules.home-manager
         {
           home-manager.useGlobalPkgs = true;
@@ -140,8 +119,8 @@
 
     homeConfigurations = {
       "gaurav@coffee" = home-manager.lib.homeManagerConfiguration {
-        pkgs = pkgs-gtk3;
-        extraSpecialArgs = {inherit inputs;}; # ✓ Already correct
+        pkgs = nixpkgs.legacyPackages.aarch64-darwin;
+        extraSpecialArgs = {inherit inputs self;};
         modules = [
           ./hosts/coffee/home.nix
           {
@@ -152,7 +131,7 @@
       };
       "gaurav@atlas" = home-manager.lib.homeManagerConfiguration {
         pkgs = nixpkgs.legacyPackages.x86_64-linux;
-        extraSpecialArgs = {inherit inputs;}; # ✓ Already correct
+        extraSpecialArgs = {inherit inputs self;};
         modules = [
           ./hosts/atlas/home.nix
           {
