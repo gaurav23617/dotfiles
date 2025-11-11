@@ -124,9 +124,8 @@
       "raycast"
       "blip"
       "google-drive"
-      "hiddenbar"
-      "alt-tab"
       "android-file-transfer"
+      "brave-browser"
     ];
 
     brews = [
