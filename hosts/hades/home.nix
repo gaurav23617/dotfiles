@@ -4,11 +4,10 @@
   lib,
   ...
 }: {
-  # Home Manager needs a bit of information about you and the paths it should
-  # manage.
   imports = [
+    # Comment out git for now to test
+    # ../../home/git.nix
     ../../home/nh.nix
-    ../../home/git.nix
     ../../home/lazydocker.nix
     ../../home/gh.nix
   ];
@@ -18,13 +17,13 @@
 
   home.packages = [];
   home.file = {};
-  xdg.userDirs = {
-    enable = true;
-    createDirectories = true; # This is the key part
-  };
+
+  # Disable XDG for initial install
+  xdg.userDirs.enable = false;
+
   programs.home-manager.enable = true;
   home.sessionVariables = {
     EDITOR = "nvim";
   };
-  home.stateVersion = "25.05"; # Please read the comment before changing.
+  home.stateVersion = "25.05";
 }

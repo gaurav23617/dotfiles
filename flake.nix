@@ -63,6 +63,7 @@
   outputs = {
     self,
     nixpkgs,
+    disko,
     vicinae,
     nix-darwin,
     home-manager,
