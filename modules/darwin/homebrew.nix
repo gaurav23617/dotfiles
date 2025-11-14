@@ -126,6 +126,7 @@
       "google-drive"
       "android-file-transfer"
       "brave-browser"
+      "helium-browser"
     ];
 
     brews = [
