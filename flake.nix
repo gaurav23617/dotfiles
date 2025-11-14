@@ -92,7 +92,9 @@
         system = "x86_64-linux";
         specialArgs = {inherit inputs self;};
         modules = [
+          disko.nixosModules.disko
           ./hosts/hades/default.nix
+          ./hosts/hades/disko-config.nix
           home-manager.nixosModules.home-manager
           {
             home-manager.useGlobalPkgs = false;

@@ -30,7 +30,7 @@
   environment.systemPackages = with pkgs; [neovim vim wget];
   # Enable CUPS to print documents.
 
-  # Define a user account. Don't forget to set a password with ‘passwd’.
+  # Define a user account. Don't forget to set a password with 'passwd'.
   users = {
     defaultUserShell = pkgs.zsh;
     users.indie = {
@@ -47,7 +47,7 @@
 
   # Enable automatic login for the user.
   services.displayManager.autoLogin.enable = true;
-  services.displayManager.autoLogin.user = "hades";
+  services.displayManager.autoLogin.user = "indie"; # Changed from "hades" to "indie"
   nixpkgs.config.allowUnfree = true;
   system.stateVersion = "25.05"; # Did you read the comment?
 }
