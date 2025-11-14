@@ -8,7 +8,7 @@
           type = "gpt";
           partitions = {
             boot = {
-              size = "3.7G";
+              size = "4G"; # Changed from 3.7G - disko doesn't accept decimals
               type = "EF00"; # EFI System partition
               content = {
                 type = "filesystem";
@@ -18,14 +18,14 @@
               };
             };
             swap = {
-              size = "7.5G";
+              size = "8G"; # Changed from 7.5G
               content = {
                 type = "swap";
                 resumeDevice = true; # for hibernation support
               };
             };
             root = {
-              size = "100%"; # Use remaining space (221.7G)
+              size = "100%"; # Use remaining space
               content = {
                 type = "filesystem";
                 format = "ext4";
