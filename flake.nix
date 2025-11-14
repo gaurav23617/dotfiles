@@ -58,13 +58,11 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     ghostty.url = "github:ghostty-org/ghostty";
-    nixCats.url = "github:BirdeeHub/nixCats-nvim";
   };
 
   outputs = {
     self,
     nixpkgs,
-    nixCats,
     vicinae,
     nix-darwin,
     home-manager,
