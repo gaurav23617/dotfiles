@@ -71,20 +71,38 @@
     homebrew-cask,
     ...
   } @ inputs: {
-    nixosConfigurations.atlas = nixpkgs.lib.nixosSystem {
-      system = "x86_64-linux";
-      specialArgs = {inherit inputs self;};
-      modules = [
-        ./hosts/atlas/default.nix
-        home-manager.nixosModules.home-manager
-        {
-          home-manager.useGlobalPkgs = false;
-          home-manager.useUserPackages = true;
-          home-manager.users.gaurav = import ./hosts/atlas/home.nix;
-          home-manager.extraSpecialArgs = {inherit inputs;};
-          home-manager.backupFileExtension = "backup";
-        }
-      ];
+    nixosConfigurations = {
+      atlas = nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+        specialArgs = {inherit inputs self;};
+        modules = [
+          ./hosts/atlas/default.nix
+          home-manager.nixosModules.home-manager
+          {
+            home-manager.useGlobalPkgs = false;
+            home-manager.useUserPackages = true;
+            home-manager.users.gaurav = import ./hosts/atlas/home.nix;
+            home-manager.extraSpecialArgs = {inherit inputs;};
+            home-manager.backupFileExtension = "backup";
+          }
+        ];
+      };
+
+      hades = nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+        specialArgs = {inherit inputs self;};
+        modules = [
+          ./hosts/atlas/default.nix
+          home-manager.nixosModules.home-manager
+          {
+            home-manager.useGlobalPkgs = false;
+            home-manager.useUserPackages = true;
+            home-manager.users.hades = import ./hosts/hades/home.nix;
+            home-manager.extraSpecialArgs = {inherit inputs;};
+            home-manager.backupFileExtension = "backup";
+          }
+        ];
+      };
     };
 
     darwinConfigurations.coffee = nix-darwin.lib.darwinSystem {
@@ -135,6 +153,18 @@
           {
             home.username = "gaurav";
             home.homeDirectory = "/home/gaurav";
+          }
+        ];
+      };
+
+      "hades@hades" = home-manager.lib.homeManagerConfiguration {
+        pkgs = nixpkgs.legacyPackages.x86_64-linux;
+        extraSpecialArgs = {inherit inputs self;};
+        modules = [
+          ./hosts/hades/home.nix
+          {
+            home.username = "hades";
+            home.homeDirectory = "/home/hades";
           }
         ];
       };
