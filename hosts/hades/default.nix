@@ -33,7 +33,7 @@
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users = {
     defaultUserShell = pkgs.zsh;
-    users.hades = {
+    users.indie = {
       isNormalUser = true;
       description = "indiefluence server";
       extraGroups = ["networkmanager" "wheel" "docker"];

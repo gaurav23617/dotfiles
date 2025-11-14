@@ -92,7 +92,7 @@
         system = "x86_64-linux";
         specialArgs = {inherit inputs self;};
         modules = [
-          ./hosts/atlas/default.nix
+          ./hosts/hades/default.nix
           home-manager.nixosModules.home-manager
           {
             home-manager.useGlobalPkgs = false;
@@ -157,14 +157,14 @@
         ];
       };
 
-      "hades@hades" = home-manager.lib.homeManagerConfiguration {
+      "indie@hades" = home-manager.lib.homeManagerConfiguration {
         pkgs = nixpkgs.legacyPackages.x86_64-linux;
         extraSpecialArgs = {inherit inputs self;};
         modules = [
           ./hosts/hades/home.nix
           {
-            home.username = "hades";
-            home.homeDirectory = "/home/hades";
+            home.username = "indie";
+            home.homeDirectory = "/home/indie";
           }
         ];
       };
