@@ -12,6 +12,7 @@
     yq
     fd
     zoxide
+    yazi
     fzf
     eza
     bat
