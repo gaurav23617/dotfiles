@@ -74,3 +74,24 @@ keybind = alt+6=unbind
 keybind = alt+7=unbind
 keybind = alt+8=unbind
 keybind = alt+9=unbind
+
+# Unbind Super+Number keys to allow them to be passed through to tmux
+keybind = super+1=unbind
+keybind = super+2=unbind
+keybind = super+3=unbind
+keybind = super+4=unbind
+keybind = super+5=unbind
+keybind = super+6=unbind
+keybind = super+7=unbind
+keybind = super+8=unbind
+
+# Remove the unbind lines and use these instead
+keybind = super+1=text:\x1b[27;5;49~
+keybind = super+2=text:\x1b[27;5;50~
+keybind = super+3=text:\x1b[27;5;51~
+keybind = super+4=text:\x1b[27;5;52~
+keybind = super+5=text:\x1b[27;5;53~
+keybind = super+6=text:\x1b[27;5;54~
+keybind = super+7=text:\x1b[27;5;55~
+keybind = super+8=text:\x1b[27;5;56~
+keybind = super+t=text:TESTING
