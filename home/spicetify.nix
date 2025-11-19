@@ -19,7 +19,7 @@ with lib; {
   in {
     enable = true;
     theme = spicePkgs.themes.text;
-    colorScheme = "CatppuccinMocha";
+    colorScheme = "TokyoNight";
 
     enabledExtensions = with spicePkgs.extensions; [
       # adblock
