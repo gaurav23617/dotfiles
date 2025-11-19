@@ -24,7 +24,7 @@
     ../../home/atuin.nix
     ../../home/aerospace.nix
     ../../home/mpv.nix
-    # ../../home/spicetify.nix
+    ../../home/spicetify.nix
 
     ./secrets
   ];
