@@ -1,38 +1,56 @@
 #!/bin/sh
 
-autoload -Uz compinit
-compinit
+ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
+[ ! -d $ZINIT_HOME ] && mkdir -p "$(dirname $ZINIT_HOME)"
+[ ! -d $ZINIT_HOME/.git ] && git clone https://github.com/zdharma-continuum/zinit.git "$ZINIT_HOME"
+source "${ZINIT_HOME}/zinit.zsh"
 
-if [[ -n $GHOSTTY_RESOURCES_DIR ]]; then
-  source "$GHOSTTY_RESOURCES_DIR"/shell-integration/zsh/ghostty-integration
-fi
+# Should be called before compinit
+zmodload zsh/complist
+
+# Load completions
+autoload -Uz _zinit && compinit && compinit
+(( ${+_comps} )) && _comps[zinit]=_zinit
+
+autoload -U compinit; compinit
+_comp_options+=(globdots) # With hidden files
 
 # Use a persistent, fast zcompdump location
 ZCDUMP="$HOME/.cache/zcompdump"
-# ZCDUMP="${XDG_CACHE_HOME:-$HOME/.cache}/zcompdump"
-#
-#
-# # Load cached completions
-# if [[ ! -s "$ZCDUMP" || "$ZCDUMP" -ot ~/.config/zsh/.zshrc ]]; then
-#   compinit -d "$ZCDUMP"
-# else
-#   compinit -C -d "$ZCDUMP"
-# fi
-#
-# # Precompile zcompdump for faster startups
-# if [[ -s "$ZCDUMP" && (! -s "$ZCDUMP.zwc" || "$ZCDUMP" -nt "$ZCDUMP.zwc") ]]; then
-#   zcompile "$ZCDUMP"
-# fi
 
-[ -f "$HOME/.local/share/zap/zap.zsh" ] && source "$HOME/.local/share/zap/zap.zsh"
 
-# Download Zinit, if it's not there yet
-if [ ! -d "$ZAP_DIR" ]; then
-  zsh <(curl -s https://raw.githubusercontent.com/zap-zsh/zap/master/install.zsh) --branch release-v --keep
-fi
+# Add in zsh plugins
+zinit light Aloxaf/fzf-tab
+zinit light hlissner/zsh-autopair
+zinit light jeffreytse/zsh-vi-mode
+zinit light zsh-users/zsh-completions
+zinit light zsh-users/zsh-autosuggestions
+zinit light zsh-users/zsh-syntax-highlighting
+zinit load zsh-users/zsh-history-substring-search
+zinit load zdharma-continuum/history-search-multi-word
 
-# Set the directory we want to store Zap and plugins
-ZAP_DIR="$HOME/.local/share/zap"
+
+# source
+zinit snippet "$HOME/.config/zsh/zstyle.zsh"
+zinit snippet "$HOME/.config/zsh/aliases.zsh"
+zinit snippet "$HOME/.config/zsh/exports.zsh"
+zinit snippet "$HOME/.config/zsh/functions.zsh"
+zinit snippet "$HOME/.config/zsh/Keybindings.zsh"
+zinit snippet "$HOME/.config/zsh/catppuccin_mocha-zsh-syntax-highlighting.zsh"
+
+# source
+# source "$HOME/.config/zsh/aliases.zsh"
+# source "$HOME/.config/zsh/zstyle.zsh"
+# source "$HOME/.config/zsh/exports.zsh"
+# source "$HOME/.config/zsh/functions.zsh"
+# source "$HOME/.config/zsh/Keybindings.zsh"
+# source "$HOME/dotfiles/config/zsh/Keybindings.zsh"
+# source "$HOME/.config/zsh/catppuccin_mocha-zsh-syntax-highlighting.zsh"
+
+
+# Prevent Zsh from throwing errors on unmatched globs (e.g. *, ?, # in commands)
+setopt no_nomatch
+# source <(carapace _carapace)
 
 # Add in Starship
 export STARSHIP_CONFIG=~/.config/starship.toml
@@ -44,27 +62,3 @@ eval "$(fzf --zsh)"
 eval "$(zoxide init --cmd cd zsh)"
 # eval "`pip completion --zsh`"
 # eval "$(<Homebrew prefix path>/bin/brew shellenv)"
-
-# source
-plug "$HOME/.config/zsh/aliases.zsh"
-plug "$HOME/.config/zsh/zstyle.zsh"
-plug "$HOME/.config/zsh/exports.zsh"
-plug "$HOME/.config/zsh/functions.zsh"
-plug "$HOME/.config/zsh/Keybindings.zsh"
-plug "$HOME/.config/zsh/catppuccin_mocha-zsh-syntax-highlighting.zsh"
-
-# Add in zsh plugins
-plug "zsh-users/zsh-completions"
-plug "zsh-users/zsh-autosuggestions"
-plug "hlissner/zsh-autopair"
-plug "zap-zsh/supercharge"
-plug "zap-zsh/vim"
-plug "zap-zsh/fzf"
-plug "Aloxaf/fzf-tab"
-plug "zap-zsh/exa"
-plug "zsh-users/zsh-syntax-highlighting"
-plug "zsh-users/zsh-history-substring-search"
-
-# Prevent Zsh from throwing errors on unmatched globs (e.g. *, ?, # in commands)
-setopt no_nomatch
-source <(carapace _carapace)

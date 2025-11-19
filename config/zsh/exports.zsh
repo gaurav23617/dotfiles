@@ -16,7 +16,24 @@ setopt HIST_SAVE_NO_DUPS          # Do not save duplicate entries in the history
 setopt HIST_FIND_NO_DUPS          # Do not display duplicate commands in history searches
 export HISTORY_IGNORE="(ls|cd|pwd|exit|sudo reboot|history|cd -|cd ..)"
 
-export EDITOR="nvim"
+setopt autocd              # change directory just by typing its name
+setopt correct             # auto correct mistakes
+setopt interactivecomments # allow comments in interactive mode
+setopt magicequalsubst     # enable filename expansion for arguments of the form ‘anything=expression’
+setopt nonomatch           # hide error message if there is no match for the pattern
+setopt notify              # report the status of background jobs immediately
+setopt numericglobsort     # sort filenames numerically when it makes sense
+setopt promptsubst         # enable command substitution in prompt
+
+# setopt GLOB_COMPLETE      # Show autocompletion menu with globs
+setopt MENU_COMPLETE        # Automatically highlight first element of completion menu
+setopt AUTO_LIST            # Automatically list choices on ambiguous completion.
+setopt COMPLETE_IN_WORD     # Complete from both ends of a word.
+
+# export EDITOR="nvim"
+export EDITOR="nvim visudo"
+export VISUAL="nvim visudo"
+export SUDO_EDITOR="nvim"
 export TERMINAL="ghostty"
 export BROWSER="zen-browser"
 export BROWSER="zen"
