@@ -120,7 +120,7 @@
 
     casks = [
       "google-chrome"
-      "spotify"
+      # "spotify"
       "raycast"
       "blip"
       "google-drive"
@@ -131,6 +131,8 @@
 
     brews = [
       "mas" # Ensure mas is available via Homebrew too
+      "tesseract-lang"
+      "tesseract"
     ];
 
     # Mac App Store apps
