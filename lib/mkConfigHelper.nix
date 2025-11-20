@@ -69,7 +69,7 @@ in {
       else "/home/${username}";
   in
     inputs.home-manager.lib.homeManagerConfiguration {
-      pkgs = inputs.nixpkgs.legacyPackages.${system};
+      pkgs = inputs.nixpkgs.legacyPackages.${stdenv.hostPlatform.system};
       extraSpecialArgs = {inherit inputs;};
       modules = [
         ../hosts/${platform}/${hostname}/home.nix

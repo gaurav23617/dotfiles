@@ -13,7 +13,7 @@ with lib; let
 in {
   home.packages = (
     if pkgs.stdenv.isLinux
-    then [inputs.ghostty.packages."${pkgs.system}".default]
+    then [inputs.ghostty.packages."${pkgs.stdenv.hostPlatform.system}".default]
     else [pkgs.brewCasks.ghostty]
   );
 
