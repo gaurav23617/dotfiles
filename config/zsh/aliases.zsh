@@ -2,7 +2,9 @@
 alias c='clear'
 alias vi='vim'
 alias vim='nvim'
-alias lg='lazygit'
+if [[ -x "$(command -v lazygit)" ]]; then
+    alias lg='lazygit'
+fi
 alias lzd='lazydocker'
 alias ff='fastfetch'
 alias logs='git log --graph --all --pretty=format:"%C(magenta)%h %C(white) %an  %ar%C(auto)  %D%n%s%n"'
