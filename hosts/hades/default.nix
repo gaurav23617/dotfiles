@@ -10,6 +10,7 @@
     ./disko-config.nix
     ../../home/docker.nix
     ../../modules/common
+    ../../modules/nixos/nix.nix
   ];
 
   # Bootloader.

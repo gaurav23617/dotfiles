@@ -9,6 +9,7 @@
     ./hardware-configuration.nix
     ../../modules/nixos/fonts.nix
     ../../modules/nixos/nixld.nix
+    ../../modules/nixos/nix.nix
     ../../modules/nixos/locale.nix
     ../../modules/nixos/audio.nix
     ../../modules/nixos/bluetooth.nix

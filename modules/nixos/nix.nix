@@ -40,13 +40,9 @@
     };
     gc = {
       automatic = true;
-      # persistent = true;
-      interval = {
-        Weekday = 0;
-        Hour = 0;
-        Minute = 0;
-      };
-      options = "--delete-older-than 7d";
+      persistent = true;
+      dates = "weekly";
+      options = "--delete-older-than 3d";
     };
   };
 }

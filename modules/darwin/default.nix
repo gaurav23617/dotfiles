@@ -9,6 +9,7 @@
     ./settings.nix
     ./packages.nix
     ./fonts.nix
+    ./nix.nix
   ];
 
   # nix config
