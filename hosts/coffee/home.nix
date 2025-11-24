@@ -44,6 +44,7 @@
     $DRY_RUN_CMD mkdir -p "$HOME/personal/projects"
     $DRY_RUN_CMD mkdir -p "$HOME/personal/playground"
     $DRY_RUN_CMD mkdir -p "$HOME/workspace"
+    $DRY_RUN_CMD mkdir -p "$HOME/workspace/docs"
   '';
 
   home.stateVersion = "25.05";
