@@ -1,11 +1,10 @@
 #!/bin/sh
 
-# Keybindings
-
 bindkey -v
-
 bindkey '^p' history-search-backward
 bindkey '^n' history-search-forward
+bindkey '^k' history-substring-backward
+bindkey '^j' history-substring-search-down
 bindkey '^[w' kill-region
 bindkey '^[[A' history-substring-search-up
 bindkey '^[[B' history-substring-search-down

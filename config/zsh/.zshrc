@@ -37,7 +37,6 @@ ZVM_SYSTEM_CLIPBOARD_ENABLED=true
 zvm_after_init_commands+=('[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh')
 
 # source
-zinit snippet "$HOME/.config/zsh/eza.zsh"
 zinit snippet "$HOME/.config/zsh/zstyle.zsh"
 zinit snippet "$HOME/.config/zsh/aliases.zsh"
 zinit snippet "$HOME/.config/zsh/exports.zsh"
