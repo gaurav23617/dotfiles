@@ -3,17 +3,16 @@
   pkgs,
   lib,
   ...
-}: let
-  inherit
-    (pkgs)
+}:
+let
+  inherit (pkgs)
     tree-sitter
     lua54Packages
     luajitPackages
     nodePackages_latest
     vimPlugins
     ;
-  inherit
-    (pkgs.tree-sitter-grammars)
+  inherit (pkgs.tree-sitter-grammars)
     tree-sitter-lua
     tree-sitter-nix
     tree-sitter-go
@@ -23,7 +22,13 @@
     tree-sitter-markdown
     tree-sitter-json
     ;
-in {
+in
+{
+  home.packages = with pkgs; [
+    nixfmt-rfc-style # Provides 'nixfmt' binary
+    statix
+    alejandra
+  ];
   programs.neovim = {
     enable = true;
     extraPackages = with pkgs; [
@@ -43,6 +48,9 @@ in {
       lua51Packages.luarocks-nix
       luarocks
       nixd
+      nixfmt-rfc-style
+      statix
+      selene
       alejandra
       gnumake
       go
@@ -68,7 +76,7 @@ in {
       "--suffix"
       "LIBRARY_PATH"
       ":"
-      "${lib.makeLibraryPath [pkgs.stdenv.cc.cc.lib]}"
+      "${lib.makeLibraryPath [ pkgs.stdenv.cc.cc.lib ]}"
     ];
 
     plugins = [
