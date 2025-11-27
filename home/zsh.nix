@@ -3,7 +3,12 @@
   lib,
   config,
   ...
-}: {
+}:
+{
+  imports = [
+    ./eza.nix
+  ];
+
   home.packages = with pkgs; [
     ripgrep
     tldr
@@ -17,6 +22,7 @@
     bat
     carapace
     vivid
+    zinit
   ];
 
   programs.zsh = {

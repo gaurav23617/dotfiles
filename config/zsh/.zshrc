@@ -37,13 +37,12 @@ ZVM_SYSTEM_CLIPBOARD_ENABLED=true
 zvm_after_init_commands+=('[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh')
 
 # source
-zinit snippet "$HOME/.config/zsh/zstyle.zsh"
-zinit snippet "$HOME/.config/zsh/aliases.zsh"
-zinit snippet "$HOME/.config/zsh/exports.zsh"
-zinit snippet "$HOME/.config/zsh/functions.zsh"
-zinit snippet "$HOME/.config/zsh/Keybindings.zsh"
-zinit snippet "$HOME/.config/zsh/catppuccin_mocha-zsh-syntax-highlighting.zsh"
-
+source "$HOME/.config/zsh/zstyle.zsh"
+source "$HOME/.config/zsh/aliases.zsh"
+source "$HOME/.config/zsh/exports.zsh"
+source "$HOME/.config/zsh/functions.zsh"
+source "$HOME/.config/zsh/Keybindings.zsh"
+source "$HOME/.config/zsh/catppuccin_mocha-zsh-syntax-highlighting.zsh"
 
 # Prevent Zsh from throwing errors on unmatched globs (e.g. *, ?, # in commands)
 setopt no_nomatch

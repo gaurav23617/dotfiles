@@ -1,6 +1,6 @@
 #!/bin/sh
 
-# 🧠 Completion styling
+# Completion styling
 zstyle ':completion:*' auto-description 'specify: %d'
 zstyle ':completion:*' completer _expand _complete
 zstyle ':completion:*' format 'Completing %d'
