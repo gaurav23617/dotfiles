@@ -4,16 +4,17 @@
   pkgs,
   inputs,
   ...
-}: {
-  imports = [inputs.nix-homebrew.darwinModules.nix-homebrew];
+}:
+{
+  imports = [ inputs.nix-homebrew.darwinModules.nix-homebrew ];
 
   environment.systemPackages = with pkgs; [
     pkg-config
   ];
 
   environment = {
-    systemPath = ["/opt/homebrew/bin"];
-    pathsToLink = ["/Applications"];
+    systemPath = [ "/opt/homebrew/bin" ];
+    pathsToLink = [ "/Applications" ];
   };
 
   environment.variables = {
@@ -127,6 +128,7 @@
       "android-file-transfer"
       "brave-browser"
       "helium-browser"
+      "iina"
     ];
 
     brews = [
