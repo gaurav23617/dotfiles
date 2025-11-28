@@ -3,12 +3,14 @@
   pkgs,
   config,
   ...
-}: let
+}:
+let
   # Using beta driver for recent GPUs like RTX 4070
   nvidiaDriverChannel = config.boot.kernelPackages.nvidiaPackages.beta;
-in {
+in
+{
   # Video drivers configuration for Xorg and Wayland
-  services.xserver.videoDrivers = ["nvidia"]; # Simplified - other modules are loaded automatically
+  services.xserver.videoDrivers = [ "nvidia" ]; # Simplified - other modules are loaded automatically
 
   # Kernel parameters for better Wayland and Hyprland integration
   boot.kernelParams = [
@@ -18,7 +20,7 @@ in {
   ];
 
   # Blacklist nouveau to avoid conflicts
-  boot.blacklistedKernelModules = ["nouveau"];
+  boot.blacklistedKernelModules = [ "nouveau" ];
 
   # Environment variables for better compatibility
   environment.variables = {
@@ -36,7 +38,9 @@ in {
   };
 
   # Configuration for proprietary packages
-  nixpkgs.config = {nvidia.acceptLicense = true;};
+  nixpkgs.config = {
+    nvidia.acceptLicense = true;
+  };
 
   # Nvidia configuration
   hardware = {
@@ -56,8 +60,7 @@ in {
         # Optimized configuration for switchable graphics laptops
         offload = {
           enable = true; # Mode optimized for power saving
-          enableOffloadCmd =
-            true; # Allows running applications with dedicated GPU
+          enableOffloadCmd = true; # Allows running applications with dedicated GPU
         };
         # sync.enable disabled as offload is generally better for laptops
         sync.enable = false;
@@ -87,7 +90,7 @@ in {
 
   # Nix cache for CUDA
   nix.settings = {
-    substituters = ["https://cuda-maintainers.cachix.org"];
+    substituters = [ "https://cuda-maintainers.cachix.org" ];
     trusted-public-keys = [
       "cuda-maintainers.cachix.org-1:0dq3bujKpuEPMCX6U4WylrUDZ9JyUG0VpVZa7CNfq5E="
     ];

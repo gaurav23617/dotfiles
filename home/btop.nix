@@ -1,4 +1,5 @@
-{pkgs, ...}: {
+{ pkgs, ... }:
+{
   programs.btop = {
     package = pkgs.btop-cuda;
     enable = true;

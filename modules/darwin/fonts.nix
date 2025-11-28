@@ -1,4 +1,5 @@
-{pkgs, ...}: {
+{ pkgs, ... }:
+{
   fonts = {
     packages = with pkgs; [
       roboto
@@ -6,7 +7,7 @@
       comic-neue
       inter
       lato
-      (google-fonts.override {fonts = ["Inter"];})
+      (google-fonts.override { fonts = [ "Inter" ]; })
       jetbrains-mono
       nerd-fonts.jetbrains-mono
       nerd-fonts.zed-mono

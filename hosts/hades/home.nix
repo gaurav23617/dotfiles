@@ -3,7 +3,8 @@
   pkgs,
   lib,
   ...
-}: {
+}:
+{
   imports = [
     # Comment out git for now to test
     # ../../home/git.nix
@@ -15,8 +16,8 @@
   home.username = "indie";
   home.homeDirectory = "/home/indie";
 
-  home.packages = [];
-  home.file = {};
+  home.packages = [ ];
+  home.file = { };
 
   # Disable XDG for initial install
   xdg.userDirs.enable = false;

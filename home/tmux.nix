@@ -1,5 +1,11 @@
-{pkgs, ...}: {
-  home.packages = with pkgs; [sesh tmuxinator yq tmuxp];
+{ pkgs, ... }:
+{
+  home.packages = with pkgs; [
+    sesh
+    tmuxinator
+    yq
+    tmuxp
+  ];
   programs.tmux = {
     enable = true;
     # tmuxp.enable = false;

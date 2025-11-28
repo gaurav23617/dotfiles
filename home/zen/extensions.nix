@@ -1,4 +1,5 @@
-{lib, ...}: {
+{ lib, ... }:
+{
   ExtensionSettings = {
     "*" = {
       blocked_install_message = "Addon is not added in the nix config";

@@ -3,12 +3,14 @@
   pkgs,
   lib,
   ...
-}: {
+}:
+{
   imports = [
     ../../home/tmux.nix
     ../../home/zsh.nix
     # ../../home/nushell.nix
-    ../../home/zen
+    # ../../home/zen
+    # ../../home/zen.nix
     ../../home/direnv.nix
     ../../home/starship.nix
     ../../home/nh.nix
@@ -24,7 +26,7 @@
     ../../home/atuin.nix
     ../../home/aerospace.nix
     ../../home/mpv.nix
-    ../../home/spicetify.nix
+    # ../../home/spicetify.nix
 
     ./secrets
   ];
@@ -37,7 +39,7 @@
   xdg.userDirs.enable = false;
 
   # Create directories manually instead
-  home.activation.createCustomDirs = lib.hm.dag.entryAfter ["writeBoundary"] ''
+  home.activation.createCustomDirs = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
     $DRY_RUN_CMD mkdir -p "$HOME/.config/sops/age"
     $DRY_RUN_CMD mkdir -p "$HOME/personal"
     $DRY_RUN_CMD mkdir -p "$HOME/personal/media"

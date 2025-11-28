@@ -3,14 +3,16 @@
   lib,
   config,
   ...
-}: let
+}:
+let
   nu-scripts = pkgs.fetchFromGitHub {
     owner = "nushell";
     repo = "nu_scripts";
     rev = "e380c8a355b4340c26dc51c6be7bed78f87b0c71";
     sha256 = "sha256-b2AeWiHRz1LbiGR1gOJHBV3H56QP7h8oSTzg+X4Shk8=";
   };
-in {
+in
+{
   home.packages = with pkgs; [
     # Core utilities
     bat

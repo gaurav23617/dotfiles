@@ -1,4 +1,5 @@
-{pkgs, ...}: {
+{ pkgs, ... }:
+{
   services.swaync = {
     enable = true;
     settings = {
@@ -19,7 +20,14 @@
       image-visibility = "when-available";
       transition-time = 100;
 
-      widgets = ["title" "buttons-grid" "dnd" "inhibitors" "mpris" "notifications"];
+      widgets = [
+        "title"
+        "buttons-grid"
+        "dnd"
+        "inhibitors"
+        "mpris"
+        "notifications"
+      ];
 
       widget-config = {
         inhibitors = {
@@ -32,7 +40,9 @@
           clear-all-button = true;
           button-text = "Clear All";
         };
-        dnd = {text = "Do Not Disturb";};
+        dnd = {
+          text = "Do Not Disturb";
+        };
         mpris = {
           image-size = 64;
           blur = true;

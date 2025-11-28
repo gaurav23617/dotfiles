@@ -1,4 +1,5 @@
-{pkgs, ...}: {
+{ pkgs, ... }:
+{
   fonts = {
     packages = with pkgs; [
       roboto
@@ -18,7 +19,7 @@
       twemoji-color-font
       material-symbols
       libertinus
-      (google-fonts.override {fonts = ["Inter"];})
+      (google-fonts.override { fonts = [ "Inter" ]; })
       jetbrains-mono
       nerd-fonts.jetbrains-mono
       nerd-fonts.symbols-only

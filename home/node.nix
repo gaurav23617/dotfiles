@@ -4,53 +4,56 @@
   pkgs,
   lib,
   ...
-}: {
-  home = let
-    npmGlobalDir = "${config.home.homeDirectory}/.npm";
-  in {
-    packages = with pkgs; [
-      npm-check-updates # (ncu) Find newer versions of package dependencies and check outdated npm packages locally or globally.
-      nodePackages.pnpm
-      bun
-      pkgs-extra.npkill # remove node_modules from child directories
-      nest-cli
-      nodejs_24
-      husky
-      biome
-    ];
+}:
+{
+  home =
+    let
+      npmGlobalDir = "${config.home.homeDirectory}/.npm";
+    in
+    {
+      packages = with pkgs; [
+        npm-check-updates # (ncu) Find newer versions of package dependencies and check outdated npm packages locally or globally.
+        nodePackages.pnpm
+        bun
+        pkgs-extra.npkill # remove node_modules from child directories
+        nest-cli
+        nodejs_24
+        husky
+        biome
+      ];
 
-    sessionVariables = {
-      # https://github.com/npm/cli/issues/7857#issuecomment-2481331001
-      NODE_OPTIONS = "--disable-warning=ExperimentalWarning";
-    };
+      sessionVariables = {
+        # https://github.com/npm/cli/issues/7857#issuecomment-2481331001
+        NODE_OPTIONS = "--disable-warning=ExperimentalWarning";
+      };
 
-    sessionPath = ["${npmGlobalDir}/bin"];
+      sessionPath = [ "${npmGlobalDir}/bin" ];
 
-    activation.init = lib.hm.dag.entryAfter ["writeBoundary"] ''
-      mkdir -p ${npmGlobalDir}/bin \
-               ${npmGlobalDir}/lib
-    '';
-
-    file = {
-      ".npmrc".text = ''
-        prefix=${npmGlobalDir}
-        //registry.npmjs.org/:_authToken=''${NPM_TOKEN}
+      activation.init = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
+        mkdir -p ${npmGlobalDir}/bin \
+                 ${npmGlobalDir}/lib
       '';
 
-      ".bunfig.toml".text = ''
-        [runtime]
-        logLevel = "debug"
-        telemetry = false
+      file = {
+        ".npmrc".text = ''
+          prefix=${npmGlobalDir}
+          //registry.npmjs.org/:_authToken=''${NPM_TOKEN}
+        '';
 
-        [install]
-        optional = true
-        dev = true
-        peer = true
-        production = false
-        exact = true
+        ".bunfig.toml".text = ''
+          [runtime]
+          logLevel = "debug"
+          telemetry = false
 
-        auto = "fallback"
-      '';
+          [install]
+          optional = true
+          dev = true
+          peer = true
+          production = false
+          exact = true
+
+          auto = "fallback"
+        '';
+      };
     };
-  };
 }

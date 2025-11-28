@@ -3,7 +3,8 @@
   pkgs,
   config,
   ...
-}: {
+}:
+{
   # ctrl + m to toggle the menubar
   home.packages = with pkgs; [
     xfce.thunar

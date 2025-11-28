@@ -4,7 +4,8 @@
   config,
   lib,
   ...
-}: {
+}:
+{
   imports = [
     ./animations.nix
     ./bindings.nix

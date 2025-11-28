@@ -1,4 +1,5 @@
-{lib, ...}: {
+{ lib, ... }:
+{
   AllowFileSelectionDialogs = true;
   AppAutoUpdate = false;
   AutofillAddressEnabled = false;
@@ -20,14 +21,18 @@
   DisableSafeMode = false;
   DisableTelemetry = true;
   DisableFeedbackCommands = true;
-  DNSOverHTTPS = {Enabled = true;};
+  DNSOverHTTPS = {
+    Enabled = true;
+  };
   EnableTrackingProtection = {
     Value = true;
     Locked = true;
     Cryptomining = true;
     Fingerprinting = true;
   };
-  EncryptedMediaExtensions = {Enabled = true;};
+  EncryptedMediaExtensions = {
+    Enabled = true;
+  };
   ExtensionUpdate = true;
   FirefoxHome = {
     Search = false;
@@ -44,12 +49,18 @@
   NoDefaultBookmarks = false;
   OfferToSaveLogins = false;
   PasswordManagerEnabled = true;
-  PictureInPicture = {Enabled = true;};
+  PictureInPicture = {
+    Enabled = true;
+  };
   PopupBlocking = {
-    Allow = [];
+    Allow = [ ];
     Default = true;
   };
-  Preferences = {"browser.tabs.warnOnClose" = {Value = false;};};
+  Preferences = {
+    "browser.tabs.warnOnClose" = {
+      Value = false;
+    };
+  };
   PromptForDownloadLocation = true;
   ShowHomeButton = false;
   StartDownloadsInTempDirectory = false;

@@ -3,7 +3,8 @@
   pkgs,
   inputs,
   ...
-}: {
+}:
+{
   imports = [
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
@@ -16,7 +17,7 @@
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
-  boot.kernelParams = ["nvidia-drm.modeset=1"];
+  boot.kernelParams = [ "nvidia-drm.modeset=1" ];
 
   networking.hostName = "hades"; # Define your hostname.
 
@@ -37,7 +38,10 @@
       ];
     };
     defaultGateway = "192.168.1.254"; # Change to your router's IP
-    nameservers = ["8.8.8.8" "8.8.4.4"]; # Or use your preferred DNS servers
+    nameservers = [
+      "8.8.8.8"
+      "8.8.4.4"
+    ]; # Or use your preferred DNS servers
   };
 
   # Enable OpenSSH
@@ -57,7 +61,11 @@
     variant = "";
   };
 
-  environment.systemPackages = with pkgs; [neovim vim wget];
+  environment.systemPackages = with pkgs; [
+    neovim
+    vim
+    wget
+  ];
 
   # Define a user account. Don't forget to set a password with 'passwd'.
   users = {
@@ -65,7 +73,11 @@
     users.indie = {
       isNormalUser = true;
       description = "indiefluence server";
-      extraGroups = ["networkmanager" "wheel" "docker"];
+      extraGroups = [
+        "networkmanager"
+        "wheel"
+        "docker"
+      ];
       packages = with pkgs; [
         #  thunderbird
       ];

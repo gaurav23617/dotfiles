@@ -1,4 +1,5 @@
-{config, ...}: {
+{ config, ... }:
+{
   security = {
     # allow wayland lockers to unlock the screen
     pam.services.hyprlock.text = "auth include login";

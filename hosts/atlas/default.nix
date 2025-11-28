@@ -3,7 +3,8 @@
   pkgs,
   inputs,
   ...
-}: {
+}:
+{
   imports = [
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
@@ -22,7 +23,7 @@
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
-  boot.kernelParams = ["nvidia-drm.modeset=1"];
+  boot.kernelParams = [ "nvidia-drm.modeset=1" ];
 
   networking.hostName = "atlas"; # Define your hostname.
 
@@ -34,7 +35,7 @@
     layout = "us";
     variant = "";
   };
-  environment.systemPackages = [pkgs.google-chrome];
+  environment.systemPackages = [ pkgs.google-chrome ];
   # Enable CUPS to print documents.
   services.printing.enable = true;
 
@@ -44,7 +45,11 @@
     users.gaurav = {
       isNormalUser = true;
       description = "Gaurav";
-      extraGroups = ["networkmanager" "wheel" "docker"];
+      extraGroups = [
+        "networkmanager"
+        "wheel"
+        "docker"
+      ];
       packages = with pkgs; [
         #  thunderbird
       ];

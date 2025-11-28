@@ -2,7 +2,8 @@
   config,
   pkgs,
   ...
-}: let
+}:
+let
   accent = "#${config.lib.stylix.colors.base0D}";
   background = "#${config.lib.stylix.colors.base00}";
   foreground = "#${config.lib.stylix.colors.base05}";
@@ -61,10 +62,11 @@
       }
     '';
   };
-in {
+in
+{
   wayland.windowManager.hyprland.settings = {
-    exec-once = ["swayosd-server"];
-    bind = [",XF86AudioMute, exec, ${pkgs.swayosd}/bin/swayosd-client --output-volume mute-toggle"];
+    exec-once = [ "swayosd-server" ];
+    bind = [ ",XF86AudioMute, exec, ${pkgs.swayosd}/bin/swayosd-client --output-volume mute-toggle" ];
     bindl = [
       ",XF86MonBrightnessUp, exec, ${pkgs.swayosd}/bin/swayosd-client --brightness raise 5%+"
       ",XF86MonBrightnessDown, exec, ${pkgs.swayosd}/bin/swayosd-client --brightness lower 5%-"

@@ -3,7 +3,8 @@
   config,
   inputs,
   ...
-}: {
+}:
+{
   # Allow unfree packages
   nixpkgs.config.allowBroken = true;
   nix = {

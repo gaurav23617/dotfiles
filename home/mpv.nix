@@ -3,10 +3,12 @@
   pkgs,
   lib,
   ...
-}: {
+}:
+{
   programs.mpv = {
     enable = true;
-    scripts = with pkgs.mpvScripts;
+    scripts =
+      with pkgs.mpvScripts;
       [
         thumbnail
       ]

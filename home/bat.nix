@@ -2,10 +2,15 @@
   pkgs,
   lib,
   ...
-}: {
+}:
+{
   programs.bat = {
     enable = true;
-    extraPackages = with pkgs.bat-extras; [batman batpipe batgrep];
+    extraPackages = with pkgs.bat-extras; [
+      batman
+      batpipe
+      batgrep
+    ];
   };
   home.file.".config/bat" = {
     recursive = true;
