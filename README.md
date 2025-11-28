@@ -4,7 +4,7 @@ My personal dotfiles managed with Nix flakes, featuring configurations for devel
 
 ## 📸 Preview
 
-*(Add screenshots of your setup here)*
+![Neovim Configuration](https://raw.githubusercontent.com/gaurav23617/dump/refs/heads/main/dotfiles/nvim-config-preview.webp)
 
 ## 🖥️ System Configuration
 
