@@ -154,17 +154,46 @@
         "zen.workspaces.continue-where-left-off" = true;
         "zen.workspaces.natural-scroll" = true;
         "zen.view.compact" = true;
-        "zen.view.compact.hide-tabbar" = true;
+        "zen.view.compact.hide-tabbar" = false;
         "zen.view.compact.hide-toolbar" = true;
         "zen.view.compact.animate-sidebar" = true;
         "zen.welcome-screen.seen" = true;
         "zen.urlbar.behavior" = "float";
         "zen.view.use-single-toolbar" = true;
-        "zen.view.sidebar-expanded" = false;
+        "zen.view.sidebar-expanded" = true;
         "zen.tabs.vertical.right-side" = true;
 
         # Enable password manager
         "signon.rememberSignons" = true;
+        "browser.uiCustomization.state" = builtins.toJSON {
+          placements = {
+            widget-overflow-fixed-list = [ ];
+            nav-bar = [
+              "back-button"
+              "forward-button"
+              "stop-reload-button"
+              "urlbar-container"
+              "downloads-button"
+              "logins-button"
+            ];
+            toolbar-menubar = [ "menubar-items" ];
+            TabsToolbar = [
+              "firefox-view-button"
+              "tabbrowser-tabs"
+              "alltabs-button"
+            ];
+            PersonalToolbar = [
+              "personal-bookmarks"
+              "managed-bookmarks"
+            ];
+          };
+          currentVersion = 20;
+          newElementCount = 7;
+        };
+        # macOS Touch ID authentication
+        "identity.fxaccounts.pairing.enabled" = true;
+        "signon.management.page.os-auth.enabled" = true;
+        "extensions.formautofill.reauth.enabled" = true;
       };
 
       bookmarks = {
@@ -281,6 +310,11 @@
               ];
               icon = nixSnowflakeIcon;
               definedAliases = [ "hmop" ];
+            };
+
+            "youtube" = {
+              urls = [ { template = "https://youtube.com/results?search_query={searchTerms}"; } ];
+              definedAliases = [ "yt" ];
             };
             bing.metaData.hidden = "true";
           };
