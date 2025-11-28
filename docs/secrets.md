@@ -124,6 +124,7 @@ If you are using `sops-nix`, ensure your `flake.nix` includes the `sops` secrets
 
 Add `docs/` and move the installation + secrets text out of README:
 
+```
 .
 ├── config/
 ├── docs/
@@ -134,6 +135,7 @@ Add `docs/` and move the installation + secrets text out of README:
 ├── modules/
 ├── flake.nix
 └── README.md
+```
 
 ---
 
