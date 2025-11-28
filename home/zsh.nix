@@ -30,7 +30,10 @@
     initContent = builtins.readFile ../config/zsh/.zshrc;
   };
 
+  # home.file.".config/zsh".source = builtins.toString (
+  #   config.lib.file.mkOutOfStoreSymlink ../config/zsh
+  # );
   home.file.".config/zsh".source = builtins.toString (
-    config.lib.file.mkOutOfStoreSymlink ../config/zsh
+    config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfiles/config/zsh"
   );
 }
