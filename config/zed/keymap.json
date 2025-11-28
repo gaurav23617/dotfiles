@@ -1,0 +1,126 @@
+// Zed keymap
+//
+// For information on binding keys, see the Zed
+// documentation: https://zed.dev/docs/key-bindings
+//
+// To see the default key bindings run `zed: open default keymap`
+// from the command palette.
+[
+  {
+    "context": "Workspace",
+    "bindings": {
+      // "shift shift": "file_finder::Toggle"
+    }
+  },
+  {
+    "context": "Editor && vim_mode == insert",
+    "bindings": {
+      "j k": "vim::NormalBefore",
+      "j j": "vim::NormalBefore",
+      "space space": "file_finder::Toggle",
+      "space w": "workspace::Save"
+    }
+  },
+  {
+    "context": "Editor && (showing_code_actions || showing_completions)",
+    "bindings": {
+      "ctrl-k": "editor::ContextMenuPrevious",
+      "up": "editor::ContextMenuPrevious",
+      "ctrl-j": "editor::ContextMenuNext",
+      "down": "editor::ContextMenuNext",
+      "pageup": "editor::ContextMenuFirst",
+      "pagedown": "editor::ContextMenuLast"
+    }
+  },
+  {
+    "context": "Workspace",
+    "bindings": {
+      "space space": "file_finder::Toggle"
+      // "space e": "project_panel::ToggleFocus"
+    }
+  },
+
+  // --- START: Your Merged Neovim Keybindings ---
+  {
+    "context": "Workspace",
+    "bindings": {
+      "space .": "workspace::NewFile", // Toggle Scratch Buffer
+      // "space n": "notifications::Toggle", // Notification History
+      "ctrl-/": "terminal_panel::ToggleFocus",
+
+      // --- Save / Quit ---
+      "space w": "workspace::Save",
+      // "space s s": "workspace::Save",
+      // "space w q": ["workspace::Save", "pane::CloseActiveItem"],
+      // "space w q a": ["workspace::SaveAll", "workspace::Quit"],
+      // "space q": "pane::CloseActiveItem", // Quit current
+      // "space q q": "workspace::Quit", // Quit all
+
+      // --- Clear Search ---
+      // "space n h": "editor::ClearSelections", // Clear highlights
+
+      // --- Buffers (Tabs in Zed) ---
+      // "shift-h": "pane::ActivatePrevItem",
+      "shift-l": "pane::ActivateNextItem",
+      // "left_bracket b": "pane::ActivatePrevItem",
+      "right_bracket b": "pane::ActivateNextItem",
+      // "space b b": "pane::ActivatePrevItem", // Switch to Other Buffer
+      "space b d": "pane::CloseActiveItem", // Delete Buffer
+      "space b o": "pane::CloseOtherItems", // Delete Other Buffers
+      "space b D": "pane::CloseActiveItem", // Delete Buffer and Window
+      "right": "pane::ActivateNextItem",
+      // "left": "pane::ActivatePrevItem",
+
+      // --- Pane Resizing (Vim-style) ---
+      // "+": "pane::Widen",
+      // "_": "pane::Narrow",
+      // "=": "pane::Tallen",
+      // "-": "pane::Shorten",
+
+      // --- Pane Resizing (Arrow-style) ---
+      // "ctrl-up": "pane::Tallen",
+      // "ctrl-down": "pane::Shorten",
+      // "ctrl-left": "pane::Narrow",
+      // "ctrl-right": "pane::Widen",
+
+      // --- Tabs (as in, new Vim tabs) ---
+      "space t o": "workspace::NewFile", // New tab
+      "space t x": "pane::CloseActiveItem", // Close tab
+      "space t n": "pane::ActivateNextItem", // Next tab
+      // "space t p": "pane::ActivatePrevItem", // Prev tab
+
+      // --- Splits ---
+      "space s v": "pane::SplitRight",
+      "space s h": "pane::SplitDown",
+      // "space s e": "pane::BalancePanes",
+      "space s x": "pane::CloseActiveItem" // Close split
+
+      // --- Increment / Decrement ---
+      // "space =": "editor::Increment", // <leader>+
+      // "space -": "editor::Decrement",
+
+      // --- File Actions ---
+      // "space c R": "workspace::Rename" // Snacks: Rename File
+    }
+  },
+  // Context for actions inside the text editor
+  {
+    "context": "Editor",
+    "bindings": {
+      // --- Insert Mode Exit ---
+      // "j j": "editor::Cancel" // Exit insert mode
+      // "j k": ["editor::Cancel", "workspace::Save"], // Exit insert and save
+      // --- Normal Mode Edits ---
+      // "X": "editor::SplitLine", // Split line at cursor
+      // "enter": "editor::ChangeInsideWord", // Change word (ciw)
+      // "ctrl-x": "editor::CutLine" // Cut line
+    }
+  },
+  // --- END: Your Merged Neovim Keybindings ---
+  {
+    "context": "(ProjectPanel && not_editing)",
+    "bindings": {
+      "space e": "vim::ToggleProjectPanelFocus"
+    }
+  }
+]
