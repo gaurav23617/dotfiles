@@ -46,6 +46,8 @@ source "$HOME/.config/zsh/catppuccin_mocha-zsh-syntax-highlighting.zsh"
 
 # Prevent Zsh from throwing errors on unmatched globs (e.g. *, ?, # in commands)
 setopt no_nomatch
+
+# Initialize Carapace with Catppuccin colors
 source <(carapace _carapace)
 
 # Add in Starship

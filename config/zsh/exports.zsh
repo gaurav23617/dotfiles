@@ -60,6 +60,21 @@ export FZF_DEFAULT_OPTS=" \
 --color=marker:#B4BEFE,fg+:#CDD6F4,prompt:#CBA6F7,hl+:#F38BA8 \
 --color=selected-bg:#45475A \
 --color=border:#6C7086,label:#CDD6F4"
+
+
+# Carapace Catppuccin Mocha Theme
+export CARAPACE_HIGHLIGHT_DESCRIPTION='38;5;243:italic'
+export CARAPACE_HIGHLIGHT_FLAG='38;5;116'
+export CARAPACE_HIGHLIGHT_FLAGARG='38;5;222'
+export CARAPACE_HIGHLIGHT_FLAGMULTIARG='38;5;222'
+export CARAPACE_HIGHLIGHT_FLAGNOARG='38;5;147'
+export CARAPACE_HIGHLIGHT_DEFAULT='38;5;188'
+export CARAPACE_HIGHLIGHT_KEYWORDNEGATIVE='38;5;210'
+export CARAPACE_HIGHLIGHT_KEYWORDPOSITIVE='38;5;156'
+export CARAPACE_HIGHLIGHT_KEYWORDAMBIGUOUS='38;5;222'
+export CARAPACE_HIGHLIGHT_KEYWORDUNKNOWN='38;5;243'
+export CARAPACE_HIGHLIGHT_VALUE='38;5;213'
+
 export NIX_CONFIG="experimental-features = nix-command flakes"
 export FZF_DEFAULT_COMMAND='rg --files --no-ignore-vcs --hidden'
 export CARAPACE_BRIDGES='zsh,fish,bash,inshellisense'
