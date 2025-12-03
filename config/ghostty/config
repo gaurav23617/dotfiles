@@ -57,14 +57,14 @@ gtk-titlebar = false
 macos-titlebar-style = hidden
 macos-window-shadow = true
 macos-non-native-fullscreen = false
-macos-option-as-alt = false
+macos-option-as-alt = true
 
 # Scrollback & Storage
 scrollback-limit = 10000000
 image-storage-limit = 320000000
 click-repeat-interval = 0
 
-# Unbind Alt+Number keys to allow them to be passed through to tmux
+# Unbind alt+Number keys to allow them to be passed through to tmux
 keybind = alt+1=unbind
 keybind = alt+2=unbind
 keybind = alt+3=unbind
@@ -75,23 +75,25 @@ keybind = alt+7=unbind
 keybind = alt+8=unbind
 keybind = alt+9=unbind
 
-# Unbind Super+Number keys to allow them to be passed through to tmux
-keybind = super+1=unbind
-keybind = super+2=unbind
-keybind = super+3=unbind
-keybind = super+4=unbind
-keybind = super+5=unbind
-keybind = super+6=unbind
-keybind = super+7=unbind
-keybind = super+8=unbind
+# Unbind default tab switching with Super+numbers
+keybind = super+digit_1=unbind
+keybind = super+digit_2=unbind
+keybind = super+digit_3=unbind
+keybind = super+digit_4=unbind
+keybind = super+digit_5=unbind
+keybind = super+digit_6=unbind
+keybind = super+digit_7=unbind
+keybind = super+digit_8=unbind
+keybind = super+digit_9=unbind
 
-# Remove the unbind lines and use these instead
-keybind = super+1=text:\x1b[27;5;49~
-keybind = super+2=text:\x1b[27;5;50~
-keybind = super+3=text:\x1b[27;5;51~
-keybind = super+4=text:\x1b[27;5;52~
-keybind = super+5=text:\x1b[27;5;53~
-keybind = super+6=text:\x1b[27;5;54~
-keybind = super+7=text:\x1b[27;5;55~
-keybind = super+8=text:\x1b[27;5;56~
-keybind = super+t=text:TESTING
+keybind = global:cmd+backquote=toggle_quick_terminal
+
+keybind = super+1=text:\x011
+keybind = super+2=text:\x012
+keybind = super+3=text:\x013
+keybind = super+4=text:\x014
+keybind = super+5=text:\x015
+keybind = super+6=text:\x016
+keybind = super+7=text:\x017
+keybind = super+8=text:\x018
+keybind = super+9=text:\x019
