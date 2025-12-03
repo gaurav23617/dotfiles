@@ -16,7 +16,11 @@ in
     else
       [ pkgs.brewCasks.ghostty ];
 
+  # home.file.".config/ghostty".source = builtins.toString (
+  #   config.lib.file.mkOutOfStoreSymlink ../config/ghostty
+  # );
+
   home.file.".config/ghostty".source = builtins.toString (
-    config.lib.file.mkOutOfStoreSymlink ../config/ghostty
+    config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfiles/config/ghostty"
   );
 }
