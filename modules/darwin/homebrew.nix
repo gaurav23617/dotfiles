@@ -135,6 +135,12 @@
       "mas" # Ensure mas is available via Homebrew too
       "tesseract-lang"
       "tesseract"
+      "docker-buildx"
+      "docker"
+      "docker-compose"
+      "colima"
+      # "qbittorrent"
+      # "motrix"
     ];
 
     # Mac App Store apps
