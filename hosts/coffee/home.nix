@@ -17,16 +17,18 @@
     ../../home/btop.nix
     ../../home/git.nix
     ../../home/lazygit.nix
+    ../../home/lazydocker.nix
     ../../home/editor/neovim.nix
-    ../../home/editor/zed.nix
+    # ../../home/editor/zed.nix
     ../../home/fastfetch.nix
     ../../home/bat.nix
     ../../home/gh.nix
+    ../../home/node.nix
     ../../home/ghostty.nix
     ../../home/atuin.nix
     ../../home/aerospace.nix
     ../../home/mpv.nix
-    # ../../home/spicetify.nix
+    ../../home/spicetify.nix
 
     ./secrets
   ];

@@ -1,5 +1,4 @@
 {
-  pkgs-extra,
   config,
   pkgs,
   lib,
@@ -15,8 +14,7 @@
         npm-check-updates # (ncu) Find newer versions of package dependencies and check outdated npm packages locally or globally.
         nodePackages.pnpm
         bun
-        pkgs-extra.npkill # remove node_modules from child directories
-        nest-cli
+        npkill
         nodejs_24
         husky
         biome
