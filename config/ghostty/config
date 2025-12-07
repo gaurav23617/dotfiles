@@ -64,6 +64,8 @@ scrollback-limit = 10000000
 image-storage-limit = 320000000
 click-repeat-interval = 0
 
+macos-icon = blueprint
+
 # Unbind alt+Number keys to allow them to be passed through to tmux
 keybind = alt+1=unbind
 keybind = alt+2=unbind
