@@ -74,29 +74,54 @@
     fi
 
     # Check if signed into Mac App Store
-    if ! ${pkgs.mas}/bin/mas account &> /dev/null; then
-      echo "⚠️  Not signed into Mac App Store"
-      echo "   Please sign in via the App Store application"
-      echo "   Then re-run: darwin-rebuild switch --flake .#coffee"
+    # Note: 'mas account' is not supported on macOS 10.13+ due to Apple's changes
+    # See: https://github.com/mas-cli/mas#known-issues
+    echo "━━━ Mac App Store Status ━━━"
+
+    # Use || true to prevent command failures from stopping activation
+    MAS_ACCOUNT_OUTPUT=$(${pkgs.mas}/bin/mas account 2>&1 || true)
+    MAS_EXIT_CODE=$?
+
+    if [ $MAS_EXIT_CODE -eq 0 ] && [ -n "$MAS_ACCOUNT_OUTPUT" ]; then
+      echo "✓ Mac App Store: Signed in as $MAS_ACCOUNT_OUTPUT"
     else
-      echo "✓ Mac App Store: Signed in as $(${pkgs.mas}/bin/mas account)"
-
-      # Check if required apps are in purchase history
-      echo "━━━ Checking App Store Apps ━━━"
-
-      # List of app IDs we want to install
-      REQUIRED_APPS="310633997"  # WhatsApp
-
-      for app_id in $REQUIRED_APPS; do
-        if ${pkgs.mas}/bin/mas list | grep -q "$app_id"; then
-          echo "✓ App $app_id: Already in purchase history"
-        else
-          echo "⚠️  App $app_id: NOT in purchase history"
-          echo "   Please open the App Store and click 'Get' for this app"
-          echo "   You can cancel the download immediately after"
-        fi
-      done
+      # Check if it's the "not supported" error
+      if echo "$MAS_ACCOUNT_OUTPUT" | grep -q "not supported"; then
+        echo "ℹ️  Mac App Store account check not supported on this macOS version"
+        echo "   This is expected on macOS 10.13+ (current: $(sw_vers -productVersion))"
+        echo "   As long as you're signed into the App Store app, mas apps will install fine"
+        echo ""
+        echo "   To verify you're signed in:"
+        echo "   1. Open the App Store application"
+        echo "   2. Check if you see your account icon in the bottom left"
+        echo "   3. If not signed in, click 'Sign In' and log in with your Apple ID"
+      else
+        echo "⚠️  Could not verify Mac App Store sign-in status"
+        echo "   Please ensure you're signed in via the App Store application"
+        echo "   Output: $MAS_ACCOUNT_OUTPUT"
+      fi
     fi
+
+    # Check if required apps are in purchase history (this still works)
+    echo ""
+    echo "━━━ Checking App Store Apps ━━━"
+
+    # List of app IDs we want to install
+    REQUIRED_APPS="310633997"  # WhatsApp
+
+    for app_id in $REQUIRED_APPS; do
+      # Use || true to prevent grep failures from stopping activation
+      if ${pkgs.mas}/bin/mas list 2>/dev/null | grep -q "$app_id" || false; then
+        echo "✓ App $app_id: Already installed or in purchase history"
+      else
+        echo "ℹ️  App $app_id: Not yet in purchase history"
+        echo "   To enable automatic installation:"
+        echo "   1. Open the App Store and search for the app"
+        echo "   2. Click 'Get' or the download icon"
+        echo "   3. You can cancel the download immediately after"
+        echo "   This associates the app with your Apple ID for mas to install"
+      fi
+    done || true  # Ensure the loop doesn't fail activation
 
     echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
   '';
@@ -104,7 +129,7 @@
   # Configure what to install via Homebrew
   homebrew = {
     enable = true;
-    caskArgs.no_quarantine = true;
+    # caskArgs.no_quarantine = true;
     global.brewfile = true;
     # Only enable if brew is already installed
     # This prevents the error on first run
@@ -121,7 +146,7 @@
 
     casks = [
       "google-chrome"
-      # "spotify"
+      "spotify"
       "raycast"
       "blip"
       "google-drive"
@@ -129,6 +154,9 @@
       "brave-browser"
       "helium-browser"
       "iina"
+      "requestly"
+      "antigravity"
+      "mhaeuser/mhaeuser/battery-toolkit"
     ];
 
     brews = [
