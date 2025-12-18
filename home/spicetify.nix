@@ -10,10 +10,8 @@ with lib;
 {
   imports = [ inputs.spicetify-nix.homeManagerModules.default ];
 
-  # Only install Spotify on Linux, use Homebrew on macOS
-  home.packages = lib.optionals pkgs.stdenv.isLinux [
-    pkgs.spotify
-  ];
+  # Spicetify-nix will install Spotify automatically on all platforms
+  home.packages = [ ];
 
   programs.spicetify =
     let

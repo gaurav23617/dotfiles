@@ -119,6 +119,15 @@
           {
             nixpkgs.overlays = [
               inputs.brew-nix.overlays.default
+              # Override Spotify with correct hash for macOS
+              (final: prev: {
+                spotify = prev.spotify.overrideAttrs (oldAttrs: {
+                  src = prev.fetchurl {
+                    url = "https://web.archive.org/web/20251029235406/https://download.scdn.co/SpotifyARM64.dmg";
+                    sha256 = "sha256-0gwoptqLBJBM0qJQ+dGAZdCD6WXzDJEs0BfOxz7f2nQ=";
+                  };
+                });
+              })
             ];
           }
           home-manager.darwinModules.home-manager
