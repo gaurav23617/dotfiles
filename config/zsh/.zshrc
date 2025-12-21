@@ -58,3 +58,5 @@ eval "$(starship init zsh)"
 eval "$(fzf --zsh)"
 eval "$(zoxide init --cmd cd zsh)"
 eval "$(atuin init zsh --disable-up-arrow)"
+
+# alias ni="NVIM_APPNAME=nvim-ni nvim"

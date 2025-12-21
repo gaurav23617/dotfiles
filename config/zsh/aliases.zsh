@@ -1,7 +1,9 @@
 #!/bin/sh
+
 alias c='clear'
 alias vi='vim'
 alias vim='nvim'
+alias ni='nvim'
 alias lg='lazygit'
 alias lzd='lazydocker'
 alias ff='fastfetch'
