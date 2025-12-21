@@ -28,6 +28,7 @@
   ];
 
   users.users.gaurav = {
+    uid = 501;
     description = "Gaurav";
     home = "/Users/gaurav";
     shell = pkgs.zsh;
