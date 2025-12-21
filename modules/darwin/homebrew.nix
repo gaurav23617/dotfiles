@@ -146,10 +146,9 @@
 
     casks = [
       "google-chrome"
-      "spotify"
+      # "spotify"
       "raycast"
       "blip"
-      "google-drive"
       "android-file-transfer"
       "brave-browser"
       "helium-browser"
@@ -167,6 +166,7 @@
       "docker"
       "docker-compose"
       "colima"
+      "tree-sitter-cli"
       # "qbittorrent"
       # "motrix"
     ];
