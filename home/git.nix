@@ -7,6 +7,8 @@
   home.packages = with pkgs; [
     delta
     git-cliff
+    jujutsu
+    jjui
   ];
   programs.git = {
     enable = true;
