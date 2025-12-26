@@ -14,6 +14,10 @@
     '';
     optimise.automatic = true;
     settings = {
+      trusted-users = [
+        "root"
+        "gaurav"
+      ];
       download-buffer-size = 262144000; # 250 MB (250 * 1024 * 1024)
       experimental-features = [
         "nix-command"
