@@ -4,6 +4,7 @@ result/
 target
 result
 result-*
+.DS_Store
 
 [Bb]ackup
 [Bb]ackup/*
