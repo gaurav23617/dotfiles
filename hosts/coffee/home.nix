@@ -19,7 +19,7 @@
     ../../home/lazygit.nix
     ../../home/lazydocker.nix
     ../../home/editor/neovim.nix
-    # ../../home/editor/zed.nix
+    ../../home/editor/zed.nix
     ../../home/fastfetch.nix
     ../../home/bat.nix
     ../../home/gh.nix
