@@ -81,7 +81,6 @@ in
 
     plugins = [
       vimPlugins.nvim-treesitter.withAllGrammars
-      vimPlugins.nvim-treesitter
     ];
   };
 
