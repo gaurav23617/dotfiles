@@ -156,6 +156,8 @@
       "requestly"
       "antigravity"
       "mhaeuser/mhaeuser/battery-toolkit"
+      # "adobe-creative-cloud"
+      # "epic-games"
     ];
 
     brews = [
@@ -167,6 +169,7 @@
       "docker-compose"
       "colima"
       "tree-sitter-cli"
+      "mole"
       # "qbittorrent"
       # "motrix"
     ];
