@@ -45,6 +45,7 @@
     $DRY_RUN_CMD mkdir -p "$HOME/.config/sops/age"
     $DRY_RUN_CMD mkdir -p "$HOME/personal"
     $DRY_RUN_CMD mkdir -p "$HOME/personal/media"
+    $DRY_RUN_CMD mkdir -p "$HOME/personal/obsidian"
     $DRY_RUN_CMD mkdir -p "$HOME/personal/projects"
     $DRY_RUN_CMD mkdir -p "$HOME/personal/playground"
     $DRY_RUN_CMD mkdir -p "$HOME/workspace"
