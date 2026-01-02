@@ -169,6 +169,7 @@
       "docker-compose"
       "colima"
       "tree-sitter-cli"
+      "tree-sitter"
       "mole"
       # "qbittorrent"
       # "motrix"
