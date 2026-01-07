@@ -17,7 +17,7 @@
   "theme": {
     "mode": "system",
     "light": "One Light",
-    "dark": "Catppuccin Mocha"
+    "dark": "One Dark Pro"
   },
   "languages": {
     "Nix": {
