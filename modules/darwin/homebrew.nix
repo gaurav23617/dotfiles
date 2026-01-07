@@ -145,6 +145,7 @@
     ];
 
     casks = [
+      "obsidian"
       "google-chrome"
       # "spotify"
       "raycast"
