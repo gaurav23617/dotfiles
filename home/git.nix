@@ -9,6 +9,7 @@
     git-cliff
     jujutsu
     jjui
+    gitoxide
   ];
   programs.git = {
     enable = true;
