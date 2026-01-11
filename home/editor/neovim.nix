@@ -25,7 +25,7 @@ let
 in
 {
   home.packages = with pkgs; [
-    nixfmt-rfc-style # Provides 'nixfmt' binary
+    nixfmt # Provides 'nixfmt' binary
     statix
     alejandra
   ];
