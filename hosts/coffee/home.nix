@@ -54,6 +54,7 @@
 
   home.stateVersion = "25.05";
   home.sessionVariables = {
+    XDG_CONFIG_HOME = "$HOME/.config";
     TERM = "ghostty";
     EDITOR = "nvim";
     SHELL = "zsh";

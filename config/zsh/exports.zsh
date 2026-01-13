@@ -37,6 +37,7 @@ export SUDO_EDITOR="nvim"
 export TERMINAL="ghostty"
 export BROWSER="zen-browser"
 export BROWSER="zen"
+export XDG_CONFIG_HOME="$HOME/.config"
 export PATH="$HOME/.local/bin":$PATH
 export PATH=$PATH:/usr/bin
 export PATH="$HOME/.npm/bin:$PATH"
