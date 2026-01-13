@@ -1,22 +1,23 @@
-yaml-language-server: $schema=https://raw.githubusercontent.com/jesseduffield/lazygit/master/schema/config.json
+# yaml-language-server: $schema=https://raw.githubusercontent.com/jesseduffield/lazygit/master/schema/config.json
 
+promptToReturnFromSubprocess: false
 disableStartupPopups: true
 notARepository: "skip"
-promptToReturnFromSubprocess: false
 update:
   method: "never"
 
 git:
-  showIcons: true
-  paging:
-  useConfig: true
   commit:
     signOff: true
   overrideGpg: true
   parseEmoji: true
-  useExternalDiffGitConfig: true
 
 gui:
+  authorColors:
+    "*": "#b4befe"
+    "gaurav2361": "#eeeeee"
+    "Gaurav": "#eeeeee"
+  showIcons: true
   showListFooter: true
   showRandomTip: false
   showCommandLog: true
@@ -46,6 +47,3 @@ theme:
     - "#cdd6f4"
   searchingActiveBorderColor:
     - "#f9e2af"
-
-authorColors:
-  "*": "#b4befe"
