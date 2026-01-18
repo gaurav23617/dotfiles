@@ -147,6 +147,7 @@
     casks = [
       "obsidian"
       "google-chrome"
+      "google-drive"
       # "spotify"
       "raycast"
       "blip"
