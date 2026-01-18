@@ -14,10 +14,10 @@ git:
 
 gui:
   authorColors:
-    "*": "#b4befe"
-    "gaurav2361": "#eeeeee"
-    "Gaurav": "#eeeeee"
+    "gaurav2361": "#ffa500"
+    "Gaurav": "#ffa500"
   showIcons: true
+  showFileIcons: true
   showListFooter: true
   showRandomTip: false
   showCommandLog: true
@@ -29,7 +29,7 @@ os:
 
 theme:
   activeBorderColor:
-    - "#f38ba8"
+    - "#cba6f7"
     - bold
   inactiveBorderColor:
     - "#a6adc8"
@@ -40,7 +40,7 @@ theme:
   cherryPickedCommitBgColor:
     - "#45475a"
   cherryPickedCommitFgColor:
-    - "#f38ba8"
+    - "#cba6f7"
   unstagedChangesColor:
     - "#f38ba8"
   defaultFgColor:
