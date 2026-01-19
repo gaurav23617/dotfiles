@@ -3,5 +3,6 @@
   environment.systemPackages = with pkgs; [
     luarocks
     nixpkgs-fmt
+    harper
   ];
 }

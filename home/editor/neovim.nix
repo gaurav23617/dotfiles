@@ -71,6 +71,7 @@ in
       ripgrep
       imagemagick
       libiconv
+      harper
     ];
     extraWrapperArgs = [
       "--suffix"
