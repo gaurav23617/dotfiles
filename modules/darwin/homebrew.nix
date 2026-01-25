@@ -158,6 +158,8 @@
       "requestly"
       "antigravity"
       "mhaeuser/mhaeuser/battery-toolkit"
+      "iordv/tap/droppy"
+      "finetune"
       # "adobe-creative-cloud"
       # "epic-games"
     ];
