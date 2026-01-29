@@ -10,8 +10,6 @@
     ./settings.nix
     ./packages.nix
     ./fonts.nix
-    # ./nix.nix
+    ./nix.nix
   ];
-
-  nixpkgs.config.allowUnfree = true;
 }

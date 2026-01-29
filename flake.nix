@@ -60,6 +60,10 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     ghostty.url = "github:ghostty-org/ghostty";
+    determinate = {
+      url = "https://flakehub.com/f/DeterminateSystems/determinate/3";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
@@ -70,6 +74,7 @@
       vicinae,
       nix-darwin,
       home-manager,
+      determinate,
       nix-homebrew,
       homebrew-core,
       homebrew-cask,
@@ -121,6 +126,7 @@
             nixpkgs.overlays = [ inputs.brew-nix.overlays.default ];
           }
           home-manager.darwinModules.home-manager
+          determinate.darwinModules.default
           {
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
@@ -128,7 +134,6 @@
             home-manager.backupFileExtension = "backup";
             home-manager.users.gaurav = {
               imports = [ ./hosts/coffee/home.nix ];
-              # No need to mkForce if this is the only place it's defined
               home.username = "gaurav";
               home.homeDirectory = "/Users/gaurav";
             };
