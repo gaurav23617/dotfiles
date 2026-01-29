@@ -160,6 +160,7 @@
       "mhaeuser/mhaeuser/battery-toolkit"
       "iordv/tap/droppy"
       "finetune"
+      "keyboardcleantool"
       # "adobe-creative-cloud"
       # "epic-games"
     ];
