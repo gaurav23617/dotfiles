@@ -117,20 +117,8 @@
         specialArgs = { inherit inputs self; };
         modules = [
           ./hosts/coffee/default.nix
-          # Add the brew-nix overlay here
           {
-            nixpkgs.overlays = [
-              inputs.brew-nix.overlays.default
-              # Override Spotify with correct hash for macOS
-              # (final: prev: {
-              #   spotify = prev.spotify.overrideAttrs (oldAttrs: {
-              #     src = prev.fetchurl {
-              #       url = "https://web.archive.org/web/20251029235406/https://download.scdn.co/SpotifyARM64.dmg";
-              #       sha256 = "sha256-gEZxRBT7Jo2m6pirf+CreJiMeE2mhIkpe9Mv5t0RI58=";
-              #     };
-              #   });
-              # })
-            ];
+            nixpkgs.overlays = [ inputs.brew-nix.overlays.default ];
           }
           home-manager.darwinModules.home-manager
           {
@@ -140,10 +128,9 @@
             home-manager.backupFileExtension = "backup";
             home-manager.users.gaurav = {
               imports = [ ./hosts/coffee/home.nix ];
-              home = {
-                username = nixpkgs.lib.mkForce "gaurav";
-                homeDirectory = nixpkgs.lib.mkForce "/Users/gaurav";
-              };
+              # No need to mkForce if this is the only place it's defined
+              home.username = "gaurav";
+              home.homeDirectory = "/Users/gaurav";
             };
           }
         ];
