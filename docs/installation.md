@@ -3,7 +3,43 @@
 This document contains platform-specific installation instructions for using these dotfiles.
 We keep platform-specific commands separated to avoid confusion.
 
-> **Note:** these instructions assume you have `git` and basic system tools installed. Nix is required for most setups.
+> **Note:** these instructions assume you have `git` and basic system tools installed.
+
+## Install Nix
+
+### macOS
+
+**Official Installer:**
+
+```bash
+sh <(curl --proto '=https' --tlsv1.2 -L https://nixos.org/nix/install)
+```
+
+**Determinate Nix:**
+
+```bash
+curl -fsSL https://install.determinate.systems/nix | sh -s -- install
+```
+
+### Linux
+
+Please refer to the official documentation: [https://nixos.org/download/#nix-install-linux](https://nixos.org/download/#nix-install-linux)
+
+## Bootstrap nix-darwin (macOS)
+
+If this is your first time setting up `nix-darwin`, use the experimental `nix run` command to bootstrap:
+
+```bash
+sudo nix run nix-darwin/master#darwin-rebuild -- switch --flake .#coffee
+```
+
+Or for a generic hostname:
+
+```bash
+sudo nix run nix-darwin/master#darwin-rebuild -- switch --flake .#<hostname>
+```
+
+> **Note:** Nix is required for most setups.
 
 ---
 
